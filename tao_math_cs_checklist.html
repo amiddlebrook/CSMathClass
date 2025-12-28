@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Day-by-Day Math + CS Checklist (1 bullet = 1 day)</title>
+  <style>
+    :root { --bg:#0b0c10; --panel:#11131a; --text:#e8e8ef; --muted:#a9acb8; --accent:#7dd3fc; --ok:#86efac; --warn:#fbbf24; --danger:#fb7185; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text); }
+    header { padding:24px 16px 10px; max-width:1100px; margin:0 auto; }
+    h1 { margin:0 0 6px; font-size:22px; font-weight:800; letter-spacing:.2px; }
+    .sub { color:var(--muted); font-size:13px; line-height:1.4; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px; }
+    .toolbar input[type="search"]{ flex:1; min-width:220px; padding:10px 12px; border-radius:10px; border:1px solid #222633; background:#0f1117; color:var(--text); }
+    button, .btnlike {
+      border:1px solid #222633; background:#0f1117; color:var(--text);
+      padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:650;
+    }
+    button:hover { border-color:#2f3446; }
+    button:active { transform: translateY(1px); }
+    .btn-accent { border-color: rgba(125,211,252,.35); }
+    .btn-danger { border-color: rgba(251,113,133,.35); }
+    .stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; align-items:center; }
+    .pill { padding:7px 10px; border-radius:999px; background:var(--panel); border:1px solid #202437; color:var(--muted); font-size:12px; }
+    .pill strong { color:var(--text); }
+    .barWrap { width:340px; max-width:100%; height:10px; border-radius:999px; background:#0f1117; border:1px solid #202437; overflow:hidden; }
+    .bar { height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--ok)); }
+    main { max-width:1100px; margin:0 auto; padding:10px 16px 40px; }
+    details { background:var(--panel); border:1px solid #202437; border-radius:14px; margin:10px 0; overflow:hidden; }
+    summary { cursor:pointer; padding:14px 14px; list-style:none; display:flex; align-items:center; gap:10px; }
+    summary::-webkit-details-marker { display:none; }
+    .secTitle { font-weight:800; }
+    .secMeta { color:var(--muted); font-size:12px; margin-left:auto; }
+    .items { padding:0 14px 14px; }
+    .item { display:flex; gap:10px; padding:10px 8px; border-radius:12px; border:1px solid transparent; align-items:flex-start; }
+    .item:hover { border-color:#202437; background:#0f1117; }
+    .item label { flex:1; cursor:pointer; line-height:1.35; }
+    .day { font-variant-numeric: tabular-nums; color:var(--muted); font-size:12px; min-width:64px; padding-top:2px; }
+    input[type="checkbox"]{ width:18px; height:18px; margin-top:2px; accent-color: var(--accent); cursor:pointer; }
+    .done label { text-decoration: line-through; color:#9aa0ae; }
+    .footerNote { margin-top:18px; color:var(--muted); font-size:12px; line-height:1.5; }
+    .small { font-size:12px; color:var(--muted); }
+    .file { display:none; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; padding:2px 6px; border-radius:8px; border:1px solid #202437; background:#0f1117; color:var(--text); font-size:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Day-by-Day Math + CS Checklist</h1>
+    <div class="sub">Rule: <strong>1 bullet = 1 day</strong>. Check items off. Progress is saved locally in your browser (no accounts, no cloud).</div>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search (e.g., 'induction', 'eigen', 'NP')  — tip: press / to focus" />
+      <button id="expandAll" class="btnlike btn-accent" title="Expand all sections">Expand all</button>
+      <button id="collapseAll" class="btnlike" title="Collapse all sections">Collapse all</button>
+      <button id="exportBtn" class="btnlike" title="Download your progress as a file">Export</button>
+      <label for="importFile" class="btnlike" title="Load a saved progress file">Import</label>
+      <input id="importFile" class="file" type="file" accept="application/json" />
+      <button id="resetBtn" class="btnlike btn-danger" title="Clear all progress (undoable)">Reset</button>
+    </div>
+
+    <div class="stats">
+      <div class="pill"><strong id="doneCount">0</strong> / <strong id="totalCount">0</strong> done</div>
+      <div class="pill">Current day: <strong id="currentDay">1</strong></div>
+      <div class="barWrap" aria-label="Progress bar"><div id="bar" class="bar"></div></div>
+      <div class="pill">Progress: <strong id="pct">0%</strong></div>
+      <div class="pill small">Shortcuts: <span class="kbd">/</span> search · <span class="kbd">E</span> expand · <span class="kbd">C</span> collapse</div>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <script>
+    // ---------- Curriculum (1 bullet = 1 day) ----------
+    const curriculum = [
+      {
+        title: "0) Operating system (non-negotiable skills)",
+        items: [
+          "Arithmetic fluency: Fractions, negatives, exponents/roots, scientific notation",
+          "Arithmetic fluency: Ratio/rate/percent, unit conversions",
+          "Algebra fluency: Solve linear/quadratic systems",
+          "Algebra fluency: Manipulate expressions fast (factor, expand, simplify)",
+          "Algebra fluency: Functions — domain/range, inverses, composition",
+          "Proof habits: Learn direct proof, contrapositive, contradiction, induction, invariants",
+          "Proof habits: Write solutions like Definitions → Claim → Proof → QED",
+          "Checkpoint: Explain why each step is valid (not just do steps)"
+        ]
+      },
+      {
+        title: "1) Precalculus foundation",
+        items: [
+          "Functions & graphs: Polynomials, rational, exponential/log, piecewise",
+          "Functions & graphs: Transformations, asymptotes, growth rates",
+          "Trigonometry: Unit circle, identities, trig equations",
+          "Trigonometry: Vectors + dot product (basic)",
+          "Complex numbers (early exposure): a+bi, magnitude/angle, Euler’s formula (intro)"
+        ]
+      },
+      {
+        title: "2) Calculus sequence",
+        items: [
+          "Single-variable calculus: Limits, derivatives, integrals",
+          "Single-variable calculus: Fundamental Theorem of Calculus",
+          "Single-variable calculus: Series — Taylor series basics",
+          "Multivariable calculus: Partial derivatives, gradients, Jacobians",
+          "Multivariable calculus: Multiple integrals, change of variables",
+          "Multivariable calculus: Line/surface integrals (recognize the ideas)",
+          "Differential equations (intro): First-order ODEs, second-order linear ODEs",
+          "Differential equations (intro): Systems of ODEs (ties into linear algebra)"
+        ]
+      },
+      {
+        title: "3) Linear algebra (the spine)",
+        items: [
+          "Computational LA: Matrix operations, elimination, rank",
+          "Computational LA: Eigenvalues/eigenvectors, diagonalization",
+          "Computational LA: Orthogonality, projections, least squares",
+          "Abstract LA: Vector spaces, linear maps, dual spaces",
+          "Abstract LA: Inner product spaces, spectral theorem (finite-dim)",
+          "Checkpoint: Move between “matrix form” and “linear map form”"
+        ]
+      },
+      {
+        title: "4) Discrete math core",
+        items: [
+          "Logic + sets + relations: Propositional/first-order logic",
+          "Logic + sets + relations: Equivalence relations, partial orders",
+          "Proof techniques (deepen): Induction variants, strong induction",
+          "Proof techniques (deepen): Pigeonhole, invariants, extremal arguments",
+          "Combinatorics: Counting, inclusion–exclusion",
+          "Combinatorics: Recurrences, generating functions (intro)",
+          "Graph theory: Trees, connectivity, matchings (intro), flows (later)",
+          "Graph theory: Graph traversal and correctness proofs",
+          "Number theory (CS-facing): Modular arithmetic, gcd, Euclid",
+          "Number theory (CS-facing): Fermat/Euler, CRT, basics of primality"
+        ]
+      },
+      {
+        title: "5) Algorithms + data structures",
+        items: [
+          "Programming mastery (pick one): Write clean code, tests, debug, performance basics",
+          "Data structures: Arrays/lists, stacks/queues, hash tables",
+          "Data structures: Trees (BST, heap), tries",
+          "Data structures: Graph representations",
+          "Algorithms (core): Sorting/searching, greedy, divide & conquer",
+          "Algorithms (core): Dynamic programming",
+          "Algorithms (core): Graph algorithms (BFS/DFS, shortest paths, MST)",
+          "Algorithms (core): Correctness proofs + complexity",
+          "Algorithmic math: Amortized analysis",
+          "Algorithmic math: Randomized algorithms (intro)",
+          "Algorithmic math: Reductions and hardness intuition"
+        ]
+      },
+      {
+        title: "6) Probability + stats",
+        items: [
+          "Probability foundations: Conditional probability, Bayes",
+          "Probability foundations: Random variables, expectation/variance",
+          "Probability foundations: Common distributions",
+          "Probability foundations: Concentration ideas (Markov/Chebyshev → Chernoff/Hoeffding)",
+          "Statistics basics: Estimation, confidence intervals (conceptual)",
+          "Statistics basics: Regression (ties to linear algebra)"
+        ]
+      },
+      {
+        title: "7) Analysis + rigor (serious proofs)",
+        items: [
+          "Proof-heavy calculus / intro analysis: ε–δ definitions",
+          "Proof-heavy calculus / intro analysis: Limits/continuity rigor",
+          "Proof-heavy calculus / intro analysis: Sequences/series rigor",
+          "Real analysis I: Completeness, compactness, uniform continuity",
+          "Real analysis I: Differentiation/integration theorems",
+          "Real analysis II: Metric spaces (general viewpoint)",
+          "Real analysis II: Function spaces (intro)",
+          "Real analysis II: Convergence modes (pointwise/uniform)",
+          "Checkpoint: Read a dense proof and reconstruct it cleanly"
+        ]
+      },
+      {
+        title: "8) Abstract algebra",
+        items: [
+          "Group theory: Homomorphisms, quotient groups, actions (intro)",
+          "Rings + fields: Ideals, quotient rings",
+          "Rings + fields: Field extensions basics (enough to understand structure)",
+          "Linear algebra revisited via algebra: Modules viewpoint (optional but powerful)"
+        ]
+      },
+      {
+        title: "9) Topology + measure",
+        items: [
+          "Point-set topology: Open/closed sets, continuity generalization",
+          "Point-set topology: Compactness/connectedness in full generality",
+          "Point-set topology: Product spaces (important later)",
+          "Measure theory: Sigma-algebras, Lebesgue measure",
+          "Measure theory: Measurable functions, integration",
+          "Measure theory: Convergence theorems (Monotone/Dominated)",
+          "Probability upgrade: Random variables as measurable functions",
+          "Probability upgrade: Expectation as an integral",
+          "Probability upgrade: Laws of large numbers / CLT at a serious level (eventually)"
+        ]
+      },
+      {
+        title: "10) Functional analysis + PDE + harmonic analysis",
+        items: [
+          "Functional analysis: Normed/Banach/Hilbert spaces",
+          "Functional analysis: Bounded operators, duality",
+          "Functional analysis: Weak convergence ideas",
+          "Complex analysis: Holomorphic functions, residues",
+          "Complex analysis: Conformal mapping intuition",
+          "Harmonic analysis: Fourier series/transforms",
+          "Harmonic analysis: L^p spaces, convolution, distribution basics",
+          "PDE: Weak solutions, energy methods",
+          "PDE: Sobolev spaces (ties to functional + measure)"
+        ]
+      },
+      {
+        title: "11) Theoretical computer science (research-grade CS)",
+        items: [
+          "Automata + computability: Regular/CFL, Turing machines",
+          "Automata + computability: Decidability/undecidability",
+          "Complexity theory: P, NP, reductions, NP-completeness",
+          "Complexity theory: Space/time hierarchy ideas",
+          "Complexity theory: Randomness in computation (BPP, etc. — later)",
+          "Information theory (optional): Entropy, KL divergence",
+          "Information theory (optional): Coding theorems intuition",
+          "Cryptography: RSA/ECC foundations",
+          "Cryptography: Security proofs style (reductions)",
+          "Cryptography: Modern crypto (optional: lattices)",
+          "Advanced algorithms/theory: Approximation algorithms",
+          "Advanced algorithms/theory: Online algorithms",
+          "Advanced algorithms/theory: Spectral graph theory",
+          "Advanced algorithms/theory: Expander graphs",
+          "Advanced algorithms/theory: Convex optimization (huge payoff)"
+        ]
+      },
+      {
+        title: "12) Convex optimization + numerical math",
+        items: [
+          "Convex optimization: Convex sets/functions, duality",
+          "Convex optimization: KKT conditions",
+          "Convex optimization: Gradient methods, proximal methods",
+          "Numerical LA / numerical analysis: Conditioning, stability",
+          "Numerical LA / numerical analysis: Iterative methods",
+          "Numerical LA / numerical analysis: Fast transforms intuition"
+        ]
+      },
+      {
+        title: "13) Specialize (pick your mountains)",
+        items: [
+          "Specialize: Additive combinatorics",
+          "Specialize: Analytic number theory",
+          "Specialize: Harmonic analysis",
+          "Specialize: PDE / geometric analysis",
+          "Specialize: Probability (random matrices, stochastic processes)",
+          "Specialize: Algebraic geometry (maximum abstraction path)",
+          "Specialize: Theoretical CS (complexity/algorithms/crypto)",
+          "Rule: Pick 2–3 and go deep; connect them"
+        ]
+      },
+      {
+        title: "Always-on discipline (do these too)",
+        items: [
+          "Do problems daily (reading ≠ ability)",
+          "Write proofs in full sentences (no “obvious”, no handwaving)",
+          "Keep a lemma notebook (record facts you use repeatedly)",
+          "Two-pass learning: Pass 1 = definitions/theorems/basic problems",
+          "Two-pass learning: Pass 2 = hard problems + re-prove without looking",
+          "Teach it back: explain in plain English, then in formal math"
+        ]
+      }
+    ];
+
+    // ---------- State ----------
+    const STORAGE_KEY = "tao_checklist_v1";
+    const state = loadState();
+
+    // Flatten to assign Day numbers
+    const flat = [];
+    curriculum.forEach((sec, si) => {
+      sec.items.forEach((text, ii) => {
+        flat.push({ si, ii, secTitle: sec.title, text });
+      });
+    });
+
+    // Map id -> day #
+    const idFor = (si, ii) => `sec${si}_item${ii}`;
+    const dayById = {};
+    flat.forEach((x, idx) => { dayById[idFor(x.si, x.ii)] = idx + 1; });
+
+    // ---------- Render ----------
+    const app = document.getElementById("app");
+    const search = document.getElementById("search");
+    const doneCountEl = document.getElementById("doneCount");
+    const totalCountEl = document.getElementById("totalCount");
+    const pctEl = document.getElementById("pct");
+    const barEl = document.getElementById("bar");
+    const currentDayEl = document.getElementById("currentDay");
+
+    function render() {
+      app.innerHTML = "";
+      const q = (search.value || "").trim().toLowerCase();
+
+      curriculum.forEach((sec, si) => {
+        const details = document.createElement("details");
+        details.dataset.section = String(si);
+        details.open = state.openSections?.includes(si) ?? (si < 2); // first two open by default
+
+        const summary = document.createElement("summary");
+        const title = document.createElement("div");
+        title.className = "secTitle";
+        title.textContent = sec.title;
+
+        const meta = document.createElement("div");
+        meta.className = "secMeta";
+
+        const secIds = sec.items.map((_, ii) => idFor(si, ii));
+        const secDone = secIds.filter(id => !!state.checked[id]).length;
+        meta.textContent = `${secDone}/${sec.items.length} done`;
+
+        summary.appendChild(title);
+        summary.appendChild(meta);
+        details.appendChild(summary);
+
+        const itemsWrap = document.createElement("div");
+        itemsWrap.className = "items";
+
+        let visibleCount = 0;
+
+        sec.items.forEach((text, ii) => {
+          const id = idFor(si, ii);
+          const day = dayById[id];
+          const hay = `${sec.title} ${text} day ${day}`.toLowerCase();
+          if (q && !hay.includes(q)) return;
+
+          visibleCount++;
+
+          const row = document.createElement("div");
+          row.className = "item" + (state.checked[id] ? " done" : "");
+
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.id = id;
+          cb.checked = !!state.checked[id];
+          cb.addEventListener("change", () => {
+            state.checked[id] = cb.checked;
+            saveState();
+            renderStats();
+            row.classList.toggle("done", cb.checked);
+            meta.textContent = `${secIds.filter(x => !!state.checked[x]).length}/${sec.items.length} done`;
+          });
+
+          const dayEl = document.createElement("div");
+          dayEl.className = "day";
+          dayEl.textContent = `Day ${day}`;
+
+          const label = document.createElement("label");
+          label.htmlFor = id;
+          label.textContent = text;
+
+          row.appendChild(cb);
+          row.appendChild(dayEl);
+          row.appendChild(label);
+          itemsWrap.appendChild(row);
+        });
+
+        if (q && visibleCount === 0) return;
+
+        details.appendChild(itemsWrap);
+
+        details.addEventListener("toggle", () => {
+          const isOpen = details.open;
+          const idx = Number(details.dataset.section);
+          state.openSections = Array.isArray(state.openSections) ? state.openSections : [];
+          const has = state.openSections.includes(idx);
+          if (isOpen && !has) state.openSections.push(idx);
+          if (!isOpen && has) state.openSections = state.openSections.filter(x => x !== idx);
+          saveState();
+        });
+
+        app.appendChild(details);
+      });
+
+      renderStats();
+    }
+
+    function renderStats() {
+      const total = flat.length;
+      const done = Object.values(state.checked).filter(Boolean).length;
+
+      totalCountEl.textContent = String(total);
+      doneCountEl.textContent = String(done);
+
+      const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+      pctEl.textContent = `${pct}%`;
+      barEl.style.width = `${pct}%`;
+
+      // "Current day" = first unchecked day number
+      let cur = 1;
+      for (let i = 1; i <= total; i++) {
+        const id = Object.keys(dayById).find(k => dayById[k] === i);
+        if (id && !state.checked[id]) { cur = i; break; }
+        if (i === total) cur = total + 1; // all done
+      }
+      currentDayEl.textContent = String(cur);
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { checked: {}, openSections: [] };
+        const parsed = JSON.parse(raw);
+        return {
+          checked: parsed.checked || {},
+          openSections: Array.isArray(parsed.openSections) ? parsed.openSections : []
+        };
+      } catch {
+        return { checked: {}, openSections: [] };
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // ---------- Controls ----------
+    document.getElementById("expandAll").addEventListener("click", () => {
+      document.querySelectorAll("details").forEach(d => d.open = true);
+      state.openSections = curriculum.map((_, i) => i);
+      saveState();
+    });
+
+    document.getElementById("collapseAll").addEventListener("click", () => {
+      document.querySelectorAll("details").forEach(d => d.open = false);
+      state.openSections = [];
+      saveState();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      const ok = confirm("Reset will clear ALL checkmarks. This cannot be undone. Proceed?");
+      if (!ok) return;
+      state.checked = {};
+      state.openSections = [];
+      saveState();
+      render();
+    });
+
+    // Export progress
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      const payload = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        checked: state.checked,
+        openSections: state.openSections
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "tao_checklist_progress.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // Import progress
+    document.getElementById("importFile").addEventListener("change", async (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const payload = JSON.parse(text);
+        if (!payload || typeof payload !== "object") throw new Error("Bad file");
+        state.checked = payload.checked || {};
+        state.openSections = Array.isArray(payload.openSections) ? payload.openSections : [];
+        saveState();
+        render();
+      } catch (err) {
+        alert("Import failed. Make sure you picked a valid exported JSON progress file.");
+      } finally {
+        e.target.value = "";
+      }
+    });
+
+    // Search
+    search.addEventListener("input", () => render());
+
+    // Keyboard shortcuts
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== search) {
+        e.preventDefault();
+        search.focus();
+      } else if ((e.key === "e" || e.key === "E") && document.activeElement !== search) {
+        document.getElementById("expandAll").click();
+      } else if ((e.key === "c" || e.key === "C") && document.activeElement !== search) {
+        document.getElementById("collapseAll").click();
+      }
+    });
+
+    // First render
+    render();
+  </script>
+</body>
+</html>
