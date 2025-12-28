@@ -416,10 +416,21 @@
       text-decoration: none;
     }
     a.link:hover{ text-decoration: underline; }
+    nav a:hover{
+      color: var(--text) !important;
+      border-color: rgba(122,162,255,.35) !important;
+      background: rgba(122,162,255,.08) !important;
+    }
   </style>
 </head>
 
 <body>
+  <nav style="padding:18px 18px 0; max-width:1160px; margin:0 auto;">
+    <a href="index.html" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:var(--muted); padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:rgba(17,24,38,.65); transition:all 0.2s;">
+      <span style="font-size:18px;">←</span>
+      <span style="font-weight:600;">Back to Index</span>
+    </a>
+  </nav>
   <header>
     <div class="badge"><span class="dot"></span> Arithmetic Fluency (Full Mini-Course + Videos + Auto-Checked Practice)</div>
     <h1>Fractions • Negatives • Exponents/Roots • Scientific Notation</h1>
