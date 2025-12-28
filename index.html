@@ -35,10 +35,17 @@
     .items { padding:0 14px 14px; }
     .item { display:flex; gap:10px; padding:10px 8px; border-radius:12px; border:1px solid transparent; align-items:flex-start; }
     .item:hover { border-color:#202437; background:#0f1117; }
-    .item label { flex:1; cursor:pointer; line-height:1.35; }
+    .item .item-text { flex:1; line-height:1.35; }
+    .lesson-btn { 
+      border:1px solid #222633; background:#0f1117; color:var(--text);
+      padding:6px 10px; border-radius:8px; font-size:12px; font-weight:650;
+      text-decoration:none; display:inline-block; margin-left:8px;
+      transition:all 0.2s;
+    }
+    .lesson-btn:hover { border-color:#2f3446; background:rgba(125,211,252,.08); }
     .day { font-variant-numeric: tabular-nums; color:var(--muted); font-size:12px; min-width:64px; padding-top:2px; }
     input[type="checkbox"]{ width:18px; height:18px; margin-top:2px; accent-color: var(--accent); cursor:pointer; }
-    .done label { text-decoration: line-through; color:#9aa0ae; }
+    .done .item-text { text-decoration: line-through; color:#9aa0ae; }
     .footerNote { margin-top:18px; color:var(--muted); font-size:12px; line-height:1.5; }
     .small { font-size:12px; color:var(--muted); }
     .file { display:none; }
@@ -69,18 +76,6 @@
       <div class="pill small">Shortcuts: <span class="kbd">/</span> search · <span class="kbd">E</span> expand · <span class="kbd">C</span> collapse</div>
     </div>
   </header>
-
-  <nav style="max-width:1100px; margin:0 auto; padding:0 16px 16px;">
-    <div style="background:var(--panel); border:1px solid #202437; border-radius:14px; padding:16px; margin-bottom:10px;">
-      <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:var(--text)">Daily Lessons</div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px;">
-        <a href="DayOne.html" class="day-link" style="text-decoration:none; color:inherit; display:block; padding:12px 14px; background:#0f1117; border:1px solid #222633; border-radius:10px; transition:all 0.2s;">
-          <div style="font-weight:700; color:var(--text); margin-bottom:4px;">Day 1</div>
-          <div style="font-size:13px; color:var(--muted);">Arithmetic Fluency</div>
-        </a>
-      </div>
-    </div>
-  </nav>
 
   <main id="app"></main>
 
@@ -367,13 +362,22 @@
           dayEl.className = "day";
           dayEl.textContent = `Day ${day}`;
 
-          const label = document.createElement("label");
-          label.htmlFor = id;
-          label.textContent = text;
+          const textSpan = document.createElement("span");
+          textSpan.className = "item-text";
+          textSpan.textContent = text;
+
+          // Add lesson link for the first curriculum item (section 0, item 0 = "Arithmetic fluency...")
+          if (si === 0 && ii === 0) {
+            const lessonLink = document.createElement("a");
+            lessonLink.href = "DayOne.html";
+            lessonLink.className = "lesson-btn";
+            lessonLink.textContent = "View Lesson";
+            textSpan.appendChild(lessonLink);
+          }
 
           row.appendChild(cb);
           row.appendChild(dayEl);
-          row.appendChild(label);
+          row.appendChild(textSpan);
           itemsWrap.appendChild(row);
         });
 
