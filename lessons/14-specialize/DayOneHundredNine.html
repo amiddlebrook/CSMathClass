@@ -41,21 +41,21 @@
             Day 109 · Specialization
         </div>
         <h1>Harmonic Analysis</h1>
-        <p class="hero-desc">Oscillatory integrals, Restriction Theory, and the Kakeya Conjecture.</p>
+        <p class="hero-desc">Fourier Series on R, Z, and general Groups. The Uncertainty Principle.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#uncertainty" class="toc-link">1. Uncertainty Principle</a></li>
-                    <li><a href="#restriction" class="toc-link">2. Restriction Theory</a></li>
-                    <li><a href="#kakeya" class="toc-link">3. Kakeya Needle</a></li>
-                    <li><a href="#oscillatory" class="toc-link">4. Oscillatory Integrals</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Sinc</a></li>
+                    <li><a href="#fourier" class="toc-link">1. Fourier Series vs Transform</a></li>
+                    <li><a href="#groups" class="toc-link">2. Pontryagin Duality</a></li>
+                    <li><a href="#uncertainty" class="toc-link">3. Uncertainty Principle</a></li>
+                    <li><a href="#wavelets" class="toc-link">4. Wavelets</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Spectrogram</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -92,59 +92,66 @@
         </aside>
 
         <main class="content">
+            <!-- Fourier -->
+            <section class="section" id="fourier">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">Domains</h2>
+                </div>
+                <div class="section-body">
+                    <p>Harmonic Analysis generalizes "frequency".</p>
+                    <ul>
+                        <li><strong>Periodic on Circle (T):</strong> Fourier Series (Discrete frequencies Z).</li>
+                        <li><strong>Line (R):</strong> Fourier Transform (Continuous frequencies R).</li>
+                        <li><strong>Discrete (Z):</strong> DTFT (Continuous periodic frequencies on Circle).</li>
+                        <li><strong>Finite (Z_N):</strong> DFT (Discrete frequencies Z_N).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Groups -->
+            <section class="section" id="groups">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Pontryagin Duality (LCA Groups)</h2>
+                </div>
+                <div class="section-body">
+                    <p>For any Locally Compact Abelian (LCA) group `G`, the Dual Group `\hat{G}` consists of all
+                        continuous characters (homomorphisms to the circle group).</p>
+                    <div class="math-block">
+                        \hat{\mathbb{R}} \cong \mathbb{R} \\
+                        \hat{\mathbb{Z}} \cong \mathbb{T} \text{ (Circle)} \\
+                        \hat{\mathbb{T}} \cong \mathbb{Z} \\
+                        \hat{Z_N} \cong Z_N
+                    </div>
+                </div>
+            </section>
+
             <!-- Uncertainty -->
             <section class="section" id="uncertainty">
                 <div class="section-header">
-                    <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Uncertainty Principle</h2>
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">The Uncertainty Principle</h2>
                 </div>
                 <div class="section-body">
                     <p>A function cannot be localized in both time and frequency.</p>
                     <div class="math-block">
-                        \int x^2 |f(x)|^2 dx \cdot \int \xi^2 |\hat{f}(\xi)|^2 d\xi \ge C
+                        \sigma_t \cdot \sigma_f \ge \frac{1}{4\pi}
                     </div>
+                    <p>If you squeeze a signal in time (short pulse), its spectrum spreads out (broadband).</p>
                 </div>
             </section>
 
-            <!-- Restriction -->
-            <section class="section" id="restriction">
-                <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Restriction Theory</h2>
-                </div>
-                <div class="section-body">
-                    <p>Problem: Can we restrict the Fourier transform of an $L^p$ function to a curved surface (like a
-                        sphere) and still have it be meaningful?</p>
-                    <p>Stein showed yes, for certain range of `p`. This measures the "curvature" of Fourier space.</p>
-                </div>
-            </section>
-
-            <!-- Kakeya -->
-            <section class="section" id="kakeya">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Kakeya Needle Problem</h2>
-                </div>
-                <div class="section-body">
-                    <p>What is the minimum area required to rotate a needle 180 degrees?</p>
-                    <div class="rule">
-                        Answer: Arbitrarily close to zero! (Besicovitch sets).
-                    </div>
-                    <p>The <strong>Kakeya Conjecture</strong> relates the dimension of these sets to the dimension of
-                        the space. It is deeply linked to Restriction Theory.</p>
-                </div>
-            </section>
-
-            <!-- Oscillatory -->
-            <section class="section" id="oscillatory">
+            <!-- Wavelets -->
+            <section class="section" id="wavelets">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Oscillatory Integrals</h2>
+                    <h2 class="section-title">Wavelets</h2>
                 </div>
                 <div class="section-body">
-                    <p>Integrals of the form `∫ e^{i λ φ(x)} a(x) dx`.</p>
-                    <p>By <strong>Stationary Phase</strong> principle, the main contribution comes from points where
-                        `∇φ(x) = 0` (where phase is stationary).</p>
+                    <p>Fourier uses sines (infinite duration). Wavelets use localized packets.</p>
+                    <p>Multiresolution analysis decomposes a signal into detail at different scales. Key for compression
+                        (JPEG 2000).</p>
                 </div>
             </section>
 
@@ -152,24 +159,36 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Decay</h2>
+                    <h2 class="section-title">Python: Time-Freq Uncertainty</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Oscillatory Decay</span>
+                            <span class="code-label">Spectrogram</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import scipy.signal
 
-x = np.linspace(-10, 10, 1000)
-<span class="code-comment"># Sinc function: FT of a boxcar</span>
-y = np.sinc(x) 
+# Generate a "Chirp" signal (freq increases with time)
+fs = 1000
+t = np.linspace(0, 2, 2*fs)
+freq = np.linspace(20, 200, len(t))
+signal = np.sin(2 * np.pi * freq * t)
 
-<span class="code-comment"># Shows localization in frequency <-> spread in time</span>
-<span class="code-comment"># plt.plot(x, y)</span></pre>
+# Compute Spectrogram (Short-Time Fourier Transform)
+f, t_spec, Sxx = scipy.signal.spectrogram(signal, fs)
+
+plt.figure(figsize=(10, 5))
+plt.pcolormesh(t_spec, f, Sxx, shading='gouraud')
+plt.ylabel('Frequency [Hz]')
+plt.xlabel('Time [sec]')
+plt.title('Spectrogram: Seeing Time and Frequency')
+plt.colorbar(label='Intensity')
+plt.ylim(0, 250)
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -222,18 +241,24 @@ y = np.sinc(x)
             {
                 title: "Harmonic Analysis",
                 items: [
-                    { title: "Kakeya Needle Problem", channel: "Numberphile", vid: "video_id_placeholder" },
+                    { title: "Heisenberg Uncertainty Principle", channel: "3Blue1Brown", vid: "video_id_placeholder" },
+                    { title: "Wavelets Intro", channel: "Steve Brunton", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Uncertainty", prompt: "Function cannot be localized in both time and ___.", answer: "frequency" },
-            { topic: "Kakeya", prompt: "A Kakeya set has measure zero but contains a unit ___ in every direction.", answer: "segment", altAnswers: ["line", "needle"] },
-            { topic: "Decay", prompt: "Stationary phase says integral depends on ___ points.", answer: "critical", altAnswers: ["stationary"] },
-            { topic: "Restriction", prompt: "Relates FT on curved surfaces to ___ norms.", answer: "lp" },
-            { topic: "Area", prompt: "Minimum area to rotate a needle is ___.", answer: "0", altAnswers: ["zero"] },
+            { topic: "Domains", prompt: "Fourier Series map the Circle to the ___.", answer: "Integers" },
+            { topic: "Uncertainty", prompt: "We cannot simultaneously localize time and ___.", answer: "frequency" },
+            { topic: "Dual", prompt: "The dual of the Reals is the ___.", answer: "Reals" },
+            { topic: "Dual", prompt: "The dual of the Integers is the ___.", answer: "Circle" },
+            { topic: "Wavelets", prompt: "Wavelets are localized in both time and frequency, unlike ___ waves.", answer: "sine" },
+            { topic: "LCA", prompt: "Pontryagin duality applies to Locally Compact ___ Groups.", answer: "Abelian" },
+            { topic: "Spectrogram", prompt: "A spectrogram uses the ___ Fourier Transform.", answer: "Short-Time", altAnswers: ["Short Time", "STFT"] },
+            { topic: "Gaussian", prompt: "Minimizing the uncertainty principle is achieved by ___ functions.", answer: "Gaussian" },
+            { topic: "Basis", prompt: "Fourier basis functions extend infinitely; Wavelets have ___ support.", answer: "compact" },
+            { topic: "Plancherel", prompt: "The Plancherel theorem states that the FT preserves ___ (energy).", answer: "norms", altAnswers: ["energy", "L2 norm"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day109_harmonic_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day109_harm_v2' });
     </script>
 </body>
 

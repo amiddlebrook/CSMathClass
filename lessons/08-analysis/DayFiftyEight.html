@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 58: Completeness and Compactness</title>
+    <title>Day 58: Riemann Integration</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,12 +38,11 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 58 · Analysis
+            Day 58 · Real Analysis
         </div>
-        <h1>Completeness and Compactness</h1>
+        <h1>Riemann Integration</h1>
         <p class="hero-desc">
-            The deep properties that make calculus work: why ℝ is special,
-            and how bounded closed sets behave. Essential for optimization and convergence proofs.
+            Accumulation of change. Defining area under a curve using infinite rectangles.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -51,14 +50,14 @@
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~40 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                12 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,11 +73,12 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#complete" class="toc-link">1. Completeness</a></li>
-                    <li><a href="#compact" class="toc-link">2. Compactness</a></li>
-                    <li><a href="#uniform" class="toc-link">3. Uniform Continuity</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#definition" class="toc-link">1. Riemann Sums</a></li>
+                    <li><a href="#integrability" class="toc-link">2. Integrability</a></li>
+                    <li><a href="#ftc" class="toc-link">3. FTC</a></li>
+                    <li><a href="#python" class="toc-link">4. Python Integration</a></li>
+                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -93,179 +93,113 @@
         </aside>
 
         <main class="content">
-            <!-- Completeness -->
-            <section class="section" id="complete">
+            <!-- Riemann Sums -->
+            <section class="section" id="definition">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Completeness of ℝ</h2>
+                    <h2 class="section-title">Riemann Sums</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">What makes ℝ special</h3>
-                        <div class="rule">
-                            <strong>Completeness:</strong> Every Cauchy sequence in ℝ converges to a limit in ℝ.
-                            There are no "holes" in the real line.
+                    <p>
+                        We approximate the area under $f(x)$ on $[a, b]$ by partitioning the interval into $n$
+                        sub-intervals using rectangles.
+                    </p>
+                    <div class="formula-box">
+                        <div class="formula-main">
+                            $S = \sum_{i=1}^n f(x_i^*) \Delta x_i$
                         </div>
-                        <div class="math-block">COMPLETENESS AXIOM (equivalent formulations):
-                            1. Every Cauchy sequence converges
-                            2. Every nonempty bounded set has a supremum
-                            3. Every bounded monotone sequence converges
-
-                            WHY ℚ IS NOT COMPLETE:
-                            Consider √2 ≈ 1.414...
-                            Sequence: 1, 1.4, 1.41, 1.414, ...
-                            This is Cauchy in ℚ but doesn't converge in ℚ (√2 ∉ ℚ)</div>
                     </div>
-
-                    <div class="subsection">
-                        <h3 class="subsection-title">Supremum and infimum</h3>
-                        <div class="math-block">SUPREMUM (sup): Least upper bound
-                            sup S = smallest number b such that x ≤ b for all x ∈ S
-
-                            INFIMUM (inf): Greatest lower bound
-                            inf S = largest number a such that a ≤ x for all x ∈ S
-
-                            EXAMPLE: S = (0, 1)
-                            sup S = 1 (not in S!)
-                            inf S = 0 (not in S!)
-                            max S doesn't exist (no largest element)</div>
-                    </div>
-
-                    <div class="info">
-                        <strong>CS Application:</strong> Completeness is crucial for numerical analysis.
-                        It guarantees that iterative algorithms (Newton's method, gradient descent)
-                        that produce Cauchy sequences will converge to a real answer.
-                    </div>
+                    <p>
+                        As the width of the largest sub-interval approaches 0 (limit as $n \to \infty$), if the sum
+                        converges to a unique value $I$, then $I = \int_a^b f(x) dx$.
+                    </p>
                 </div>
             </section>
 
-            <!-- Compactness -->
-            <section class="section" id="compact">
+            <!-- Integrability -->
+            <section class="section" id="integrability">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Compactness</h2>
+                    <h2 class="section-title">Integrability Criteria</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Definitions (equivalent in ℝⁿ)</h3>
-                        <div class="math-block">A set K ⊆ ℝⁿ is COMPACT if any of these hold:
-
-                            1. COVER DEF: Every open cover has a finite subcover
-                            {Uα} covers K ⟹ finitely many Uα₁,...,Uαₙ cover K
-
-                            2. SEQUENTIAL: Every sequence in K has a convergent
-                            subsequence with limit in K
-
-                            3. HEINE-BOREL: K is closed and bounded
-
-                            All three definitions are equivalent in ℝⁿ!</div>
+                    <div class="rule">
+                        A bounded function on $[a,b]$ is Riemann integrable if and only if it is continuous almost
+                        everywhere (Lebesgue's Criterion).
                     </div>
+                    <p>
+                        Continuous functions are always integrable. Monotonic functions are always integrable.
+                        Dirichlet function (1 on rationals, 0 on irrationals) is NOT Riemann integrable.
+                    </p>
+                </div>
+            </section>
 
-                    <div class="subsection">
-                        <h3 class="subsection-title">Key properties</h3>
-                        <div class="two-col">
-                            <div class="math-block">COMPACT SETS:
-                                • [a, b] ✓
-                                • Finite sets ✓
-                                • {1/n : n ∈ ℕ} ∪ {0} ✓
-
-                                NOT COMPACT:
-                                • (a, b) ✗ (not closed)
-                                • [0, ∞) ✗ (not bounded)
-                                • ℤ ✗ (not bounded)</div>
-                            <div class="math-block">KEY THEOREMS:
-                                • Continuous image of
-                                compact is compact
-                                • Compact ⊂ closed
-                                • Compact ⊂ bounded
-                                • Closed subset of
-                                compact is compact</div>
+            <!-- FTC -->
+            <section class="section" id="ftc">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Fundamental Theorem of Calculus</h2>
+                </div>
+                <div class="section-body">
+                    <p>Connects differentiation and integration as inverse processes.</p>
+                    <div class="list-group">
+                        <div class="list-item">
+                            <strong>Part 1:</strong> If $F(x) = \int_a^x f(t) dt$, then $F'(x) = f(x)$.
                         </div>
-                    </div>
-
-                    <div class="warning">
-                        <strong>Compactness matters for optimization:</strong> The Extreme Value Theorem
-                        (continuous functions attain max/min) requires a compact domain. On non-compact
-                        domains, max/min may not exist!
+                        <div class="list-item">
+                            <strong>Part 2:</strong> $\int_a^b f(x) dx = F(b) - F(a)$, where $F' = f$.
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Uniform Continuity -->
-            <section class="section" id="uniform">
+            <!-- Python -->
+            <section class="section" id="python">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Uniform Continuity</h2>
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Python Integration</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Definition and comparison</h3>
-                        <div class="math-block">POINTWISE CONTINUITY (at each point a):
-                            ∀ε > 0, ∃δ(a,ε) > 0: |x-a| < δ ⟹ |f(x)-f(a)| < ε Note: δ can depend on BOTH ε and the point
-                                a UNIFORM CONTINUITY (on a set): ∀ε> 0, ∃δ(ε) > 0: |x-y| < δ ⟹ |f(x)-f(y)| < ε Note: δ
-                                    depends ONLY on ε (works for all points) UNIFORM ⟹ POINTWISE (but not vice
-                                    versa)</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Numerical Integration (Trapezoidal)</span>
                         </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
 
-                        <div class="subsection">
-                            <h3 class="subsection-title">Key theorem</h3>
-                            <div class="rule">
-                                <strong>Heine-Cantor Theorem:</strong> Continuous on compact ⟹ uniformly continuous.
-                            </div>
-                            <div class="math-block">EXAMPLE: f(x) = x² on [0, 1]
-                                f is continuous on compact [0, 1]
-                                Therefore f is uniformly continuous on [0, 1]
+<span class="code-comment"># Function to integrate: f(x) = x^2</span>
+f = <span class="code-keyword">lambda</span> x: x**<span class="code-number">2</span>
+a, b = <span class="code-number">0</span>, <span class="code-number">1</span>
+n = <span class="code-number">1000</span> <span class="code-comment"># Number of trapezoids</span>
 
-                                COUNTEREXAMPLE: f(x) = 1/x on (0, 1)
-                                f is continuous (pointwise) on (0, 1)
-                                But NOT uniformly continuous!
-                                (near 0, need smaller and smaller δ)</div>
-                        </div>
+<span class="code-comment"># Create x values</span>
+x = np.linspace(a, b, n+<span class="code-number">1</span>)
+y = f(x)
 
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span class="code-lang">Python</span>
-                                <span class="code-label">Testing uniform continuity</span>
-                            </div>
-                            <div class="code-content">
-                                <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-comment"># Trapezoidal Rule: np.trapz(y, x)</span>
+area = np.trapz(y, x)
+exact = (<span class="code-number">1</span>**<span class="code-number">3</span>)/<span class="code-number">3</span> - (<span class="code-number">0</span>**<span class="code-number">3</span>)/<span class="code-number">3</span> <span class="code-comment"># 1/3</span>
 
-<span class="code-keyword">def</span> <span class="code-function">check_uniform_continuity</span>(f, domain, epsilon):
-    <span class="code-string">"""Find if single δ works for all points (approximately)"""</span>
-    x = np.linspace(domain[<span class="code-number">0</span>] + <span class="code-number">0.01</span>, domain[<span class="code-number">1</span>] - <span class="code-number">0.01</span>, <span class="code-number">100</span>)
-    
-    <span class="code-comment"># For each point, find minimum δ needed</span>
-    min_deltas = []
-    <span class="code-keyword">for</span> a <span class="code-keyword">in</span> x:
-        <span class="code-comment"># Binary search for delta</span>
-        <span class="code-keyword">for</span> delta <span class="code-keyword">in</span> np.logspace(-<span class="code-number">6</span>, <span class="code-number">0</span>, <span class="code-number">100</span>):
-            nearby = x[(np.<span class="code-function">abs</span>(x - a) < delta) & (x != a)]
-            <span class="code-keyword">if</span> <span class="code-function">len</span>(nearby) > <span class="code-number">0</span> <span class="code-keyword">and</span> np.<span class="code-function">all</span>(np.<span class="code-function">abs</span>(f(nearby) - f(a)) < epsilon):
-                min_deltas.append(delta)
-                <span class="code-keyword">break</span>
-    
-    <span class="code-keyword">return</span> np.<span class="code-function">min</span>(min_deltas), np.<span class="code-function">max</span>(min_deltas)
+<span class="code-function">print</span>(<span class="code-string">f"Approx Area: {area:.6f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Exact Area: {exact:.6f}"</span>)
 
-<span class="code-comment"># x² on [0,1]: uniform (bounded delta range)</span>
-d_min, d_max = check_uniform_continuity(<span class="code-keyword">lambda</span> x: x**<span class="code-number">2</span>, [<span class="code-number">0</span>, <span class="code-number">1</span>], <span class="code-number">0.1</span>)
-<span class="code-function">print</span>(<span class="code-string">f"x² on [0,1]: δ range [{d_min:.4f}, {d_max:.4f}]"</span>)
-
-<span class="code-comment"># 1/x on (0,1): NOT uniform (δ→0 near x=0)</span></pre>
-                            </div>
+<span class="code-comment"># Using SciPy for adaptive quadrature (quad)</span>
+<span class="code-keyword">from</span> scipy.integration <span class="code-keyword">import</span> quad
+res, err = quad(f, a, b)
+<span class="code-function">print</span>(<span class="code-string">f"SciPy Quad: {res:.10f}"</span>)</pre>
                         </div>
                     </div>
+                </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Advanced analysis concepts explained visually.
-                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -284,13 +218,10 @@ d_min, d_max = check_uniform_continuity(<span class="code-keyword">lambda</span>
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Type your answer and press Check (or hit Enter).
-                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -307,27 +238,30 @@ d_min, d_max = check_uniform_continuity(<span class="code-keyword">lambda</span>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Analysis Foundations",
+                title: "Integration",
                 items: [
-                    { title: "Compactness — Math Major", channel: "Math Major", vid: "td7Nz9ATyWY" },
-                    { title: "Uniform Continuity", channel: "Dr. Trefor Bazett", vid: "z2y7r2wFDHo" },
-                    { title: "Completeness of Reals", channel: "Michael Penn", vid: "1G3SqJxCiJA" },
+                    { title: "Integration and the Fundamental Theorem", channel: "3Blue1Brown", vid: "rfG8ce4nNh0" },
+                    { title: "Riemann Sums", channel: "The Organic Chemistry Tutor", vid: "None" },
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Complete", prompt: "Complete: every ___ sequence converges", answer: "cauchy" },
-            { topic: "Complete", prompt: "ℚ is ___ complete (is/is not)", answer: "not" },
-            { topic: "Supremum", prompt: "sup S is the ___ upper bound", answer: "least" },
-            { topic: "Compact", prompt: "Heine-Borel: closed + ___", answer: "bounded" },
-            { topic: "Compact", prompt: "Every sequence in compact set has convergent ___", answer: "subsequence" },
-            { topic: "Uniform", prompt: "Uniform continuity: δ doesn't depend on ___", answer: "point", altAnswers: ["x", "a"] },
-            { topic: "Theorem", prompt: "Continuous on compact ⟹ ___ continuous", answer: "uniformly" },
-            { topic: "Image", prompt: "Continuous image of compact is ___", answer: "compact" },
-            { topic: "Not compact", prompt: "(0,1) is not compact because not ___", answer: "closed" },
-            { topic: "ℝ", prompt: "[0, ∞) is not compact because not ___", answer: "bounded" },
+        const VIDEOS_REAL = [
+            {
+                title: "Integration",
+                items: [
+                    { title: "Integration", channel: "3Blue1Brown", vid: "rfG8ce4nNh0" },
+                    { title: "Riemann Sums", channel: "Khan Academy", vid: "dIy-tSjZyk0" },
+                ]
+            }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day58_complete_v1' });
+
+        const QUESTIONS = [
+            { topic: "Area", prompt: "The integral calculates the ___ under the curve.", answer: "area" },
+            { topic: "FTC", prompt: "Differentiation and Integration are ___ operations.", answer: "inverse", altAnswers: ["opposite"] },
+            { topic: "Sum", prompt: "Riemann sums use ___ to approximate area.", answer: "rectangles" },
+            { topic: "Condition", prompt: "Continuous functions are always ___.", answer: "integrable" },
+        ];
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day58_int_v1' });
     </script>
 </body>
 

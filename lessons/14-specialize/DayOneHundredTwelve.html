@@ -41,21 +41,21 @@
             Day 112 · Specialization
         </div>
         <h1>Algebraic Geometry</h1>
-        <p class="hero-desc">Solving polynomial equations with geometry. Varieties, Schemes, and Cohomology.</p>
+        <p class="hero-desc">Solving systems of polynomial equations using geometry. Varieties and Ideals.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,12 +72,13 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#varieties" class="toc-link">1. Affine Varieties</a></li>
-                    <li><a href="#grothendieck" class="toc-link">2. Grothendieck's Schemes</a></li>
-                    <li><a href="#cohomology" class="toc-link">3. Sheaf Cohomology</a></li>
-                    <li><a href="#bezout" class="toc-link">4. Bézout's Theorem</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Curves</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#ideals" class="toc-link">2. Ideals & Coordinate Rings</a></li>
+                    <li><a href="#nullstellensatz" class="toc-link">3. Nullstellensatz</a></li>
+                    <li><a href="#groebner" class="toc-link">4. Groebner Bases</a></li>
+                    <li><a href="#schemes" class="toc-link">5. Schemes (Briefly)</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Plotting Curves</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -99,49 +100,58 @@
                     <h2 class="section-title">Affine Varieties</h2>
                 </div>
                 <div class="section-body">
-                    <p>The solution set of a system of polynomial equations.</p>
+                    <p>An <strong>affine variety</strong> `V(S)` is the set of common zeros of a set of polynomials `S
+                        \subseteq k[x_1, \dots, x_n]`.</p>
                     <div class="math-block">
-                        V(S) = \{x \in k^n : f(x)=0 \, \forall f \in S \}
+                        V(y - x^2) = \{(x, y) \in \mathbb{R}^2 \mid y = x^2\} \quad \text{(Parabola)}
                     </div>
-                    <p>Varieties bridge Algebra (Ideal `I`) and Geometry (Set `V`).</p>
+                    <p>Algebra (Polynomials) `\leftrightarrow` Geometry (Shapes).</p>
                 </div>
             </section>
 
-            <!-- Grothendieck -->
-            <section class="section" id="grothendieck">
+            <!-- Ideals -->
+            <section class="section" id="ideals">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Grothendieck Revolution</h2>
+                    <h2 class="section-title">Ideals</h2>
                 </div>
                 <div class="section-body">
-                    <p>Classical varieties study solutions in a fixed field (like `C`).</p>
-                    <p><strong>Schemes</strong> allow solutions in ANY ring (including integers, nilpotent elements). "A
-                        scheme assumes the points are not enough."</p>
+                    <p>Given a variety `V`, the set of all polynomials that vanish on `V` forms an
+                        <strong>ideal</strong> `I(V)`.</p>
+                    <div class="math-block">
+                        I(V) = \{f \in k[x_1, \dots, x_n] \mid f(p) = 0 \forall p \in V\}
+                    </div>
+                    <p>If two polynomials vanish on `V`, their sum does too. If `f` vanishes, `f \cdot g` also vanishes.
+                    </p>
                 </div>
             </section>
 
-            <!-- Cohomology -->
-            <section class="section" id="cohomology">
+            <!-- Nullstellensatz -->
+            <section class="section" id="nullstellensatz">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Sheaf Cohomology</h2>
+                    <h2 class="section-title">Hilbert's Nullstellensatz</h2>
                 </div>
                 <div class="section-body">
-                    <p>Measures the obstruction to gluing local solutions into global solutions.</p>
-                    <p>If `H^1(X, F) = 0`, then local data can always be stitched together globally.</p>
+                    <p>The "Zeros Theorem". It establishes a perfect dictionary between geometry and algebra over
+                        algebraically closed fields (like `\mathbb{C}`).</p>
+                    <div class="rule">
+                        Theorem: `I(V(J)) = \sqrt{J}` (The radical of the ideal).
+                    </div>
                 </div>
             </section>
 
-            <!-- Bezout -->
-            <section class="section" id="bezout">
+            <!-- Groebner -->
+            <section class="section" id="groebner">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Bézout's Theorem</h2>
+                    <h2 class="section-title">Groebner Bases</h2>
                 </div>
                 <div class="section-body">
-                    <p>Two projective plane curves of degree `m` and `n` intersect in exactly `mn` points (counting
-                        multiplicity).</p>
-                    <p>This is a topological invariant of intersection.</p>
+                    <p>How do we solve systems of polynomial equations computationally? We can't use Gaussian
+                        Elimination (linear only).</p>
+                    <p><strong>Buchberger's Algorithm</strong> computes a Groebner Basis, which is like "Ref Row Echelon
+                        Form" for ideals. It allows us to determine if a system has solutions.</p>
                 </div>
             </section>
 
@@ -149,21 +159,32 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Elliptic Curve</h2>
+                    <h2 class="section-title">Python: Plotting a Variety</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Plot Curve</span>
+                            <span class="code-label">Implicit Plot</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 
-y, x = np.ogrid[-5:5:100j, -5:5:100j]
-<span class="code-comment"># y^2 = x^3 - x</span>
-plt.contour(x.ravel(), y.ravel(), y**2 - x**3 + x, [0])</pre>
+# Plot the variety defined by y^2 = x^3 - x (Elliptic Curve)
+x = np.linspace(-2, 3, 400)
+y = np.linspace(-4, 4, 400)
+X, Y = np.meshgrid(x, y)
+
+F = Y**2 - (X**3 - X)
+
+plt.figure(figsize=(6, 6))
+plt.contour(X, Y, F, levels=[0], colors='blue')
+plt.title("Elliptic Curve: y^2 = x^3 - x")
+plt.grid(True)
+plt.axhline(0, color='black', lw=1)
+plt.axvline(0, color='black', lw=1)
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -216,18 +237,24 @@ plt.contour(x.ravel(), y.ravel(), y**2 - x**3 + x, [0])</pre>
             {
                 title: "Algebraic Geometry",
                 items: [
-                    { title: "What is a Scheme?", channel: "Aleph 0", vid: "video_id_placeholder" },
+                    { title: "What is Algebraic Geometry?", channel: "Aleph 0", vid: "video_id_placeholder" },
+                    { title: "Groebner Bases", channel: "Computerphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Variety", prompt: "An affine variety is the zero set of multiple ___.", answer: "polynomials" },
+            { topic: "Variety", prompt: "A variety is the set of solutions to a system of ___ equations.", answer: "polynomial" },
+            { topic: "Ideal", prompt: "The set of polynomials vanishing on a variety forms an ___.", answer: "ideal" },
+            { topic: "Nullstellensatz", prompt: "Hilbert's Nullstellensatz means 'Theorem of ___'.", answer: "Zeros" },
+            { topic: "Field", prompt: "Algebraic geometry works best over an algebraically ___ field.", answer: "closed" },
+            { topic: "Basis", prompt: "Groebner Bases generalize Gaussian ___.", answer: "elimination" },
+            { topic: "Elliptic", prompt: "y^2 = x^3 + ax + b defines an ___ curve.", answer: "elliptic" },
+            { topic: "Dimension", prompt: "The dimension of a variety corresponds to the 'degrees of ___'.", answer: "freedom" },
+            { topic: "Zariski", prompt: "The ___ topology is the standard topology in algebraic geometry.", answer: "Zariski" },
             { topic: "Scheme", prompt: "Grothendieck generalized varieties to ___.", answer: "schemes" },
-            { topic: "Bezout", prompt: "Two curves of degree m and n intersect in ___ points.", answer: "mn" },
-            { topic: "Gluing", prompt: "Sheaf cohomology measures obstruction to ___.", answer: "gluing" },
-            { topic: "Points", prompt: "A scheme treats points as ___ ideals.", answer: "prime" },
+            { topic: "Radical", prompt: "I(V(J)) is the ___ of J.", answer: "radical" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day112_alg_geo_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day112_alggeom_v2' });
     </script>
 </body>
 

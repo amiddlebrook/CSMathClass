@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 87: Theoretical CS — Turing Machines & Decidability</title>
+    <title>Day 87: Context-Free Languages</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 87 · Theoretical CS
         </div>
-        <h1>Decidability</h1>
-        <p class="hero-desc">The Turing Machine and the limits of what computers can do. The Halting Problem.</p>
+        <h1>Context-Free Languages</h1>
+        <p class="hero-desc">Grammars, Parsers, and the Pushdown Automata. The structure of code.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                CFGs & PDAs
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#turing" class="toc-link">1. Turing Machines</a></li>
-                    <li><a href="#church" class="toc-link">2. Church-Turing Thesis</a></li>
-                    <li><a href="#halting" class="toc-link">3. The Halting Problem</a></li>
-                    <li><a href="#rice" class="toc-link">4. Rice's Theorem</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#cfg" class="toc-link">1. Context-Free Grammars</a></li>
+                    <li><a href="#pda" class="toc-link">2. Pushdown Automata</a></li>
+                    <li><a href="#ambiguity" class="toc-link">3. Ambiguity & Parsing</a></li>
+                    <li><a href="#cnf" class="toc-link">4. Chomsky Normal Form</a></li>
+                    <li><a href="#pumping" class="toc-link">5. Pumping Lemma for CFL</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Recursive Descent</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,83 +93,144 @@
         </aside>
 
         <main class="content">
-            <!-- Turing -->
-            <section class="section" id="turing">
+            <!-- CFG -->
+            <section class="section" id="cfg">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Turing Machines</h2>
+                    <h2 class="section-title">Context-Free Grammars (CFG)</h2>
                 </div>
                 <div class="section-body">
-                    <p>A <strong>Turing Machine (TM)</strong> is an infinite tape with a read/write head and a finite
-                        controller.</p>
-                    <div class="math-block">
-                        • Can move Left or Right.
-                        • Can read and write symbols.
-                        • Has infinite memory.
-                    </div>
-                    <p>Despite its simplicity, it can compute <strong>anything</strong> recognizable by any algorithm.
-                    </p>
+                    <p>Regular languages cannot handle nested structures like `((()))`. CFGs can.</p>
+                    <p>A CFG consists of variables, terminals, and rules like `S \to A | B`.</p>
+                    <p>Example: `S \to 0S1 | \epsilon` generates `\{0^n 1^n\}`.</p>
+                    <p>"Context-Free" means we can replace a variable `A` regardless of what surrounds it.</p>
                 </div>
             </section>
 
-            <!-- Church -->
-            <section class="section" id="church">
+            <!-- PDA -->
+            <section class="section" id="pda">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Church-Turing Thesis</h2>
+                    <h2 class="section-title">Pushdown Automata (PDA)</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        <strong>The Thesis:</strong>
-                        "Anything obtainable by a 'mechanical' method of calculation is computable by a Turing Machine."
+                        Theorem: A language is Context-Free `\iff` it is recognized by a Non-deterministic PDA.
                     </div>
-                    <p>This means your Python code, C++, and supercomputers are all just shiny Turing Machines.</p>
+                    <p>A PDA is an NFA with a <strong>Stack</strong> (LIFO memory).</p>
+                    <p>Important: Deterministic PDAs (DPDA) are strictly weaker than Non-deterministic PDAs. This is
+                        unlike Finite Automata where DFA=NFA. Programming languages usually target DPDAs for efficient
+                        parsing.</p>
                 </div>
             </section>
 
-            <!-- Halting -->
-            <section class="section" id="halting">
+            <!-- Ambiguity -->
+            <section class="section" id="ambiguity">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">The Halting Problem</h2>
+                    <h2 class="section-title">Ambiguity</h2>
                 </div>
                 <div class="section-body">
-                    <p>Is there a program `H` that takes code `P` and input `x`, and tells you if `P(x)` halts?</p>
-                    <div class="math-block">
-                        Assume H exists.
-                        Construct D(P):
-                        if H(P, P) says "halts", then D loops forever.
-                        if H(P, P) says "loops", then D halts.
-                        Run D(D)... Contradiction!
-                    </div>
-                    <div class="warning">
-                        <strong>Conclusion:</strong> The Halting Problem is <strong>Undecidable</strong>. There are
-                        things computers CANNOT do.
-                    </div>
+                    <p>A grammar is <strong>ambiguous</strong> if a string has multiple distinct parse trees.</p>
+                    <p>Example: `E \to E+E | E*E | a`. The string `a+a*a` can be parsed as `(a+a)*a` or `a+(a*a)`.</p>
+                    <p>We fix this in compilers using operator precedence. Some languages are inherently ambiguous.</p>
                 </div>
             </section>
 
-            <!-- Rice -->
-            <section class="section" id="rice">
+            <!-- CNF -->
+            <section class="section" id="cnf">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Rice's Theorem</h2>
+                    <h2 class="section-title">Chomsky Normal Form</h2>
                 </div>
                 <div class="section-body">
-                    <p>It gets worse.</p>
-                    <div class="rule">
-                        <strong>Rice's Theorem:</strong> Any non-trivial semantic property of a Turing Machine's
-                        language is undecidable.
+                    <p>Any CFG can be simplified to rules of the form:</p>
+                    <ul>
+                        <li>`A \to BC` (Two variables)</li>
+                        <li>`A \to a` (One terminal)</li>
+                    </ul>
+                    <p>This canonical form enables the <strong>CYK Algorithm</strong>, which checks if a string is in
+                        the grammar in `O(n^3)` time.</p>
+                </div>
+            </section>
+
+            <!-- Pumping -->
+            <section class="section" id="pumping">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Pumping Lemma for CFLs</h2>
+                </div>
+                <div class="section-body">
+                    <p>If a parse tree is deep enough, a path must repeat a variable `R`. We can "pump" the subtree
+                        under `R`.</p>
+                    <div class="math-block">
+                        w = uvxyz, \quad |vxy| \le p, \quad |vy| > 0, \quad uv^i xy^i z \in L
                     </div>
-                    <p>You cannot write a static analyzer that perfectly checks "Does this code ever output a 5?" or "is
-                        this code bug free?".</p>
+                    <p>Used to prove languages like `\{0^n 1^n 2^n\}` are <strong>NOT</strong> Context-Free.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Recursive Descent (Top-Down Parsing)</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Simple Parser</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">class SimpleParser:
+    """
+    Parses S -> 'a' S 'b' | epsilon
+    Language: a^n b^n
+    """
+    def __init__(self, token_stream):
+        self.tokens = list(token_stream)
+        self.pos = 0
+
+    def peek(self):
+        return self.tokens[self.pos] if self.pos < len(self.tokens) else None
+
+    def consume(self, expected):
+        if self.peek() == expected:
+            self.pos += 1
+            return True
+        return False
+
+    def parse_S(self):
+        # S -> 'a' S 'b'
+        if self.consume('a'):
+            if self.parse_S():
+                if self.consume('b'):
+                    return True
+                else:
+                    return False # Expected 'b'
+            return False
+        # S -> epsilon (valid if we don't see 'a')
+        return True
+
+    def parse(self):
+        # Must match S and reach End of Stream
+        valid = self.parse_S()
+        return valid and self.pos == len(self.tokens)
+
+# Test
+print(f"aabb: {SimpleParser('aabb').parse()}") # True
+print(f"aabbb: {SimpleParser('aabbb').parse()}") # False (leftover b)
+print(f"ba: {SimpleParser('ba').parse()}") # False (starts with b)</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -189,8 +252,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -209,21 +272,21 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Undecidability",
+                title: "Context-Free Languages",
                 items: [
-                    { title: "Turing Machines", channel: "Computerphile", vid: "video_id_placeholder" },
-                    { title: "Proof That Computers Can't Do Everything", channel: "Veritasium", vid: "video_id_placeholder" },
+                    { title: "Pushdown Automata", channel: "Easy Theory", vid: "video_id_placeholder" },
+                    { title: "Chomsky Normal Form", channel: "Neso Academy", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "TM", prompt: "A Turing Machine has access to an infinite ___.", answer: "tape" },
-            { topic: "Hypothesis", prompt: "The Church-Turing ___ states TM = Algorithm.", answer: "thesis" },
-            { topic: "Halting", prompt: "The Halting Problem is ___.", answer: "undecidable" },
-            { topic: "Rice", prompt: "Rice's Theorem says semantic properties are ___.", answer: "undecidable" },
-            { topic: "Universal", prompt: "A ___ Turing Machine can simulate any other TM.", answer: "universal" },
+            { topic: "PDA", prompt: "A PDA uses a ___ for memory.", answer: "stack" },
+            { topic: "Determinism", prompt: "Deterministic PDAs are ___ powerful than Nondeterministic PDAs.", answer: "less" },
+            { topic: "Ambiguity", prompt: "If a string has multiple parse trees, the grammar is ___.", answer: "ambiguous" },
+            { topic: "CNF", prompt: "In Chomsky Normal Form, all rules map to either a terminal or ___ variables.", answer: "two" },
+            { topic: "Parsing", prompt: "Recursive Descent is a ___ parser.", answer: "top-down", altAnswers: ["top down"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day87_turing_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day87_cfg_v2' });
     </script>
 </body>
 

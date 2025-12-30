@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 89: Theoretical CS — Space Complexity & Hierarchy</title>
+    <title>Day 89: Decidability & Reducibility</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 89 · Theoretical CS
         </div>
-        <h1>Space Complexity</h1>
-        <p class="hero-desc">How much memory do you need? PSPACE, L, and limits of efficiency.</p>
+        <h1>Decidability & Reducibility</h1>
+        <p class="hero-desc">Proving problems are unsolvable by reducing them to the Halting Problem.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Reductions
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#space" class="toc-link">1. Space Complexity</a></li>
-                    <li><a href="#pspace" class="toc-link">2. PSPACE</a></li>
-                    <li><a href="#savitch" class="toc-link">3. Savitch's Theorem</a></li>
-                    <li><a href="#hierarchy" class="toc-link">4. Hierarchy Theorems</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#diagonal" class="toc-link">1. Countability & Diagonalization</a></li>
+                    <li><a href="#undecidable" class="toc-link">2. Undecidable Problems</a></li>
+                    <li><a href="#reduction" class="toc-link">3. Reductions</a></li>
+                    <li><a href="#rice" class="toc-link">4. Rice's Theorem</a></li>
+                    <li><a href="#pcp" class="toc-link">5. Post Correspondence Problem</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Reduction Logic</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,74 +93,144 @@
         </aside>
 
         <main class="content">
-            <!-- Space -->
-            <section class="section" id="space">
+            <!-- Diagonal -->
+            <section class="section" id="diagonal">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Space vs Time</h2>
+                    <h2 class="section-title">Countability & Diagonalization</h2>
                 </div>
                 <div class="section-body">
-                    <p>Space complexity measures the <strong>memory</strong> used by a Turing Machine (excluding
-                        read-only input tape).</p>
-                    <div class="math-block">
-                        L (Log Space): Space O(log n)
-                        PSPACE: Space Method O(n^k)
-                    </div>
+                    <p>There are countably many Turing Machines (they are strings). There are uncountably many languages
+                        (subsets of strings).</p>
+                    <p>Therefore, <strong>almost all</strong> languages are undecidable. We just need to find specific
+                        ones.</p>
                 </div>
             </section>
 
-            <!-- PSPACE -->
-            <section class="section" id="pspace">
+            <!-- Undecidable -->
+            <section class="section" id="undecidable">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">PSPACE</h2>
+                    <h2 class="section-title">Undecidable Problems</h2>
                 </div>
                 <div class="section-body">
-                    <p>PSPACE contains P and NP. It corresponds to games like Chess or Go (on n x n boards).</p>
-                    <div class="rule">
-                        P ⊆ NP ⊆ PSPACE
-                    </div>
-                    <p>It is unknown if P = PSPACE, but it is strongly believed P ≠ PSPACE.</p>
+                    <p>We know `A_{TM} = \{\langle M, w \rangle \mid M \text{ accepts } w\}` is undecidable.</p>
+                    <p>What about:</p>
+                    <ul>
+                        <li>`E_{TM}`: Is `L(M)` empty?</li>
+                        <li>`EQ_{TM}`: Are `L(M_1)` and `L(M_2)` equal?</li>
+                        <li>`REGULAR_{TM}`: Is `L(M)` regular?</li>
+                    </ul>
+                    <p>Spoiler: They are all undecidable.</p>
                 </div>
             </section>
 
-            <!-- Savitch -->
-            <section class="section" id="savitch">
+            <!-- Reduction -->
+            <section class="section" id="reduction">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Savitch's Theorem</h2>
+                    <h2 class="section-title">Reductions</h2>
                 </div>
                 <div class="section-body">
-                    <p>For time, P vs NP is huge. For space, nondeterminism is weak!</p>
-                    <div class="math-block">
-                        <strong>Theorem:</strong> NSPACE(f(n)) ⊆ SPACE(f(n)²)
-                    </div>
-                    <p>Meaning: Any problem solveable nondeterministically with S space can be solved deterministically
-                        with S² space.</p>
+                    <p>To prove problem `P` is undecidable, we show `A_{TM} \le_m P` (Mapping Reduction).</p>
+                    <p>Meaning: "If I could solve `P`, I could solve the Halting Problem." Since Halting is impossible,
+                        `P` must be impossible.</p>
+                    <p>Example for `E_{TM}`: Construct a machine `M'` that ignores its input and simulates `M` on `w`.
+                        If `M` accepts, `M'` accepts everything (non-empty). If `M` rejects, `M'` accepts nothing
+                        (empty). A solver for Empty would solve Halting.</p>
                 </div>
             </section>
 
-            <!-- Hierarchy -->
-            <section class="section" id="hierarchy">
+            <!-- Rice -->
+            <section class="section" id="rice">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Hierarchy Theorems</h2>
+                    <h2 class="section-title">Rice's Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>We can prove that more resources allows you to solve more problems.</p>
                     <div class="rule">
-                        <strong>Time Hierarchy Theorem:</strong>
-                        TIME(n) ⊊ TIME(n²)
+                        Theorem: Any non-trivial property of the language recognized by a Turing machine is restricted
+                        (undecidable).
                     </div>
-                    <p>This is one of the few "hard" separation results we have. We know `O(n)` cannot solve everything
-                        `O(n²)` can.</p>
+                    <p>"Non-trivial" means it's true for some TMs and false for others (and depends on the language, not
+                        the syntax).</p>
+                    <p>You cannot check IF a function is empty, finite, regular, or context-free.</p>
+                </div>
+            </section>
+
+            <!-- PCP -->
+            <section class="section" id="pcp">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Post Correspondence Problem (PCP)</h2>
+                </div>
+                <div class="section-body">
+                    <p>Not all undecidable problems are about TMs. PCP is about dominos.</p>
+                    <p>Given a set of dominos `[\frac{a}{ab}], [\frac{b}{ca}], \dots`, can you arrange them so the top
+                        string equals the bottom string?</p>
+                    <p>This is undecidable! It can simulate a computation history.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Simulation</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Reduction Concept</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># We cannot code a real reduction for undecidable problems,
+# but we can simulate the "logic" of a reduction.
+
+def solve_halting_oracle(M, w):
+    """Hypothetical Oracle"""
+    # Magic
+    return True 
+
+def solve_is_empty(M):
+    """
+    To determine if L(M) is empty using Halting Oracle:
+    We don't call M directly. We assume M is a machine that
+    runs only on specific inputs.
+    """
+    pass
+
+# Reductions are about code transformation.
+# Input: Source Code of M, Input w
+# Output: Source Code of M'
+
+def construct_M_prime(M_code, w):
+    """
+    Constructs source code for a machine M' that:
+    1. Ignores actual input x.
+    2. Runs M(w).
+    3. If M(w) accepts, M' accepts x.
+    """
+    M_prime_code = f"""
+def M_prime(x):
+    # Ignore x
+    simulate({M_code}, {w})
+    return ACCEPT
+    """
+    return M_prime_code
+
+# If E_TM(M_prime_code) says "NOT EMPTY", it implies M(w) accepted.
+# Thus we reduced Halting to Emptiness.</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -180,8 +252,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -200,20 +272,21 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Space Complexity",
+                title: "Undecidability",
                 items: [
-                    { title: "PSPACE and Savitch Theorem", channel: "MIT OpenCourseWare", vid: "video_id_placeholder" },
+                    { title: "Rice's Theorem", channel: "Easy Theory", vid: "video_id_placeholder" },
+                    { title: "Reductions Explained", channel: "Udacity", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Definition", prompt: "Space complexity excludes the space of the ___.", answer: "input" },
-            { topic: "Relationship", prompt: "Is NP a subset of PSPACE? (yes/no)", answer: "yes" },
-            { topic: "Savitch", prompt: "Nondeterministic space S can be simulated in space ___.", answer: "squared", altAnswers: ["s^2", "s squared"] },
-            { topic: "Hierarchy", prompt: "Time Hierarchy theorem says more time = ___ problems solved.", answer: "more" },
-            { topic: "QBF", prompt: "Quantified Boolean Formula (QBF) is ___ complete.", answer: "pspace" },
+            { topic: "Countability", prompt: "The set of TMs is countable, but the set of languages is ___.", answer: "uncountable" },
+            { topic: "Method", prompt: "To prove undecidability, we typically use a ___ from a known undecidable problem.", answer: "reduction" },
+            { topic: "Rice", prompt: "Rice's Theorem applies to any ___ property of the language.", answer: "non-trivial", altAnswers: ["nontrivial"] },
+            { topic: "PCP", prompt: "The Post Correspondence Problem involves matching strings on ___.", answer: "dominos", altAnswers: ["tiles"] },
+            { topic: "ATM", prompt: "A_TM is the problem of determining if a TM ___ a given string.", answer: "accepts" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day89_space_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day89_decide_v2' });
     </script>
 </body>
 

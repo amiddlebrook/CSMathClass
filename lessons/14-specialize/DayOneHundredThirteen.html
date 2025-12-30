@@ -40,22 +40,22 @@
             </svg>
             Day 113 · Specialization
         </div>
-        <h1>Deep Theoretical CS</h1>
-        <p class="hero-desc">PCP Theorem, Hardness of Approximation, and Unique Games.</p>
+        <h1>Complexity II</h1>
+        <p class="hero-desc">The PCP Theorem, Hardness of Approximation, and Interactive Proofs.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,13 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#pcp" class="toc-link">1. PCP Theorem</a></li>
-                    <li><a href="#approx" class="toc-link">2. Hardness of Approximation</a></li>
-                    <li><a href="#ugc" class="toc-link">3. Unique Games Conjecture</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#pcp" class="toc-link">1. The PCP Theorem</a></li>
+                    <li><a href="#hardness" class="toc-link">2. Hardness of Approximation</a></li>
+                    <li><a href="#ip" class="toc-link">3. Interactive Proofs</a></li>
+                    <li><a href="#crypto" class="toc-link">4. Zero Knowledge</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: 3SAT Check</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -94,47 +96,111 @@
             <section class="section" id="pcp">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">PCP Theorem</h2>
+                    <h2 class="section-title">The PCP Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Probabilistically Checkable Proofs:</strong> Every problem in NP has a proof that can be
-                        verified by reading only 3 bits of it (with high probability, after transforming the problem).
-                    </p>
-                    <div class="math-block">
-                        NP = PCP(\log n, 1)
+                    <p><strong>Probabilistically Checkable Proofs.</strong></p>
+                    <div class="rule">
+                        Theorem: NP = PCP(log n, 1).
                     </div>
+                    <p>This means any mathematical proof (of length `L`) can be rewritten in a format where a verifier
+                        can check it with 99% confidence by looking at only a <strong>constant</strong> number of bits!
+                    </p>
                 </div>
             </section>
 
-            <!-- Approx -->
-            <section class="section" id="approx">
+            <!-- Hardness -->
+            <section class="section" id="hardness">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Hardness of Approximation</h2>
                 </div>
                 <div class="section-body">
-                    <p>The PCP theorem implies that for many NP-Hard problems (like Max-Clique), finding even an
-                        <i>approximate</i> solution is NP-Hard.</p>
+                    <p>The PCP theorem revolutionized optimization. It implies that for many NP-Hard problems (like
+                        Max-Clique), finding even an <strong>approximate</strong> solution is NP-Hard.</p>
+                    <p>It creates a gap: If a formula is satisfiable, we can satisfy 100% of clauses. If not, we can
+                        satisfy at most 90%. Detecting the difference is easy (constant queries), so finding the opt is
+                        hard.</p>
                 </div>
             </section>
 
-            <!-- UGC -->
-            <section class="section" id="ugc">
+            <!-- IP -->
+            <section class="section" id="ip">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Unique Games Conjecture (UGC)</h2>
+                    <h2 class="section-title">Interactive Proofs</h2>
                 </div>
                 <div class="section-body">
-                    <p>Proposed by Subhash Khot (2002). If true, it implies optimal inapproximability results for many
-                        problems (like Max-Cut).</p>
-                    <p>It remains one of the biggest open problems in TCS.</p>
+                    <p>What if the prover and verifier can talk? `IP` is the class of problems solvable this way.</p>
+                    <div class="math-block">
+                        IP = PSPACE
+                    </div>
+                    <p>This means interactive proofs are incredibly powerful—able to prove things like "this Chess
+                        position is a win" (in principle).</p>
+                </div>
+            </section>
+
+            <!-- Crypto -->
+            <section class="section" id="crypto">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Zero Knowledge Proofs</h2>
+                </div>
+                <div class="section-body">
+                    <p>A proof that conveys <strong>zero</strong> information other than the validity of the statement.
+                    </p>
+                    <p>Example: Proving you know a graph coloring without revealing the colors. Crucial for crypto
+                        (Z-Cash, Authentication).</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Python: 3-SAT Verifier</h2>
+                </div>
+                <div class="section-body">
+                    <p>A simple verifier for a 3-SAT assignment.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">SAT Checker</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">def is_satisfied(clauses, assignment):
+    """
+    clauses: list of tuples (e.g., [(1, 2, -3), ...])
+    assignment: dict {1: True, 2: False, ...}
+    """
+    for clause in clauses:
+        clause_sat = False
+        for lit in clause:
+            var = abs(lit)
+            val = assignment.get(var, False)
+            if lit < 0: val = not val
+            
+            if val:
+                clause_sat = True
+                break
+        
+        if not clause_sat:
+            return False # Failed constraint
+    return True
+
+# Example (x1 OR x2 OR NOT x3)
+clauses = [(1, 2, -3)]
+sol = {1: False, 2: False, 3: True} # 0 0 0 -> Fail
+print("Satisfied?", is_satisfied(clauses, sol))</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -156,7 +222,7 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -176,20 +242,26 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "TCS",
+                title: "Advanced Complexity",
                 items: [
-                    { title: "PCP Theorem", channel: "Simons Institute", vid: "video_id_placeholder" },
+                    { title: "The PCP Theorem", channel: "Simons Institute", vid: "video_id_placeholder" },
+                    { title: "Zero Knowledge Proofs", channel: "Numberphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "PCP", prompt: "PCP theorem says proofs can be verified by reading ___ bits.", answer: "constant" },
-            { topic: "Bits", prompt: "Specifically, often just ___ bits!", answer: "3", altAnswers: ["three"] },
-            { topic: "Approx", prompt: "PCP theorem proves hardness of ___.", answer: "approximation" },
-            { topic: "Khot", prompt: "Subhash Khot proposed the ___ Games Conjecture.", answer: "unique" },
-            { topic: "Clique", prompt: "Max-Clique is hard to approximate within factor ___.", answer: "n" },
+            { topic: "PCP", prompt: "PCP(log n, 1) equals ___.", answer: "NP" },
+            { topic: "Verifier", prompt: "A PCP verifier reads only a ___ number of bits.", answer: "constant" },
+            { topic: "Approx", prompt: "PCP implies that ___ solutions are hard to find.", answer: "approximate" },
+            { topic: "IP", prompt: "IP equals ___.", answer: "PSPACE" },
+            { topic: "ZK", prompt: "Zero Knowledge Proofs reveal ___.", answer: "nothing", altAnswers: ["zero knowledge", "no info"] },
+            { topic: "Gap", prompt: "PCP creates a ___ in the objective value between satisfiable and unsatisfiable instances.", answer: "gap" },
+            { topic: "Graph", prompt: "Graph Non-Isomorphism has an ___ proof.", answer: "interactive" },
+            { topic: "SAT", prompt: "If PCP holds, then max-3SAT is hard to approximate within a factor of ___.", answer: "constant" },
+            { topic: "Randomness", prompt: "The verifier must use ___ to check the proof.", answer: "randomness" },
+            { topic: "Length", prompt: "The PCP proof is polynomially ___ than the original proof.", answer: "longer" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day113_tcs_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day113_tcs_v2' });
     </script>
 </body>
 

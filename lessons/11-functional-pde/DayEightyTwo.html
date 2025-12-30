@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 82: Functional Analysis — Fourier Series & Transforms</title>
+    <title>Day 82: Harmonic Analysis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -38,25 +38,24 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 82 · Harmonic Analysis
+            Day 82 · Functional & PDE
         </div>
-        <h1>Fourier Series & Transforms</h1>
-        <p class="hero-desc">Decomposing functions into frequencies. The bridge between time and frequency domains in
-            L².</p>
+        <h1>Harmonic Analysis</h1>
+        <p class="hero-desc">Fourier Series, Fourier Transform, and the decomposition of signals. </p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~50 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                6 practice problems
+                Fourier Theory
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,11 +72,13 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#series" class="toc-link">1. Fourier Series</a></li>
-                    <li><a href="#transform" class="toc-link">2. Fourier Transform</a></li>
-                    <li><a href="#plancherel" class="toc-link">3. Plancherel's Theorem</a></li>
-                    <li><a href="#code" class="toc-link">4. Python: FFT</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#convergence" class="toc-link">2. Convergence Issues</a></li>
+                    <li><a href="#transform" class="toc-link">3. Fourier Transform</a></li>
+                    <li><a href="#plancherel" class="toc-link">4. Plancherel / Parseval</a></li>
+                    <li><a href="#conv" class="toc-link">5. Convolution</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: FFT</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -99,83 +100,132 @@
                     <h2 class="section-title">Fourier Series</h2>
                 </div>
                 <div class="section-body">
-                    <p>Periodic functions `f(x)` can be written as a sum of sines and cosines (or exponentials).</p>
+                    <p>Any periodic function `f(x)` on `[-\pi, \pi]` can be decomposed into sines and cosines.</p>
                     <div class="math-block">
-                        f(x) ∼ ∑ c_n e^{inx}
-                        c_n = (1/2π) ∫ f(x) e^{-inx} dx
+                        f(x) \sim \sum_{n=-\infty}^\infty c_n e^{inx}
                     </div>
-                    <div class="rule">
-                        <strong>Convergence:</strong>
-                        • L² convergence is guaranteed for L² functions (Hilbert space theory).
-                        • Pointwise convergence is tricky! (Dirichlet conditions required).
-                    </div>
+                    <p>Coefficients: `c_n = \frac{1}{2\pi} \int_{-\pi}^\pi f(x) e^{-inx} dx`.</p>
+                </div>
+            </section>
+
+            <!-- Convergence -->
+            <section class="section" id="convergence">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Convergence Issues</h2>
+                </div>
+                <div class="section-body">
+                    <p>Does the series actually equal `f(x)`?</p>
+                    <ul>
+                        <li><strong>Absolutely?</strong> Only if `f` is smooth enough (e.g., `C^1`).</li>
+                        <li><strong>Pointwise?</strong> Yes, if `f` is piecewise continuous (Dirichlet condition), to
+                            `(f(x+) + f(x-))/2`.</li>
+                        <li><strong>L^2 Norm?</strong> Yes, for any `f \in L^2`. (Carleson's theorem says almost
+                            everywhere too!).</li>
+                    </ul>
+                    <p>The <strong>Gibbs Phenomenon</strong> occurs at discontinuities: the series overshoots by ~9%.
+                    </p>
                 </div>
             </section>
 
             <!-- Transform -->
             <section class="section" id="transform">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
+                    <div class="section-number">Section 3</div>
                     <h2 class="section-title">Fourier Transform</h2>
                 </div>
                 <div class="section-body">
-                    <p>For non-periodic functions on `ℝ`, we use the Integral Transform.</p>
+                    <p>For non-periodic functions on `\mathbb{R}`, we use the transform.</p>
                     <div class="math-block">
-                        f̂(ξ) = ∫_{-∞}^{∞} f(x) e^{-2πixξ} dx
-                        f(x) = ∫_{-∞}^{∞} f̂(ξ) e^{2πixξ} dξ
+                        \hat{f}(\xi) = \int_{-\infty}^\infty f(x) e^{-2\pi i x \xi} dx
                     </div>
-                    <p>It maps derivates to multiplication: `(d/dx f)̂ = 2πiξ · f̂`. Use this to solve ODEs/PDEs.</p>
+                    <p>Inverse:</p>
+                    <div class="math-block">
+                        f(x) = \int_{-\infty}^\infty \hat{f}(\xi) e^{2\pi i x \xi} d\xi
+                    </div>
+                    <p>It maps time domain to frequency domain.</p>
                 </div>
             </section>
 
             <!-- Plancherel -->
             <section class="section" id="plancherel">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Plancherel's Theorem</h2>
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Plancherel Theorem</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        The Fourier Transform is a <strong>Unitary Operator</strong> on L²(ℝ).
-                        <div class="math-block" style="text-align:center; margin: 10px 0;">||f||₂ = ||f̂||₂</div>
+                        Theorem: `\|f\|_2 = \|\hat{f}\|_2`
                     </div>
-                    <p>This means energy is conserved between the time domain and frequency domain. (Parseval's
-                        identity).</p>
+                    <p>Total energy is conserved. The integral of the square of the signal equals the integral of the
+                        square of its spectrum.</p>
                 </div>
             </section>
 
-            <!-- Python -->
-            <section class="section" id="code">
+            <!-- Conv -->
+            <section class="section" id="conv">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Python: Fast Fourier Transform (FFT)</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Convolution Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>The O(N log N) algorithm that changed the world.</p>
+                    <p>The Fourier Transform turns convolution into multiplication.</p>
+                    <div class="math-block">
+                        \widehat{f * g} = \hat{f} \cdot \hat{g}
+                    </div>
+                    <p>This is why we use it for signal processing (filtering) and solving PDEs (Turn derivatives into
+                        algebra).</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: FFT</h2>
+                </div>
+                <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Decomposing a Mixed Signal</span>
+                            <span class="code-label">Fast Fourier Transform</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 
-<span class="code-comment"># Create signal: 50Hz + 80Hz</span>
-fs = <span class="code-number">1000</span> <span class="code-comment"># sampling rate</span>
-t = np.arange(<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">1</span>/fs)
-sig = np.sin(<span class="code-number">2</span>*np.pi*<span class="code-number">50</span>*t) + <span class="code-number">0.5</span>*np.sin(<span class="code-number">2</span>*np.pi*<span class="code-number">80</span>*t)
+# Generate a signal with two frequencies
+fs = 1000 # Sampling rate
+t = np.linspace(0, 1, fs)
+f1, f2 = 50, 120 # Hz
+signal = np.sin(2*np.pi*f1*t) + 0.5*np.sin(2*np.pi*f2*t)
 
-<span class="code-comment"># Compute FFT</span>
-freq = np.fft.fftfreq(len(t), <span class="code-number">1</span>/fs)
-fft_val = np.abs(np.fft.fft(sig))
+# Add noise
+noise = 0.5 * np.random.randn(len(t))
+noisy_signal = signal + noise
 
-<span class="code-comment"># Plot first half (positive freqs)</span>
-n = len(t)//<span class="code-number">2</span>
-plt.plot(freq[:n], fft_val[:n])
-plt.xlabel(<span class="code-string">"Frequency (Hz)"</span>)
-plt.ylabel(<span class="code-string">"Amplitude"</span>)
-plt.title(<span class="code-string">"Frequency Spectrum: Peaks at 50Hz and 80Hz"</span>)</pre>
+# Compute FFT
+fft_spectrum = np.fft.fft(noisy_signal)
+freqs = np.fft.fftfreq(len(t), 1/fs)
+
+# Plot magnitude (only positive frequencies)
+mask = freqs > 0
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+plt.plot(t[:100], noisy_signal[:100])
+plt.title("Noisy Signal (Time Domain)")
+plt.xlabel("Time (s)")
+
+plt.subplot(1, 2, 2)
+plt.plot(freqs[mask], np.abs(fft_spectrum[mask]))
+plt.title("FFT Magnitude (Frequency Domain)")
+plt.xlabel("Frequency (Hz)")
+plt.xlim(0, 200) # Zoom in on interest region
+plt.grid()
+plt.show()
+
+# Key result: Peaks clearly visible at 50Hz and 120Hz despite noise.</code></pre>
                         </div>
                     </div>
                 </div>
@@ -184,7 +234,7 @@ plt.title(<span class="code-string">"Frequency Spectrum: Peaks at 50Hz and 80Hz"
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -206,8 +256,8 @@ plt.title(<span class="code-string">"Frequency Spectrum: Peaks at 50Hz and 80Hz"
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -226,22 +276,21 @@ plt.title(<span class="code-string">"Frequency Spectrum: Peaks at 50Hz and 80Hz"
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Fourier Analysis",
+                title: "Harmonic Analysis",
                 items: [
-                    { title: "Fourier Series Intepretation", channel: "3Blue1Brown", vid: "r6sGWTCMz2k" },
-                    { title: "Fourier Transform Visually", channel: "3Blue1Brown", vid: "spUNpyF58BY" },
+                    { title: "Fourier Series Geometric", channel: "3Blue1Brown", vid: "video_id_placeholder" },
+                    { title: "Continuous Fourier Transform", channel: "Steve Brunton", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Series", prompt: "Fourier series represent ___ functions.", answer: "periodic" },
-            { topic: "Space", prompt: "Fourier series converge in L___ norm naturally.", answer: "2" },
-            { topic: "Theorem", prompt: "___'s Theorem says energy is conserved.", answer: "plancherel", altAnswers: ["parseval"] },
-            { topic: "Derivative", prompt: "Differentiation becomes ___ in freq domain.", answer: "multiplication" },
-            { topic: "FFT", prompt: "The complexity of FFT is O(N ___ N).", answer: "log" },
-            { topic: "Decay", prompt: "Smoothness of f relates to ___ of f-hat.", answer: "decay" },
+            { topic: "Basis", prompt: "Fourier series decompose functions into sines and ___.", answer: "cosines" },
+            { topic: "Overshoot", prompt: "The overshoot at a discontinuity is called the ___ phenomenon.", answer: "Gibbs" },
+            { topic: "Plancherel", prompt: "Plancherel theorem states that the Fourier transform preserves ___.", answer: "energy", altAnswers: ["L2 norm"] },
+            { topic: "Convolution", prompt: "Convolution in time domain corresponds to ___ in frequency domain.", answer: "multiplication" },
+            { topic: "FFT", prompt: "The algorithm to compute DFT efficiently is called ___.", answer: "FFT", altAnswers: ["Fast Fourier Transform"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day82_fourier_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day82_harmonic_v2' });
     </script>
 </body>
 

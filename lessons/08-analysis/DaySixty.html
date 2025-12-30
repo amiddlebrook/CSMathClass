@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 60: Metric Spaces</title>
+    <title>Day 60: Taylor Series</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,12 +38,11 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 60 · Analysis
+            Day 60 · Real Analysis
         </div>
-        <h1>Metric Spaces</h1>
+        <h1>Taylor Series</h1>
         <p class="hero-desc">
-            Generalizing the concept of distance: how metrics enable analysis beyond ℝⁿ.
-            Essential for functional analysis, machine learning, and algorithm design.
+            Approximating any function with polynomials. The bridge between complex functions and simple arithmetic.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -51,14 +50,14 @@
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~40 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                12 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,11 +73,12 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#metric" class="toc-link">1. Metric Definition</a></li>
-                    <li><a href="#examples" class="toc-link">2. Common Metrics</a></li>
-                    <li><a href="#topology" class="toc-link">3. Metric Topology</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#definition" class="toc-link">1. Definition</a></li>
+                    <li><a href="#common" class="toc-link">2. Common Series</a></li>
+                    <li><a href="#error" class="toc-link">3. Error Bounds</a></li>
+                    <li><a href="#python" class="toc-link">4. SymPy Expansions</a></li>
+                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -93,143 +93,115 @@
         </aside>
 
         <main class="content">
-            <!-- Metric Definition -->
-            <section class="section" id="metric">
+            <!-- Definition -->
+            <section class="section" id="definition">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Metric Definition</h2>
+                    <h2 class="section-title">The Master Formula</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">The axioms</h3>
-                        <div class="rule">
-                            <strong>Metric:</strong> A function d: X × X → [0, ∞) satisfying:
+                    <p>
+                        If $f$ is infinitely differentiable at $a$, its Taylor Series is:
+                    </p>
+                    <div class="formula-box">
+                        <div class="formula-main">
+                            $f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x-a)^n$
                         </div>
-                        <div class="math-block">1. IDENTITY: d(x, y) = 0 ⟺ x = y
-                            2. SYMMETRY: d(x, y) = d(y, x)
-                            3. TRIANGLE: d(x, z) ≤ d(x, y) + d(y, z)
-
-                            A METRIC SPACE is a pair (X, d) where X is a set and d is a metric.
-
-                            These axioms capture our intuitions about "distance":
-                            • Distance 0 only to yourself
-                            • Distance from A to B = distance from B to A
-                            • Shortest path is direct (no shortcuts via third point)</div>
                     </div>
-
-                    <div class="warning">
-                        <strong>Pseudometric:</strong> If we drop the identity axiom (d(x,y) = 0 possible
-                        for x ≠ y), we get a pseudometric. Useful in some CS applications.
-                    </div>
+                    <p>
+                        It matches the value, slope, concavity, jerk, etc., of the function at a single point $a$.
+                        When $a=0$, it is called a <strong>Maclaurin Series</strong>.
+                    </p>
                 </div>
             </section>
 
-            <!-- Examples -->
-            <section class="section" id="examples">
+            <!-- Common -->
+            <section class="section" id="common">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Common Metrics</h2>
+                    <h2 class="section-title">Common Expansions</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">For x, y ∈ ℝⁿ:
+                    <div class="list-group">
+                        <div class="list-item">
+                            $e^x = 1 + x + \frac{x^2}{2!} + \dots$ (Converges everywhere)
+                        </div>
+                        <div class="list-item">
+                            $\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots$
+                        </div>
+                        <div class="list-item">
+                            $\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \dots$
+                        </div>
+                        <div class="list-item">
+                            $\frac{1}{1-x} = 1 + x + x^2 + \dots$ (Converges for $|x|<1$) </div>
+                        </div>
+                        <div class="info">
+                            <strong>Euler's Identity:</strong> $e^{ix} = \cos x + i \sin x$ becomes obvious when looking
+                            at the series expansions.
+                        </div>
+                    </div>
+            </section>
 
-                        EUCLIDEAN (L²):
-                        d₂(x, y) = √Σᵢ(xᵢ - yᵢ)²
-                        The "usual" distance
+            <!-- Error -->
+            <section class="section" id="error">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Taylor's Theorem (Error)</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        The error $R_n(x)$ in using the $n$-th degree polynomial is:
+                        $$ R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{n+1} $$
+                        for some $c$ between $a$ and $x$.
+                        This allows us to bound the error and prove convergence.
+                    </p>
+                </div>
+            </section>
 
-                        MANHATTAN/TAXICAB (L¹):
-                        d₁(x, y) = Σᵢ|xᵢ - yᵢ|
-                        City-block distance
-
-                        MAXIMUM/CHEBYSHEV (L∞):
-                        d∞(x, y) = maxᵢ|xᵢ - yᵢ|
-                        Chessboard distance
-
-                        DISCRETE:
-                        d(x, y) = 0 if x = y, else 1
-                        Trivial but useful</div>
-
+            <!-- Python -->
+            <section class="section" id="python">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">SymPy Expansions</h2>
+                </div>
+                <div class="section-body">
+                    <p>Computing series coefficients automatically.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Computing different metrics</span>
+                            <span class="code-label">Taylor Series</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">from</span> scipy.spatial <span class="code-keyword">import</span> distance
+                            <pre><span class="code-keyword">from</span> sympy <span class="code-keyword">import</span> symbols, series, sin, exp, cos
 
-x = np.array([<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>])
-y = np.array([<span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>])
+x = symbols(<span class="code-string">'x'</span>)
 
-<span class="code-comment"># Different metrics</span>
-euclidean = np.linalg.norm(x - y)  <span class="code-comment"># L² norm</span>
-manhattan = np.<span class="code-function">sum</span>(np.<span class="code-function">abs</span>(x - y))   <span class="code-comment"># L¹ norm</span>
-chebyshev = np.<span class="code-function">max</span>(np.<span class="code-function">abs</span>(x - y))   <span class="code-comment"># L∞ norm</span>
+<span class="code-comment"># Maclaurin series of sin(x) up to x^9</span>
+TS_sin = series(sin(x), x, <span class="code-number">0</span>, <span class="code-number">10</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Sin(x) ~ {TS_sin}"</span>)
 
-<span class="code-function">print</span>(<span class="code-string">f"Euclidean: {euclidean:.4f}"</span>)  <span class="code-comment"># 5.196</span>
-<span class="code-function">print</span>(<span class="code-string">f"Manhattan: {manhattan}"</span>)        <span class="code-comment"># 9</span>
-<span class="code-function">print</span>(<span class="code-string">f"Chebyshev: {chebyshev}"</span>)        <span class="code-comment"># 3</span>
+<span class="code-comment"># Taylor Series of e^x at x=1</span>
+TS_exp = series(exp(x), x, <span class="code-number">1</span>, <span class="code-number">4</span>)
+<span class="code-function">print</span>(<span class="code-string">f"e^x at x=1 ~ {TS_exp}"</span>)
 
-<span class="code-comment"># scipy.spatial.distance has many more</span>
-<span class="code-function">print</span>(<span class="code-string">f"Cosine: {distance.cosine(x, y):.4f}"</span>)
-<span class="code-function">print</span>(<span class="code-string">f"Minkowski p=3: {distance.minkowski(x, y, p=3):.4f}"</span>)</pre>
+<span class="code-comment"># Using series to take limits</span>
+<span class="code-comment"># Limit of (sin x - x)/x^3 as x->0</span>
+<span class="code-comment"># sin x - x ~ -x^3/6. So ratio is -1/6.</span>
+expr = (sin(x) - x) / x**<span class="code-number">3</span>
+lim = expr.limit(x, <span class="code-number">0</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Limit: {lim}"</span>) <span class="code-comment"># -1/6</span></pre>
                         </div>
-                    </div>
-
-                    <div class="info">
-                        <strong>CS Applications:</strong>
-                        <ul>
-                            <li><strong>KNN:</strong> Choice of metric affects classification</li>
-                            <li><strong>Clustering:</strong> K-means uses Euclidean, others use different metrics</li>
-                            <li><strong>Edit distance:</strong> Metric on strings (Levenshtein distance)</li>
-                            <li><strong>Jaccard distance:</strong> Metric on sets (1 - intersection/union)</li>
-                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Topology -->
-            <section class="section" id="topology">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Metric Topology</h2>
-                </div>
-                <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Open and closed sets</h3>
-                        <div class="math-block">OPEN BALL:
-                            B(x, r) = {y ∈ X : d(x, y) < r} All points within distance r of x OPEN SET: A set is open if
-                                every point has an open ball contained in it. Equivalently: union of open balls CLOSED
-                                SET: Complement of an open set Contains all its limit points CONVERGENCE: xₙ → x in (X,
-                                d) ⟺ d(xₙ, x) → 0</div>
-                        </div>
-
-                        <div class="subsection">
-                            <h3 class="subsection-title">Topological properties</h3>
-                            <div class="math-block">PROPERTIES DEFINED VIA METRIC:
-                                • Continuity: f: (X, d₁) → (Y, d₂) continuous if
-                                xₙ → x ⟹ f(xₙ) → f(x)
-                                • Completeness: every Cauchy sequence converges
-                                • Compactness: every sequence has convergent subsequence
-                                • Connectedness: cannot separate into disjoint open sets
-
-                                EQUIVALENT METRICS:
-                                d and d' are equivalent if they define the same open sets.
-                                Example: All Lᵖ norms are equivalent on ℝⁿ!</div>
-                        </div>
-                    </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Introduction to abstract metric spaces.
-                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -248,13 +220,10 @@ chebyshev = np.<span class="code-function">max</span>(np.<span class="code-funct
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Type your answer and press Check (or hit Enter).
-                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -271,27 +240,30 @@ chebyshev = np.<span class="code-function">max</span>(np.<span class="code-funct
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Metric Spaces",
+                title: "Taylor Series",
                 items: [
-                    { title: "Metric Spaces Introduction — Math Major", channel: "Math Major", vid: "sqMg4vOPYsE" },
-                    { title: "Open and Closed Sets", channel: "Dr. Trefor Bazett", vid: "PFK8sKqoV4g" },
-                    { title: "Convergence in Metric Spaces", channel: "Michael Penn", vid: "u2qYNOAk9Jc" },
+                    { title: "Taylor Series", channel: "3Blue1Brown", vid: "3d6DsjIBzJ4" },
+                    { title: "Euler's Formula with Taylor Series", channel: "Khan Academy", vid: "None" },
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Axioms", prompt: "d(x,y) = d(y,x) is ___", answer: "symmetry" },
-            { topic: "Axioms", prompt: "d(x,z) ≤ d(x,y) + d(y,z) is ___ inequality", answer: "triangle" },
-            { topic: "Axioms", prompt: "d(x,y) = 0 ⟺ x = y is ___", answer: "identity" },
-            { topic: "Examples", prompt: "___ metric: √Σ(xᵢ - yᵢ)²", answer: "euclidean" },
-            { topic: "Examples", prompt: "Manhattan is also called L^___ norm", answer: "1" },
-            { topic: "Examples", prompt: "Chebyshev is also called L^___ norm", answer: "∞", altAnswers: ["infinity", "inf"] },
-            { topic: "Topology", prompt: "B(x,r) is an open ___", answer: "ball" },
-            { topic: "Topology", prompt: "Closed set = complement of ___", answer: "open" },
-            { topic: "Convergence", prompt: "xₙ → x iff d(xₙ, x) → ___", answer: "0" },
-            { topic: "CS", prompt: "___ distance measures edit operations on strings", answer: "levenshtein", altAnswers: ["edit"] },
+        const VIDEOS_REAL = [
+            {
+                title: "Taylor",
+                items: [
+                    { title: "Taylor Series", channel: "3Blue1Brown", vid: "3d6DsjIBzJ4" },
+                    { title: "Power Series", channel: "Professor Leonard", vid: "None" },
+                ]
+            }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day60_metric_v1' });
+
+        const QUESTIONS = [
+            { topic: "Maclaurin", prompt: "A Taylor series centered at 0 is valid a ___ series.", answer: "maclaurin" },
+            { topic: "Sin", prompt: "The Maclaurin series for sin(x) contains only ___ powers of x.", answer: "odd" },
+            { topic: "Cos", prompt: "The Maclaurin series for cos(x) contains only ___ powers of x.", answer: "even" },
+            { topic: "Exp", prompt: "Series for e^x is sum of x^n / ___.", answer: "n!", altAnswers: ["n factorial"] },
+        ];
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day60_taylor_v1' });
     </script>
 </body>
 

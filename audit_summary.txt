@@ -1,0 +1,18 @@
+Section                        | Total | Thin  | Avg Words 
+------------------------------------------------------------
+01-operating-system            | 8     | 0     | 1394      
+02-precalculus                 | 5     | 0     | 869       
+03-calculus                    | 8     | 4     | 608       
+04-linear-algebra              | 6     | 6     | 402       
+05-discrete-math               | 10    | 10    | 284       
+06-algorithms                  | 11    | 7     | 483       
+07-probability-stats           | 6     | 0     | 743       
+08-analysis                    | 9     | 5     | 493       
+09-abstract-algebra            | 3     | 3     | 317       
+09-numerical                   | 1     | 1     | 257       
+10-topology-measure            | 9     | 9     | 301       
+11-functional-pde              | 9     | 9     | 225       
+12-theoretical-cs              | 15    | 15    | 189       
+13-optimization                | 6     | 6     | 213       
+14-specialize                  | 8     | 8     | 181       
+15-discipline                  | 6     | 6     | 113       

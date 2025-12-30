@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 86: Automata — Regular & Context-Free Languages</title>
+    <title>Day 86: Finite Automata</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,23 +40,22 @@
             </svg>
             Day 86 · Theoretical CS
         </div>
-        <h1>Automata & Languages</h1>
-        <p class="hero-desc">The foundation of computation. Finite State Machines, Regular Expressions, and Grammars.
-        </p>
+        <h1>Finite Automata & Regular Languages</h1>
+        <p class="hero-desc">The simplest model of computation. State machines and Regex.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Regular Languages
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#regular" class="toc-link">1. Regular Languages</a></li>
-                    <li><a href="#pumping" class="toc-link">2. Pumping Lemma</a></li>
-                    <li><a href="#cfg" class="toc-link">3. Context-Free Grammars</a></li>
-                    <li><a href="#code" class="toc-link">4. Python: Regex Engine</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#dfa" class="toc-link">1. DFA Definition</a></li>
+                    <li><a href="#nfa" class="toc-link">2. NFA & Equivalence</a></li>
+                    <li><a href="#regex" class="toc-link">3. Regular Expressions</a></li>
+                    <li><a href="#pumping" class="toc-link">4. Pumping Lemma</a></li>
+                    <li><a href="#closure" class="toc-link">5. Closure Properties</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Finite State Machine</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -92,97 +93,154 @@
         </aside>
 
         <main class="content">
-            <!-- Regular -->
-            <section class="section" id="regular">
+            <!-- DFA -->
+            <section class="section" id="dfa">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Regular Languages & DFAs</h2>
+                    <h2 class="section-title">Deterministic Finite Automata (DFA)</h2>
                 </div>
                 <div class="section-body">
-                    <p>A <strong>Regular Language</strong> is the simplest class of computational languages. It can be
-                        recognized by a <strong>Deterministic Finite Automaton (DFA)</strong>.</p>
-                    <div class="math-block">
-                        M = (Q, Σ, δ, q₀, F)
-                        • Q: Finite set of states
-                        • Σ: Alphabet
-                        • δ: Transition function Q × Σ → Q
-                        • q₀: Start state
-                        • F: Accept states
+                    <p>A DFA is a machine with finite memory. It consists of a 5-tuple `(Q, \Sigma, \delta, q_0, F)`:
+                    </p>
+                    <ul>
+                        <li>`Q`: Finite set of states.</li>
+                        <li>`\Sigma`: Finite alphabet (e.g., `{0, 1}`).</li>
+                        <li>`\delta`: Transition function `Q \times \Sigma \to Q`. (Takes state + input, gives new
+                            state).</li>
+                        <li>`q_0`: Start state.</li>
+                        <li>`F`: Set of Accept states.</li>
+                    </ul>
+                    <p>It accepts a string `w` if the sequence of states ends in `F`. The set of all strings accepted by
+                        a DFA is a <strong>Regular Language</strong>.</p>
+                </div>
+            </section>
+
+            <!-- NFA -->
+            <section class="section" id="nfa">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Nondeterministic Finite Automata (NFA)</h2>
+                </div>
+                <div class="section-body">
+                    <p>An NFA can be in <strong>multiple states at once</strong>. It can assume multiple paths or
+                        "guess".</p>
+                    <div class="rule">
+                        Theorem: Every NFA has an equivalent DFA (Subset Construction).
                     </div>
-                    <p><strong>NFA (Nondeterministic):</strong> Can have multiple paths. Surprisingly, NFA = DFA in
-                        power (subset construction).</p>
+                    <p>While NFAs are easier to design, they don't have more power than DFAs. However, the equivalent
+                        DFA might have exponentially more states (`2^{|Q|}`).</p>
+                </div>
+            </section>
+
+            <!-- Regex -->
+            <section class="section" id="regex">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Regular Expressions</h2>
+                </div>
+                <div class="section-body">
+                    <p>Algebraic notation for regular languages. Built using union (`|`), concatenation, and Kleene star
+                        (`*`).</p>
+                    <div class="rule">
+                        Kleene's Theorem: A language is Regular `\iff` it is recognized by a DFA `\iff` it is described
+                        by a Regex.
+                    </div>
+                    <p>Note: Modern "Regex" in programming (with backreferences) is strictly more powerful than
+                        theoretical Regex (it can parse non-regular languages).</p>
                 </div>
             </section>
 
             <!-- Pumping -->
             <section class="section" id="pumping">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">The Pumping Lemma</h2>
                 </div>
                 <div class="section-body">
                     <p>How do we prove a language is <strong>NOT</strong> regular?</p>
-                    <div class="rule">
-                        <strong>Pumping Lemma:</strong> If L is regular, there exists a length `p` such that any string
-                        `s` with `|s| ≥ p` can be split into `xyz` where:
-                        1. `|xy| ≤ p`
-                        2. `y` is not empty
-                        3. `xyⁱz ∈ L` for all `i ≥ 0`.
-                    </div>
-                    <div class="info">
-                        <strong>Classic Example:</strong> `L = {0ⁿ1ⁿ | n ≥ 0}` is NOT regular. (You can't "count" to
-                        arbitrary `n` with finite states).
-                    </div>
-                </div>
-            </section>
-
-            <!-- CFG -->
-            <section class="section" id="cfg">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Context-Free Grammars (CFG)</h2>
-                </div>
-                <div class="section-body">
-                    <p>To capture nested structures (like `0ⁿ1ⁿ` or programming language syntax), we need a
-                        <strong>Stack</strong>.</p>
+                    <p>Since a DFA has finite states, if a string is long enough (`|w| \ge p`), it must loop (visit a
+                        state twice). This loop can be pumped.</p>
                     <div class="math-block">
-                        Pushdown Automaton (PDA) = NFA + Stack
+                        w = xyz, \quad |xy| \le p, \quad |y| > 0, \quad xy^iz \in L \quad \forall i \ge 0
                     </div>
-                    <p><strong>CFG Rules:</strong> `A → α` where A is a variable and α is a string of vars/terminals.
+                    <p>Example: `L = \{0^n 1^n\}` is not regular because you can't pump the 0s without matching the 1s.
                     </p>
                 </div>
             </section>
 
-            <!-- Python -->
-            <section class="section" id="code">
+            <!-- Closure -->
+            <section class="section" id="closure">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Python: Simple FSM</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Closure Properties</h2>
                 </div>
                 <div class="section-body">
-                    <p>Implementing a Finite State Machine to recognize even numbers of 1s.</p>
+                    <p>Regular languages are closed under:</p>
+                    <ul>
+                        <li>Union (Parallel NFAs)</li>
+                        <li>Concatenation (Chain NFAs)</li>
+                        <li>Star (Loop NFA)</li>
+                        <li>Intersection (Product Construction of DFAs)</li>
+                        <li>Complementation (Flip accept/reject states in DFA)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: FSM Implementation</h2>
+                </div>
+                <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Even Parity DFA</span>
+                            <span class="code-label">DFA Simulator</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">class</span> <span class="code-title">DFA</span>:
-    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
-        self.state = <span class="code-string">'EVEN'</span>
+                            <pre><code class="language-python">class DFA:
+    def __init__(self, states, alphabet, transitions, start_state, accept_states):
+        self.states = states
+        self.alphabet = alphabet
+        self.transitions = transitions
+        self.current_state = start_state
+        self.accept_states = accept_states
 
-    <span class="code-keyword">def</span> <span class="code-function">process</span>(self, string):
-        self.state = <span class="code-string">'EVEN'</span>
-        <span class="code-keyword">for</span> char <span class="code-keyword">in</span> string:
-            <span class="code-keyword">if</span> self.state == <span class="code-string">'EVEN'</span>:
-                <span class="code-keyword">if</span> char == <span class="code-string">'1'</span>: self.state = <span class="code-string">'ODD'</span>
-            <span class="code-keyword">else</span>: <span class="code-comment"># ODD</span>
-                <span class="code-keyword">if</span> char == <span class="code-string">'1'</span>: self.state = <span class="code-string">'EVEN'</span>
-        <span class="code-keyword">return</span> self.state == <span class="code-string">'EVEN'</span>
+    def reset(self):
+        self.current_state = 'q0'
 
-dfa = DFA()
-print(dfa.process(<span class="code-string">"101"</span>))   <span class="code-comment"># True (two 1s)</span>
-print(dfa.process(<span class="code-string">"111"</span>))   <span class="code-comment"># False (three 1s)</span></pre>
+    def process_symbol(self, symbol):
+        if symbol not in self.alphabet:
+            raise ValueError("Invalid Symbol")
+        # Transition: (current_state, symbol) -> next_state
+        self.current_state = self.transitions.get((self.current_state, symbol), 'reject')
+
+    def process_string(self, string):
+        self.reset()
+        for char in string:
+            self.process_symbol(char)
+            if self.current_state == 'reject':
+                return False
+        return self.current_state in self.accept_states
+
+# Example: Accept only strings ending in '11'
+# States: q0 (init), q1 (saw 1), q2 (saw 11, accept)
+transitions = {
+    ('q0', '0'): 'q0', ('q0', '1'): 'q1',
+    ('q1', '0'): 'q0', ('q1', '1'): 'q2',
+    ('q2', '0'): 'q0', ('q2', '1'): 'q2'
+}
+
+dfa = DFA(states={'q0', 'q1', 'q2'},
+          alphabet={'0', '1'},
+          transitions=transitions,
+          start_state='q0',
+          accept_states={'q2'})
+
+test_strings = ['0010', '0011', '1111', '101']
+for s in test_strings:
+    print(f"'{s}': {dfa.process_string(s)}")</code></pre>
                         </div>
                     </div>
                 </div>
@@ -191,7 +249,7 @@ print(dfa.process(<span class="code-string">"111"</span>))   <span class="code-c
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -213,8 +271,8 @@ print(dfa.process(<span class="code-string">"111"</span>))   <span class="code-c
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -235,20 +293,20 @@ print(dfa.process(<span class="code-string">"111"</span>))   <span class="code-c
             {
                 title: "Automata Theory",
                 items: [
-                    { title: "Regular Languages and DFAs", channel: "Easy Theory", vid: "S1W4X6fX19k" }, // Placeholder ID if needed: S1W4X6fX19k is random
+                    { title: "DFA and NFA", channel: "Easy Theory", vid: "video_id_placeholder" },
                     { title: "Pumping Lemma Explained", channel: "Neso Academy", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "DFA", prompt: "A DFA has a ___ set of states.", answer: "finite" },
-            { topic: "Equivalence", prompt: "Are DFAs and NFAs equivalent in power? (yes/no)", answer: "yes" },
-            { topic: "Pumping", prompt: "The pumping lemma proves a language is ___ regular.", answer: "not" },
-            { topic: "Memory", prompt: "Regular languages cannot have unbounded ___.", answer: "memory", altAnswers: ["count"] },
-            { topic: "CFG", prompt: "Context Free Grammars describe ___ structures.", answer: "nested", altAnswers: ["recursive"] },
-            { topic: "Stack", prompt: "A PDA uses a ___ for memory.", answer: "stack" },
+            { topic: "DFA", prompt: "A DFA is in exactly ___ state at a time.", answer: "one" },
+            { topic: "NFA", prompt: "Every NFA can be converted to an equivalent ___.", answer: "DFA" },
+            { topic: "Memory", prompt: "Finite Automata cannot count infinitely because they have finite ___.", answer: "memory", altAnswers: ["states"] },
+            { topic: "Pumping Lemma", prompt: "If a language fails the pumping lemma, it is ___ regular.", answer: "not" },
+            { topic: "Closure", prompt: "Regular languages are closed under union, intersection, and ___.", answer: "complement", altAnswers: ["concatenation", "star"] },
+            { topic: "Equivalence", prompt: "The set of languages recognized by DFAs, NFAs, and Regex are ___.", answer: "identical", altAnswers: ["same", "equivalent"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day86_automata_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day86_automata_v2' });
     </script>
 </body>
 

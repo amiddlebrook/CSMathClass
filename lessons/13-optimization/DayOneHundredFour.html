@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 104: Numerical — Stability & Conditioning</title>
+    <title>Day 104: Numerical Conditioning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -41,7 +41,7 @@
             Day 104 · Numerical Analysis
         </div>
         <h1>Conditioning & Stability</h1>
-        <p class="hero-desc">When computers get magnitude wrong. Floating point errors and matrix conditioning.</p>
+        <p class="hero-desc">When exact math meets finite precision. Why some problems are unsolvable.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#float" class="toc-link">1. Floating Point</a></li>
+                    <li><a href="#floats" class="toc-link">1. Floating Point</a></li>
                     <li><a href="#cond" class="toc-link">2. Condition Number</a></li>
-                    <li><a href="#stable" class="toc-link">3. Stability</a></li>
-                    <li><a href="#svd" class="toc-link">4. SVD & Conditioning</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Kappa</a></li>
+                    <li><a href="#stability" class="toc-link">3. Forward vs Backward</a></li>
+                    <li><a href="#hilbert" class="toc-link">4. The Hilbert Matrix</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Instability</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -92,18 +92,20 @@
         </aside>
 
         <main class="content">
-            <!-- Float -->
-            <section class="section" id="float">
+            <!-- Floats -->
+            <section class="section" id="floats">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Floating Point</h2>
+                    <h2 class="section-title">Floating Point Arithmetic</h2>
                 </div>
                 <div class="section-body">
-                    <p>Computers cannot store real numbers exactly. They store `sign * mantissa * 2^exp` (IEEE 754).</p>
-                    <div class="warning">
-                        <strong>Catastrophic Cancellation:</strong> Subtracting two nearly identical numbers leads to
-                        massive loss of precision. `1.000001 - 1.000000 = 0.000001` (most significant digits lost).
+                    <p>Computers do not do real arithmetic. They do <strong>floating point</strong> arithmetic (IEEE
+                        754).</p>
+                    <div class="math-block">
+                        fl(x) = x(1 + \epsilon), \quad |\epsilon| \le \epsilon_{mach}
                     </div>
+                    <p>For double precision (64-bit), machine epsilon `\epsilon_{mach} \approx 10^{-16}`. This small
+                        error can explode.</p>
                 </div>
             </section>
 
@@ -111,42 +113,54 @@
             <section class="section" id="cond">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Condition Number κ</h2>
+                    <h2 class="section-title">Condition Number</h2>
                 </div>
                 <div class="section-body">
-                    <p>How much does the output change given a small change in input?</p>
+                    <p>The <strong>Condition Number</strong> `\kappa(f)` measures how sensitive a function is to input
+                        perturbations.</p>
                     <div class="math-block">
-                        κ(A) = ||A|| * ||A^{-1}|| = σ_max / σ_min
+                        \text{Relative Output Error} \approx \kappa(f) \times \text{Relative Input Error}
                     </div>
-                    <p>If `κ` is large (e.g. $10^{16}$), the matrix is <strong>ill-conditioned</strong>. Solving `Ax=b`
-                        becomes unreliable.</p>
+                    <div class="subsection">
+                        <h3>Matrices</h3>
+                        <p>For solving `Ax=b`:</p>
+                        <div class="math-block">
+                            \kappa(A) = \|A\| \cdot \|A^{-1}\| = \frac{\sigma_{max}}{\sigma_{min}}
+                        </div>
+                        <p>If `\kappa(A) = 10^k`, you lose `k` digits of precision in the solution.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Stable -->
-            <section class="section" id="stable">
+            <!-- Stability -->
+            <section class="section" id="stability">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Numerical Stability</h2>
+                    <h2 class="section-title">Algorithm Stability</h2>
                 </div>
                 <div class="section-body">
-                    <p>An algorithm is stable if small errors in input (or roundoff) do not blow up.</p>
-                    <div class="info">
-                        Example: Gaussian Elimination needs <strong>pivoting</strong> (swapping rows) to be stable.
-                        Without pivoting, dividing by small numbers causes explosion.
-                    </div>
+                    <p>Conditioning is a property of the <strong>problem</strong>. Stability is a property of the
+                        <strong>algorithm</strong>.</p>
+                    <ul>
+                        <li><strong>Forward Stable:</strong> The computed answer is close to the true answer.</li>
+                        <li><strong>Backward Stable:</strong> The computed answer is the <em>exact</em> answer to a
+                            slightly wrong problem.</li>
+                        <li><strong>Unstable:</strong> Errors magnify uncontrollably (e.g., Catastrophic Cancellation).
+                        </li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- SVD -->
-            <section class="section" id="svd">
+            <!-- Hilbert -->
+            <section class="section" id="hilbert">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">SVD Connection</h2>
+                    <h2 class="section-title">The Hilbert Matrix</h2>
                 </div>
                 <div class="section-body">
-                    <p>Singular Value Decomposition (SVD) reveals the condition of a matrix.</p>
-                    <p>Small singular values mean the matrix is "almost" singular (close to non-invertible).</p>
+                    <p>The canonical example of an ill-conditioned matrix. `H_{ij} = \frac{1}{i+j-1}`.</p>
+                    <p>Even for `n=10`, `\kappa(H) \approx 10^{13}`. Solving `Hx=b` is nearly impossible with standard
+                        precision.</p>
                 </div>
             </section>
 
@@ -154,24 +168,42 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Condition Number</h2>
+                    <h2 class="section-title">Python: Catastrophic Cancellation</h2>
                 </div>
                 <div class="section-body">
+                    <p>Solving a Hilbert matrix system shows how precision vanishes.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Calculate κ</span>
+                            <span class="code-label">Ill-Conditioned System</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+                            <pre><code class="language-python">import numpy as np
+from scipy.linalg import hilbert, solve
+import matplotlib.pyplot as plt
 
-<span class="code-comment"># Identical rows = Singular = Infinite Cond</span>
-A = np.array([[1, 1], [1, 1.00000001]])
-cond = np.linalg.cond(A)
+n = 10
+H = hilbert(n)
+print(f"Condition Number (n={n}): {np.linalg.cond(H):.2e}")
 
-print(f<span class="code-string">"Condition Number: {cond}"</span>)
-<span class="code-comment"># Will be huge (approx 10^8)</span>
-<span class="code-comment"># This means we lose ~8 digits of precision solving Ax=b</span></pre>
+# Create a known solution x_true = [1, 1, ..., 1]
+x_true = np.ones(n)
+b = H @ x_true
+
+# Solve Hx = b
+x_comp = solve(H, b)
+
+# Check error
+error = np.linalg.norm(x_comp - x_true)
+print(f"Error: {error:.2e}")
+
+# Visualize solution
+plt.plot(x_true, 'o-', label='True')
+plt.plot(x_comp, 'x--', label='Computed')
+plt.title(f'Solving Hilbert(10) - Correct? Almost.')
+plt.ylim(0, 2)
+plt.legend()
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -222,20 +254,26 @@ print(f<span class="code-string">"Condition Number: {cond}"</span>)
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Numerical Analysis",
+                title: "Conditioning",
                 items: [
-                    { title: "Floating Point Numbers", channel: "Computerphile", vid: "video_id_placeholder" },
+                    { title: "Floating Point Arithmetic", channel: "Computerphile", vid: "video_id_placeholder" },
+                    { title: "Condition Number", channel: "MIT OpenCourseWare", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Cancellation", prompt: "Catastrophic ___ occurs when subtracting close numbers.", answer: "cancellation" },
-            { topic: "Kappa", prompt: "Condition number κ is ratio of max to min ___ values.", answer: "singular" },
-            { topic: "Ill-conditioned", prompt: "A problem with large κ is ___.", answer: "ill-conditioned" },
-            { topic: "Pivoting", prompt: "Gaussian elimination requires ___ to be stable.", answer: "pivoting" },
-            { topic: "Precision", prompt: "Condition number tells us how much ___ we lose.", answer: "precision" },
+            { topic: "Floats", prompt: "Machine epsilon is roughly 10 power minus ___ for doubles.", answer: "16" },
+            { topic: "Cond", prompt: "If cond(A) = 1e6, we essentially lose ___ digits of accuracy.", answer: "6" },
+            { topic: "Singular", prompt: "A singular matrix has a condition number of ___.", answer: "infinity" },
+            { topic: "Stability", prompt: "A ___ stable algorithm gives the exact answer to a nearby problem.", answer: "backward" },
+            { topic: "Cancellation", prompt: "Catastrophic ___ occurs when subtracting two nearly equal numbers.", answer: "cancellation" },
+            { topic: "Hilbert", prompt: "The ___ matrix is famous for being extremely ill-conditioned.", answer: "Hilbert" },
+            { topic: "Norms", prompt: "Condition number is the product of norms of A and ___.", answer: "A inverse", altAnswers: ["inverse", "A^-1"] },
+            { topic: "SVD", prompt: "Condition number is ratio of max singular value to ___.", answer: "min" },
+            { topic: "Precision", prompt: "IEEE 754 defines standard ___ point arithmetic.", answer: "floating" },
+            { topic: "Error", prompt: "Relative error is absolute error divided by the ___ value.", answer: "true" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day104_num_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day104_cond_v2' });
     </script>
 </body>
 

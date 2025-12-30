@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 97: Theoretical CS — Online Algorithms</title>
+    <title>Day 97: Information Theory</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 97 · Theoretical CS
         </div>
-        <h1>Online Algorithms</h1>
-        <p class="hero-desc">Making decisions without knowing the future. Competitive Analysis and Ski Rental.</p>
+        <h1>Information Theory</h1>
+        <p class="hero-desc">The mathematics of communication. Entropy, bits, and compression.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Entropy
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#online" class="toc-link">1. Online vs Offline</a></li>
-                    <li><a href="#competitive" class="toc-link">2. Competitive Ratio</a></li>
-                    <li><a href="#ski" class="toc-link">3. Ski Rental Problem</a></li>
-                    <li><a href="#cache" class="toc-link">4. Paging / Caching</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#bits" class="toc-link">1. Bits & Surprise</a></li>
+                    <li><a href="#entropy" class="toc-link">2. Shannon Entropy</a></li>
+                    <li><a href="#compression" class="toc-link">3. Source Coding</a></li>
+                    <li><a href="#huffman" class="toc-link">4. Huffman Coding</a></li>
+                    <li><a href="#channel" class="toc-link">5. Channel Capacity</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Huffman Tree</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,65 +93,126 @@
         </aside>
 
         <main class="content">
-            <!-- Online -->
-            <section class="section" id="online">
+            <!-- Bits -->
+            <section class="section" id="bits">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Challenge</h2>
+                    <h2 class="section-title">Bits & Surprise</h2>
                 </div>
                 <div class="section-body">
-                    <p>In standard algorithms (Offline), you see the whole input properly. In <strong>Online</strong>
-                        algorithms, input arrives piece by piece, and you must act immediately.</p>
-                    <div class="info">
-                        Example: Routing packets or trading stocks in real-time.
+                    <p>What is information? It is the resolution of uncertainty.</p>
+                    <p>If I tell you "The sun rose today", learning that is low information (high probability).</p>
+                    <p>If I tell you "I won the lottery", learning that is high information (low probability).</p>
+                    <div class="math-block">
+                        I(x) = -\log_2 P(x)
                     </div>
                 </div>
             </section>
 
-            <!-- Competitive -->
-            <section class="section" id="competitive">
+            <!-- Entropy -->
+            <section class="section" id="entropy">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Competitive Analysis</h2>
+                    <h2 class="section-title">Shannon Entropy</h2>
                 </div>
                 <div class="section-body">
-                    <p>We compare our online algorithm `ALG` to the perfect (omniscient) offline algorithm `OPT`.</p>
+                    <p>Entropy `H(X)` is the average information content of a random variable.</p>
                     <div class="math-block">
-                        ALG(I) ≤ c * OPT(I) + b
+                        H(X) = - \sum P(x) \log_2 P(x)
                     </div>
-                    <p>`c` is the competitive ratio. We minimize `c` against an "adversary".</p>
+                    <p>It represents the <strong>minimum average number of bits</strong> needed to encode the variable.
+                    </p>
                 </div>
             </section>
 
-            <!-- Ski -->
-            <section class="section" id="ski">
+            <!-- Compression -->
+            <section class="section" id="compression">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Ski Rental Problem</h2>
+                    <h2 class="section-title">Source Coding Theorem</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        <strong>Problem:</strong> Rent skis for $1/day or Buy for $B? You don't know how many days `D`
-                        you will ski.
+                        Theorem: You cannot compress data below its entropy without losing information.
                     </div>
-                    <p><strong>Strategy:</strong> Rent for `B-1` days. On day `B`, buy.</p>
-                    <p><strong>Ratio:</strong> This is `2`-competitive. Even if you stop skiing immediately after
-                        buying, you paid `2B` vs optimal `B`. It's the best deterministic strategy.</p>
+                    <p>Lossless compression (ZIP, PNG) relies on patterns to approach entropy.</p>
+                    <p>Lossy compression (JPEG, MP3) throws away "unimportant" bits to go below entropy.</p>
                 </div>
             </section>
 
-            <!-- Cache -->
-            <section class="section" id="cache">
+            <!-- Huffman -->
+            <section class="section" id="huffman">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Paging (Caching)</h2>
+                    <h2 class="section-title">Huffman Coding</h2>
                 </div>
                 <div class="section-body">
-                    <p>Which item do you evict from cache when it's full?</p>
-                    <p><strong>LRU (Least Recently Used):</strong> A popular strategy. It is `k`-competitive (where `k`
-                        is cache size).</p>
-                    <div class="info">
-                        Randomized Marking algorithms can achieve `O(log k)`.
+                    <p>An algorithm to construct optimal prefix codes.</p>
+                    <p>High frequency symbols get short codes (e.g. 'e' = 0). Low frequency symbols get long codes (e.g.
+                        'z' = 1101).</p>
+                    <p>This is a Greedy Algorithm that builds a binary tree from the bottom up.</p>
+                </div>
+            </section>
+
+            <!-- Channel -->
+            <section class="section" id="channel">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Channel Capacity</h2>
+                </div>
+                <div class="section-body">
+                    <p>Noisy Channel Coding Theorem: For any channel with capacity `C`, data can be transmitted reliably
+                        at rate `R < C` using error-correcting codes.</p>
+                            <p>This birthed the digital age. Errors can be detected and corrected, making digital
+                                storage perfect.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Entropy Calc</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Entropy</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">import math
+from collections import Counter
+
+def calculate_entropy(data):
+    if not data:
+        return 0
+    
+    counts = Counter(data)
+    total = len(data)
+    entropy = 0
+    
+    for count in counts.values():
+        p = count / total
+        entropy -= p * math.log2(p)
+        
+    return entropy
+
+s1 = "AAAAABBBBB" # 50/50 split
+s2 = "AAAAAAAAAB" # Highly predictable
+s3 = "ABCDEFGHIJ" # Maximum surprise
+
+print(f"Entropy s1: {calculate_entropy(s1):.2f} bits (Max 1.0)")
+print(f"Entropy s2: {calculate_entropy(s2):.2f} bits (Low)")
+print(f"Entropy s3: {calculate_entropy(s3):.2f} bits (High)")
+
+# Huffman Logic (Conceptual)
+# s2 could be encoded: A=0, B=1. 
+# Code: 0000000001 (10 bits).
+# Avg bits per symbol = 1.0. 
+# But Entropy is 0.47! 
+# Optimal block coding would do better than 1 bit per symbol.</code></pre>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -157,7 +220,7 @@
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -179,8 +242,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -199,20 +262,21 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Online Algorithms",
+                title: "Information Theory",
                 items: [
-                    { title: "Ski Rental Problem", channel: "Tim Roughgarden", vid: "video_id_placeholder" },
+                    { title: "Entropy (Shannon Information Theory)", channel: "Computerphile", vid: "video_id_placeholder" },
+                    { title: "Huffman Coding", channel: "Computerphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Future", prompt: "Online algorithms do not know the ___.", answer: "future" },
-            { topic: "Ski", prompt: "The competitive ratio for Ski Rental is ___.", answer: "2" },
-            { topic: "Benchmark", prompt: "We compare against the optimal ___ algorithm.", answer: "offline" },
-            { topic: "Strategy", prompt: "Buying skis immediately is bad if you ski ___.", answer: "once", altAnswers: ["little"] },
-            { topic: "Ratio", prompt: "A ratio of 1 means the algorithm is ___.", answer: "optimal" },
+            { topic: "Entropy", prompt: "Entropy measures the average ___ content.", answer: "information" },
+            { topic: "Probability", prompt: "Low probability events provide ___ information.", answer: "high" },
+            { topic: "Coding", prompt: "Huffman coding assigns shorter codes to ___ frequent symbols.", answer: "more" },
+            { topic: "Channel", prompt: "The Channel Coding theorem proves transmission can be reliable even with ___.", answer: "noise", altAnswers: ["errors"] },
+            { topic: "Unit", prompt: "Information is typically measured in ___.", answer: "bits" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day97_online_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day97_info_v2' });
     </script>
 </body>
 

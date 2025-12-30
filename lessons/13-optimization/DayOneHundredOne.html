@@ -41,7 +41,8 @@
             Day 101 · Optimization
         </div>
         <h1>Convex Fundamentals & Duality</h1>
-        <p class="hero-desc">Deep dive into Convex Sets, Hyperplanes, and Fenchel Conjugates.</p>
+        <p class="hero-desc">A rigorous treatment of Convex Sets, Convex Functions, Separation Theorems, and Fenchel
+            Duality.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -55,7 +56,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,13 +72,15 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#ops" class="toc-link">1. Preserving Convexity</a></li>
-                    <li><a href="#sep" class="toc-link">2. Separating Hyperplane</a></li>
-                    <li><a href="#fenchel" class="toc-link">3. Fenchel Conjugate</a></li>
-                    <li><a href="#dual" class="toc-link">4. Deriving the Dual</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Convex Hull</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#sets" class="toc-link">1. Convex Sets</a></li>
+                    <li><a href="#functions" class="toc-link">2. Convex Functions</a></li>
+                    <li><a href="#jensen" class="toc-link">3. Jensen's Inequality</a></li>
+                    <li><a href="#sep" class="toc-link">4. Separating Hyperplane</a></li>
+                    <li><a href="#fenchel" class="toc-link">5. Fenchel Conjugate</a></li>
+                    <li><a href="#dual" class="toc-link">6. Deriving the Dual (LP)</a></li>
+                    <li><a href="#code" class="toc-link">7. Python: Convex Hull</a></li>
+                    <li><a href="#videos" class="toc-link">8. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">9. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -92,36 +95,121 @@
         </aside>
 
         <main class="content">
-            <!-- Ops -->
-            <section class="section" id="ops">
+            <!-- Sets -->
+            <section class="section" id="sets">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Preserving Convexity</h2>
+                    <h2 class="section-title">Convex Sets</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3>Definition</h3>
+                        <p>A set `C \subseteq \mathbb{R}^n` is <strong>convex</strong> if the line segment between any
+                            two points in `C` lies lies entirely in `C`.</p>
+                        <div class="math-block">
+                            \forall x, y \in C, \theta \in [0, 1] \implies \theta x + (1-\theta)y \in C
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="ops">
+                <div class="section-header">
+                    <div class="section-number">Section 1.1</div>
+                    <h2 class="section-title">Operations Preserving Convexity</h2>
                 </div>
                 <div class="section-body">
                     <p>How do we construct complex convex sets from simple ones?</p>
                     <div class="rule">
                         <ul>
-                            <li><strong>Intersection:</strong> The intersection of ANY number of convex sets is convex.
-                            </li>
-                            <li><strong>Affine Map:</strong> f(x) = Ax + b maps convex sets to convex sets.</li>
-                            <li><strong>Perspective Function:</strong> P(x, t) = x/t preserves convexity.</li>
+                            <li><strong>Intersection:</strong> The intersection of ANY number (even infinite) of convex
+                                sets is convex.</li>
+                            <li><strong>Affine Map:</strong> `f(x) = Ax + b` maps convex sets to convex sets.
+                                `f^{-1}(C)` is also convex.</li>
+                            <li><strong>Perspective Function:</strong> `P(x, t) = x/t` (for `t > 0`) preserves
+                                convexity.</li>
                         </ul>
                     </div>
+                </div>
+            </section>
+
+            <!-- Functions -->
+            <section class="section" id="functions">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Convex Functions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3>Definition</h3>
+                        <p>A function `f: \mathbb{R}^n \to \mathbb{R}` is convex if its domain is a convex set and for
+                            all `x, y` in the domain and `\theta \in [0, 1]`:</p>
+                        <div class="math-block">
+                            f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y)
+                        </div>
+                        <p>Geometrically, the chord connecting `(x, f(x))` and `(y, f(y))` lies <strong>above</strong>
+                            the graph of `f`.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>First-Order Condition</h3>
+                        <p>If `f` is differentiable, it is convex if and only if its graph lies above its tangent
+                            hyperplanes:</p>
+                        <div class="math-block">
+                            f(y) \ge f(x) + \nabla f(x)^T (y-x)
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Second-Order Condition</h3>
+                        <p>If `f` is twice differentiable, it is convex if and only if its Hessian is Positive
+                            Semidefinite (PSD):</p>
+                        <div class="math-block">
+                            \nabla^2 f(x) \succeq 0 \quad (\forall z, z^T \nabla^2 f(x) z \ge 0)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jensen -->
+            <section class="section" id="jensen">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Jensen's Inequality</h2>
+                </div>
+                <div class="section-body">
+                    <p>This is arguably the most important inequality in analysis and probability.</p>
+                    <div class="info">
+                        <strong>Theorem:</strong> If `f` is convex, then for any random variable `X`:
+                        <div class="math-block">
+                            f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]
+                        </div>
+                    </div>
+                    <p><strong>Example:</strong> `f(x) = x^2` is convex. Thus `(\mathbb{E}[X])^2 \le \mathbb{E}[X^2]`.
+                        This implies `\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \ge 0`, which makes sense!</p>
                 </div>
             </section>
 
             <!-- Sep -->
             <section class="section" id="sep">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Separating Hyperplane Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>If `C` and `D` are disjoint convex sets, there exists a plane `a^T x = b` that separates them.
-                    </p>
+                    <div class="subsection">
+                        <h3>Theorem Statement</h3>
+                        <p>If `C` and `D` are disjoint nonempty convex sets, there exists a nonzero vector `a` and a
+                            scalar `b` such that:</p>
+                        <div class="math-block">
+                            a^T x \le b \quad \forall x \in C \\
+                            a^T x \ge b \quad \forall x \in D
+                        </div>
+                        <p>This defines a hyperplane `H = \{x | a^T x = b\}` that separates the sets.</p>
+                    </div>
                     <div class="info">
-                        This is the geometric basis for <strong>duality</strong> and Support Vector Machines (SVM).
+                        This is the geometric engine behind <strong>duality</strong> and Support Vector Machines (SVM).
+                        It guarantees that if a point `y` is not in a convex set `C`, we can separate it from `C`.
                     </div>
                 </div>
             </section>
@@ -129,58 +217,104 @@
             <!-- Fenchel -->
             <section class="section" id="fenchel">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Fenchel Conjugate</h2>
                 </div>
                 <div class="section-body">
-                    <p>The conjugate `f*(y)` of a function `f(x)` is:</p>
+                    <p>The conjugate `f^*(y)` of a function `f(x)` is defined as:</p>
                     <div class="math-block">
-                        f*(y) = sup_x (y^T x - f(x))
+                        f^*(y) = \sup_{x \in \text{dom } f} (y^T x - f(x))
                     </div>
-                    <p>Crucially, `f*` is <strong>always convex</strong>, even if `f` is not!</p>
+                    <p>Visually, `f^*(y)` is the maximum gap between the linear function `y^T x` and `f(x)`. It encodes
+                        the optimal intercept of a supporting hyperplane with slope `y`.</p>
+                    <div class="warning">
+                        <strong>Crucial Property:</strong> `f^*` is <strong>always convex</strong>, even if `f` is not!
+                        This is because it is the pointwise supremum of a family of affine functions (of `y`).
+                    </div>
+                    <p>Also, if `f` is convex and closed, then `f^{**} = f` (Fenchel-Moreau Theorem).</p>
                 </div>
             </section>
 
             <!-- Dual -->
             <section class="section" id="dual">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Deriving the Dual</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Deriving the Dual (LP Example)</h2>
                 </div>
                 <div class="section-body">
-                    <p>For Linear Programming (LP):</p>
+                    <p>Let's derive the dual of a Linear Program (LP) from first principles (Lagrangian).</p>
                     <div class="math-block">
-                        Primal: min c^T x s.t. Ax = b, x ≥ 0
-                        Dual: max -b^T ν s.t. A^T ν + c ≥ 0
+                        \text{Primal: } \min c^T x \quad \text{s.t.} \quad Ax = b, x \ge 0
                     </div>
-                    <p>The dual provides a lower bound on the primal optimal value.</p>
+                    <p><strong>Step 1: The Lagrangian.</strong> Introduce dual variables `\nu` (for `Ax=b`) and `\lambda
+                        \ge 0` (for `-x \le 0`).</p>
+                    <div class="math-block">
+                        L(x, \lambda, \nu) = c^T x + \nu^T (Ax - b) - \lambda^T x \\
+                        = (c + A^T \nu - \lambda)^T x - b^T \nu
+                    </div>
+                    <p><strong>Step 2: The Dual Function.</strong> `g(\lambda, \nu) = \inf_x L(x, \lambda, \nu)`.</p>
+                    <p>The term is linear in `x`. If the coefficient `(c + A^T \nu - \lambda)` is nonzero, the infimum
+                        is `-\infty`. If it is zero, the infimum is `-b^T \nu`.</p>
+                    <p><strong>Step 3: The Dual Problem.</strong> Maximize `g(\lambda, \nu)` subject to `\lambda \ge 0`.
+                    </p>
+                    <div class="math-block">
+                        \text{Dual: } \max -b^T \nu \quad \text{s.t.} \quad A^T \nu + c - \lambda = 0, \lambda \ge 0
+                    </div>
+                    <p>Eliminating `\lambda` (which just means `A^T \nu + c \ge 0`):</p>
+                    <div class="math-block">
+                        \max -b^T \nu \quad \text{s.t.} \quad A^T \nu + c \ge 0
+                    </div>
+                    <p><strong>Weak Duality:</strong> `d^* \le p^*`. The dual always provides a lower bound.</p>
                 </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Convex Hull</h2>
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Python: Convex Hull Visualization</h2>
                 </div>
                 <div class="section-body">
+                    <p>The Convex Hull is the smallest convex set containing a given set of points. We can compute it
+                        efficiently using `scipy.spatial`.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
                             <span class="code-label">Convex Hull (SciPy)</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">from</span> scipy.spatial <span class="code-keyword">import</span> ConvexHull
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.spatial import ConvexHull
 
+# 1. Generate random points in 2D
 points = np.random.rand(30, 2)
+
+# 2. Compute Convex Hull
 hull = ConvexHull(points)
 
-<span class="code-comment"># The vertices of the hull</span>
-print(<span class="code-string">"Hull vertices indices:"</span>, hull.vertices)
+# 3. Plotting
+plt.figure(figsize=(8, 6))
 
-<span class="code-comment"># Plotting code typically follows...</span></pre>
+# Plot all points
+plt.plot(points[:,0], points[:,1], 'o', color='blue')
+
+# Plot hull edges
+for simplex in hull.simplices:
+    # simplex is an array of indices forming an edge
+    plt.plot(points[simplex, 0], points[simplex, 1], 'r-', lw=2)
+
+# Highlight hull vertices
+plt.plot(points[hull.vertices,0], points[hull.vertices,1], 'ro')
+
+plt.title('Convex Hull of 30 Random Points')
+plt.grid(True)
+plt.show()
+
+# Verification of Convexity Definition:
+# Pick any two points inside the hull (e.g., averages of vertices)
+p_avg = np.mean(points[hull.vertices], axis=0) # Centroid is definitely inside
+print(f"Centroid: {p_avg}") # This point is a convex combination!</code></pre>
                         </div>
                     </div>
                 </div>
@@ -189,7 +323,7 @@ print(<span class="code-string">"Hull vertices indices:"</span>, hull.vertices)
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 8</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -211,7 +345,7 @@ print(<span class="code-string">"Hull vertices indices:"</span>, hull.vertices)
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 9</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -233,18 +367,25 @@ print(<span class="code-string">"Hull vertices indices:"</span>, hull.vertices)
             {
                 title: "Convex Analysis",
                 items: [
-                    { title: "Convex Sets and Functions", channel: "Stanford", vid: "video_id_placeholder" },
+                    { title: "Convex Sets", channel: "Stanford (Boyd)", vid: "video_id_placeholder" },
+                    { title: "Lagrange Multipliers", channel: "Khan Academy", vid: "video_id_placeholder" },
+                    { title: "Duality Intuition", channel: "Visually", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Intersect", prompt: "The intersection of convex sets is ___.", answer: "convex" },
-            { topic: "Sep", prompt: "A ___ hyperplane exists for disjoint convex sets.", answer: "separating" },
+            { topic: "Sets", prompt: "A set is convex if the line segment between any two points is ___ the set.", answer: "in" },
+            { topic: "Ops", prompt: "The intersection of convex sets is always ___.", answer: "convex" },
+            { topic: "Hessian", prompt: "A twice-differentiable function is convex iff its Hessian is ___.", answer: "positive semidefinite", altAnswers: ["psd", "semi-definite"] },
+            { topic: "Jensen", prompt: "f(E[X]) <= E[f(X)]. This is ___ Inequality.", answer: "Jensen's", altAnswers: ["Jensen"] },
+            { topic: "Sep", prompt: "Disjoint convex sets can be separated by a ___.", answer: "hyperplane" },
+            { topic: "Fenchel", prompt: "The Fenchel conjugate f* is defined as the point-wise ___ of affine functions.", answer: "supremum", altAnswers: ["maximum", "max", "sup"] },
             { topic: "Fenchel", prompt: "The conjugate f* is always ___.", answer: "convex" },
-            { topic: "Dual", prompt: "The dual problem gives a ___ bound on minimization.", answer: "lower" },
-            { topic: "Hull", prompt: "The smallest convex set containing points S is the Convex ___.", answer: "hull" },
+            { topic: "Lagrangian", prompt: "In the Lagrangian L(x, λ, ν), the multiplier λ must be >= ___.", answer: "0" },
+            { topic: "Dual", prompt: "The dual function comes from taking the ___ of the Lagrangian over x.", answer: "infimum", altAnswers: ["minimum", "min", "inf"] },
+            { topic: "Reference", prompt: "Linear functions are both convex and ___.", answer: "concave" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day101_convex_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day101_convex_v2' });
     </script>
 </body>
 

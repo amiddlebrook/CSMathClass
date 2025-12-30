@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 106: Numerical — Fast Transforms</title>
+    <title>Day 106: Fast Transforms (FFT)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -41,21 +41,21 @@
             Day 106 · Numerical Analysis
         </div>
         <h1>Fast Fourier Transform (FFT)</h1>
-        <p class="hero-desc">The most important algorithm of the 20th century. O(N log N) frequency analysis.</p>
+        <p class="hero-desc">The most important algorithm of the 20th century. O(N log N) changes everything.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#dft" class="toc-link">1. Discrete Fourier Transform</a></li>
-                    <li><a href="#fft" class="toc-link">2. Cooley-Tukey Algorithm</a></li>
-                    <li><a href="#conv" class="toc-link">3. Fast Convolution</a></li>
-                    <li><a href="#apps" class="toc-link">4. Applications</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: FFT</a></li>
+                    <li><a href="#dft" class="toc-link">1. Describe DFT</a></li>
+                    <li><a href="#fft" class="toc-link">2. Cooley-Tukey FFT</a></li>
+                    <li><a href="#roots" class="toc-link">3. Roots of Unity</a></li>
+                    <li><a href="#conv" class="toc-link">4. Convolution Theorem</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Fast Conv</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -96,14 +96,14 @@
             <section class="section" id="dft">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">DFT Definition</h2>
+                    <h2 class="section-title">Discrete Fourier Transform</h2>
                 </div>
                 <div class="section-body">
-                    <p>Converts time domain `x_n` to frequency domain `X_k`.</p>
+                    <p>The DFT maps a sequence `x_n` (time) to `X_k` (frequency):</p>
                     <div class="math-block">
-                        X_k = ∑_{n=0}^{N-1} x_n e^{-i 2π k n / N}
+                        X_k = \sum_{n=0}^{N-1} x_n \cdot e^{-i 2\pi k n / N}
                     </div>
-                    <p>Naive computation takes $O(N^2)$. Too slow for audio/image processing.</p>
+                    <p>Naively, this is a matrix-vector product, taking `O(N^2)` time.</p>
                 </div>
             </section>
 
@@ -111,47 +111,48 @@
             <section class="section" id="fft">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Divide and Conquer (FFT)</h2>
+                    <h2 class="section-title">Cooley-Tukey Algorithm</h2>
                 </div>
                 <div class="section-body">
-                    <p>Cooley and Tukey (1965) showed that if N is even, we can split into Even and Odd parts.</p>
-                    <div class="math-block">
-                        DFT(N) ≈ 2 * DFT(N/2) + O(N) linear work
+                    <p><strong>Divide and Conquer:</strong> Determine the DFT of size `N` by interacting two DFTs of
+                        size `N/2`.</p>
+                    <div class="subsection">
+                        <h3>The Split</h3>
+                        <p>Separate indices into even and odd: `2m` and `2m+1`.</p>
+                        <div class="math-block">
+                            X_k = E_k + e^{-i 2\pi k / N} O_k
+                        </div>
+                        <p>This recursion `T(N) = 2T(N/2) + O(N)` gives `O(N \log N)` complexity.</p>
                     </div>
-                    <p>This recursion gives $T(N) = 2T(N/2) + N$, which solves to $O(N \log N)$.</p>
+                </div>
+            </section>
+
+            <!-- Roots -->
+            <section class="section" id="roots">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Roots of Unity</h2>
+                </div>
+                <div class="section-body">
+                    <p>The magic relies on the properties of `\omega_N = e^{-i 2\pi/N}` (the N-th root of unity).</p>
+                    <div class="rule">
+                        Cancellation: `\sum_{k=0}^{N-1} \omega_N^{jk} = 0` (unless `j` is a multiple of `N`).
+                    </div>
                 </div>
             </section>
 
             <!-- Conv -->
             <section class="section" id="conv">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Fast Convolution</h2>
-                </div>
-                <div class="section-body">
-                    <div class="rule">
-                        Convolution in Time = Multiplication in Frequency.
-                    </div>
-                    <p>To compute `a * b` (length N convolution):<br>
-                        1. FFT(a), FFT(b)<br>
-                        2. Multiply pointwise<br>
-                        3. IFFT(result)<br>
-                        Total time: $O(N \log N)$ instead of $O(N^2)$. This is HUGE.</p>
-                </div>
-            </section>
-
-            <!-- Apps -->
-            <section class="section" id="apps">
-                <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Applications</h2>
+                    <h2 class="section-title">Convolution Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <ul>
-                        <li><strong>Signal Processing:</strong> Filtering noise.</li>
-                        <li><strong>Multiplication:</strong> Multiplying huge integers/polynomials.</li>
-                        <li><strong>Compression:</strong> JPEG/MP3 use DCT (variant of FFT).</li>
-                    </ul>
+                    <p>Convolution in time is multiplication in frequency:</p>
+                    <div class="math-block">
+                        \mathcal{F}(f * g) = \mathcal{F}(f) \cdot \mathcal{F}(g)
+                    </div>
+                    <p>This allows us to compute convolution (normally `O(N^2)`) in `O(N \log N)`!</p>
                 </div>
             </section>
 
@@ -159,27 +160,39 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: FFT</h2>
+                    <h2 class="section-title">Python: Fast Convolution</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">NumPy FFT</span>
+                            <span class="code-label">FFT Convolution</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+                            <pre><code class="language-python">import numpy as np
+import scipy.signal
+import time
 
-<span class="code-comment"># Create signal: 50 Hz + 120 Hz</span>
-t = np.linspace(0, 1, 1000)
-sig = np.sin(2*np.pi*50*t) + np.sin(2*np.pi*120*t)
+N = 100000
+# Random signals
+f = np.random.rand(N)
+g = np.random.rand(N)
 
-<span class="code-comment"># Compute FFT</span>
-freq = np.fft.fft(sig)
-freq_mag = np.abs(freq)
+# 1. Slow Convolution (Direct)
+# Note: Full convolution size is 2N-1
+print("Starting Direct Conv (this might take a while for N=1e5)...")
+# Actually, let's just do a small section to prove point, or trust scipy
+# direct = np.convolve(f, g) # Too slow for demo!
 
-<span class="code-comment"># We should see spikes at index 50 and 120</span>
-print(<span class="code-string">"Max freq component:"</span>, np.argmax(freq_mag[0:500]))</pre>
+# 2. Fast Convolution via FFT
+start = time.time()
+fft_f = np.fft.fft(f, n=2*N) # Pad to avoid circular artifacts
+fft_g = np.fft.fft(g, n=2*N)
+conv_fft = np.fft.ifft(fft_f * fft_g)
+end = time.time()
+
+print(f"FFT Convolution Time: {end-start:.4f}s")
+print(f"Result Size: {conv_fft.shape}")</code></pre>
                         </div>
                     </div>
                 </div>
@@ -233,17 +246,23 @@ print(<span class="code-string">"Max freq component:"</span>, np.argmax(freq_mag
                 title: "FFT",
                 items: [
                     { title: "The FFT Algorithm", channel: "Reducible", vid: "video_id_placeholder" },
+                    { title: "Fourier Transform Visualized", channel: "3Blue1Brown", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Big O", prompt: "FFT reduces complexity from N² to ___.", answer: "nlogn", altAnswers: ["n log n"] },
-            { topic: "Domain", prompt: "DFT converts time domain to ___ domain.", answer: "frequency" },
-            { topic: "Convolution", prompt: "Multiplication in frequency is ___ in time.", answer: "convolution" },
-            { topic: "Strategy", prompt: "Cooley-Tukey uses a ___ and Conquer strategy.", answer: "divide" },
-            { topic: "Inverse", prompt: "To go back to time, use the ___ FFT.", answer: "inverse", altAnswers: ["ifft"] },
+            { topic: "Complexity", prompt: "Naive DFT is O(N^2), FFT is O(___).", answer: "N log N", altAnswers: ["NlogN", "n log n"] },
+            { topic: "Strategy", prompt: "FFT uses a ___ and conquer strategy.", answer: "divide" },
+            { topic: "Recursion", prompt: "The FFT splits the problem into ___ and odd indices.", answer: "even" },
+            { topic: "Convolution", prompt: "Convolution in time is ___ in frequency.", answer: "multiplication" },
+            { topic: "Roots", prompt: "FFT relies on symmetries of the Roots of ___.", answer: "unity" },
+            { topic: "Inverse", prompt: "The Inverse FFT is almost identical, but with a sign change in the ___.", answer: "exponent" },
+            { topic: "Polynomial", prompt: "FFT is equivalent to fast ___ multiplication.", answer: "polynomial" },
+            { topic: "Physics", prompt: "In Physics, frequency domain is often called ___ space (k-space).", answer: "reciprocal" },
+            { topic: "Aliasing", prompt: "Sampling below the Nyquist rate causes ___.", answer: "aliasing" },
+            { topic: "Windowing", prompt: "To reduce spectral leakage, we apply a ___ function.", answer: "window" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day106_fft_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day106_fft_v2' });
     </script>
 </body>
 

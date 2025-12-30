@@ -41,22 +41,21 @@
             Day 107 · Specialization
         </div>
         <h1>Additive Combinatorics</h1>
-        <p class="hero-desc">The structure of sumsets. Roth's Theorem, Freiman's Theorem, and the Sum-Product
-            phenomenon.</p>
+        <p class="hero-desc">The structure of Sumsets. When does A + A look like a subspace?</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,12 +72,13 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#sumsets" class="toc-link">1. Sumsets</a></li>
-                    <li><a href="#roth" class="toc-link">2. Roth's Theorem</a></li>
-                    <li><a href="#freiman" class="toc-link">3. Freiman's Theorem</a></li>
-                    <li><a href="#sumprod" class="toc-link">4. Sum-Product</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Sumsets</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#doubling" class="toc-link">2. Doubling Constant</a></li>
+                    <li><a href="#ruzsa" class="toc-link">3. Ruzsa's Inequality</a></li>
+                    <li><a href="#freiman" class="toc-link">4. Freiman's Theorem</a></li>
+                    <li><a href="#roth" class="toc-link">5. Roth's Theorem</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Sumset Viz</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -97,57 +97,81 @@
             <section class="section" id="sumsets">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Sumset A+A</h2>
+                    <h2 class="section-title">Sumsets Definition</h2>
                 </div>
                 <div class="section-body">
-                    <p>Given a set of integers `A`, the sumset is `A+A = {a+b : a ∈ A, b ∈ A}`.</p>
-                    <p>If `A` is an arithmetic progression (like `1, 2, 3...N`), then `|A+A| ≈ 2|A|`.<br>
-                        If `A` is random (like powers of 2), `|A+A| ≈ |A|^2/2`.</p>
-                    <div class="rule">
-                        Inverse Problem: If `|A+A|` is small, `A` must look like an arithmetic progression.
+                    <p>Given a set `A` integers (or elements of an abelian group), the <strong>sumset</strong> `A+A` is:
+                    </p>
+                    <div class="math-block">
+                        A + A = \{a + a' \mid a, a' \in A\}
+                    </div>
+                    <p>Contrast this with the difference set `A - A`.</p>
+                </div>
+            </section>
+
+            <!-- Doubling -->
+            <section class="section" id="doubling">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Small Doubling</h2>
+                </div>
+                <div class="section-body">
+                    <p>The size `|A+A|` tells us about the structure of `A`.</p>
+                    <ul>
+                        <li><strong>Structure:</strong> If `A` is an arithmetic progression (e.g., `{1, 2, ..., N}`),
+                            then `|A+A| \approx 2|A|`. This is "small doubling".</li>
+                        <li><strong>Randomness:</strong> If `A` is random, `|A+A| \approx |A|^2/2`. This is "large
+                            doubling".</li>
+                    </ul>
+                    <div class="info">
+                        <strong>The Philosophy:</strong> Groups with small sumsets MUST look like Arithmetic
+                        Progressions.
                     </div>
                 </div>
             </section>
 
-            <!-- Roth -->
-            <section class="section" id="roth">
+            <!-- Ruzsa -->
+            <section class="section" id="ruzsa">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Roth's Theorem</h2>
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Plünnecke-Ruzsa Inequality</h2>
                 </div>
                 <div class="section-body">
-                    <p>Roth proved that any subset of integers with positive density contains a <strong>3-term
-                            arithmetic progression</strong>.</p>
+                    <p>This powerful inequality controls iterated sumsets `kA` based on `2A`.</p>
                     <div class="math-block">
-                        x, x+d, x+2d
+                        |nA - mA| \le \left(\frac{|A+A|}{|A|}\right)^{n+m} |A|
                     </div>
-                    <p>This was generalized by Szemerédi to k-term progressions, a towering achievement.</p>
+                    <p>It implies that if `A` has small doubling, then even `100A` is relatively small.</p>
                 </div>
             </section>
 
             <!-- Freiman -->
             <section class="section" id="freiman">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Freiman's Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>Specifically characterizes sets with small sumsets.</p>
-                    <p>If `|A+A| < K|A|`, then `A` is contained in a <strong>Generalized Arithmetic Progression</strong>
-                            (GAP) of small dimension.</p>
+                    <p>A central result in the field.</p>
+                    <div class="rule">
+                        Theorem: If `|A+A| \le K|A|`, then `A` is contained in a <strong>Generalized Arithmetic
+                            Progression (GAP)</strong> of dimension `d(K)` and size `C(K)|A|`.
+                    </div>
+                    <p>This formalizes the intuition that "small doubling implies structure."</p>
                 </div>
             </section>
 
-            <!-- SumProd -->
-            <section class="section" id="sumprod">
+            <!-- Roth -->
+            <section class="section" id="roth">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Sum-Product Phenomenon</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Roth's Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>Erdős-Szemerédi Conjecture: A set cannot have both a small sumset AND a small product set.</p>
+                    <p>Any subset of the integers with positive density contains a 3-term Arithmetic Progression.</p>
                     <div class="math-block">
-                        \max(|A+A|, |A \cdot A|) \ge c|A|^{1+\epsilon}
+                        A \subseteq \{1, \dots, N\}, \quad |A| \ge \delta N \implies \exists x, d : \{x, x+d, x+2d\}
+                        \subseteq A
                     </div>
                 </div>
             </section>
@@ -155,28 +179,48 @@
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Sumset Size</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Analyzing Sumsets</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Calculate |A+A| and |A*A|</span>
+                            <span class="code-label">Sumset Calculator</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">def</span> <span class="code-function">calc_sets</span>(A):
-    sumset = {a+b <span class="code-keyword">for</span> a <span class="code-keyword">in</span> A <span class="code-keyword">for</span> b <span class="code-keyword">in</span> A}
-    prodset = {a*b <span class="code-keyword">for</span> a <span class="code-keyword">in</span> A <span class="code-keyword">for</span> b <span class="code-keyword">in</span> A}
-    <span class="code-keyword">return</span> len(sumset), len(prodset)
+                            <pre><code class="language-python">import matplotlib.pyplot as plt
+import numpy as np
 
-<span class="code-comment"># Arithmetic Progression</span>
-AP = list(range(1, 11))
-<span class="code-comment"># Geometric Progression</span>
-GP = [2**i <span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(10)]
+def get_sumset(A):
+    S = set()
+    for x in A:
+        for y in A:
+            S.add(x + y)
+    return sorted(list(S))
 
-print(<span class="code-string">"AP Sum vs Prod:"</span>, calc_sets(AP)) <span class="code-comment"># Sum small, Prod large</span>
-print(<span class="code-string">"GP Sum vs Prod:"</span>, calc_sets(GP)) <span class="code-comment"># Sum large, Prod small</span></pre>
+# 1. Structure (Arithmetic Progression)
+A_struct = list(range(1, 21)) # {1, 2, ..., 20}
+S_struct = get_sumset(A_struct)
+print(f"Structured A: Size {len(A_struct)}, Sumset Size {len(S_struct)}")
+print(f"Ratio: {len(S_struct)/len(A_struct):.2f}") # Expect ~2
+
+# 2. Random Set
+A_rand = sorted(np.random.choice(range(1000), 20, replace=False))
+S_rand = get_sumset(A_rand)
+print(f"Random A: Size {len(A_rand)}, Sumset Size {len(S_rand)}")
+print(f"Ratio: {len(S_rand)/len(A_rand):.2f}") # Expect large
+
+# Visualization
+plt.figure(figsize=(10, 2))
+plt.scatter(A_struct, [1]*len(A_struct), c='blue', s=10, label='A (struct)')
+plt.scatter(S_struct, [1]*len(S_struct), c='blue', s=10, alpha=0.3, marker='x')
+plt.scatter(A_rand, [0]*len(A_rand), c='red', s=10, label='A (random)')
+plt.scatter(S_rand, [0]*len(S_rand), c='red', s=10, alpha=0.3, marker='x')
+plt.yticks([0, 1], ['Random', 'Structured'])
+plt.title("Set vs Sumset")
+plt.legend()
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -185,7 +229,7 @@ print(<span class="code-string">"GP Sum vs Prod:"</span>, calc_sets(GP)) <span c
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -207,7 +251,7 @@ print(<span class="code-string">"GP Sum vs Prod:"</span>, calc_sets(GP)) <span c
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 8</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -229,18 +273,24 @@ print(<span class="code-string">"GP Sum vs Prod:"</span>, calc_sets(GP)) <span c
             {
                 title: "Additive Combinatorics",
                 items: [
+                    { title: "Sumsets and Doubling", channel: "Terence Tao", vid: "video_id_placeholder" },
                     { title: "Roth's Theorem", channel: "Numberphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Sumset", prompt: "A set `A` is roughly an arithmetic progression if `|A+A|` is ___.", answer: "small" },
-            { topic: "Roth", prompt: "Roth's theorem guarantees a ___-term arithmetic progression.", answer: "3", altAnswers: ["three"] },
-            { topic: "Freiman", prompt: "Freiman's theorem relates small doubling to Generalized ___ Progressions.", answer: "arithmetic" },
-            { topic: "Sum-Product", prompt: "A set cannot have both small sumset and small ___ set.", answer: "product" },
-            { topic: "Progression", prompt: "If A = {1, 2, ..., N}, then |A+A| is roughly ___.", answer: "2n", altAnswers: ["2*n", "2|a|"] },
+            { topic: "Sumset", prompt: "The sumset A+A is the set of all sums x + y where x, y are in ___.", answer: "A" },
+            { topic: "Small Doubling", prompt: "If |A+A| approx 2|A|, then A resembles an ___ progression.", answer: "arithmetic" },
+            { topic: "Large Doubling", prompt: "If |A+A| approx |A|^2/2, then A behaves like a ___ set.", answer: "random" },
+            { topic: "Freiman", prompt: "Freiman's theorem states sets with small doubling are contained in ___.", answer: "GAPs", altAnswers: ["Generalized Arithmetic Progressions", "GAP"] },
+            { topic: "Roth", prompt: "Roth's theorem guarantees existence of 3-term ___.", answer: "AP", altAnswers: ["arithmetic progression"] },
+            { topic: "Ruzsa", prompt: "The Plünnecke-Ruzsa inequality bounds iterated ___.", answer: "sumsets" },
+            { topic: "Density", prompt: "Roth's theorem applies to sets with positive ___.", answer: "density" },
+            { topic: "Structure", prompt: "Additive Combinatorics studies the interplay between additive structure and ___ randomness.", answer: "statistical", altAnswers: ["multiplicative"] },
+            { topic: "Inverse", prompt: "Inverse problems ask: Given the size of sumset, what is the ___ of A?", answer: "structure" },
+            { topic: "Gowers", prompt: "Gowers norms use higher order ___ structure.", answer: "additive" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day107_addcomb_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day107_addcomb_v2' });
     </script>
 </body>
 

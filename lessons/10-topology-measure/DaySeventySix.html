@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 76: LLN & CLT (Rigorous)</title>
+    <title>Day 76: LLN and CLT Rigor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 4 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,23 +41,21 @@
             Day 76 · Topology & Measure
         </div>
         <h1>LLN & CLT</h1>
-        <p class="hero-desc">
-            The Strong Law of Large Numbers and the Central Limit Theorem. The crowning achievements of probability.
-        </p>
+        <p class="hero-desc">The Weak Law, The Strong Law, and the Central Limit Theorem. Modes of Convergence.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~55 min read
+                ~50 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                8 practice problems
+                Convergence
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#modes" class="toc-link">1. Convergence Modes</a></li>
-                    <li><a href="#lln" class="toc-link">2. Strong Law (SLLN)</a></li>
-                    <li><a href="#clt" class="toc-link">3. CLT & Characteristic Fns</a></li>
-                    <li><a href="#code" class="toc-link">4. Python: CLT Demo</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#modes" class="toc-link">1. Modes of Convergence</a></li>
+                    <li><a href="#wlln" class="toc-link">2. Weak Law (WLLN)</a></li>
+                    <li><a href="#slln" class="toc-link">3. Strong Law (SLLN)</a></li>
+                    <li><a href="#clt" class="toc-link">4. Central Limit Theorem</a></li>
+                    <li><a href="#proofs" class="toc-link">5. Proof Sketch: Characteristic Functions</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: WLLN vs CLT</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -100,98 +100,134 @@
                     <h2 class="section-title">Modes of Convergence</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">1. Almost Sure (a.s.)</h3>
-                        <div class="rule">
-                            P(lim Xₙ = X) = 1.
-                            (Pointwise convergence on set of measure 1).
-                            <strong>Strongest form.</strong>
-                        </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">2. In Probability</h3>
-                        <div class="rule">
-                            ∀ε>0, lim P(|Xₙ - X| > ε) = 0.
-                            (Probability of being far away goes to 0).
-                        </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">3. In Distribution (Weak)</h3>
-                        <div class="rule">
-                            lim Fₙ(x) = F(x) for all continuity points of F.
-                            (CDFs converge).
-                            <strong>Weakest form.</strong> (Used in CLT).
-                        </div>
-                    </div>
+                    <p>Random Variables `X_n` are functions. Sequences of functions can converge in different ways.</p>
+                    <ul>
+                        <li><strong>In Probability:</strong> `\forall \epsilon, P(|X_n - X| > \epsilon) \to 0`. (Measure
+                            of bad set vanishes).</li>
+                        <li><strong>Almost Surely (a.s.):</strong> `P(\{\omega : \lim X_n(\omega) = X(\omega)\}) = 1`.
+                            (Pointwise convergence on set of measure 1).</li>
+                        <li><strong>In Distribution:</strong> CDFs converge. `F_n(x) \to F(x)`. (Weaker).</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- LLN -->
-            <section class="section" id="lln">
+            <!-- WLLN -->
+            <section class="section" id="wlln">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Weak Law of Large Numbers (WLLN)</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        Theorem: If `X_i` are i.i.d. with finite mean `\mu`, then `\bar{X}_n \xrightarrow{p} \mu`.
+                    </div>
+                    <p>Convergence in Probability. "For large `n`, the average is unlikely to be far from `\mu`."</p>
+                    <p>Proof uses <strong>Chebyshev's Inequality</strong>.</p>
+                </div>
+            </section>
+
+            <!-- SLLN -->
+            <section class="section" id="slln">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
                     <h2 class="section-title">Strong Law of Large Numbers (SLLN)</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">
-                        <strong>Theorem:</strong> Let X₁, X₂, ... be i.i.d. with E[|X|] < ∞. Let Sₙ=(X₁ + ... + Xₙ) / n.
-                            Then: <strong>Sₙ → μ almost surely.</strong>
-
-                            This means the sample mean converges to the true mean with probability 1.
-                            (Proof uses Kolmogorov's Inequality and Truncation).
+                    <div class="rule">
+                        Theorem: If `X_i` are i.i.d. with finite mean `\mu`, then `\bar{X}_n \xrightarrow{a.s.} \mu`.
                     </div>
+                    <p>Convergence Almost Surely. "The sample path `\bar{X}_n` will eventually stay arbitrarily close to
+                        `\mu` with probability 1."</p>
+                    <p>Historically harder to prove (Kolmogorov).</p>
                 </div>
             </section>
 
             <!-- CLT -->
             <section class="section" id="clt">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Central Limit Theorem (CLT)</h2>
                 </div>
                 <div class="section-body">
+                    <p>The Laws of Large Numbers say `\bar{X}_n \to \mu` (spike). The CLT tells us about the
+                        <strong>shape</strong> of the fluctuations around that spike.</p>
                     <div class="math-block">
-                        <strong>Theorem:</strong> Let Xᵢ be i.i.d. with mean μ and variance σ².
-                        Let Zₙ = (Sₙ - μ) / (σ / √n).
-                        Then:
-                        <strong>Zₙ → N(0, 1) in distribution.</strong>
-
-                        Proof Strategy:
-                        1. Characteristic Function φ_X(t) = E[e^{itX}].
-                        2. Show φ_Zn(t) → e^{-t^2/2} (Char func of Normal).
-                        3. Levy's Continuity Theorem implies convergence in distribution.
+                        \sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)
                     </div>
+                    <p>Convergence in Distribution. The error scales like `1/\sqrt{n}`.</p>
+                </div>
+            </section>
+
+            <!-- Proofs -->
+            <section class="section" id="proofs">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Proof Technique: Characteristic Functions</h2>
+                </div>
+                <div class="section-body">
+                    <p>The standard proof of CLT relies on <strong>Characteristic Functions</strong> (Fourier Transforms
+                        of distributions).</p>
+                    <p>`\phi_X(t) = E[e^{itX}]`.</p>
+                    <p>Key Idea: If `\phi_{X_n}(t) \to \phi_X(t)`, then `X_n \to X` in distribution (Lévy's Continuity
+                        Theorem).</p>
+                    <p>We show `\phi_{S_n}(t) \approx (1 - \frac{t^2}{2n})^n \to e^{-t^2/2}`, which is the char function
+                        of Normal.</p>
                 </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Python: CLT in Action</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Convergence Visualized</h2>
                 </div>
                 <div class="section-body">
-                    <p>Summing ANY distribution (with finite variance) leads to Gaussian.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Sum of Uniforms</span>
+                            <span class="code-label">LLN vs CLT</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 
-<span class="code-comment"># Sum of 30 Uniform Variables</span>
-n_sums = <span class="code-number">10000</span>
-n_add = <span class="code-number">30</span>
-sums = np.sum(np.random.uniform(<span class="code-number">0</span>, <span class="code-number">1</span>, (n_sums, n_add)), axis=<span class="code-number">1</span>)
+# Simulate N experiments, each with n samples
+N = 1000
+n = 1000
+# Uniform(0, 1) -> Mean 0.5, Var 1/12
+data = np.random.rand(N, n)
 
-<span class="code-comment"># Plot Histogram</span>
-plt.hist(sums, bins=<span class="code-number">50</span>, density=<span class="code-keyword">True</span>, alpha=<span class="code-number">0.6</span>, color=<span class="code-string">'g'</span>)
+# Compute running averages for one path (SLLN check)
+path = data[0]
+running_avg = np.cumsum(path) / np.arange(1, n+1)
 
-<span class="code-comment"># The Result should look remarkably Bell-Shaped</span>
-plt.title(<span class="code-string">"CLT: Sum of 30 Uniforms"</span>)
-<span class="code-comment"># plt.show()</span></pre>
+plt.figure(figsize=(12, 5))
+
+# Plot 1: SLLN (One path settling down)
+plt.subplot(1, 2, 1)
+plt.plot(running_avg)
+plt.axhline(0.5, color='r', linestyle='--', label='True Mean')
+plt.title("Strong Law (Single Path)")
+plt.xlabel("n")
+plt.ylabel("Average")
+plt.legend()
+
+# Plot 2: CLT (Distribution of final averages)
+# We need averages from many experiments (N)
+final_avgs = np.mean(data, axis=1)
+# Normalize to see standard normal
+normalized = np.sqrt(n) * (final_avgs - 0.5) / np.sqrt(1/12)
+
+plt.subplot(1, 2, 2)
+plt.hist(normalized, bins=30, density=True, alpha=0.7, color='g')
+# Overlay N(0,1)
+xs = np.linspace(-4, 4, 100)
+pdf = (1/np.sqrt(2*np.pi)) * np.exp(-xs**2/2)
+plt.plot(xs, pdf, 'r-', lw=2, label='N(0,1)')
+plt.title("CLT (Distribution of Averages)")
+plt.legend()
+
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -200,7 +236,7 @@ plt.title(<span class="code-string">"CLT: Sum of 30 Uniforms"</span>)
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -222,8 +258,8 @@ plt.title(<span class="code-string">"CLT: Sum of 30 Uniforms"</span>)
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -244,19 +280,20 @@ plt.title(<span class="code-string">"CLT: Sum of 30 Uniforms"</span>)
             {
                 title: "Limit Theorems",
                 items: [
-                    { title: "Strong Law of Large Numbers", channel: "Michael Penn", vid: "video_id_placeholder" },
-                    { title: "Central Limit Theorem Proof", channel: "The Bright Side of Mathematics", vid: "video_id_placeholder" },
+                    { title: "Weak vs Strong Law", channel: "Ox Educ", vid: "video_id_placeholder" },
+                    { title: "Central Limit Theorem Proof", channel: "jbstatistics", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "SLLN", prompt: "SLLN uses convergence ___ surely.", answer: "almost" },
-            { topic: "CLT", prompt: "CLT uses convergence in ___.", answer: "distribution" },
-            { topic: "CLT", prompt: "The limit distribution in CLT is ___.", answer: "normal", altAnswers: ["gaussian"] },
-            { topic: "Proof", prompt: "CLT is often proved using ___ functions.", answer: "characteristic" },
-            { topic: "Requirement", prompt: "CLT requires finite ___.", answer: "variance" },
+            { topic: "WLLN", prompt: "The Weak Law asserts convergence in ___.", answer: "probability" },
+            { topic: "SLLN", prompt: "The Strong Law asserts convergence ___ surely.", answer: "almost" },
+            { topic: "CLT", prompt: "The Central Limit Theorem describes convergence in ___.", answer: "distribution" },
+            { topic: "Scaling", prompt: "In CLT, the fluctuations scale as 1 over the square root of ___.", answer: "n" },
+            { topic: "Tool", prompt: "Characteristic functions are useful for proving convergence in ___.", answer: "distribution" },
+            { topic: "Assumption", prompt: "Both Laws require the random variables to be ___ and identically distributed.", answer: "independent" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day76_limits_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day76_lln_clt_v2' });
     </script>
 </body>
 

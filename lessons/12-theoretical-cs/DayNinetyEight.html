@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 98: Theoretical CS — Spectral Graph Theory</title>
+    <title>Day 98: Cryptography</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 98 · Theoretical CS
         </div>
-        <h1>Spectral Graph Theory</h1>
-        <p class="hero-desc">Connecting Linear Algebra and Graph Theory. Eigenvalues of the Laplacian.</p>
+        <h1>Cryptography</h1>
+        <p class="hero-desc">Securing communication in the presence of adversaries. RSA and Diffie-Hellman.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~50 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Public Key
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#adj" class="toc-link">1. Adjacency Matrix</a></li>
-                    <li><a href="#laplacian" class="toc-link">2. The Laplacian L</a></li>
-                    <li><a href="#fiedler" class="toc-link">3. Connectivity</a></li>
-                    <li><a href="#code" class="toc-link">4. Python: Spectrum</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#symmetric" class="toc-link">1. Symmetric Key</a></li>
+                    <li><a href="#public" class="toc-link">2. Public Key (Asymmetric)</a></li>
+                    <li><a href="#rsa" class="toc-link">3. RSA Algorithm</a></li>
+                    <li><a href="#diffie" class="toc-link">4. Diffie-Hellman</a></li>
+                    <li><a href="#zk" class="toc-link">5. Zero-Knowledge</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: RSA Basics</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,83 +93,127 @@
         </aside>
 
         <main class="content">
-            <!-- Adj -->
-            <section class="section" id="adj">
+            <!-- Symmetric -->
+            <section class="section" id="symmetric">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Matrix Representations</h2>
+                    <h2 class="section-title">Symmetric Key</h2>
                 </div>
                 <div class="section-body">
-                    <p>A graph G can be viewed as an operator.</p>
-                    <div class="math-block">
-                        Adjacency Matrix A: A_ij = 1 if edge (i,j) exists.
-                        Degree Matrix D: Diagonal matrix of degrees.
-                    </div>
+                    <p>Alice and Bob share a secret key `K`. `E(m, K) = c`, `D(c, K) = m`.</p>
+                    <p>Example: One-Time Pad (XOR with random key). Proven perfectly secure if key is truly random and
+                        never reused.</p>
+                    <p>Issue: Key Exchange. How to share `K` securely?</p>
                 </div>
             </section>
 
-            <!-- Laplacian -->
-            <section class="section" id="laplacian">
+            <!-- Public -->
+            <section class="section" id="public">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">The Laplacian</h2>
+                    <h2 class="section-title">Public Key Cryptography</h2>
                 </div>
                 <div class="section-body">
-                    <p>The <strong>Laplacian Matrix</strong> `L` is defined as:</p>
-                    <div class="math-block">
-                        L = D - A
-                    </div>
-                    <p>It acts like a discrete version of the `∇²` operator (calculating differences between a node and
-                        its neighbors).</p>
+                    <p>Uses two keys: Public `PK` (Encryption) and Private `SK` (Decryption).</p>
+                    <p>Anyone can lock the box (Pub), only you can open it (Priv).</p>
+                    <p>Relies on One-Way Functions: Easy to compute `f(x)`, hard to find `x` given `y=f(x)`.</p>
                 </div>
             </section>
 
-            <!-- Fiedler -->
-            <section class="section" id="fiedler">
+            <!-- RSA -->
+            <section class="section" id="rsa">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Eigenvalues & Connectivity</h2>
+                    <h2 class="section-title">RSA</h2>
                 </div>
                 <div class="section-body">
-                    <p>Let `0 = λ₁ ≤ λ₂ ≤ ... ≤ λₙ` be the eigenvalues of L.</p>
-                    <div class="rule">
-                        λ₁ is always 0.
-                        λ₂ > 0 if and only if G is connected.
-                    </div>
-                    <p><strong>λ₂</strong> is called the <strong>Algebraic Connectivity</strong> (or Fiedler value). It
-                        tells you how "well-connected" the graph is.</p>
+                    <p>Relies on the hardness of <strong>Factoring</strong>.</p>
+                    <ol>
+                        <li>Choose primes `p, q`. Let `n = p q`.</li>
+                        <li>Compute `\phi(n) = (p-1)(q-1)`.</li>
+                        <li>Choose `e` coprime to `\phi(n)`. Find `d` such that `d e \equiv 1 \pmod{\phi(n)}`.</li>
+                        <li>Public: `(e, n)`. Private: `d`.</li>
+                        <li>Encrypt: `c = m^e \pmod n`.</li>
+                        <li>Decrypt: `m = c^d \pmod n`.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Diffie -->
+            <section class="section" id="diffie">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Diffie-Hellman Key Exchange</h2>
+                </div>
+                <div class="section-body">
+                    <p>Allows two parties to agree on a secret key over an insecure channel.</p>
+                    <p>Relies on <strong>Discrete Logarithm Problem</strong>: Given `g^a \pmod p`, find `a`.</p>
+                    <ul>
+                        <li>Alice sends `g^a`. Bob sends `g^b`.</li>
+                        <li>Alice computes `(g^b)^a`. Bob computes `(g^a)^b`.</li>
+                        <li>They share `g^{ab}`. Secure!</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ZK -->
+            <section class="section" id="zk">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Zero-Knowledge Proofs</h2>
+                </div>
+                <div class="section-body">
+                    <p>Proving you know a secret without revealing the secret.</p>
+                    <p>Example: Finding Waldo. I can prove I found Waldo by covering the rest of the image, showing you
+                        only Waldo through a hole. You know I know where he is, but you don't know where (relative to
+                        the full page).</p>
                 </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Python: Computing Eigenvalues</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: RSA Text</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Graph Spectrum</span>
+                            <span class="code-label">Toy RSA</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> scipy.linalg <span class="code-keyword">as</span> la
+                            <pre><code class="language-python">def modinv(a, m):
+    # Extended Euclidean Algorithm
+    m0, x0, x1 = m, 0, 1
+    if m == 1: return 0
+    while a > 1:
+        q = a // m
+        m, a = a % m, m
+        x0, x1 = x1 - q * x0, x0
+    if x1 < 0: x1 += m0
+    return x1
 
-<span class="code-comment"># Graph: 0-1-2-3 (Line)</span>
-A = np.array([
-    [0, 1, 0, 0],
-    [1, 0, 1, 0],
-    [0, 1, 0, 1],
-    [0, 0, 1, 0]
-])
-D = np.diag(np.sum(A, axis=1))
-L = D - A
+# 1. Setup
+p, q = 61, 53
+n = p * q
+phi = (p-1) * (q-1)
+e = 17 # Public Exponent
+d = modinv(e, phi) # Private Exponent
 
-vals, vecs = la.eigh(L)
-print(f<span class="code-string">"Eigenvalues: {np.round(vals, 2)}"</span>)
-<span class="code-comment"># λ2 will be small (weakly connected line)</span></pre>
+print(f"Public Key (e,n): ({e}, {n})")
+print(f"Private Key d: {d}")
+
+# 2. Encrypt Message (must be < n)
+m = 123
+c = pow(m, e, n)
+print(f"Encrypted: {c}")
+
+# 3. Decrypt
+m_dec = pow(c, d, n)
+print(f"Decrypted: {m_dec}")
+
+assert m == m_dec</code></pre>
                         </div>
                     </div>
                 </div>
@@ -176,7 +222,7 @@ print(f<span class="code-string">"Eigenvalues: {np.round(vals, 2)}"</span>)
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -198,8 +244,8 @@ print(f<span class="code-string">"Eigenvalues: {np.round(vals, 2)}"</span>)
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -218,20 +264,21 @@ print(f<span class="code-string">"Eigenvalues: {np.round(vals, 2)}"</span>)
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Spectral Graph Theory",
+                title: "Cryptography",
                 items: [
-                    { title: "Spectral Graph Theory Intro", channel: "Simons Institute", vid: "video_id_placeholder" },
+                    { title: "RSA Encryption", channel: "Computerphile", vid: "video_id_placeholder" },
+                    { title: "Diffie Hellman Key Exchange", channel: "Computerphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Matrix", prompt: "The Laplacian L is defined as D - ___.", answer: "a" },
-            { topic: "Eigenvalue", prompt: "The smallest eigenvalue of L is always ___.", answer: "0" },
-            { topic: "Connectivity", prompt: "If λ2 > 0, the graph is ___.", answer: "connected" },
-            { topic: "Sum", prompt: "Rows of the Laplacian sum to ___.", answer: "0" },
-            { topic: "Name", prompt: "λ2 is often called the ___ connectivity.", answer: "algebraic" },
+            { topic: "Symmetric", prompt: "Symmetric encryption uses the ___ key for encryption and decryption.", answer: "same" },
+            { topic: "RSA", prompt: "RSA security relies on the difficulty of ___ large numbers.", answer: "factoring" },
+            { topic: "Diffie-Hellman", prompt: "Diffie-Hellman relies on the ___ Logarithm problem.", answer: "discrete" },
+            { topic: "Keys", prompt: "In public key crypto, the ___ key is shared with everyone.", answer: "public" },
+            { topic: "ZK", prompt: "Zero-Knowledge proofs prove knowledge without revealing the ___.", answer: "secret", altAnswers: ["concept", "information"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day98_spectral_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day98_crypto_v2' });
     </script>
 </body>
 

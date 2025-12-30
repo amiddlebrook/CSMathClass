@@ -41,21 +41,21 @@
             Day 118 · Discipline
         </div>
         <h1>Two-Pass Learning I</h1>
-        <p class="hero-desc">The Breadth-First Search approach to learning. Definitions and Statements first.</p>
+        <p class="hero-desc">The Breadth Pass. How to survey a field quickly.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~30 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Strategy
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,13 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#bfs" class="toc-link">1. BFS vs DFS</a></li>
-                    <li><a href="#firstpass" class="toc-link">2. The First Pass</a></li>
-                    <li><a href="#map" class="toc-link">3. Building the Map</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#concept" class="toc-link">1. The Two-Pass Concept</a></li>
+                    <li><a href="#pass1" class="toc-link">2. Pass 1: The Scout</a></li>
+                    <li><a href="#keywords" class="toc-link">3. Identifying Keywords</a></li>
+                    <li><a href="#map" class="toc-link">4. Building the Map</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Keyword Extraction</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -90,51 +92,113 @@
         </aside>
 
         <main class="content">
-            <!-- BFS -->
-            <section class="section" id="bfs">
+            <!-- Concept -->
+            <section class="section" id="concept">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Breadth-First Search</h2>
+                    <h2 class="section-title">The Two-Pass Model</h2>
                 </div>
                 <div class="section-body">
-                    <p>Many students get stuck on Line 1 of Page 1. They try to do a Depth-First Search (DFS) of the
-                        textbook.</p>
-                    <p>Instead, do a <strong>BFS</strong>. Scan the chapter. Understand the <i>landscape</i> before you
-                        explore the caves.</p>
+                    <p>Learning strictly linearly (Page 1 to 500) is inefficient. You get stuck on details before
+                        understanding the context.</p>
+                    <div class="rule">
+                        Algorithm:
+                        1. <strong>Pass 1 (The Scout):</strong> Survey the terrain. Gain vocabulary. Build a mental map.
+                        Ignore hard proofs. (Fast)
+                        2. <strong>Pass 2 (The Engineer):</strong> Build the road. Go deep. Derive proofs. Solve hard
+                        problems. (Slow)
+                    </div>
                 </div>
             </section>
 
-            <!-- FirstPass -->
-            <section class="section" id="firstpass">
+            <!-- Pass 1 -->
+            <section class="section" id="pass1">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">The First Pass</h2>
+                    <h2 class="section-title">Pass 1: The Scout</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule">
-                        Goal: Memorize the Definitions and Theorem Statements.
-                    </div>
-                    <p>Do NOT read the proofs. Do NOT do the hard problems. Just learn the language.</p>
-                    <p>If you don't know what "Compact" means, you can't prove anything about it.</p>
+                    <p>Your goal is <strong>familiarity</strong>, not mastery.</p>
+                    <ul>
+                        <li>Read the Table of Contents.</li>
+                        <li>Read Introductions and Conclusions.</li>
+                        <li>Scan for bolded terms.</li>
+                        <li>Look at the diagrams.</li>
+                    </ul>
+                    <p>If you see a wall of math, skip it. Ask: "What is this TRYING to do?"</p>
+                </div>
+            </section>
+
+            <!-- Keywords -->
+            <section class="section" id="keywords">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Identifying Keywords</h2>
+                </div>
+                <div class="section-body">
+                    <p>In Pass 1, collect "Black Boxes".</p>
+                    <p>Example: You read "The kernel trick allows SVMs to classify non-linear data."</p>
+                    <p><strong>Do not</strong> stop to learn RKHS. Just Note: "Kernel Trick = magic for non-linear."</p>
                 </div>
             </section>
 
             <!-- Map -->
             <section class="section" id="map">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Building the Map</h2>
                 </div>
                 <div class="section-body">
-                    <p>By the end of Pass 1, you should have a mental map of the subject. You know what is true, even if
-                        you don't know <i>why</i>.</p>
+                    <p>At the end of Pass 1, draw a dependency graph.</p>
+                    <p>"A depends on B." "C is a type of D."</p>
+                    <p>This contextual knowledge makes Pass 2 10x faster because you know <strong>WHY</strong> you are
+                        learning each piece.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Python: TF-IDF for Keywords</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Basic Extractor</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+
+documents = [
+    "Machine learning uses the kernel trick for non-linear classification.",
+    "The kernel trick maps data to high dimensional space.",
+    "Linear algebra is the foundation of machine learning."
+]
+
+# TF-IDF highlights unique important words
+vectorizer = TfidfVectorizer(stop_words='english')
+X = vectorizer.fit_transform(documents)
+
+feature_names = vectorizer.get_feature_names_out()
+dense = X.todense()
+
+print("Top keywords per document:")
+for i in range(len(documents)):
+    # Get indices of top 3 words
+    row = dense[i].tolist()[0]
+    top_indices = sorted(range(len(row)), key=lambda i: row[i], reverse=True)[:3]
+    print(f"Doc {i}: {[feature_names[j] for j in top_indices]}")</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -156,8 +220,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -176,20 +240,23 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Learning",
+                title: "Meta-Learning",
                 items: [
-                    { title: "How to Read a Textbook", channel: "Various", vid: "video_id_placeholder" },
+                    { title: "Learning How to Learn", channel: "Barbara Oakley", vid: "video_id_placeholder" },
+                    { title: "Ultralearning", channel: "Scott Young", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Strategy", prompt: "Use a ___ search approach to reading.", answer: "bfs" },
-            { topic: "Pass 1", prompt: "In Pass 1, focus on definitions and ___ statements.", answer: "theorem" },
-            { topic: "Skip", prompt: "In Pass 1, skip the ___.", answer: "proofs" },
-            { topic: "Goal", prompt: "Build a mental ___ of the subject.", answer: "map" },
-            { topic: "Language", prompt: "You must learn the ___ before you can speak.", answer: "vocabulary", altAnswers: ["language"] },
+            { topic: "Pass 1", prompt: "The goal of Pass 1 is ___.", answer: "familiarity", altAnswers: ["overview", "survey"] },
+            { topic: "Pass 2", prompt: "The goal of Pass 2 is ___.", answer: "mastery", altAnswers: ["depth"] },
+            { topic: "Black Box", prompt: "In Pass 1, treat unknown complex concepts as ___ boxes.", answer: "black" },
+            { topic: "Linear", prompt: "Avoid strictly ___ reading (Page 1 to N).", answer: "linear" },
+            { topic: "Map", prompt: "Build a dependency ___ to understand connections.", answer: "map", altAnswers: ["graph"] },
+            { topic: "Speed", prompt: "Pass 1 should be ___.", answer: "fast" },
+            { topic: "Context", prompt: "Context helps you understand ___ you are learning something.", answer: "why" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day118_pass1_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day118_twopass1_v2' });
     </script>
 </body>
 

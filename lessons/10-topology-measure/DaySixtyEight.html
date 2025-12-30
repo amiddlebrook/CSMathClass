@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 68: Topology Fundamentals</title>
+    <title>Day 68: Topology Foundations</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 4 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -38,12 +38,10 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 68 · Topology
+            Day 68 · Topology & Measure
         </div>
-        <h1>Topology Fundamentals</h1>
-        <p class="hero-desc">
-            Space as a collection of open sets. Generalizing continuity without distance.
-        </p>
+        <h1>Topology Foundations</h1>
+        <p class="hero-desc">The rubber-sheet geometry. Generalizing continuity without metrics.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -57,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                8 practice problems
+                Abstract Definitions
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,11 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#definition" class="toc-link">1. Definition</a></li>
-                    <li><a href="#continuity" class="toc-link">2. Continuity</a></li>
-                    <li><a href="#code" class="toc-link">3. Visualization</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#metric" class="toc-link">1. Review: Metric Spaces</a></li>
+                    <li><a href="#topology" class="toc-link">2. Topological Spaces</a></li>
+                    <li><a href="#openclosed" class="toc-link">3. Open, Closed, Clopen</a></li>
+                    <li><a href="#basis" class="toc-link">4. Basis of a Topology</a></li>
+                    <li><a href="#continuity" class="toc-link">5. Continuity Generalized</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Finite Topologies</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -92,104 +93,151 @@
         </aside>
 
         <main class="content">
-            <!-- Definition -->
-            <section class="section" id="definition">
+            <!-- Metric -->
+            <section class="section" id="metric">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">What is a Topology?</h2>
+                    <h2 class="section-title">Review: Metric Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Axioms of Top Spaces</h3>
-                        <div class="rule">
-                            <strong>Topology (X, τ):</strong> A collection τ of subsets of X (called "open sets") such
-                            that:
-                            1. ∅ and X are in τ.
-                            2. <strong>Finite Intersection:</strong> Intersection of finite open sets is open.
-                            3. <strong>Arbitrary Union:</strong> Union of any collection of open sets is open.
-                        </div>
-                        <div class="info">
-                            <strong>Why?</strong> This extracts the essence of "closeness" without needing a metric
-                            (distance function).
-                        </div>
-                    </div>
+                    <p>In Real Analysis, we relied on distance `d(x, y)` to define limits. Open balls `B_\epsilon(x)`
+                        were the fundamental building blocks.</p>
+                    <p>But what if we don't have a distance? What if we only care about adjacency or convergence in a
+                        way that distance cannot capture (e.g., pointwise convergence)?</p>
+                    <p>We abstract the "Open Ball" into just "Open Set".</p>
+                </div>
+            </section>
 
-                    <div class="subsection">
-                        <h3 class="subsection-title">Examples</h3>
-                        <div class="math-block">
-                            • <strong>Standard Topology on ℝ:</strong> Open intervals (a, b) and their unions.
-                            • <strong>Discrete Topology:</strong> ALL subsets are open (points are isolated).
-                            • <strong>Indiscrete Topology:</strong> Only ∅ and X are open (everything is "glued"
-                            together).
-                        </div>
+            <!-- Topology -->
+            <section class="section" id="topology">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Definition of a Topology</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        Definition: A <strong>Topology</strong> on a set `X` is a collection `\tau` of subsets of `X`
+                        (called <strong>open sets</strong>) satisfying:
+                        <ol>
+                            <li>`\emptyset \in \tau` and `X \in \tau`.</li>
+                            <li>The union of <strong>any</strong> collection of sets in `\tau` is in `\tau` (Arbitrary
+                                Unions).</li>
+                            <li>The intersection of any <strong>finite</strong> collection of sets in `\tau` is in
+                                `\tau` (Finite Intersections).</li>
+                        </ol>
                     </div>
+                    <p>The pair `(X, \tau)` is a topological space.</p>
+                    <div class="info">
+                        Why finite intersections? Consider `U_n = (-1/n, 1/n)` in `\mathbb{R}`. Each is open. But
+                        `\cap_{n=1}^\infty U_n = \{0\}`, which is closed! Infinite intersections break openness.
+                    </div>
+                </div>
+            </section>
+
+            <!-- OpenClosed -->
+            <section class="section" id="openclosed">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Open, Closed, and Clopen</h2>
+                </div>
+                <div class="section-body">
+                    <ul>
+                        <li><strong>Open:</strong> By definition, any set `U \in \tau`.</li>
+                        <li><strong>Closed:</strong> A set `C` is closed if its complement `X \setminus C` is open.</li>
+                        <li><strong>Clopen:</strong> A set that is both open and closed (e.g., `\emptyset` and `X`
+                            always).</li>
+                    </ul>
+                    <div class="warning">
+                        "Closed" is NOT "Not Open". A door can be open, closed, both (revolving?), or neither (a frame
+                        with no door?). Most sets are neither.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Basis -->
+            <section class="section" id="basis">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Basis of a Topology</h2>
+                </div>
+                <div class="section-body">
+                    <p>Defining `\tau` by listing ALL open sets is impossible for `\mathbb{R}`. Instead, we specify a
+                        <strong>Basis</strong> `\mathcal{B}`.</p>
+                    <p>A collection `\mathcal{B}` is a basis if every open set `U \in \tau` can be written as a union of
+                        elements from `\mathcal{B}`.</p>
+                    <p>Example: For `\mathbb{R}`, the basis is the set of all open intervals `(a, b)`. Every open set in
+                        `\mathbb{R}` is a union of open intervals.</p>
                 </div>
             </section>
 
             <!-- Continuity -->
             <section class="section" id="continuity">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Continuity Generalized</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">The "Real" Definition</h3>
-                        <div class="rule">
-                            <strong>Definition:</strong> Function f: X → Y is continuous if for every open set V in Y,
-                            the preimage f⁻¹(V) is open in X.
-                        </div>
-                        <div class="math-block">
-                            "Inverse images of open sets are open."
-
-                            Compare to ε-δ:
-                            |f(x) - f(c)| < ε ⟺ f(x) ∈ (f(c)-ε, f(c)+ε) (an open set V). Implying ∃δ s.t. x ∈ (c-δ, c+δ)
-                                (an open set U). So f(U) ⊆ V ⟺ U ⊆ f⁻¹(V). </div>
-                        </div>
-
-                        <div class="subsection">
-                            <h3 class="subsection-title">Homeomorphism</h3>
-                            <div class="info">
-                                <strong>Homeomorphism:</strong> A continuous bijection with a continuous inverse.
-                                In Topology, X ≅ Y means distinct shapes (donut vs coffee mug) are the "same" if one can
-                                continuously deform into the other.
-                            </div>
-                        </div>
+                    <p>In calculus: `f` is continuous if `\lim_{x \to c} f(x) = f(c)`. In metric spaces: `\forall
+                        \epsilon, \exists \delta`...</p>
+                    <p>In Topology, we have the elegant definition:</p>
+                    <div class="math-block">
+                        f: X \to Y \text{ is continuous if } \forall V \in \tau_Y, f^{-1}(V) \in \tau_X.
                     </div>
+                    <p>"The preimage of every open set is open."</p>
+                    <p>This definition requires NO distance function.</p>
+                </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Visualization: Norms = Topologies</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Finite Topologies</h2>
                 </div>
                 <div class="section-body">
-                    <p>Different norms induce standard topologies that look different.</p>
+                    <p>For finite sets, we can check the topology axioms explicitly.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Visualizing Open Balls</span>
+                            <span class="code-label">Topology Validator</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">from itertools import combinations
 
-x = np.linspace(<span class="code-number">-1.5</span>, <span class="code-number">1.5</span>, <span class="code-number">400</span>)
-y = np.linspace(<span class="code-number">-1.5</span>, <span class="code-number">1.5</span>, <span class="code-number">400</span>)
-X, Y = np.meshgrid(x, y)
+def is_topology(X, tau):
+    # Convert list of lists to set of frozensets for easy set ops
+    tau_set = set(frozenset(s) for s in tau)
+    X_set = frozenset(X)
+    
+    # 1. Empty and X must be in tau
+    if frozenset() not in tau_set: return False, "Missing empty set"
+    if X_set not in tau_set: return False, "Missing X"
+    
+    # 2. Arbitrary Unions (Finite case: just all combinations)
+    # 3. Finite Intersections
+    # Optimization: Just check pairwise for finite tau
+    for A in tau_set:
+        for B in tau_set:
+            if A | B not in tau_set:
+                return False, f"Union of {set(A)} and {set(B)} missing"
+            if A & B not in tau_set:
+                return False, f"Intersection of {set(A)} and {set(B)} missing"
+                
+    return True, "Valid Topology"
 
-<span class="code-comment"># L1 Norm: |x| + |y| < 1 (Diamond)</span>
-L1 = (np.abs(X) + np.abs(Y)) < <span class="code-number">1</span>
+# Example X = {1, 2, 3}
+# Sierpinski Space: { {}, {1,2,3}, {1} } is NOT a topology?
+# Wait: {1} U {1,2,3} = {1,2,3} (in). {1} & {1,2,3} = {1} (in).
+# Standard Sierpinski on {0, 1} is {{}, {0,1}, {1}}.
 
-<span class="code-comment"># L2 Norm: x^2 + y^2 < 1 (Circle)</span>
-L2 = (X**<span class="code-number">2</span> + Y**<span class="code-number">2</span>) < <span class="code-number">1</span>
+X = {1, 2, 3}
+# Try: {{}, {1,2,3}, {1}, {2}} -> Union {1,2} missing!
+tau_bad = [[], [1, 2, 3], [1], [2]]
+print(f"Bad: {is_topology(X, tau_bad)}")
 
-<span class="code-comment"># L-inf Norm: max(|x|, |y|) < 1 (Square)</span>
-Linf = np.maximum(np.abs(X), np.abs(Y)) < <span class="code-number">1</span>
-
-<span class="code-comment"># In Finite Dimensional spaces, these all generate the SAME topology!</span>
-<span class="code-comment"># They are "equivalent norms".</span></pre>
+# Try: {{}, {1,2,3}, {1}, {1,2}} -> Valid
+tau_good = [[], [1, 2, 3], [1], [1, 2]]
+print(f"Good: {is_topology(X, tau_good)}")</code></pre>
                         </div>
                     </div>
                 </div>
@@ -198,7 +246,7 @@ Linf = np.maximum(np.abs(X), np.abs(Y)) < <span class="code-number">1</span>
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -220,8 +268,8 @@ Linf = np.maximum(np.abs(X), np.abs(Y)) < <span class="code-number">1</span>
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -240,22 +288,23 @@ Linf = np.maximum(np.abs(X), np.abs(Y)) < <span class="code-number">1</span>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Topology Intro",
+                title: "Topology Basics",
                 items: [
-                    { title: "Understand Topology", channel: "The Bright Side of Mathematics", vid: "S231-gT9v9o" },
-                    { title: "Continuity Definition", channel: "Michael Penn", vid: "VzX8Htsq_Cc" },
+                    { title: "Introduction to Topology", channel: "The Bright Side of Mathematics", vid: "video_id_placeholder" },
+                    { title: "Topological Spaces Construction", channel: "3Blue1Brown", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Definition", prompt: "A topology is a collection of ___ sets.", answer: "open" },
-            { topic: "Axioms", prompt: "The union of arbitrary open sets must be ___.", answer: "open" },
-            { topic: "Continuity", prompt: "f is continuous if f⁻¹(Open) is ___.", answer: "open" },
-            { topic: "Homeomorphism", prompt: "Topological equivalence requires a continuous ___.", answer: "bijection", altAnswers: ["inverse", "map"] },
-            { topic: "Example", prompt: "In the Discrete topology, ___ set is open.", answer: "every", altAnswers: ["all"] },
-            { topic: "Metric", prompt: "Topology generalizes concepts from ___ spaces.", answer: "metric" },
+            { topic: "Axioms", prompt: "A topology must be closed under arbitrary ___.", answer: "unions" },
+            { topic: "Axioms", prompt: "A topology must be closed under finite ___.", answer: "intersections" },
+            { topic: "Closed Sets", prompt: "A set is closed if its ___ is open.", answer: "complement" },
+            { topic: "Continuity", prompt: "A function is continuous if the preimage of every open set is ___.", answer: "open" },
+            { topic: "Basis", prompt: "A basis generates the topology via ___ of basis elements.", answer: "unions" },
+            { topic: "Metric", prompt: "Every metric space induces a topology, but not every topological space comes from a ___.", answer: "metric", altAnswers: ["distance"] },
+            { topic: "Clopen", prompt: "A set that is both open and closed is called ___.", answer: "clopen" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day68_topology_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day68_topology_v2' });
     </script>
 </body>
 

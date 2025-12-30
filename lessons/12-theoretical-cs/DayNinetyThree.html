@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 93: Theoretical CS — Cryptography I</title>
+    <title>Day 93: PSPACE-Completeness</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 93 · Theoretical CS
         </div>
-        <h1>Public Key Cryptography</h1>
-        <p class="hero-desc">RSA, Diffie-Hellman, and the magic of Number Theory.</p>
+        <h1>PSPACE-Completeness</h1>
+        <p class="hero-desc">The hardest problems in PSPACE. TQBF and Simulation.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                TQBF
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#sym" class="toc-link">1. Symmetric vs Asymmetric</a></li>
-                    <li><a href="#rsa" class="toc-link">2. RSA Algorithm</a></li>
-                    <li><a href="#math" class="toc-link">3. The Math (Euler's Phi)</a></li>
-                    <li><a href="#dh" class="toc-link">4. Diffie-Hellman</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Mod Exp</a></li>
+                    <li><a href="#tqbf" class="toc-link">1. TQBF</a></li>
+                    <li><a href="#games" class="toc-link">2. Games & Geography</a></li>
+                    <li><a href="#planning" class="toc-link">3. Planning Problems</a></li>
+                    <li><a href="#simulation" class="toc-link">4. Simulation Proof</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Quantifiers</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -92,49 +92,59 @@
         </aside>
 
         <main class="content">
-            <!-- Sym -->
-            <section class="section" id="sym">
+            <!-- TQBF -->
+            <section class="section" id="tqbf">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Symmetric vs Public Key</h2>
+                    <h2 class="section-title">True Quantified Boolean Formulas</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Symmetric:</strong> Alice and Bob share a secret key. (AES, One-Time Pad). Fast.</p>
-                    <p><strong>Public Key (Asymmetric):</strong> Alice has a Public Key (Lock) and Private Key (Key).
-                        Anyone can lock a message, only Alice can open it.</p>
+                    <p>SAT asks `\exists x_1 \dots \exists x_n \phi(x)`. This is NP.</p>
+                    <p>TQBF allows universal quantifiers: `\exists x_1 \forall x_2 \exists x_3 \dots \phi`. This is
+                        <strong>PSPACE-Complete</strong>.</p>
+                    <p>It represents a game: "Does Player 1 (Existential) have a move such that for all Player 2
+                        (Universal) moves..."</p>
                 </div>
             </section>
 
-            <!-- RSA -->
-            <section class="section" id="rsa">
+            <!-- Games -->
+            <section class="section" id="games">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">RSA</h2>
+                    <h2 class="section-title">Generalized Geography</h2>
                 </div>
                 <div class="section-body">
-                    <p>Security relies on the difficulty of <strong>factoring large numbers</strong>.</p>
-                    <div class="math-block">
-                        1. Pick primes p, q. N = p*q.
-                        2. Compute φ(N) = (p-1)(q-1).
-                        3. Pick e (public exponent).
-                        4. Compute d (private key) s.t. d*e ≡ 1 mod φ(N).
-                    </div>
-                    <p>Encrypt: `c = m^e mod N`</p>
-                    <p>Decrypt: `m = c^d mod N`</p>
+                    <p>A game played on a directed graph. Players take turns moving a token along an edge. You cannot
+                        reuse nodes. First player unable to move loses.</p>
+                    <p>This is PSPACE-Complete. Most "generalized" board games (Go, Hex, Reversi) are PSPACE-hard.</p>
                 </div>
             </section>
 
-            <!-- Math -->
-            <section class="section" id="math">
+            <!-- Planning -->
+            <section class="section" id="planning">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Why it works</h2>
+                    <h2 class="section-title">Planning Problems</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule">
-                        <strong>Euler's Theorem:</strong> `m^{φ(N)} ≡ 1 mod N`.
-                    </div>
-                    <p>So `c^d = (m^e)^d = m^{ed} = m^{kφ(N) + 1} = (m^{φ(N)})^k * m = 1^k * m = m`. Magic!</p>
+                    <p>Sokoban (pushing boxes) is PSPACE-Complete.</p>
+                    <p>Robot Motion Planning with movable obstacles is often PSPACE-Complete.</p>
+                    <p>Why? Because to solve the puzzle, you might need to undo moves, cycle back, and explore a state
+                        space exponentially larger than the board.</p>
+                </div>
+            </section>
+
+            <!-- Simulation -->
+            <section class="section" id="simulation">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">The Proof Idea</h2>
+                </div>
+                <div class="section-body">
+                    <p>To prove TQBF is PSPACE-Complete, we simulate a TM using a formula.</p>
+                    <p>We use a recursive definition: `Path(start, end, steps)`.</p>
+                    <p>`Path(u, v, k) \iff \exists m : Path(u, m, k/2) \land Path(m, v, k/2)`.</p>
+                    <p>Since space is poly, time is `2^{poly}`. The recursion depth is `\log(2^{poly}) = poly`.</p>
                 </div>
             </section>
 
@@ -142,37 +152,45 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Modular Exponentiation</h2>
+                    <h2 class="section-title">Python: Evaluating TQBF</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Square and Multiply</span>
+                            <span class="code-label">QBF Evaluator</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">def</span> <span class="code-function">mod_exp</span>(base, exp, mod):
-    res = 1
-    base %= mod
-    <span class="code-keyword">while</span> exp > 0:
-        <span class="code-keyword">if</span> exp % 2 == 1:
-            res = (res * base) % mod
-        base = (base * base) % mod
-        exp //= 2
-    <span class="code-keyword">return</span> res
+                            <pre><code class="language-python">def evaluate_qbf(formula_tree):
+    """
+    Evaluates a Quantified Boolean Formula.
+    Tree Structure: ('forall', 'x', sub_expr) or ('exists', 'x', sub_expr) or ('and', a, b) ...
+    """
+    op = formula_tree[0]
+    
+    if op == 'const':
+        return formula_tree[1]
+    
+    if op == 'exists':
+        # Try True, Try False. If ANY is true, return True.
+        var = formula_tree[1]
+        sub = formula_tree[2]
+        # Recursively substitute var=True/False
+        return evaluate_qbf(substitute(sub, var, True)) or \
+               evaluate_qbf(substitute(sub, var, False))
+               
+    if op == 'forall':
+        # Try True, Try False. If BOTH are true, return True.
+        var = formula_tree[1]
+        sub = formula_tree[2]
+        return evaluate_qbf(substitute(sub, var, True)) and \
+               evaluate_qbf(substitute(sub, var, False))
 
-<span class="code-comment"># RSA Example</span>
-p, q = 61, 53
-n = p*q
-phi = (p-1)*(q-1)
-e = 17
-d = pow(e, -1, phi) <span class="code-comment"># Modular inverse</span>
+    # AND, OR, NOT logic handled here...
+    return False
 
-msg = 65
-enc = mod_exp(msg, e, n)
-dec = mod_exp(enc, d, n)
-
-print(f<span class="code-string">"Original: {msg}, Decrypted: {dec}"</span>)</pre>
+# This recursion depth is proportional to the number of variables (space)
+# But execution time is exponential.</code></pre>
                         </div>
                     </div>
                 </div>
@@ -204,7 +222,7 @@ print(f<span class="code-string">"Original: {msg}, Decrypted: {dec}"</span>)</pr
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -223,20 +241,21 @@ print(f<span class="code-string">"Original: {msg}, Decrypted: {dec}"</span>)</pr
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "RSA",
+                title: "PSPACE-Completeness",
                 items: [
-                    { title: "RSA Encryption", channel: "Computerphile", vid: "video_id_placeholder" },
+                    { title: "TQBF Explained", channel: "Easy Theory", vid: "video_id_placeholder" },
+                    { title: "Generalized Geography", channel: "MIT OpenCourseWare", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Type", prompt: "RSA is a ___ key cryptosystem.", answer: "public" },
-            { topic: "Hardness", prompt: "RSA relies on the hardness of ___.", answer: "factoring" },
-            { topic: "Key", prompt: "The secret private key is called ___.", answer: "d" },
-            { topic: "Theorem", prompt: "RSA works because of ___ theorem.", answer: "euler", altAnswers: ["euler's"] },
-            { topic: "Keys", prompt: "In public key crypto, you encrypt with the ___ key.", answer: "public" },
+            { topic: "TQBF", prompt: "TQBF includes both existential and ___ quantifiers.", answer: "universal" },
+            { topic: "Game", prompt: "TQBF can be viewed as a ___ between two players.", answer: "game", altAnswers: ["competition"] },
+            { topic: "Geography", prompt: "Generalized Geography is played on a ___.", answer: "graph" },
+            { topic: "Sokoban", prompt: "Puzzle games like Sokoban are often ___ complete.", answer: "PSPACE" },
+            { topic: "Recursive", prompt: "The TQBF algorithm is naturally ___.", answer: "recursive" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day93_rsa_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day93_pspace_comp_v2' });
     </script>
 </body>
 

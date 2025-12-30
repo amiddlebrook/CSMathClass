@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 78: Functional Analysis — Operators & Duality</title>
+    <title>Day 78: Linear Operators & Duals</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 7 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -38,25 +38,24 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 78 · Functional Analysis
+            Day 78 · Functional & PDE
         </div>
-        <h1>Operators & Duality</h1>
-        <p class="hero-desc">Linear maps between infinite-dimensional spaces. The Operator Norm and the concept of the
-            Dual Space.</p>
+        <h1>Operators & Duals</h1>
+        <p class="hero-desc">Functions acting on functions. The Dual Space `V^*`.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~55 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                6 practice problems
+                Operator Norms
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#bounded" class="toc-link">1. Bounded Linear Operators</a></li>
-                    <li><a href="#dual" class="toc-link">2. Dual Spaces</a></li>
-                    <li><a href="#riesz" class="toc-link">3. Riesz Representation</a></li>
-                    <li><a href="#code" class="toc-link">4. Python: Operator Norm</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#bounded" class="toc-link">1. Bounded Operators</a></li>
+                    <li><a href="#norm" class="toc-link">2. Operator Norm</a></li>
+                    <li><a href="#dual" class="toc-link">3. Dual Spaces</a></li>
+                    <li><a href="#riesz" class="toc-link">4. Riesz Representation</a></li>
+                    <li><a href="#hahn" class="toc-link">5. Hahn-Banach</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Linear Maps</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -92,92 +93,137 @@
         </aside>
 
         <main class="content">
-            <!-- Bounded Operators -->
+            <!-- Bounded -->
             <section class="section" id="bounded">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Bounded Linear Operators</h2>
                 </div>
                 <div class="section-body">
-                    <p>A linear map `T: X → Y` between normed spaces is <strong>bounded</strong> if it doesn't stretch
-                        vectors infinitely.</p>
-                    <div class="math-block">
-                        ||T|| = sup { ||Tx|| : ||x|| ≤ 1 } < ∞ </div>
-                            <div class="rule">
-                                <strong>Theorem:</strong> A linear operator is bounded if and only if it is
-                                <strong>continuous</strong>.
-                                (In infinite dimensions, linear maps can be discontinuous!)
-                            </div>
+                    <p>A linear map `T: X \to Y` is "nice" if it doesn't blow up vectors too much.</p>
+                    <div class="rule">
+                        Theorem: For linear maps, <strong>Continuous</strong> `\iff` <strong>Bounded</strong>.
                     </div>
+                    <p>Bounded means `\|Tx\| \le C \|x\|` for all `x`. `T` maps bounded sets to bounded sets.</p>
+                    <div class="warning">
+                        Differentiation `D = d/dx` is Unbounded! `D(\sin(nx)) = n \cos(nx)`. Limit blows up. This is why
+                        PDE theory is hard.
+                    </div>
+                </div>
             </section>
 
-            <!-- Dual Spaces -->
-            <section class="section" id="dual">
+            <!-- Norm -->
+            <section class="section" id="norm">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Operator Norm</h2>
+                </div>
+                <div class="section-body">
+                    <p>The space of operators `\mathcal{L}(X, Y)` is itself a normed space.</p>
+                    <div class="math-block">
+                        \|T\|_{op} = \sup_{x \ne 0} \frac{\|Tx\|_Y}{\|x\|_X} = \sup_{\|x\|=1} \|Tx\|
+                    </div>
+                    <p>It's the "maximum stretch factor" of the matrix/operator.</p>
+                </div>
+            </section>
+
+            <!-- Dual -->
+            <section class="section" id="dual">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
                     <h2 class="section-title">Dual Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <p>The <strong>Dual Space</strong> `X*` is the set of all bounded linear functionals `f: X → ℝ`.</p>
-                    <div class="math-block">
-                        • (ℝⁿ)* ≅ ℝⁿ
-                        • (ℓᵖ)* ≅ ℓ^q where 1/p + 1/q = 1 (Holder conjugate)
-                        • (Lᵖ)* ≅ L^q
-                        • (ℓ¹)* ≅ ℓ^∞
-                        • (ℓ^∞)* ≆ ℓ¹ (much larger!)
-                    </div>
-                    <p>Understanding the dual space helps us understand the original space.</p>
+                    <p>The <strong>Dual Space</strong> `X^*` is the space of all continuous linear functionals `f: X \to
+                        \mathbb{R}` (or `\mathbb{C}`).</p>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>If `X = \mathbb{R}^n`, `X^* \cong \mathbb{R}^n`.</li>
+                        <li>If `X = L^p` ($1 < p < \infty$), `X^* \cong L^q` where `1/p + 1/q=1`. (e.g. `L^2` is
+                                self-dual).</li>
+                        <li>If `X = L^1`, `X^* = L^\infty`.</li>
+                        <li>If `X = L^\infty`, `X^*` is nastier than `L^1`.</li>
+                    </ul>
                 </div>
             </section>
 
             <!-- Riesz -->
             <section class="section" id="riesz">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Riesz Representation Theorem</h2>
                 </div>
                 <div class="section-body">
+                    <p>For Hilbert Spaces, the dual is simple.</p>
                     <div class="rule">
-                        <strong>Riesz Rep (Hilbert Space):</strong> For every continuous linear functional `f` on a
-                        Hilbert space `H`, there exists a unique vector `y ∈ H` such that:
-                        <div class="math-block" style="text-align: center; margin: 8px 0;">f(x) = ⟨x, y⟩</div>
-                        And `||f|| = ||y||`.
+                        Theorem: Every continuous linear functional `f` on a Hilbert Space `H` looks like an inner
+                        product.
+                        <br>
+                        `\exists ! y \in H` such that `f(x) = \langle x, y \rangle` for all `x`.
                     </div>
-                    <p>This means Hilbert spaces are "self-dual" (`H* ≅ H`). This is why "bra-ket" notation works in
-                        Quantum Mechanics.</p>
+                    <p>This allows us to identify `H` with `H^*`. This is crucial for Quantum Mechanics (Bra-Ket
+                        notation).</p>
                 </div>
             </section>
 
-            <!-- Python -->
-            <section class="section" id="code">
+            <!-- Hahn -->
+            <section class="section" id="hahn">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Python: Operator Norm Estimation</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Hahn-Banach Theorem</h2>
                 </div>
                 <div class="section-body">
-                    <p>Approximating the norm of a matrix operator.</p>
+                    <div class="rule">
+                        Theorem: If you have a bounded linear functional on a <strong>subspace</strong>, you can extend
+                        it to the <strong>whole space</strong> without increasing its norm.
+                    </div>
+                    <p><strong>Interpretation:</strong> The dual space `X^*` is "rich" enough to detect different
+                        vectors. If `f(x) = f(y)` for all `f \in X^*`, then `x = y`.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Operator Norms</h2>
+                </div>
+                <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Operator Norm</span>
+                            <span class="code-label">Matrix Norm</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+                            <pre><code class="language-python">import numpy as np
 
-<span class="code-comment"># Define a linear operator (matrix)</span>
-A = np.array([[<span class="code-number">1</span>, <span class="code-number">2</span>], [<span class="code-number">0</span>, <span class="code-number">1</span>]])
+# In finite dimensions, operators are matrices.
+# L2 Operator Norm = Largest Singular Value.
 
-<span class="code-comment"># Generate random unit vectors</span>
-theta = np.linspace(<span class="code-number">0</span>, <span class="code-number">2</span>*np.pi, <span class="code-number">100</span>)
-x = np.array([np.cos(theta), np.sin(theta)]) <span class="code-comment"># Unit circle</span>
+A = np.array([[1, 2], [0, 2]])
 
-<span class="code-comment"># Apply operator</span>
-Tx = A @ x
-norms = np.linalg.norm(Tx, axis=<span class="code-number">0</span>)
+# 1. Compute via definition (Grid search on unit circle)
+thetas = np.linspace(0, 2*np.pi, 100)
+vecs = np.array([np.cos(thetas), np.sin(thetas)]) # Unit vectors
+# Apply A
+mapped = A @ vecs
+# Compute norms
+norms = np.linalg.norm(mapped, axis=0)
+op_norm_empirical = np.max(norms)
 
-max_stretch = np.max(norms)
-print(<span class="code-string">f"Estimated Operator Norm: {max_stretch:.4f}"</span>)
-print(<span class="code-string">f"Actual Spectral Norm: {np.linalg.norm(A, 2):.4f}"</span>)</pre>
+# 2. Compute via SVD
+U, S, Vt = np.linalg.svd(A)
+op_norm_svd = S[0]
+
+print(f"Empirical Max Stretch: {op_norm_empirical:.4f}")
+print(f"Largest Singular Value: {op_norm_svd:.4f}")
+
+# Example of unbounded operator approximation
+# Differentiation on polynomial basis [1, x, x^2, ..., x^N]
+N = 5
+# d/dx maps x^k -> k*x^{k-1}
+# As k -> infinity, the factor k grows unbounded.
+# Finite matrix D_N will have norm growing with N.</code></pre>
                         </div>
                     </div>
                 </div>
@@ -186,7 +232,7 @@ print(<span class="code-string">f"Actual Spectral Norm: {np.linalg.norm(A, 2):.4
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -208,8 +254,8 @@ print(<span class="code-string">f"Actual Spectral Norm: {np.linalg.norm(A, 2):.4
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -228,23 +274,22 @@ print(<span class="code-string">f"Actual Spectral Norm: {np.linalg.norm(A, 2):.4
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Operators and Duality",
+                title: "Operators",
                 items: [
-                    { title: "Bounded Linear Operators", channel: "The Bright Side of Mathematics", vid: "fv41hK9tL88" },
-                    { title: "Dual Spaces", channel: "The Bright Side of Mathematics", vid: "2h0g0y_5X0k" },
-                    { title: "Riesz Representation Theorem", channel: "Michael Penn", vid: "video_id_placeholder" },
+                    { title: "Bounded Linear Operators", channel: "The Bright Side of Mathematics", vid: "video_id_placeholder" },
+                    { title: "Riesz Representation Theorem", channel: "Dr. Peyam", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Operator", prompt: "A linear operator is bounded iff it is ___.", answer: "continuous" },
-            { topic: "Norm", prompt: "The operator norm is the ___ stretch of a unit vector.", answer: "maximum", altAnswers: ["supremum", "sup"] },
-            { topic: "Dual", prompt: "The dual space consists of bounded linear ___.", answer: "functionals" },
-            { topic: "Conjugate", prompt: "The dual of ℓ¹ is ___.", answer: "ℓ∞", altAnswers: ["l-infinity", "l_infinity"] },
-            { topic: "Riesz", prompt: "In Hilbert space, every functional corresponds to a ___.", answer: "vector" },
-            { topic: "Reflexivity", prompt: "Hilbert spaces are ___-dual.", answer: "self" },
+            { topic: "Boundedness", prompt: "For linear maps, continuity is equivalent to ___.", answer: "boundedness" },
+            { topic: "Dual Space", prompt: "The dual space V* consists of linear ___ on V.", answer: "functionals" },
+            { topic: "Riesz", prompt: "In a Hilbert space, every functional corresponds to an ___ product.", answer: "inner" },
+            { topic: "Hahn-Banach", prompt: "Hahn-Banach allows us to ___ functionals from a subspace to the whole space.", answer: "extend" },
+            { topic: "Lp Dual", prompt: "The dual of L^p (finite p > 1) is ___.", answer: "L^q" },
+            { topic: "Differentiation", prompt: "The differentiation operator is ___ on the space of polynomials.", answer: "unbounded" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day78_operators_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day78_operators_v2' });
     </script>
 </body>
 

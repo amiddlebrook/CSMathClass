@@ -41,22 +41,21 @@
             Day 108 · Specialization
         </div>
         <h1>Analytic Number Theory</h1>
-        <p class="hero-desc">The study of integers using continuous analysis. The Riemann Zeta Function and Prime Number
-            Theorem.</p>
+        <p class="hero-desc">Using Complex Analysis to count primes. The Riemann Zeta Function.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~60 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                10 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,13 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#primes" class="toc-link">1. Distribution of Primes</a></li>
-                    <li><a href="#riemann" class="toc-link">2. Riemann Zeta Function</a></li>
-                    <li><a href="#hypothesis" class="toc-link">3. Riemann Hypothesis</a></li>
-                    <li><a href="#pnt" class="toc-link">4. Prime Number Theorem</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Sieve vs Count</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#pnt" class="toc-link">1. Prime Number Theorem</a></li>
+                    <li><a href="#zeta" class="toc-link">2. Riemann Zeta Function</a></li>
+                    <li><a href="#product" class="toc-link">3. Euler Product</a></li>
+                    <li><a href="#rh" class="toc-link">4. Riemann Hypothesis</a></li>
+                    <li><a href="#dirichlet" class="toc-link">5. Dirichlet Series</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Sieve of Eratosthenes</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -93,95 +93,123 @@
         </aside>
 
         <main class="content">
-            <!-- Primes -->
-            <section class="section" id="primes">
+            <!-- PNT -->
+            <section class="section" id="pnt">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Distribution of Primes</h2>
+                    <h2 class="section-title">Prime Number Theorem (PNT)</h2>
                 </div>
                 <div class="section-body">
-                    <p>Primes seem random but follow a deterministic pattern.</p>
-                    <p>Let `π(x)` be the number of primes less than `x`.</p>
+                    <p>Let `\pi(x)` be the number of primes less than or equal to `x`.</p>
                     <div class="math-block">
-                        \pi(x) \approx \frac{x}{\ln x}
+                        \pi(x) \sim \frac{x}{\ln x}
                     </div>
+                    <p>Or more precisely, `\pi(x) \sim \text{Li}(x) = \int_2^x \frac{dt}{\ln t}`.</p>
                 </div>
             </section>
 
-            <!-- Riemann -->
-            <section class="section" id="riemann">
+            <!-- Zeta -->
+            <section class="section" id="zeta">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Riemann Zeta Function</h2>
                 </div>
                 <div class="section-body">
-                    <p>The bridge between arithmetic and analysis.</p>
+                    <p>Defined for `\text{Re}(s) > 1` by:</p>
                     <div class="math-block">
-                        \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p} \frac{1}{1 - p^{-s}}
+                        \zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}
                     </div>
-                    <p>The product formula (Euler Product) connects the sum to primes.</p>
+                    <p>It can be analytically continued to the entire complex plane (except a pole at `s=1`).</p>
                 </div>
             </section>
 
-            <!-- Hypothesis -->
-            <section class="section" id="hypothesis">
+            <!-- Product -->
+            <section class="section" id="product">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Euler Product Formula</h2>
+                </div>
+                <div class="section-body">
+                    <p>This connects analysis (sum over integers) to number theory (product over primes).</p>
+                    <div class="math-block">
+                        \sum_{n=1}^\infty \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}
+                    </div>
+                    <p>This identity is equivalent to the Fundamental Theorem of Arithmetic (Unique Factorization).</p>
+                </div>
+            </section>
+
+            <!-- RH -->
+            <section class="section" id="rh">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Riemann Hypothesis</h2>
                 </div>
                 <div class="section-body">
-                    <div class="warning">
-                        <strong>The Million Dollar Problem:</strong> All non-trivial zeros of `ζ(s)` lie on the critical
-                        line `Re(s) = 1/2`.
+                    <p>The zeros of `\zeta(s)` control the error term in the Prime Number Theorem.</p>
+                    <div class="rule">
+                        <strong>Hypothesis:</strong> All non-trivial zeros lie on the critical line `\text{Re}(s) =
+                        1/2`.
                     </div>
-                    <p>If true, it implies the primes are distributed as regularly as possible (optimal error term).</p>
+                    <p>If true, `|\pi(x) - \text{Li}(x)| = O(\sqrt{x} \ln x)`. This is the "square root cancellation" of
+                        randomness.</p>
                 </div>
             </section>
 
-            <!-- PNT -->
-            <section class="section" id="pnt">
+            <!-- Dirichlet -->
+            <section class="section" id="dirichlet">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Prime Number Theorem</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Dirichlet Series</h2>
                 </div>
                 <div class="section-body">
-                    <p>Proved by Hadamard and de la Vallée Poussin (1896) using the fact that `ζ(s)` has no zeros on
-                        `Re(s) = 1`.</p>
-                    <div class="math-block">
-                        \lim_{x \to \infty} \frac{\pi(x)}{x / \ln x} = 1
-                    </div>
+                    <p>General series of the form `\sum \frac{a_n}{n^s}`.</p>
+                    <p>Example: `L(s, \chi) = \sum \frac{\chi(n)}{n^s}` where `\chi` is a Dirichlet character. These are
+                        used to prove Dirichlet's theorem on primes in arithmetic progressions.</p>
                 </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Pi(x) vs x/ln(x)</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Sieve of Eratosthenes</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Check PNT</span>
+                            <span class="code-label">Counting Primes</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 
-<span class="code-keyword">def</span> <span class="code-function">sieve</span>(n):
-    primes = [True] * (n+1)
-    p = 2
-    <span class="code-keyword">while</span> (p * p <= n):
-        <span class="code-keyword">if</span> (primes[p] == True):
-            <span class="code-keyword">for</span> i <span class="code-keyword">in</span> range(p * p, n+1, p):
-                primes[i] = False
-        p += 1
-    <span class="code-keyword">return</span> sum(primes) - 2 <span class="code-comment"># Exclude 0 and 1</span>
+def sieve(n):
+    """Returns all primes <= n"""
+    is_prime = np.ones(n+1, dtype=bool)
+    is_prime[0:2] = False
+    for i in range(2, int(np.sqrt(n)) + 1):
+        if is_prime[i]:
+            is_prime[i*i:n+1:i] = False
+    return np.nonzero(is_prime)[0]
 
-N = 100000
-pi_N = sieve(N)
-est = N / np.log(N)
-print(f<span class="code-string">"Actual: {pi_N}, Est: {est:.2f}, Ratio: {pi_N/est:.4f}"</span>)</pre>
+N = 1000
+primes = sieve(N)
+count = np.arange(1, len(primes)+1)
+
+# Compare pi(x) vs x/ln(x)
+x = primes
+li_approx = x / np.log(x)
+
+plt.figure(figsize=(10, 6))
+plt.plot(x, count, label='Actual pi(x)', lw=2)
+plt.plot(x, li_approx, 'r--', label='Approx x/ln(x)', lw=2)
+plt.title(f"Prime Number Theorem Check (N={N})")
+plt.xlabel("x")
+plt.ylabel("Count")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -190,7 +218,7 @@ print(f<span class="code-string">"Actual: {pi_N}, Est: {est:.2f}, Ratio: {pi_N/e
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -212,7 +240,7 @@ print(f<span class="code-string">"Actual: {pi_N}, Est: {est:.2f}, Ratio: {pi_N/e
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 8</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -234,18 +262,24 @@ print(f<span class="code-string">"Actual: {pi_N}, Est: {est:.2f}, Ratio: {pi_N/e
             {
                 title: "Analytic Number Theory",
                 items: [
-                    { title: "Riemann Hypothesis", channel: "3Blue1Brown", vid: "video_id_placeholder" },
+                    { title: "Riemann Hypothesis Visualized", channel: "3Blue1Brown", vid: "video_id_placeholder" },
+                    { title: "Prime Number Theorem", channel: "Mathologer", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Zeta", prompt: "The Riemann Zeta function connects sums of integers to product of ___.", answer: "primes" },
-            { topic: "RH", prompt: "Riemann Hypothesis states zeros are on the ___ line.", answer: "critical" },
-            { topic: "PNT", prompt: "Prime Number Theorem says π(x) ~ x / ___.", answer: "lnx", altAnswers: ["logx", "ln(x)"] },
-            { topic: "Value", prompt: "The real part of the critical line is ___.", answer: "1/2", altAnswers: ["0.5"] },
-            { topic: "Product", prompt: "The Euler Product formula is valid for Re(s) > ___.", answer: "1" },
+            { topic: "PNT", prompt: "The number of primes pi(x) is approximately x / ___.", answer: "ln x", altAnswers: ["log x"] },
+            { topic: "Zeta", prompt: "The Riemann Zeta function is defined as sum of 1/n^___.", answer: "s" },
+            { topic: "Euler", prompt: "The Euler product is a product over all ___.", answer: "primes" },
+            { topic: "RH", prompt: "The Riemann Hypothesis states non-trivial zeros have real part ___.", answer: "1/2", altAnswers: ["0.5"] },
+            { topic: "Pole", prompt: "Zeta(s) has a simple pole at s = ___.", answer: "1" },
+            { topic: "Dirichlet", prompt: "Dirichlet series generalize Zeta: sum of a_n / ___.", answer: "n^s" },
+            { topic: "LogInt", prompt: "A better approximation for pi(x) is the ___ integral Li(x).", answer: "logarithmic", altAnswers: ["log"] },
+            { topic: "Factorization", prompt: "Euler product is equivalent to Unique ___ Theorem.", answer: "Factorization" },
+            { topic: "Complex", prompt: "Analytic Continuation extends the domain of ___ functions.", answer: "complex" },
+            { topic: "Random", prompt: "The error term O(sqrt(x)) suggests primes behave like ___ variables.", answer: "random" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day108_analytic_nt_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day108_ant_v2' });
     </script>
 </body>
 

@@ -41,21 +41,21 @@
             Day 116 · Discipline
         </div>
         <h1>Writing Proofs</h1>
-        <p class="hero-desc">Mathematics is about communication. Write in full sentences, not just symbols.</p>
+        <p class="hero-desc">How to write mathematics clearly, concisely, and correctly.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~30 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Templates Included
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,13 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#prose" class="toc-link">1. Write in Prose</a></li>
-                    <li><a href="#audience" class="toc-link">2. Know Your Audience</a></li>
-                    <li><a href="#structure" class="toc-link">3. Structure</a></li>
-                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
+                    <li><a href="#clarity" class="toc-link">1. Clarity First</a></li>
+                    <li><a href="#structure" class="toc-link">2. Structure of a Proof</a></li>
+                    <li><a href="#types" class="toc-link">3. Common Techniques</a></li>
+                    <li><a href="#latex" class="toc-link">4. LaTeX Basics</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Automated Proving?</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -90,49 +92,121 @@
         </aside>
 
         <main class="content">
-            <!-- Prose -->
-            <section class="section" id="prose">
+            <!-- Clarity -->
+            <section class="section" id="clarity">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Write in Prose</h2>
+                    <h2 class="section-title">Clarity is King</h2>
                 </div>
                 <div class="section-body">
+                    <p>Mathematics is communication. If your proof is correct but unreadable, it fails.</p>
                     <div class="rule">
-                        Do not start a sentence with a symbol.
+                        Rule: Write in complete sentences. Equations are parts of speech (nouns).
                     </div>
-                    <p><strong>Bad:</strong> `\forall x \in R, x^2 \ge 0`. Therefore...</p>
-                    <p><strong>Good:</strong> For every real number `x`, we have `x^2 \ge 0`. This implies...</p>
-                </div>
-            </section>
-
-            <!-- Audience -->
-            <section class="section" id="audience">
-                <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Know Your Audience</h2>
-                </div>
-                <div class="section-body">
-                    <p>Are you writing for a computer or a human? Humans need intuition, motivation, and "signposts"
-                        (e.g., "We will now show that...").</p>
+                    <p>Bad: "x^2 = 4 -> x = 2."</p>
+                    <p>Good: "Since `x^2 = 4` and we assume `x > 0`, it follows that `x = 2`."</p>
                 </div>
             </section>
 
             <!-- Structure -->
             <section class="section" id="structure">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Clear Structure</h2>
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Structure of a Proof</h2>
                 </div>
                 <div class="section-body">
-                    <p>State your definitions clearly. State what you are assuming and what you are proving. End with a
-                        clear conclusion (Q.E.D.).</p>
+                    <ol>
+                        <li><strong>Statement:</strong> Clearly state what you are proving (Theorem / Lemma).</li>
+                        <li><strong>Setup:</strong> Define variables. "Let `\epsilon > 0` be given."</li>
+                        <li><strong>Body:</strong> Logical steps. "Then...", "Therefore...", "Note that..."</li>
+                        <li><strong>Conclusion:</strong> Restate what was shown. "Thus, the limit exists." `\square`
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Types -->
+            <section class="section" id="types">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Common Techniques</h2>
+                </div>
+                <div class="section-body">
+                    <ul>
+                        <li><strong>Direct:</strong> `P \implies Q`. Assume `P`. Show `Q`.</li>
+                        <li><strong>Contrapositive:</strong> `\neg Q \implies \neg P`. Assume `Q` is false. Show `P` is
+                            false.</li>
+                        <li><strong>Contradiction:</strong> Assume `P` and `\neg Q`. Derive nonsense (`1=0`).</li>
+                        <li><strong>Induction:</strong> Base case. Inductive Hypothesis `P(k)`. Show `P(k+1)`.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- LaTeX -->
+            <section class="section" id="latex">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Learn LaTeX</h2>
+                </div>
+                <div class="section-body">
+                    <p>Serious math is written in LaTeX.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">LaTeX</span>
+                            <span class="code-label">Example</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-latex">\begin{theorem}
+    If $n$ is even, then $n^2$ is even.
+\end{theorem}
+\begin{proof}
+    Let $n$ be an even integer. By definition, $n = 2k$ for some integer $k$.
+    Then $n^2 = (2k)^2 = 4k^2 = 2(2k^2)$.
+    Since $2k^2$ is an integer, $n^2$ is even.
+\end{proof}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Python: Symbolic Logic</h2>
+                </div>
+                <div class="section-body">
+                    <p>Computer Assisted Proofs (e.g., Lean, Coq) are the future, but SymPy can help with algebra steps.
+                    </p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">SymPy Verification</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">from sympy import symbols, expand, Eq
+
+n, k = symbols('n k', integer=True)
+
+# Problem: Prove (2k)^2 is divisible by 2
+expr = (2*k)**2
+print(f"Expression: {expr}")
+
+# Check divisibility
+is_even = (expr % 2 == 0)
+print(f"Is divisible by 2? {is_even}")
+
+if is_even:
+    print("Q.E.D. (via Python)")</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -154,8 +228,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -174,20 +248,23 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Writing",
+                title: "Writing Proofs",
                 items: [
-                    { title: "How to Write a Proof", channel: "Leslie Lamport", vid: "video_id_placeholder" },
+                    { title: "Mathematical Writing", channel: "Knuth", vid: "video_id_placeholder" },
+                    { title: "Intro to LaTeX", channel: "Overleaf", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Style", prompt: "Write proofs in full ___.", answer: "sentences" },
-            { topic: "Rule", prompt: "Do not start a sentence with a ___.", answer: "symbol" },
-            { topic: "Audience", prompt: "Write for a ___, not a computer.", answer: "human" },
-            { topic: "Signpost", prompt: "Tell the reader where you are ___.", answer: "going" },
-            { topic: "Value", prompt: "Clarity is more important than ___.", answer: "brevity" },
+            { topic: "Sentences", prompt: "In proofs, mathematical expressions should be treated as parts of ___.", answer: "speech" },
+            { topic: "Contrapositive", prompt: "To prove P => Q, you can prove Not Q => ___.", answer: "Not P", altAnswers: ["!P", "~P"] },
+            { topic: "Contradiction", prompt: "Proof by contradiction involves assuming the negation and deriving a ___.", answer: "contradiction" },
+            { topic: "Induction", prompt: "The two steps of induction are the ___ case and the inductive step.", answer: "base" },
+            { topic: "QED", prompt: "The symbol used to end a proof is a ___, or Q.E.D.", answer: "square", altAnswers: ["box"] },
+            { topic: "Definitions", prompt: "Good proofs rely heavily on precise ___.", answer: "definitions" },
+            { topic: "Audience", prompt: "Always write for a specific ___ (e.g., your peers).", answer: "audience" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day116_writing_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day116_proofs_v2' });
     </script>
 </body>
 

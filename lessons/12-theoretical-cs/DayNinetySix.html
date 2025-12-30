@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 96: Theoretical CS — Approximation Algorithms</title>
+    <title>Day 96: Program Verification</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 96 · Theoretical CS
         </div>
-        <h1>Approximation Algorithms</h1>
-        <p class="hero-desc">When finding the perfect answer takes too long. Getting "close enough" efficiently.</p>
+        <h1>Program Verification</h1>
+        <p class="hero-desc">Proving code is correct. Hoare Logic, Invariants, and Postconditions.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                Hoare Triples
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#approx" class="toc-link">1. Approximation Ratio</a></li>
-                    <li><a href="#vc" class="toc-link">2. Vertex Cover</a></li>
-                    <li><a href="#tsp" class="toc-link">3. Traveling Salesperson</a></li>
-                    <li><a href="#hardness" class="toc-link">4. Hardness of Approximation</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#hoare" class="toc-link">1. Hoare Triples</a></li>
+                    <li><a href="#rules" class="toc-link">2. Inference Rules</a></li>
+                    <li><a href="#loops" class="toc-link">3. Loop Invariants</a></li>
+                    <li><a href="#total" class="toc-link">4. Total Correctness</a></li>
+                    <li><a href="#model" class="toc-link">5. Model Checking</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Z3 Solver</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,72 +93,130 @@
         </aside>
 
         <main class="content">
-            <!-- Approx -->
-            <section class="section" id="approx">
+            <!-- Hoare -->
+            <section class="section" id="hoare">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Ratio α</h2>
+                    <h2 class="section-title">Hoare Triples</h2>
                 </div>
                 <div class="section-body">
-                    <p>For an NP-Hard minimization problem, we want an algorithm `A` such that:</p>
+                    <p>Formal notation for code correctness:</p>
                     <div class="math-block">
-                        Cost(A(x)) ≤ α * Cost(OPT(x))
+                        \{P\} C \{Q\}
                     </div>
-                    <p>Where `α` is the approximation ratio (e.g., 2-approximation).</p>
+                    <p>Meaning: If precondition `P` is true, and command `C` executes, then postcondition `Q` will be
+                        true.</p>
                 </div>
             </section>
 
-            <!-- VC -->
-            <section class="section" id="vc">
+            <!-- Rules -->
+            <section class="section" id="rules">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Vertex Cover (2-Approx)</h2>
+                    <h2 class="section-title">Inference Rules</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Algorithm:</strong> Pick an edge (u, v). Add BOTH u and v to cover. Remove all edges
-                        touching u or v. Repeat.</p>
-                    <div class="rule">
-                        This simple greedy algorithm is a 2-Approximation.
-                        The true optimal logic is surprisingly elusive (1.36 is hard).
-                    </div>
+                    <ul>
+                        <li><strong>Assignment:</strong> `\{Q[x/E]\} x := E \{Q\}`. (Backwards substitution).</li>
+                        <li><strong>Composition:</strong> If `\{P\} S1 \{R\}` and `\{R\} S2 \{Q\}`, then `\{P\} S1; S2
+                            \{Q\}`.</li>
+                        <li><strong>Conditional:</strong> If `\{P \land B\} S1 \{Q\}` and `\{P \land \neg B\} S2 \{Q\}`,
+                            then `\{P\} \text{if } B \text{ then } S1 \text{ else } S2 \{Q\}`.</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- TSP -->
-            <section class="section" id="tsp">
+            <!-- Loops -->
+            <section class="section" id="loops">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">TSP (Metric)</h2>
+                    <h2 class="section-title">Loop Invariants</h2>
                 </div>
                 <div class="section-body">
-                    <p>If distances satisfy triangle inequality, we can do well.</p>
-                    <div class="info">
-                        <strong>Christofides Algorithm:</strong> Uses MST and Matching to get a 1.5-Approximation.
-                    </div>
-                    <p>Without triangle inequality, you can't approximate TSP at all!</p>
+                    <p>For loops `while B do S`, we need an <strong>Invariant</strong> `I` such that:</p>
+                    <ul>
+                        <li>`\{I \land B\} S \{I\}` (Maintained by body)</li>
+                        <li>`P \implies I` (True at start)</li>
+                        <li>`(I \land \neg B) \implies Q` (Implies goal at end)</li>
+                    </ul>
+                    <p>Finding loop invariants is the hardest part of verification (and is undecidable in general).</p>
                 </div>
             </section>
 
-            <!-- Hardness -->
-            <section class="section" id="hardness">
+            <!-- Total -->
+            <section class="section" id="total">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">PCP Theorem</h2>
+                    <h2 class="section-title">Total Correctness</h2>
                 </div>
                 <div class="section-body">
-                    <p>Some problems are hard to even approximate.</p>
-                    <div class="math-block">
-                        Max-Clique: Not approximable within n^(1-ε).
+                    <p><strong>Partial Correctness:</strong> If it terminates, the answer is right.</p>
+                    <p><strong>Total Correctness:</strong> Partial Correctness + Termination.</p>
+                    <p>To prove termination, we use a <strong>Variant Function</strong> (or ranking function) `v` that
+                        maps state to a well-ordered set (like natural numbers) and decreases with every loop iteration.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Model -->
+            <section class="section" id="model">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Model Checking</h2>
+                </div>
+                <div class="section-body">
+                    <p>Instead of manual proofs, we can check a finite state machine against a property (in Temporal
+                        Logic like LTL).</p>
+                    <p>Tools like TLA+ or Spin explore all reachable states (up to a bound) to find bugs like deadlocks
+                        or race conditions.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Assertions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Runtime Verification</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">def gcd(a, b):
+    # Precondition: Inputs are positive logic
+    assert a > 0 and b > 0
+    
+    # Save purely for verification logic
+    a_orig, b_orig = a, b
+    
+    while b != 0:
+        # Invariant: gcd(a, b) == gcd(a_orig, b_orig)
+        # Variant: b decreases (or a+b decreases)
+        (a, b) = (b, a % b)
+        
+    # Postcondition
+    result = a
+    assert result > 0
+    assert a_orig % result == 0
+    assert b_orig % result == 0
+    return result
+
+# In formal verification, we wouldn't just assert (runtime),
+# we would use a solver (like Z3) to PROVE the asserts never fail.
+
+print(gcd(48, 18))</code></pre>
+                        </div>
                     </div>
-                    <p>The <strong>PCP Theorem</strong> (Probabilistically Checkable Proofs) provides the tools to prove
-                        these hardness results.</p>
                 </div>
             </section>
 
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -178,8 +238,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -198,20 +258,21 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Approximation",
+                title: "Formal Verification",
                 items: [
-                    { title: "Vertex Cover Approximation", channel: "Udacity", vid: "video_id_placeholder" },
+                    { title: "Hoare Logic", channel: "Carnegie Mellon University", vid: "video_id_placeholder" },
+                    { title: "Loop Invariants", channel: "Udacity", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Ratio", prompt: "A 2-approximation is at most ___ times worse than optimal.", answer: "2", altAnswers: ["two"] },
-            { topic: "Inequality", prompt: "Metric TSP requires the ___ inequality.", answer: "triangle" },
-            { topic: "Vertex Cover", prompt: "The greedy VC algorithm adds ___ endpoints.", answer: "both" },
-            { topic: "Hardness", prompt: "The ___ Theorem helps prove hardness of approximation.", answer: "pcp" },
-            { topic: "Optimal", prompt: "Finding the exact optimal solution for NP-Hard problems is ___.", answer: "slow", altAnswers: ["hard", "impossible"] },
+            { topic: "Hoare Triple", prompt: "{P} C {Q}. P is the ___.", answer: "precondition" },
+            { topic: "Loops", prompt: "To verify a loop, we need a loop ___.", answer: "invariant" },
+            { topic: "Termination", prompt: "Total correctness requires valid output and ___.", answer: "termination", altAnswers: ["halting"] },
+            { topic: "Assignment", prompt: "The assignment rule involves ___ substitution.", answer: "backward", altAnswers: ["backwards"] },
+            { topic: "Checking", prompt: "Model Checking explores ___ reachable states.", answer: "all" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day96_approx_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day96_verify_v2' });
     </script>
 </body>
 

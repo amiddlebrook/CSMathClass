@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 77: Functional Analysis — Banach & Hilbert Spaces</title>
+    <title>Day 77: Banach & Hilbert Spaces</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 7 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -38,25 +38,24 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 77 · Functional Analysis
+            Day 77 · Functional & PDE
         </div>
-        <h1>Spaces of Functions</h1>
-        <p class="hero-desc">Moving from finite-dimensional vectors to infinite-dimensional function spaces. Normed,
-            Banach, and Hilbert spaces.</p>
+        <h1>Banach & Hilbert Spaces</h1>
+        <p class="hero-desc">Linear Algebra in infinite dimensions. Making sure limits exist.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~50 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                6 practice problems
+                Infinite Dimensions
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,13 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#normed" class="toc-link">1. Normed Spaces</a></li>
-                    <li><a href="#banach" class="toc-link">2. Banach Spaces (Completeness)</a></li>
-                    <li><a href="#hilbert" class="toc-link">3. Hilbert Spaces (Inner Product)</a></li>
-                    <li><a href="#lpconcepts" class="toc-link">4. Lᵖ and ℓᵖ</a></li>
-                    <li><a href="#code" class="toc-link">5. Python View</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#normed" class="toc-link">1. Normed Vector Spaces</a></li>
+                    <li><a href="#banach" class="toc-link">2. Banach Spaces</a></li>
+                    <li><a href="#hilbert" class="toc-link">3. Hilbert Spaces</a></li>
+                    <li><a href="#lp" class="toc-link">4. L^p Spaces</a></li>
+                    <li><a href="#basis" class="toc-link">5. Schauder Basis</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: L2 Projection</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -93,21 +93,23 @@
         </aside>
 
         <main class="content">
-            <!-- Normed Spaces -->
+            <!-- Normed -->
             <section class="section" id="normed">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Normed Linear Spaces</h2>
+                    <h2 class="section-title">Normed Vector Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <p>A <strong>Normed Space</strong> is a vector space `V` with a function `||·||: V → [0, ∞)`
-                        satisfying:</p>
-                    <div class="math-block">
-                        1. ||x|| ≥ 0, and ||x||=0 iff x=0 (Positivity)
-                        2. ||cx|| = |c| ||x|| (Homogeneity)
-                        3. ||x + y|| ≤ ||x|| + ||y|| (Triangle Inequality)
+                    <p>Functional Analysis is the study of vector spaces equipped with a structure (norm, inner product)
+                        that allows us to do analysis (limits).</p>
+                    <div class="rule">
+                        Definition: A <strong>Norm</strong> `\| \cdot \|` satisfies:
+                        <ol>
+                            <li>Positivity: `\|x\| \ge 0`, `\|x\|=0 \iff x=0`.</li>
+                            <li>Homogeneity: `\|\alpha x\| = |\alpha| \|x\|`.</li>
+                            <li>Triangle Inequality: `\|x+y\| \le \|x\| + \|y\|`.</li>
+                        </ol>
                     </div>
-                    <p>It generalizes the notion of "length" to general spaces.</p>
                 </div>
             </section>
 
@@ -118,15 +120,15 @@
                     <h2 class="section-title">Banach Spaces</h2>
                 </div>
                 <div class="section-body">
+                    <p>In finite dimensions (`\mathbb{R}^n`), every normed space is complete (Cauchy sequences
+                        converge). In infinite dimensions, this is NOT true (e.g., polynomials with sup norm often
+                        converge to non-polynomial continuous functions).</p>
                     <div class="rule">
-                        A <strong>Banach Space</strong> is a normed space that is <strong>complete</strong>.
-                        <br>
-                        "Complete" means every Cauchy sequence converges to a limit inside the space.
+                        Definition: A <strong>Banach Space</strong> is a normed vector space that is
+                        <strong>Complete</strong>.
                     </div>
-                    <p><strong>Example:</strong> `ℝⁿ` is Banach. `C[0,1]` (continuous functions) with the sup-norm
-                        `||f|| = max|f(x)|` is Banach.</p>
-                    <p><strong>Non-Example:</strong> `C[0,1]` with the L¹ norm `\int |f|` is <strong>NOT</strong> Banach
-                        (limiting sequence can be discontinuous).</p>
+                    <p>Why care? Calculus requires limits. If your space has "holes", you can't solve differential
+                        equations (the solution might fall into a hole). Banach spaces are "safe" spaces.</p>
                 </div>
             </section>
 
@@ -137,77 +139,95 @@
                     <h2 class="section-title">Hilbert Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <p>A <strong>Hilbert Space</strong> has even more structure: an <strong>inner product</strong> `⟨x,
-                        y⟩`.
-                        The norm is defined by `||x|| = \sqrt{⟨x, x⟩}`.</p>
+                    <p>A <strong>Hilbert Space</strong> is a Banach space where the norm comes from an <strong>Inner
+                            Product</strong> `\langle x, y \rangle`.</p>
                     <div class="math-block">
-                        • Complete inner product space.
-                        • Allows geometry: angles, orthogonality, projections.
-                        • Example: L² (square integrable functions).
-                        • "The most minimal infinite dimensional structure."
+                        \|x\| = \sqrt{\langle x, x \rangle}
                     </div>
-                    <div class="info">
-                        <strong>Pythagorean Theorem:</strong> If `x ⊥ y` (i.e., `⟨x, y⟩ = 0`), then `||x+y||² = ||x||² +
-                        ||y||²`.
-                        True in Hilbert spaces (like Euclidean space), but rarely in general Banach spaces.
-                    </div>
+                    <p>Hilbert Spaces are the nicest possible infinite-dimensional spaces. They have:</p>
+                    <ul>
+                        <li>Angles and Orthogonality.</li>
+                        <li>pythagorean Theorem.</li>
+                        <li>Projections (closest point intuition).</li>
+                    </ul>
+                    <p>Example: `L^2(\mathbb{R})`, `\ell^2`.</p>
                 </div>
             </section>
 
-            <!-- Lp and lp -->
-            <section class="section" id="lpconcepts">
+            <!-- Lp -->
+            <section class="section" id="lp">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Standard Examples: Lᵖ and ℓᵖ</h2>
+                    <h2 class="section-title">L^p Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <div class="two-col">
-                        <div class="subsection">
-                            <h3 class="subsection-title">ℓᵖ (Little L-p)</h3>
-                            <p>Sequences `x = (x_1, x_2, ...)` such that `\sum |x_i|^p < \infty`.</p>
-                                    <div class="math-block">Norm: ||x||_p = (\sum |x_i|^p)^{1/p}</div>
-                                    <p>For p=2, it's a Hilbert space `ℓ²`.</p>
-                        </div>
-                        <div class="subsection">
-                            <h3 class="subsection-title">Lᵖ (Big L-p)</h3>
-                            <p>Functions `f` on measure space `\Omega` such that `\int |f|^p < \infty`.</p>
-                                    <div class="math-block">Norm: ||f||_p = (\int |f|^p)^{1/p}</div>
-                                    <p>L² is the <strong>only</strong> Lᵖ space that is Hilbert.</p>
-                        </div>
+                    <p>The playground of modern analysis.</p>
+                    <div class="math-block">
+                        L^p(\Omega) = \left\{ f : \int_\Omega |f(x)|^p \, d\mu < \infty \right\} </div>
+                            <p>Norm: `\|f\|_p = (\int |f|^p)^{1/p}`.</p>
+                            <ul>
+                                <li>`L^1`: Absolutely integrable.</li>
+                                <li>`L^2`: Square integrable (Energy). The only <strong>Hilbert</strong> space in the
+                                    family.</li>
+                                <li>`L^\infty`: Essentially bounded.</li>
+                            </ul>
+                            <p>"Completeness of `L^p`" is the Fisher-Riesz Theorem (requires Lebesgue integral!).</p>
                     </div>
+            </section>
+
+            <!-- Basis -->
+            <section class="section" id="basis">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Schauder Basis</h2>
+                </div>
+                <div class="section-body">
+                    <p>In Linear Algebra, a Hamel Basis means every vector is a <em>finite</em> sum. In Banach spaces,
+                        we allow <em>infinite</em> sums.</p>
+                    <div class="math-block">
+                        x = \sum_{n=1}^\infty a_n e_n
+                    </div>
+                    <p>Fourier Series work because the trig functions form a basis for `L^2[-\pi, \pi]`.</p>
                 </div>
             </section>
 
-            <!-- Python -->
+            <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: p-Norms Visualization</h2>
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Projection in L2</h2>
                 </div>
                 <div class="section-body">
-                    <p>Visualizing the unit balls (set of x where ||x|| ≤ 1) for different p values.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Unit Balls for p=1, 2, ∞</span>
+                            <span class="code-label">Fourier Approx</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
-<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
 
-x = np.linspace(<span class="code-number">-1.5</span>, <span class="code-number">1.5</span>, <span class="code-number">400</span>)
-X, Y = np.meshgrid(x, x)
+# Approximating a Square Wave in L2
+# This is an orthogonal projection onto the subspace spanned by sin(nx)
 
-<span class="code-comment"># Define norms</span>
-L1 = np.abs(X) + np.abs(Y)
-L2 = np.sqrt(X**<span class="code-number">2</span> + Y**<span class="code-number">2</span>)
-Linf = np.maximum(np.abs(X), np.abs(Y))
+x = np.linspace(-np.pi, np.pi, 500)
+# Square wave
+f = np.where(x > 0, 1, -1)
 
-plt.contour(X, Y, L1, levels=[<span class="code-number">1</span>], colors=<span class="code-string">'r'</span>) <span class="code-comment"># Diamond</span>
-plt.contour(X, Y, L2, levels=[<span class="code-number">1</span>], colors=<span class="code-string">'g'</span>) <span class="code-comment"># Circle</span>
-plt.contour(X, Y, Linf, levels=[<span class="code-number">1</span>], colors=<span class="code-string">'b'</span>) <span class="code-comment"># Square</span>
-plt.title(<span class="code-string">"Unit Balls: p=1 (Red), p=2 (Green), p=∞ (Blue)"</span>)
-plt.axis(<span class="code-string">'equal'</span>)</pre>
+# Fourier coeffs for square wave: b_n = 4/(n*pi) for odd n
+def partial_sum(N, x):
+    s = np.zeros_like(x)
+    for n in range(1, N+1, 2):
+        bn = 4 / (n * np.pi)
+        s += bn * np.sin(n * x)
+    return s
+
+plt.plot(x, f, 'k', label='Target (L2 element)')
+plt.plot(x, partial_sum(3, x), label='N=3')
+plt.plot(x, partial_sum(10, x), label='N=10')
+plt.title("Hilbert Space Projection (Fourier Series)")
+plt.legend()
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -216,7 +236,7 @@ plt.axis(<span class="code-string">'equal'</span>)</pre>
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -238,8 +258,8 @@ plt.axis(<span class="code-string">'equal'</span>)</pre>
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -258,23 +278,22 @@ plt.axis(<span class="code-string">'equal'</span>)</pre>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Functional Analysis Basics",
+                title: "Functional Analysis Intro",
                 items: [
-                    { title: "Normed and Banach Spaces", channel: "The Bright Side of Mathematics", vid: "8jJm_6A1x8k" },
-                    { title: "Hilbert Spaces Introduction", channel: "The Bright Side of Mathematics", vid: "SgwNfAiL_P8" },
-                    { title: "Lp Spaces", channel: "Michael Penn", vid: "3Z3E6W0Z0G0" },
+                    { title: "Normed & Banach Spaces", channel: "The Bright Side of Mathematics", vid: "video_id_placeholder" },
+                    { title: "Hilbert Spaces & L2", channel: "Dr. Peyam", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Norms", prompt: "A norm must satisfy ||cx|| = |c| ||x||, known as ___.", answer: "homogeneity" },
+            { topic: "Norm", prompt: "The triangle inequality states ||x+y|| <= ||x|| + ___.", answer: "||y||" },
             { topic: "Banach", prompt: "A Banach space is a normed space that is ___.", answer: "complete" },
-            { topic: "Hilbert", prompt: "A Hilbert space has an ___ product.", answer: "inner" },
-            { topic: "Geometry", prompt: "In Hilbert spaces, we can define ___ if inner product is 0.", answer: "orthogonality" },
-            { topic: "Example", prompt: "ℓ² is a ___ space.", answer: "hilbert" },
-            { topic: "Example", prompt: "ℓ¹ is a ___ space but not Hilbert.", answer: "banach" },
+            { topic: "Hilbert", prompt: "A Hilbert space norm comes from an ___.", answer: "inner product" },
+            { topic: "Lp", prompt: "Which Lp space is a Hilbert Space?", answer: "L2" },
+            { topic: "Completeness", prompt: "Completeness means every ___ sequence converges.", answer: "Cauchy" },
+            { topic: "Infinite", prompt: "In infinite dimensions, closed and bounded sets are not necessarily ___.", answer: "compact" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day77_functional_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day77_functional_v2' });
     </script>
 </body>
 

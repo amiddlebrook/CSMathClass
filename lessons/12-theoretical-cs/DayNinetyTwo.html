@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 92: Theoretical CS — Channel Coding</title>
+    <title>Day 92: Space Complexity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 6 complete</span>
+                <span id="progressText">0 / 9 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,22 +40,22 @@
             </svg>
             Day 92 · Theoretical CS
         </div>
-        <h1>Channel Coding</h1>
-        <p class="hero-desc">Communicating reliably over a noisy channel. Error Correction Codes.</p>
+        <h1>Space Complexity</h1>
+        <p class="hero-desc">When memory is the bottleneck. L, NL, and Savitch's Theorem.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~50 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                5 practice problems
+                PSPACE
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,12 +71,14 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#channel" class="toc-link">1. The Noisy Channel</a></li>
-                    <li><a href="#capacity" class="toc-link">2. Capacity C</a></li>
-                    <li><a href="#theorem" class="toc-link">3. Noisy Channel Theorem</a></li>
-                    <li><a href="#ecc" class="toc-link">4. Error Correcting Codes</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#pspace" class="toc-link">1. PSPACE</a></li>
+                    <li><a href="#savitch" class="toc-link">2. Savitch's Theorem</a></li>
+                    <li><a href="#logspace" class="toc-link">3. Logarithmic Space</a></li>
+                    <li><a href="#hierarchy" class="toc-link">4. The Hierarchy</a></li>
+                    <li><a href="#games" class="toc-link">5. Games & Space</a></li>
+                    <li><a href="#code" class="toc-link">6. Python: Recursion Depth</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -91,66 +93,119 @@
         </aside>
 
         <main class="content">
-            <!-- Channel -->
-            <section class="section" id="channel">
+            <!-- PSPACE -->
+            <section class="section" id="pspace">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Noisy Channel</h2>
+                    <h2 class="section-title">PSPACE</h2>
                 </div>
                 <div class="section-body">
-                    <p>You send a bit `0`. The receiver hears `0` with probability `1-p` and `1` with probability `p`.
-                    </p>
-                    <div class="math-block">
-                        Goal: Send data perfectly despite noise.
-                        Naive approach: Repetition (0 -> 000000). Slow.
-                    </div>
+                    <p><strong>SPACE(f(n))</strong>: Maximum number of tape cells used by a TM on input size `n`.</p>
+                    <p><strong>PSPACE</strong>: Problems solvable using polynomial space.</p>
+                    <p>We know `P \subseteq NP \subseteq PSPACE`.</p>
+                    <p>Surprisingly, `PSPACE = NPSPACE` (Savitch's Theorem).</p>
                 </div>
             </section>
 
-            <!-- Capacity -->
-            <section class="section" id="capacity">
+            <!-- Savitch -->
+            <section class="section" id="savitch">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Channel Capacity</h2>
-                </div>
-                <div class="section-body">
-                    <p>Information Capacity <strong>C</strong> is the maximum mutual information between Input X and
-                        Output Y.</p>
-                    <div class="math-block">
-                        C = max I(X; Y)
-                    </div>
-                </div>
-            </section>
-
-            <!-- Theorem -->
-            <section class="section" id="theorem">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">The Theorem</h2>
+                    <h2 class="section-title">Savitch's Theorem</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        <strong>Shannon's Noisy Channel Coding Theorem:</strong>
-                        If rate R &lt; C, there exist codes that make error probability approach ZERO.
-                        If rate R &gt; C, reliable communication is impossible.
+                        Theorem: `NSPACE(f(n)) \subseteq SPACE(f(n)^2)`.
                     </div>
-                    <p>This was revolutionary. It proved we can fix errors without just slowing down forever.</p>
+                    <p>This means nondeterminism doesn't help much with space. We can simulate a nondeterministic path
+                        using recursion (Depth First Search).</p>
+                    <p>With time, we have to explore all branches simultaneously (Parallel/BFS), which takes exponential
+                        time. With space, we can reuse the same memory for each branch (Serial/DFS).</p>
                 </div>
             </section>
 
-            <!-- ECC -->
-            <section class="section" id="ecc">
+            <!-- LogSpace -->
+            <section class="section" id="logspace">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Error Correcting Codes</h2>
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Logarithmic Space (L vs NL)</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Parity Bits:</strong> Detect 1 error.<br>
-                        <strong>Hamming Codes:</strong> Correct 1 error.<br>
-                        <strong>Reed-Solomon:</strong> Correct bursts of errors (used in CDs, QR codes).
-                    </p>
-                    <div class="info">
-                        Turbo Codes and LDPC codes (used in 5G) approach the Shannon Limit C.
+                    <p><strong>L</strong>: Deterministic Log Space. (e.g. searching a list with pointers).</p>
+                    <p><strong>NL</strong>: Nondeterministic Log Space. (e.g. Graph connectivity).</p>
+                    <p>It is known that `L \subseteq NL \subseteq P`.</p>
+                    <p>Surprise: `NL = coNL`. (Immerman–Szelepcsényi theorem).</p>
+                </div>
+            </section>
+
+            <!-- Hierarchy -->
+            <section class="section" id="hierarchy">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">The Hierarchy</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">
+                        L \subseteq NL \subseteq P \subseteq NP \subseteq PSPACE \subseteq EXP
+                    </div>
+                    <p>We know `L \neq PSPACE` (Space Hierarchy Theorem) and `P \neq EXP` (Time Hierarchy Theorem).</p>
+                    <p>But we don't know if `P=NP` or `NP=PSPACE`. Most are believed to be strict subsets.</p>
+                </div>
+            </section>
+
+            <!-- Games -->
+            <section class="section" id="games">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Games</h2>
+                </div>
+                <div class="section-body">
+                    <p>PSPACE problems often look like 2-player games (e.g., Generalized Chess, Go).</p>
+                    <p>"Is there a winning strategy?" requires searching a game tree. This tree has polynomial depth
+                        (turns) but exponential size. DFS can solve it in Poly Space.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python: Recursion vs Iteration</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Space Consumption</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python"># Space Complexity ~ Recursion Depth (Stack Height)
+
+def depth_first_search(node, target, visited):
+    # O(D) space where D is max depth
+    if node == target:
+        return True
+    visited.add(node)
+    
+    for neighbor in get_neighbors(node):
+        if neighbor not in visited:
+            if depth_first_search(neighbor, target, visited):
+                return True
+                
+    visited.remove(node) # Backtrack: Save space!
+    return False
+
+# Contrast with BFS
+def breadth_first_search(start, target):
+    queue = [start]
+    # O(b^D) space! Must store entire frontier.
+    while queue:
+        # ...
+        pass
+
+# This is why PSPACE (DFS-like) is powerful:
+# We reuse space.</code></pre>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -158,7 +213,7 @@
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -180,8 +235,8 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -200,20 +255,21 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Channel Capacity",
+                title: "Space Complexity",
                 items: [
-                    { title: "Shannon's Theorem Explained", channel: "Art of the Problem", vid: "video_id_placeholder" },
+                    { title: "PSPACE and Savitch's Theorem", channel: "Easy Theory", vid: "video_id_placeholder" },
+                    { title: "Complexity Hierarchy", channel: "Udacity", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Limit", prompt: "The reliable speed limit of a channel is its ___.", answer: "capacity" },
-            { topic: "Theorem", prompt: "If R < C, error probability can go to ___.", answer: "zero", altAnswers: ["0"] },
-            { topic: "Parity", prompt: "A parity bit can ___ an error.", answer: "detect" },
-            { topic: "Hamming", prompt: "Hamming codes can ___ a single bit error.", answer: "correct" },
-            { topic: "Noise", prompt: "Repetition codes are very ___.", answer: "inefficient", altAnswers: ["slow"] },
+            { topic: "PSPACE", prompt: "PSPACE is the class of problems solvable in polynomial ___.", answer: "space", altAnswers: ["memory"] },
+            { topic: "Savitch", prompt: "Savitch's Theorem relates Nondeterministic Space to ___ Space.", answer: "deterministic" },
+            { topic: "Relationship", prompt: "NP is a subset of ___.", answer: "PSPACE" },
+            { topic: "Games", prompt: "Winning strategies for generalized games are often ___ complete.", answer: "PSPACE" },
+            { topic: "DFS", prompt: "DFS is space-efficient because it uses ___.", answer: "recursion", altAnswers: ["backtracking"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day92_channel_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day92_space_v2' });
     </script>
 </body>
 
