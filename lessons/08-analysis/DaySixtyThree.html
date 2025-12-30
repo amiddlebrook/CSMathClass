@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 63: Analysis Checkpoint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafaf9;
+            --surface: #fff;
+            --surface-alt: #f5f5f4;
+            --border: #e7e5e4;
+            --text: #1c1917;
+            --text-secondary: #57534e;
+            --text-muted: #78716c;
+            --accent: #0891b2;
+            --accent-light: #cffafe;
+            --accent-dark: #0e7490;
+            --success: #16a34a;
+            --error: #dc2626;
+            --radius: 8px;
+            --font-serif: 'Source Serif 4', Georgia, serif;
+            --font-sans: 'DM Sans', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace
+        }
+
+        [data-theme="dark"] {
+            --bg: #0c0c0f;
+            --surface: #16161a;
+            --surface-alt: #1c1c21;
+            --border: #2a2a32;
+            --text: #ececf1;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent: #22d3ee;
+            --accent-light: #164e63;
+            --accent-dark: #67e8f9
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px
+        }
+
+        .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .nav-back {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px
+        }
+
+        .theme-toggle {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            cursor: pointer
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 48px 24px 32px
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 16px
+        }
+
+        [data-theme="dark"] .hero-label {
+            color: var(--accent)
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 640px
+        }
+
+        .main-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 48px
+        }
+
+        @media(max-width:900px) {
+            .main-layout {
+                grid-template-columns: 1fr
+            }
+
+            .sidebar {
+                display: none
+            }
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            align-self: start
+        }
+
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px
+        }
+
+        .toc-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--text-muted);
+            margin-bottom: 12px
+        }
+
+        .toc-list {
+            list-style: none
+        }
+
+        .toc-link {
+            display: block;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius);
+            border-left: 2px solid transparent;
+            margin-left: -2px;
+            transition: all .15s
+        }
+
+        .toc-link:hover {
+            color: var(--text);
+            background: var(--surface-alt)
+        }
+
+        .toc-link.active {
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            border-left-color: var(--accent)
+        }
+
+        [data-theme="dark"] .toc-link.active {
+            color: var(--accent)
+        }
+
+        .stats-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 13px
+        }
+
+        .stats-label {
+            color: var(--text-muted)
+        }
+
+        .stats-value {
+            font-weight: 600;
+            font-family: var(--font-mono);
+            color: var(--text)
+        }
+
+        .content {
+            min-width: 0
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted)
+        }
+
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width .3s ease
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden
+        }
+
+        .section-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent)
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700
+        }
+
+        .section-body {
+            padding: 20px 24px
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text-secondary)
+        }
+
+        .math-block {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 16px 0;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            white-space: pre-wrap;
+            overflow-x: auto
+        }
+
+        .rule {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            padding: 16px;
+            margin: 16px 0;
+            font-weight: 500;
+            color: var(--accent-dark)
+        }
+
+        [data-theme="dark"] .rule {
+            color: var(--accent)
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .btn {
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff
+        }
+
+        .question {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px
+        }
+
+        .q-num {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent)
+        }
+
+        .q-topic {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--surface);
+            padding: 4px 8px;
+            border-radius: 999px
+        }
+
+        .q-prompt {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            background: var(--surface);
+            padding: 12px;
+            border-radius: var(--radius);
+            margin-bottom: 12px
+        }
+
+        .q-row {
+            display: flex;
+            gap: 8px
+        }
+
+        .q-input {
+            flex: 1;
+            padding: 10px;
+            font-family: var(--font-mono);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text)
+        }
+
+        .q-input:focus {
+            border-color: var(--accent);
+            outline: none
+        }
+
+        .q-input.correct {
+            border-color: var(--success);
+            background: #dcfce7
+        }
+
+        .q-input.incorrect {
+            border-color: var(--error);
+            background: #fee2e2
+        }
+
+        .q-result {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 500
+        }
+
+        .success {
+            color: var(--success)
+        }
+
+        .error {
+            color: var(--error)
+        }
+
+        .q-answer {
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            padding: 6px 10px;
+            border-radius: var(--radius);
+            display: inline-block
+        }
+    </style>
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t) })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner"><a href="../../index.html" class="nav-back">← Back</a>
+            <div class="nav-progress"><span id="progressText">0 / 0</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div><button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="hero-label">Day 63 · Checkpoint</div>
+        <h1>Analysis Checkpoint</h1>
+        <p class="hero-desc">Test your understanding by reconstructing key proofs and definitions.</p>
+    </header>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <div id="toc-container"></div>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+        <main class="content">
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">01</div>
+                    <h2 class="section-title">Core Definitions Review</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule"><strong>Goal:</strong> Be able to write these from memory!</div>
+                    <div class="math-block">LIMIT (ε-δ):
+                        lim_{x→a} f(x) = L means:
+                        ∀ε>0, ∃δ>0: 0<|x-a|<δ ⟹ |f(x)-L|<ε CONTINUITY: f cont. at a: ∀ε>0, ∃δ>0: |x-a|<δ ⟹ |f(x)-f(a)|<ε
+                                UNIFORM CONTINUITY: ∀ε>0, ∃δ>0: ∀x,y, |x-y|<δ ⟹ |f(x)-f(y)|<ε SEQUENCE CONVERGENCE: aₙ →
+                                    L: ∀ε>0, ∃N: n>N ⟹ |aₙ-L|<ε CAUCHY SEQUENCE: ∀ε>0, ∃N: m,n>N ⟹ |aₘ-aₙ|<ε< /div>
+                    </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">02</div>
+                    <h2 class="section-title">Key Theorems Checklist</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">CAN YOU STATE AND UNDERSTAND THESE?
+
+                        □ Intermediate Value Theorem
+                        □ Extreme Value Theorem
+                        □ Mean Value Theorem
+                        □ Rolle's Theorem
+                        □ Fundamental Theorem of Calculus (both parts)
+                        □ Bolzano-Weierstrass Theorem
+                        □ Heine-Borel Theorem
+                        □ Monotone Convergence Theorem
+                        □ Weierstrass Approximation Theorem
+                        □ Arzelà-Ascoli Theorem
+                        □ Banach Fixed Point Theorem
+
+                        SELF-TEST:
+                        For each theorem, can you:
+                        1. State the hypotheses?
+                        2. State the conclusion?
+                        3. Give a proof sketch?
+                        4. Give a counterexample if hypothesis fails?</div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">03</div>
+                    <h2 class="section-title">Proof Reconstruction: IVT</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">INTERMEDIATE VALUE THEOREM:
+                        f continuous on [a,b], f(a) < c < f(b) ⟹ ∃x ∈ (a,b): f(x)=c PROOF OUTLINE: 1. Define S={x ∈
+                            [a,b] : f(x) ≤ c} 2. S is nonempty (a ∈ S) and bounded above (by b) 3. Let s=sup(S) — exists
+                            by completeness! 4. Show f(s)=c by ruling out f(s) < c and f(s)> c
+
+                            KEY STEP (f(s) < c leads to contradiction): If f(s) < c, by continuity ∃δ: f(s+ε) < c for
+                                small ε So s+ε ∈ S, contradicting s=sup(S) Similarly for f(s)> c.
+                                ∴ f(s) = c. ✓</div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">04</div>
+                    <h2 class="section-title">Proof Reconstruction: MVT</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">MEAN VALUE THEOREM:
+                        f continuous on [a,b], differentiable on (a,b)
+                        ⟹ ∃c ∈ (a,b): f'(c) = [f(b)-f(a)]/(b-a)
+
+                        PROOF:
+                        1. Define auxiliary function:
+                        g(x) = f(x) - f(a) - [(f(b)-f(a))/(b-a)](x-a)
+
+                        2. Check: g(a) = 0 and g(b) = 0
+
+                        3. Apply Rolle's Theorem to g:
+                        ∃c ∈ (a,b): g'(c) = 0
+
+                        4. Compute g'(c):
+                        g'(c) = f'(c) - (f(b)-f(a))/(b-a) = 0
+
+                        5. Solve: f'(c) = (f(b)-f(a))/(b-a) ✓</div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">05</div>
+                    <h2 class="section-title">Counterexamples to Know</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">f(x) = |x|
+                        • Continuous but not differentiable at 0
+
+                        f(x) = 1/x on (0,1]
+                        • Continuous but not uniformly continuous
+                        • No maximum on domain
+
+                        fₙ(x) = xⁿ on [0,1]
+                        • Continuous functions
+                        • Pointwise limit is discontinuous
+                        • Shows pointwise ≠ uniform
+
+                        Dirichlet function (1 on ℚ, 0 on irrationals)
+                        • Discontinuous everywhere
+                        • Not Riemann integrable
+
+                        ℚ with usual metric
+                        • Not complete (Cauchy ≠ convergent)
+
+                        (0,1) in ℝ
+                        • Bounded but not compact (not closed)</div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">06</div>
+                    <h2 class="section-title">Hierarchy Summary</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">CONTINUITY HIERARCHY:
+                        Lipschitz ⟹ Unif. Continuous ⟹ Continuous
+
+                        INTEGRABILITY:
+                        Continuous ⟹ Riemann integrable
+                        Monotone ⟹ Riemann integrable
+
+                        CONVERGENCE MODES:
+                        Uniform ⟹ Lᵖ ⟹ In measure ⟹ Subseq. a.e.
+
+                        SPACES:
+                        Hilbert ⊂ Banach ⊂ Normed ⊂ Metric
+
+                        COMPACTNESS (in ℝⁿ):
+                        Compact ⟺ Closed + Bounded
+                        ⟺ Sequentially compact
+
+                        COMPLETENESS:
+                        ℝ, C[a,b], Lᵖ, ℓᵖ: complete
+                        ℚ, (0,1): not complete</div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="section-header">
+                    <div class="section-number">07</div>
+                    <h2 class="section-title">Self-Assessment Exercises</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">PROVE EACH FROM SCRATCH:
+
+                        1. lim_{x→3} (x² - 9)/(x - 3) = 6 using ε-δ
+
+                        2. f(x) = x² is uniformly continuous on [0,1]
+                        but NOT on ℝ
+
+                        3. If f continuous on [a,b] and f' = 0 on (a,b),
+                        then f is constant
+
+                        4. Σ(1/n²) converges (comparison test)
+
+                        5. fₙ(x) = sin(nx)/n converges uniformly to 0
+
+                        6. C[0,1] with sup norm is complete
+
+                        CHALLENGE:
+                        Prove Weierstrass M-test:
+                        |fₙ(x)| ≤ Mₙ for all x, and ΣMₙ converges
+                        ⟹ Σfₙ converges uniformly</div>
+                </div>
+            </section>
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">08</div>
+                    <h2 class="section-title">Final Quiz</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls"><button class="btn btn-primary" id="checkAll">Check All</button><button
+                            class="btn" id="showAll">Show All</button></div>
+                    <div id="quiz"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        const Q = [{ id: 1, t: "ε-δ", q: "∀ε>0, ∃δ>0 defines ___ convergence", a: ["limit"], d: "limit" }, { id: 2, t: "UC", q: "δ works for all x in ___ continuity", a: ["uniform"], d: "uniform" }, { id: 3, t: "IVT", q: "IVT uses ___ of S to find s", a: ["sup", "supremum"], d: "sup(S)" }, { id: 4, t: "MVT", q: "MVT proof applies ___'s theorem to g(x)", a: ["rolle", "rolles", "rolle's"], d: "Rolle's" }, { id: 5, t: "HB", q: "In ℝⁿ, compact = closed + ___", a: ["bounded"], d: "bounded" }, { id: 6, t: "Complete", q: "C[a,b] with sup norm is ___", a: ["complete"], d: "complete" }, { id: 7, t: "Conv", q: "Uniform convergence preserves ___", a: ["continuity", "continuous"], d: "continuity" }, { id: 8, t: "Lip", q: "Lipschitz ⟹ uniformly ___", a: ["continuous"], d: "continuous" }, { id: 9, t: "FTC", q: "FTC: F(x)=∫ₐˣf ⟹ F'=___", a: ["f"], d: "f" }, { id: 10, t: "BW", q: "Bolzano-___: bounded seq has conv. subseq", a: ["weierstrass"], d: "Weierstrass" }];
+        const norm = s => s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; const check = (v, a) => a.map(x => norm(x)).includes(norm(v)); let correct = 0, attempted = 0;
+        function updateUI() { document.getElementById("statCorrect").textContent = correct; document.getElementById("statAccuracy").textContent = attempted > 0 ? `${Math.round(correct / attempted * 100)}%` : "—"; document.getElementById("progressText").textContent = `${correct}/${Q.length}`; document.getElementById("progressFill").style.width = `${Math.round(correct / Q.length * 100)}%` }
+        function renderQuiz() { const c = document.getElementById("quiz"); c.innerHTML = ""; Q.forEach(q => { const d = document.createElement("div"); d.className = "question"; d.innerHTML = `<div class="q-header"><span class="q-num">Q${q.id}</span><span class="q-topic">${q.t}</span></div><div class="q-prompt">${q.q}</div><div class="q-row"><input class="q-input" placeholder="Answer..."/><button class="btn btn-primary bc">Check</button><button class="btn bs">Show</button></div><div class="q-result"></div>`; const inp = d.querySelector(".q-input"), res = d.querySelector(".q-result"); d.querySelector(".bc").onclick = () => { attempted++; if (check(inp.value, q.a)) { correct++; inp.classList.add("correct"); inp.classList.remove("incorrect"); res.innerHTML = `<span class="success">✓ Correct</span>` } else { inp.classList.add("incorrect"); inp.classList.remove("correct"); res.innerHTML = `<span class="error">✗ Try again</span>` } updateUI() }; d.querySelector(".bs").onclick = () => { res.innerHTML = `<div class="q-answer">Answer: ${q.d}</div>` }; inp.onkeydown = e => { if (e.key === "Enter") d.querySelector(".bc").click() }; c.appendChild(d) }); updateUI() }
+        document.getElementById("checkAll").onclick = () => document.querySelectorAll(".bc").forEach(b => b.click()); document.getElementById("showAll").onclick = () => document.querySelectorAll(".bs").forEach(b => b.click());
+        const tocContainer = document.getElementById("toc-container"); const list = document.createElement("ul"); list.className = "toc-list"; document.querySelectorAll(".section").forEach(s => { const h2 = s.querySelector(".section-title"); if (h2) { if (!s.id) s.id = h2.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); const li = document.createElement("li"); const a = document.createElement("a"); a.href = "#" + s.id; a.className = "toc-link"; a.textContent = h2.textContent; li.appendChild(a); list.appendChild(li) } }); tocContainer.appendChild(list);
+        const tocLinks = document.querySelectorAll(".toc-link"), sections = document.querySelectorAll(".section"); function updateToc() { let current = ""; sections.forEach(s => { if (s.getBoundingClientRect().top < 150) current = s.id }); tocLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === `#${current}`)) } window.addEventListener("scroll", updateToc);
+        const tt = document.getElementById("themeToggle"); tt.onclick = () => { const n = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", n); localStorage.setItem("math_cs_theme", n); tt.textContent = n === "dark" ? "☀️" : "🌙" }; tt.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙"; renderQuiz();
+    </script>
+</body>
+
+</html>
