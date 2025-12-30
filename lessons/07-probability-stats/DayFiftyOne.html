@@ -41,7 +41,32 @@
             Day 51 · Probability
         </div>
         <h1>Common Distributions</h1>
-        <p class="hero-desc">Bernoulli, Binomial, Geometric, Poisson, Normal, and more.</p>
+        <p class="hero-desc">
+            The building blocks of probabilistic modeling: Bernoulli, Binomial, Poisson, Normal, and more.
+            These distributions appear everywhere in algorithm analysis and machine learning.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~45 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,10 +74,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#discrete" class="toc-link">1. Discrete</a></li>
-                    <li><a href="#continuous" class="toc-link">2. Continuous</a></li>
-                    <li><a href="#videos" class="toc-link">3. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">4. Practice</a></li>
+                    <li><a href="#discrete" class="toc-link">1. Discrete Distributions</a></li>
+                    <li><a href="#continuous" class="toc-link">2. Continuous Distributions</a></li>
+                    <li><a href="#relationships" class="toc-link">3. Relationships</a></li>
+                    <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">5. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -67,61 +93,220 @@
         </aside>
 
         <main class="content">
+            <!-- Discrete Distributions -->
             <section class="section" id="discrete">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Discrete Distributions</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">BERNOULLI(p): One trial, success prob p
-                        E[X] = p, Var(X) = p(1-p)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Bernoulli(p)</h3>
+                        <div class="math-block">Single trial with success probability p
 
-                        BINOMIAL(n,p): n trials, count successes
-                        P(X=k) = C(n,k) p^k (1-p)^(n-k)
-                        E[X] = np, Var(X) = np(1-p)
+                            X ∈ {0, 1}
+                            P(X = 1) = p, P(X = 0) = 1-p
+                            E[X] = p
+                            Var(X) = p(1-p)
 
-                        GEOMETRIC(p): Trials until first success
-                        P(X=k) = (1-p)^(k-1) p
-                        E[X] = 1/p
+                            Use: Single yes/no experiment</div>
+                    </div>
 
-                        POISSON(λ): Events in interval
-                        P(X=k) = λ^k e^(-λ) / k!
-                        E[X] = Var(X) = λ</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Binomial(n, p)</h3>
+                        <div class="math-block">Number of successes in n independent Bernoulli trials
+
+                            X ∈ {0, 1, ..., n}
+                            P(X = k) = C(n,k) · p^k · (1-p)^(n-k)
+                            E[X] = np
+                            Var(X) = np(1-p)
+
+                            Note: Sum of n independent Bernoulli(p) RVs</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Geometric(p)</h3>
+                        <div class="math-block">Number of trials until first success
+
+                            X ∈ {1, 2, 3, ...}
+                            P(X = k) = (1-p)^(k-1) · p
+                            E[X] = 1/p
+                            Var(X) = (1-p)/p²
+
+                            Memoryless: P(X > s+t | X > s) = P(X > t)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Poisson(λ)</h3>
+                        <div class="math-block">Number of events in fixed interval
+
+                            X ∈ {0, 1, 2, ...}
+                            P(X = k) = λ^k · e^(-λ) / k!
+                            E[X] = λ
+                            Var(X) = λ
+
+                            Use: Rare events, arrival processes</div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Discrete distributions in SciPy</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">from</span> scipy <span class="code-keyword">import</span> stats
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># Binomial: 10 coin flips, P(heads) = 0.5</span>
+binom = stats.binom(n=<span class="code-number">10</span>, p=<span class="code-number">0.5</span>)
+<span class="code-function">print</span>(<span class="code-string">f"P(X = 5) = {binom.pmf(5):.4f}"</span>)  <span class="code-comment"># 0.2461</span>
+<span class="code-function">print</span>(<span class="code-string">f"P(X ≤ 5) = {binom.cdf(5):.4f}"</span>)  <span class="code-comment"># 0.6230</span>
+<span class="code-function">print</span>(<span class="code-string">f"E[X] = {binom.mean()}"</span>)           <span class="code-comment"># 5.0</span>
+
+<span class="code-comment"># Geometric: Expected flips until heads</span>
+geom = stats.geom(p=<span class="code-number">0.5</span>)
+<span class="code-function">print</span>(<span class="code-string">f"E[flips] = {geom.mean()}"</span>)  <span class="code-comment"># 2.0</span>
+
+<span class="code-comment"># Poisson: Average 3 emails per hour</span>
+poisson = stats.poisson(mu=<span class="code-number">3</span>)
+<span class="code-function">print</span>(<span class="code-string">f"P(0 emails) = {poisson.pmf(0):.4f}"</span>)  <span class="code-comment"># 0.0498</span>
+<span class="code-function">print</span>(<span class="code-string">f"P(≥5 emails) = {1 - poisson.cdf(4):.4f}"</span>)  <span class="code-comment"># 0.1847</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Continuous Distributions -->
             <section class="section" id="continuous">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Continuous Distributions</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">UNIFORM(a,b): Equal probability on [a,b]
-                        f(x) = 1/(b-a)
-                        E[X] = (a+b)/2, Var(X) = (b-a)²/12
+                    <div class="subsection">
+                        <h3 class="subsection-title">Uniform(a, b)</h3>
+                        <div class="math-block">Equal probability on interval [a, b]
 
-                        EXPONENTIAL(λ): Time between Poisson events
-                        f(x) = λe^(-λx), x ≥ 0
-                        E[X] = 1/λ, Var(X) = 1/λ²
+                            f(x) = 1/(b-a) for x ∈ [a, b]
+                            E[X] = (a+b)/2
+                            Var(X) = (b-a)²/12
 
-                        NORMAL(μ,σ²): Bell curve
-                        f(x) = (1/σ√(2π)) e^(-(x-μ)²/(2σ²))
-                        E[X] = μ, Var(X) = σ²
+                            Use: Random number generation baseline</div>
+                    </div>
 
-                        STANDARD NORMAL: N(0,1)
-                        Z = (X - μ)/σ</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Exponential(λ)</h3>
+                        <div class="math-block">Time between Poisson events
 
-                    <div class="info"><strong>Central Limit Theorem:</strong> Sum of many independent RVs → Normal!
+                            f(x) = λ·e^(-λx) for x ≥ 0
+                            E[X] = 1/λ
+                            Var(X) = 1/λ²
+
+                            Memoryless: P(X > s+t | X > s) = P(X > t)
+                            Only continuous memoryless distribution!</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Normal(μ, σ²)</h3>
+                        <div class="rule">
+                            <strong>The Normal (Gaussian) distribution:</strong> The most important distribution in
+                            statistics.
+                        </div>
+                        <div class="math-block">f(x) = (1/(σ√(2π))) · e^(-(x-μ)²/(2σ²))
+
+                            E[X] = μ
+                            Var(X) = σ²
+
+                            Standard Normal N(0,1): Z = (X - μ)/σ
+
+                            68-95-99.7 rule:
+                            • 68% within 1σ of mean
+                            • 95% within 2σ of mean
+                            • 99.7% within 3σ of mean</div>
+                    </div>
+
+                    <div class="info">
+                        <strong>Central Limit Theorem:</strong> The sum of many independent RVs
+                        (regardless of their distribution) approaches a Normal distribution!
+                        This explains why the Normal is so ubiquitous.
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Continuous distributions in SciPy</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">from</span> scipy <span class="code-keyword">import</span> stats
+
+<span class="code-comment"># Standard Normal</span>
+norm = stats.norm(loc=<span class="code-number">0</span>, scale=<span class="code-number">1</span>)
+<span class="code-function">print</span>(<span class="code-string">f"P(Z < 1.96) = {norm.cdf(1.96):.4f}"</span>)  <span class="code-comment"># 0.9750</span>
+<span class="code-function">print</span>(<span class="code-string">f"P(|Z| < 2) = {norm.cdf(2) - norm.cdf(-2):.4f}"</span>)  <span class="code-comment"># 0.9545</span>
+
+<span class="code-comment"># Inverse: what z gives P(Z < z) = 0.95?</span>
+<span class="code-function">print</span>(<span class="code-string">f"z for 95% = {norm.ppf(0.95):.4f}"</span>)  <span class="code-comment"># 1.6449</span>
+
+<span class="code-comment"># Exponential: server response time, avg 100ms</span>
+exp = stats.expon(scale=<span class="code-number">100</span>)  <span class="code-comment"># scale = 1/λ = mean</span>
+<span class="code-function">print</span>(<span class="code-string">f"P(response < 50ms) = {exp.cdf(50):.4f}"</span>)  <span class="code-comment"># 0.3935</span>
+<span class="code-function">print</span>(<span class="code-string">f"P(response > 200ms) = {1 - exp.cdf(200):.4f}"</span>)  <span class="code-comment"># 0.1353</span>
+
+<span class="code-comment"># Central Limit Theorem demo</span>
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+samples = [np.mean(np.random.uniform(<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">30</span>)) <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10000</span>)]
+<span class="code-function">print</span>(<span class="code-string">f"Mean of sample means: {np.mean(samples):.4f}"</span>)  <span class="code-comment"># ~0.5</span>
+<span class="code-function">print</span>(<span class="code-string">f"Sample means are normally distributed!"</span>)</pre>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="videos">
+            <!-- Relationships -->
+            <section class="section" id="relationships">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Relationships Between Distributions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">IMPORTANT CONNECTIONS:
+
+                        Bernoulli(p) → sum of n → Binomial(n, p)
+
+                        Binomial(n, p) as n→∞ → Poisson(np) when p small
+
+                        Geometric(p) → sum of n → NegativeBinomial(n, p)
+
+                        Poisson(λ) ←→ Exponential(λ)
+                        (counts vs. waiting times)
+
+                        Sum of many anything → Normal (CLT)
+
+                        Binomial(n, p) → Normal(np, np(1-p)) for large n</div>
+
+                    <div class="warning">
+                        <strong>When to use which:</strong>
+                        <ul>
+                            <li><strong>Binomial:</strong> Fixed n trials, count successes</li>
+                            <li><strong>Geometric:</strong> Trials until first success</li>
+                            <li><strong>Poisson:</strong> Events in interval, rare events approximation</li>
+                            <li><strong>Exponential:</strong> Time between events</li>
+                            <li><strong>Normal:</strong> Sums, averages, measurement errors</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Visual explanations of probability distributions.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -137,12 +322,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -161,9 +350,10 @@
             {
                 title: "Distributions",
                 items: [
-                    { title: "Binomial Distribution", channel: "StatQuest", vid: "8idr1WZ1A7Q" },
-                    { title: "Normal Distribution", channel: "3Blue1Brown", vid: "zeJD6dqJ5lo" },
-                    { title: "Poisson Distribution", channel: "StatQuest", vid: "jmqZG6roVqU" },
+                    { title: "Binomial Distribution — StatQuest", channel: "StatQuest", vid: "8idr1WZ1A7Q" },
+                    { title: "Normal Distribution — 3Blue1Brown", channel: "3Blue1Brown", vid: "zeJD6dqJ5lo" },
+                    { title: "Poisson Distribution — StatQuest", channel: "StatQuest", vid: "jmqZG6roVqU" },
+                    { title: "Central Limit Theorem", channel: "3Blue1Brown", vid: "zeJD6dqJ5lo" },
                 ]
             }
         ];
@@ -175,7 +365,7 @@
             { topic: "Poisson", prompt: "Poisson E[X] = Var(X) = ___", answer: "λ", altAnswers: ["lambda"] },
             { topic: "Uniform", prompt: "Uniform E[X] = (a+___)/2", answer: "b" },
             { topic: "Exponential", prompt: "Exponential models time between ___ events", answer: "poisson" },
-            { topic: "Normal", prompt: "Normal is also called ___ curve", answer: "bell" },
+            { topic: "Normal", prompt: "Normal is also called ___ curve", answer: "bell", altAnswers: ["gaussian"] },
             { topic: "Standard", prompt: "Standard normal has μ = 0, σ = ___", answer: "1" },
             { topic: "CLT", prompt: "Central ___ Theorem: sums → normal", answer: "limit" },
         ];

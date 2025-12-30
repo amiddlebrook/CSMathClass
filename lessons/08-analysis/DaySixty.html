@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 60 · Analysis
         </div>
         <h1>Metric Spaces</h1>
-        <p class="hero-desc">Generalizing distance: metrics, open sets, and convergence.</p>
+        <p class="hero-desc">
+            Generalizing the concept of distance: how metrics enable analysis beyond ℝⁿ.
+            Essential for functional analysis, machine learning, and algorithm design.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -50,8 +75,8 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#metric" class="toc-link">1. Metric Definition</a></li>
-                    <li><a href="#examples" class="toc-link">2. Examples</a></li>
-                    <li><a href="#topology" class="toc-link">3. Topology</a></li>
+                    <li><a href="#examples" class="toc-link">2. Common Metrics</a></li>
+                    <li><a href="#topology" class="toc-link">3. Metric Topology</a></li>
                     <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">5. Practice</a></li>
                 </ul>
@@ -68,49 +93,143 @@
         </aside>
 
         <main class="content">
+            <!-- Metric Definition -->
             <section class="section" id="metric">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Metric Definition</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Metric:</strong> d: X × X → [0,∞) satisfying:</div>
-                    <div class="math-block">1. d(x,y) = 0 ⟺ x = y (identity)
-                        2. d(x,y) = d(y,x) (symmetry)
-                        3. d(x,z) ≤ d(x,y) + d(y,z) (triangle inequality)</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">The axioms</h3>
+                        <div class="rule">
+                            <strong>Metric:</strong> A function d: X × X → [0, ∞) satisfying:
+                        </div>
+                        <div class="math-block">1. IDENTITY: d(x, y) = 0 ⟺ x = y
+                            2. SYMMETRY: d(x, y) = d(y, x)
+                            3. TRIANGLE: d(x, z) ≤ d(x, y) + d(y, z)
+
+                            A METRIC SPACE is a pair (X, d) where X is a set and d is a metric.
+
+                            These axioms capture our intuitions about "distance":
+                            • Distance 0 only to yourself
+                            • Distance from A to B = distance from B to A
+                            • Shortest path is direct (no shortcuts via third point)</div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Pseudometric:</strong> If we drop the identity axiom (d(x,y) = 0 possible
+                        for x ≠ y), we get a pseudometric. Useful in some CS applications.
+                    </div>
                 </div>
             </section>
 
+            <!-- Examples -->
             <section class="section" id="examples">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Common Metrics</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">EUCLIDEAN: d(x,y) = √Σ(xᵢ - yᵢ)²
-                        TAXICAB (L¹): d(x,y) = Σ|xᵢ - yᵢ|
-                        MAX (L∞): d(x,y) = max|xᵢ - yᵢ|
-                        DISCRETE: d(x,y) = 0 if x=y, else 1</div>
+                    <div class="math-block">For x, y ∈ ℝⁿ:
+
+                        EUCLIDEAN (L²):
+                        d₂(x, y) = √Σᵢ(xᵢ - yᵢ)²
+                        The "usual" distance
+
+                        MANHATTAN/TAXICAB (L¹):
+                        d₁(x, y) = Σᵢ|xᵢ - yᵢ|
+                        City-block distance
+
+                        MAXIMUM/CHEBYSHEV (L∞):
+                        d∞(x, y) = maxᵢ|xᵢ - yᵢ|
+                        Chessboard distance
+
+                        DISCRETE:
+                        d(x, y) = 0 if x = y, else 1
+                        Trivial but useful</div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Computing different metrics</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">from</span> scipy.spatial <span class="code-keyword">import</span> distance
+
+x = np.array([<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>])
+y = np.array([<span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>])
+
+<span class="code-comment"># Different metrics</span>
+euclidean = np.linalg.norm(x - y)  <span class="code-comment"># L² norm</span>
+manhattan = np.<span class="code-function">sum</span>(np.<span class="code-function">abs</span>(x - y))   <span class="code-comment"># L¹ norm</span>
+chebyshev = np.<span class="code-function">max</span>(np.<span class="code-function">abs</span>(x - y))   <span class="code-comment"># L∞ norm</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"Euclidean: {euclidean:.4f}"</span>)  <span class="code-comment"># 5.196</span>
+<span class="code-function">print</span>(<span class="code-string">f"Manhattan: {manhattan}"</span>)        <span class="code-comment"># 9</span>
+<span class="code-function">print</span>(<span class="code-string">f"Chebyshev: {chebyshev}"</span>)        <span class="code-comment"># 3</span>
+
+<span class="code-comment"># scipy.spatial.distance has many more</span>
+<span class="code-function">print</span>(<span class="code-string">f"Cosine: {distance.cosine(x, y):.4f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Minkowski p=3: {distance.minkowski(x, y, p=3):.4f}"</span>)</pre>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <strong>CS Applications:</strong>
+                        <ul>
+                            <li><strong>KNN:</strong> Choice of metric affects classification</li>
+                            <li><strong>Clustering:</strong> K-means uses Euclidean, others use different metrics</li>
+                            <li><strong>Edit distance:</strong> Metric on strings (Levenshtein distance)</li>
+                            <li><strong>Jaccard distance:</strong> Metric on sets (1 - intersection/union)</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
+            <!-- Topology -->
             <section class="section" id="topology">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
                     <h2 class="section-title">Metric Topology</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">OPEN BALL: B(x,r) = {y : d(x,y) < r} OPEN SET: Union of open balls CLOSED
-                            SET: Complement of open set CONVERGENCE: xₙ → x iff d(xₙ, x) → 0</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Open and closed sets</h3>
+                        <div class="math-block">OPEN BALL:
+                            B(x, r) = {y ∈ X : d(x, y) < r} All points within distance r of x OPEN SET: A set is open if
+                                every point has an open ball contained in it. Equivalently: union of open balls CLOSED
+                                SET: Complement of an open set Contains all its limit points CONVERGENCE: xₙ → x in (X,
+                                d) ⟺ d(xₙ, x) → 0</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Topological properties</h3>
+                            <div class="math-block">PROPERTIES DEFINED VIA METRIC:
+                                • Continuity: f: (X, d₁) → (Y, d₂) continuous if
+                                xₙ → x ⟹ f(xₙ) → f(x)
+                                • Completeness: every Cauchy sequence converges
+                                • Compactness: every sequence has convergent subsequence
+                                • Connectedness: cannot separate into disjoint open sets
+
+                                EQUIVALENT METRICS:
+                                d and d' are equivalent if they define the same open sets.
+                                Example: All Lᵖ norms are equivalent on ℝⁿ!</div>
+                        </div>
                     </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Introduction to abstract metric spaces.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -126,12 +245,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -146,16 +269,27 @@
 
     <script src="../shared-scripts.js"></script>
     <script>
-        const VIDEO_GROUPS = [{ title: "Metric Spaces", items: [{ title: "Metric Spaces Intro", channel: "Math Major", vid: "sqMg4vOPYsE" }] }];
+        const VIDEO_GROUPS = [
+            {
+                title: "Metric Spaces",
+                items: [
+                    { title: "Metric Spaces Introduction — Math Major", channel: "Math Major", vid: "sqMg4vOPYsE" },
+                    { title: "Open and Closed Sets", channel: "Dr. Trefor Bazett", vid: "PFK8sKqoV4g" },
+                    { title: "Convergence in Metric Spaces", channel: "Michael Penn", vid: "u2qYNOAk9Jc" },
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Axioms", prompt: "d(x,y) = d(y,x) is ___", answer: "symmetry" },
             { topic: "Axioms", prompt: "d(x,z) ≤ d(x,y) + d(y,z) is ___ inequality", answer: "triangle" },
             { topic: "Axioms", prompt: "d(x,y) = 0 ⟺ x = y is ___", answer: "identity" },
             { topic: "Examples", prompt: "___ metric: √Σ(xᵢ - yᵢ)²", answer: "euclidean" },
-            { topic: "Examples", prompt: "Taxicab is also called L^___ norm", answer: "1" },
+            { topic: "Examples", prompt: "Manhattan is also called L^___ norm", answer: "1" },
+            { topic: "Examples", prompt: "Chebyshev is also called L^___ norm", answer: "∞", altAnswers: ["infinity", "inf"] },
             { topic: "Topology", prompt: "B(x,r) is an open ___", answer: "ball" },
             { topic: "Topology", prompt: "Closed set = complement of ___", answer: "open" },
             { topic: "Convergence", prompt: "xₙ → x iff d(xₙ, x) → ___", answer: "0" },
+            { topic: "CS", prompt: "___ distance measures edit operations on strings", answer: "levenshtein", altAnswers: ["edit"] },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day60_metric_v1' });
     </script>

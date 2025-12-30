@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 52 · Probability
         </div>
         <h1>Concentration Inequalities</h1>
-        <p class="hero-desc">Bounding how far random variables deviate from their mean.</p>
+        <p class="hero-desc">
+            Bounding how far random variables deviate from their mean. Essential tools for
+            analyzing randomized algorithms and proving high-probability guarantees.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,9 +74,10 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#markov" class="toc-link">1. Markov</a></li>
-                    <li><a href="#chebyshev" class="toc-link">2. Chebyshev</a></li>
-                    <li><a href="#chernoff" class="toc-link">3. Chernoff</a></li>
+                    <li><a href="#why" class="toc-link">Why Concentration</a></li>
+                    <li><a href="#markov" class="toc-link">1. Markov's Inequality</a></li>
+                    <li><a href="#chebyshev" class="toc-link">2. Chebyshev's Inequality</a></li>
+                    <li><a href="#chernoff" class="toc-link">3. Chernoff Bounds</a></li>
                     <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">5. Practice</a></li>
                 </ul>
@@ -68,58 +94,218 @@
         </aside>
 
         <main class="content">
+            <!-- Why Concentration -->
+            <section class="section" id="why">
+                <div class="section-header">
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Concentration Inequalities</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Expected value tells you what happens "on average." But for algorithm analysis,
+                        we need stronger guarantees: what's the probability that our algorithm is
+                        far from its expected behavior?
+                    </p>
+
+                    <div class="rule">
+                        <strong>Key Question:</strong> What is P(X deviates far from E[X])?
+                        Concentration inequalities give upper bounds on this probability.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">The concentration hierarchy</h3>
+                        <div class="math-block">WEAKEST → STRONGEST BOUNDS:
+
+                            Markov: P(X ≥ a) ≤ E[X]/a
+                            Only needs X ≥ 0
+
+                            Chebyshev: P(|X - μ| ≥ t) ≤ σ²/t²
+                            Needs variance
+
+                            Chernoff: P(|X - μ| ≥ t) ≤ 2·exp(-t²/2n)
+                            Needs independence + boundedness
+                            EXPONENTIALLY small!</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Markov -->
             <section class="section" id="markov">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Markov's Inequality</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>For X ≥ 0:</strong> P(X ≥ a) ≤ E[X]/a</div>
-                    <div class="math-block">Example: If E[X] = 10, then P(X ≥ 50) ≤ 10/50 = 0.2
+                    <div class="subsection">
+                        <h3 class="subsection-title">Statement</h3>
+                        <div class="rule">
+                            <strong>Markov's Inequality:</strong> For non-negative X and a > 0:<br>
+                            P(X ≥ a) ≤ E[X]/a
+                        </div>
+                        <div class="math-block">Example: E[X] = 10
+                            P(X ≥ 50) ≤ 10/50 = 0.2 = 20%
+                            P(X ≥ 100) ≤ 10/100 = 0.1 = 10%
 
-                        Very weak bound, requires only non-negativity!</div>
+                            Very weak but very general!
+                            Only requires X ≥ 0.</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Proof sketch</h3>
+                        <div class="math-block">E[X] = ∫ x·f(x)dx ≥ ∫_{x≥a} x·f(x)dx ≥ a·∫_{x≥a}f(x)dx = a·P(X≥a)
+
+                            Therefore: P(X ≥ a) ≤ E[X]/a</div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Markov is often loose:</strong> It can't be tight in general because
+                        it uses no information about the distribution beyond the mean. Use it when
+                        you have nothing else, or to prove other bounds.
+                    </div>
                 </div>
             </section>
 
+            <!-- Chebyshev -->
             <section class="section" id="chebyshev">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Chebyshev's Inequality</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>For any X:</strong> P(|X - μ| ≥ kσ) ≤ 1/k²</div>
-                    <div class="math-block">k = 2: P(|X - μ| ≥ 2σ) ≤ 1/4 = 25%
-                        k = 3: P(|X - μ| ≥ 3σ) ≤ 1/9 ≈ 11%
+                    <div class="subsection">
+                        <h3 class="subsection-title">Statement</h3>
+                        <div class="rule">
+                            <strong>Chebyshev's Inequality:</strong> For any X with mean μ and variance σ²:<br>
+                            P(|X - μ| ≥ kσ) ≤ 1/k²
+                        </div>
+                        <div class="math-block">Or equivalently: P(|X - μ| ≥ t) ≤ σ²/t²
 
-                        Uses variance; tighter than Markov</div>
+                            Standard deviations from mean:
+                            k = 2: P(|X - μ| ≥ 2σ) ≤ 1/4 = 25%
+                            k = 3: P(|X - μ| ≥ 3σ) ≤ 1/9 ≈ 11%
+                            k = 4: P(|X - μ| ≥ 4σ) ≤ 1/16 ≈ 6%
+                            k = 10: P(|X - μ| ≥ 10σ) ≤ 1/100 = 1%</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Proof (from Markov)</h3>
+                        <div class="math-block">Let Y = (X - μ)²
+                            Then Y ≥ 0, so apply Markov:
+
+                            P(|X - μ| ≥ t) = P((X - μ)² ≥ t²)
+                            = P(Y ≥ t²)
+                            ≤ E[Y]/t²
+                            = Var(X)/t²
+                            = σ²/t² ✓</div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Comparing bounds</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># Compare Chebyshev bound to actual probability</span>
+n = <span class="code-number">100</span>
+samples = np.random.binomial(n, <span class="code-number">0.5</span>, <span class="code-number">100000</span>)
+mu, sigma = n*<span class="code-number">0.5</span>, np.sqrt(n*<span class="code-number">0.25</span>)
+
+k = <span class="code-number">3</span>  <span class="code-comment"># 3 standard deviations</span>
+chebyshev_bound = <span class="code-number">1</span>/k**<span class="code-number">2</span>
+actual_prob = np.mean(np.<span class="code-function">abs</span>(samples - mu) >= k*sigma)
+
+<span class="code-function">print</span>(<span class="code-string">f"Chebyshev bound: {chebyshev_bound:.4f}"</span>)  <span class="code-comment"># 0.1111</span>
+<span class="code-function">print</span>(<span class="code-string">f"Actual probability: {actual_prob:.4f}"</span>)  <span class="code-comment"># ~0.003</span>
+<span class="code-comment"># Chebyshev is very conservative for bell-shaped distributions!</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Chernoff -->
             <section class="section" id="chernoff">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
                     <h2 class="section-title">Chernoff Bounds</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>For sum of independent bounded RVs:</strong> Exponential tail bounds!
+                    <div class="subsection">
+                        <h3 class="subsection-title">Statement</h3>
+                        <div class="rule">
+                            <strong>Chernoff Bound:</strong> For X = X₁ + ... + Xₙ where Xᵢ are independent
+                            [0,1]-valued RVs with μ = E[X]:
+                        </div>
+                        <div class="math-block">MULTIPLICATIVE FORM:
+                            P(X ≥ (1+δ)μ) ≤ exp(-δ²μ/(2+δ)) for δ > 0
+                            P(X ≤ (1-δ)μ) ≤ exp(-δ²μ/2) for 0 < δ < 1 ADDITIVE FORM (Hoeffding): P(|X - μ| ≥ t) ≤
+                                2·exp(-2t²/n) Exponentially small deviation!</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Why Chernoff is powerful</h3>
+                            <div class="math-block">Chebyshev: P(|X-μ| ≥ t) ≤ σ²/t² (polynomial decay)
+                                Chernoff: P(|X-μ| ≥ t) ≤ 2·exp(-2t²/n) (exponential decay)
+
+                                Example: n = 1000 coin flips, μ = 500, want P(X ≥ 600)
+
+                                Chebyshev: P(X ≥ 600) ≤ σ²/(100)² = 250/10000 = 2.5%
+                                Chernoff: P(X ≥ 600) ≤ exp(-2·100²/1000) ≈ 2×10⁻⁹
+
+                                Chernoff is exponentially tighter!</div>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Chernoff bound application</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-keyword">def</span> <span class="code-function">chernoff_bound</span>(n, p, delta):
+    <span class="code-string">"""Multiplicative Chernoff bound for Binomial(n,p)"""</span>
+    mu = n * p
+    <span class="code-keyword">return</span> np.exp(-delta**<span class="code-number">2</span> * mu / (<span class="code-number">2</span> + delta))
+
+<span class="code-keyword">def</span> <span class="code-function">hoeffding_bound</span>(n, t):
+    <span class="code-string">"""Additive bound for sum of n [0,1] RVs"""</span>
+    <span class="code-keyword">return</span> <span class="code-number">2</span> * np.exp(-<span class="code-number">2</span> * t**<span class="code-number">2</span> / n)
+
+<span class="code-comment"># Example: 1000 coin flips, probability of ≥600 heads</span>
+n, p = <span class="code-number">1000</span>, <span class="code-number">0.5</span>
+delta = (<span class="code-number">600</span> - <span class="code-number">500</span>) / <span class="code-number">500</span>  <span class="code-comment"># = 0.2</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"Chernoff: {chernoff_bound(n, p, delta):.2e}"</span>)  <span class="code-comment"># ~1.7e-9</span>
+<span class="code-function">print</span>(<span class="code-string">f"Hoeffding: {hoeffding_bound(n, 100):.2e}"</span>)    <span class="code-comment"># ~4e-9</span>
+
+<span class="code-comment"># Algorithm analysis: random sampling</span>
+<span class="code-comment"># Want estimate within ε of true mean with probability 1-δ</span>
+<span class="code-comment"># Need n ≥ log(2/δ)/(2ε²) samples</span>
+epsilon, delta = <span class="code-number">0.05</span>, <span class="code-number">0.01</span>
+n_samples = <span class="code-function">int</span>(np.log(<span class="code-number">2</span>/delta) / (<span class="code-number">2</span>*epsilon**<span class="code-number">2</span>))
+<span class="code-function">print</span>(<span class="code-string">f"Need {n_samples} samples for 99% accuracy within 5%"</span>)</pre>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <strong>Related bounds:</strong> Hoeffding (bounded RVs), McDiarmid (bounded differences),
+                            Azuma (martingales). All give exponential concentration.
+                        </div>
                     </div>
-                    <div class="math-block">For X = Σ Xᵢ independent with μ = E[X]:
-
-                        P(X ≥ (1+δ)μ) ≤ exp(-δ²μ/(2+δ))
-                        P(X ≤ (1-δ)μ) ≤ exp(-δ²μ/2)
-
-                        Much tighter than Chebyshev for sums!</div>
-
-                    <div class="info"><strong>Hoeffding:</strong> Similar exponential bounds for bounded RVs.</div>
-                </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Concentration inequalities explained from multiple perspectives.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -135,12 +321,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -157,10 +347,11 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Inequalities",
+                title: "Concentration Inequalities",
                 items: [
-                    { title: "Markov Inequality", channel: "MIT OCW", vid: "vjYanZ1nsZg" },
+                    { title: "Markov Inequality — MIT OCW", channel: "MIT OpenCourseWare", vid: "vjYanZ1nsZg" },
                     { title: "Chebyshev Inequality", channel: "StatQuest", vid: "hJRl9UoaOgA" },
+                    { title: "Chernoff Bounds", channel: "Tim Roughgarden", vid: "vbQBqKzEnZg" },
                 ]
             }
         ];
@@ -171,8 +362,10 @@
             { topic: "Chebyshev", prompt: "Chebyshev uses the ___", answer: "variance" },
             { topic: "Chernoff", prompt: "Chernoff gives ___ tail bounds", answer: "exponential" },
             { topic: "Chernoff", prompt: "Chernoff requires ___ RVs", answer: "independent" },
-            { topic: "Strength", prompt: "___ is weakest bound", answer: "markov" },
-            { topic: "Related", prompt: "___ bound is similar to Chernoff", answer: "hoeffding" },
+            { topic: "Strength", prompt: "Markov is the ___ bound", answer: "weakest" },
+            { topic: "Strength", prompt: "Chernoff is the ___ bound", answer: "strongest", altAnswers: ["tightest"] },
+            { topic: "Related", prompt: "___ bound is similar to Chernoff for bounded RVs", answer: "hoeffding" },
+            { topic: "Decay", prompt: "Chernoff has ___ decay (not polynomial)", answer: "exponential" },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day52_conc_v1' });
     </script>

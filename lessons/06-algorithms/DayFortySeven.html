@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 47 · Algorithms
         </div>
         <h1>Randomized Algorithms</h1>
-        <p class="hero-desc">Using randomness to achieve better average-case performance.</p>
+        <p class="hero-desc">
+            Harnessing randomness to achieve simpler, faster, and more robust algorithms.
+            From quicksort to primality testing, randomization is a powerful tool.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,9 +74,10 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#types" class="toc-link">1. Types</a></li>
-                    <li><a href="#examples" class="toc-link">2. Examples</a></li>
-                    <li><a href="#analysis" class="toc-link">3. Analysis</a></li>
+                    <li><a href="#why" class="toc-link">Why Randomization</a></li>
+                    <li><a href="#types" class="toc-link">1. Las Vegas vs Monte Carlo</a></li>
+                    <li><a href="#examples" class="toc-link">2. Classic Examples</a></li>
+                    <li><a href="#analysis" class="toc-link">3. Analysis Techniques</a></li>
                     <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">5. Practice</a></li>
                 </ul>
@@ -68,94 +94,288 @@
         </aside>
 
         <main class="content">
-            <section class="section" id="types">
+            <!-- Why Randomization -->
+            <section class="section" id="why">
                 <div class="section-header">
-                    <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Types of Randomized Algorithms</h2>
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Randomization Works</h2>
                 </div>
                 <div class="section-body">
-                    <div class="two-col">
-                        <div class="subsection">
-                            <h3 class="subsection-title">Las Vegas</h3>
-                            <div class="math-block">• Always correct
-                                • Runtime varies
-                                • Example: Randomized QuickSort</div>
-                        </div>
-                        <div class="subsection">
-                            <h3 class="subsection-title">Monte Carlo</h3>
-                            <div class="math-block">• May be incorrect
-                                • Fixed runtime
-                                • Example: Miller-Rabin primality</div>
-                        </div>
+                    <p>
+                        Randomization seems counterintuitive—why add unpredictability to algorithms?
+                        The key insight is that randomness can defeat adversarial inputs and often
+                        leads to simpler algorithms with better average performance.
+                    </p>
+
+                    <div class="rule">
+                        <strong>Core Principle:</strong> A randomized algorithm makes random choices during
+                        execution, so its behavior varies across runs—even on the same input.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Benefits of randomization</h3>
+                        <ul>
+                            <li><strong>Simplicity:</strong> Randomized algorithms are often simpler than deterministic
+                                alternatives</li>
+                            <li><strong>Speed:</strong> Expected time can be much better than worst-case</li>
+                            <li><strong>Robustness:</strong> No adversary can craft a worst-case input</li>
+                            <li><strong>Breaking symmetry:</strong> Useful in distributed systems and parallel
+                                algorithms</li>
+                        </ul>
+                    </div>
+
+                    <div class="info">
+                        <strong>Real-world usage:</strong> Hash functions, load balancing, cryptography,
+                        machine learning (SGD), primality testing, and many more rely on randomization.
                     </div>
                 </div>
             </section>
 
+            <!-- Types -->
+            <section class="section" id="types">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">Las Vegas vs Monte Carlo</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Randomized algorithms fall into two categories based on what varies:
+                        the running time or the correctness.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Las Vegas Algorithms</h3>
+                            <div class="math-block">GUARANTEES:
+                                • Always correct
+                                • Running time varies
+
+                                EXAMPLES:
+                                • Randomized QuickSort
+                                • Randomized Select
+                                • Skip Lists
+
+                                ANALYSIS: Expected time
+                                "Gambles on time, not correctness"</div>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Monte Carlo Algorithms</h3>
+                            <div class="math-block">GUARANTEES:
+                                • Fixed running time
+                                • May be incorrect
+
+                                EXAMPLES:
+                                • Miller-Rabin primality
+                                • Random sampling
+                                • Approximate counting
+
+                                ANALYSIS: Error probability
+                                "Gambles on correctness, not time"</div>
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Converting between types:</strong> You can often convert Las Vegas to Monte Carlo
+                        (add a time limit) or Monte Carlo to Las Vegas (repeat until verified correct).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Examples -->
             <section class="section" id="examples">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Classic Examples</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">RANDOMIZED QUICKSORT:
-                        • Random pivot avoids worst case
-                        • Expected O(n log n)
-                        • Simple to implement
-
-                        RANDOMIZED SELECT:
-                        • Find kth smallest in O(n) expected
-
-                        HASH FUNCTIONS:
-                        • Universal hashing prevents adversarial inputs
-
-                        PRIMALITY TESTING:
-                        • Miller-Rabin: fast probabilistic test</div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Randomized QuickSort</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><span class="code-keyword">import</span> random
+                    <div class="subsection">
+                        <h3 class="subsection-title">Randomized QuickSort</h3>
+                        <p>
+                            The classic example: choosing a random pivot avoids the O(n²) worst case
+                            that occurs with deterministic pivot selection on sorted input.
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Randomized QuickSort - O(n log n) expected</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> random
 
 <span class="code-keyword">def</span> <span class="code-function">quicksort</span>(arr):
-    <span class="code-keyword">if</span> len(arr) <= <span class="code-number">1</span>:
+    <span class="code-keyword">if</span> <span class="code-function">len</span>(arr) <= <span class="code-number">1</span>:
         <span class="code-keyword">return</span> arr
-    pivot = random.choice(arr)  <span class="code-comment"># Random pivot!</span>
+    
+    <span class="code-comment"># Random pivot defeats adversarial inputs!</span>
+    pivot = random.choice(arr)
+    
     left = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x < pivot]
     mid = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x == pivot]
     right = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x > pivot]
-    <span class="code-keyword">return</span> quicksort(left) + mid + quicksort(right)</pre>
+    
+    <span class="code-keyword">return</span> quicksort(left) + mid + quicksort(right)
+
+<span class="code-comment"># Even on sorted input, expected O(n log n)</span>
+sorted_input = <span class="code-function">list</span>(<span class="code-function">range</span>(<span class="code-number">1000</span>))
+result = quicksort(sorted_input)  <span class="code-comment"># Fast!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Randomized Selection (QuickSelect)</h3>
+                        <div class="math-block">PROBLEM: Find kth smallest element
+
+                            DETERMINISTIC: Median-of-medians gives O(n) worst-case
+                            but with large constants
+
+                            RANDOMIZED: Random pivot gives O(n) expected
+                            Much simpler and faster in practice!
+
+                            T(n) = T(n/2) + O(n) = O(n) expected</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Miller-Rabin Primality Test</h3>
+                        <p>
+                            Testing if a number is prime in polynomial time. The deterministic AKS algorithm
+                            is slower, so Miller-Rabin is used in practice (including cryptographic libraries).
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Miller-Rabin primality test</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">def</span> <span class="code-function">is_probable_prime</span>(n, k=<span class="code-number">10</span>):
+    <span class="code-string">"""Miller-Rabin primality test with k rounds."""</span>
+    <span class="code-keyword">if</span> n < <span class="code-number">2</span>: <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    <span class="code-keyword">if</span> n == <span class="code-number">2</span> <span class="code-keyword">or</span> n == <span class="code-number">3</span>: <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+    <span class="code-keyword">if</span> n % <span class="code-number">2</span> == <span class="code-number">0</span>: <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    <span class="code-comment"># Write n-1 = 2^r * d</span>
+    r, d = <span class="code-number">0</span>, n - <span class="code-number">1</span>
+    <span class="code-keyword">while</span> d % <span class="code-number">2</span> == <span class="code-number">0</span>:
+        r += <span class="code-number">1</span>
+        d //= <span class="code-number">2</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">witness</span>(a):
+        x = <span class="code-function">pow</span>(a, d, n)
+        <span class="code-keyword">if</span> x == <span class="code-number">1</span> <span class="code-keyword">or</span> x == n - <span class="code-number">1</span>:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(r - <span class="code-number">1</span>):
+            x = <span class="code-function">pow</span>(x, <span class="code-number">2</span>, n)
+            <span class="code-keyword">if</span> x == n - <span class="code-number">1</span>:
+                <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">True</span>  <span class="code-comment"># Composite witness found</span>
+    
+    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(k):
+        a = random.randrange(<span class="code-number">2</span>, n - <span class="code-number">1</span>)
+        <span class="code-keyword">if</span> witness(a):
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>  <span class="code-comment"># Definitely composite</span>
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span>  <span class="code-comment"># Probably prime (error ≤ 4^(-k))</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Universal Hashing</h3>
+                        <div class="math-block">PROBLEM: Hash functions can be attacked
+                            Adversary crafts inputs with collisions
+
+                            SOLUTION: Randomly choose hash function at runtime
+                            Adversary doesn't know which one!
+
+                            GUARANTEE: For any input set,
+                            expected collisions = n²/(2m)
+                            where m = table size</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis -->
+            <section class="section" id="analysis">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Analysis Techniques</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Expected Value</h3>
+                        <div class="math-block">E[X] = Σ x · P(X = x)
+
+                            LINEARITY OF EXPECTATION:
+                            E[X + Y] = E[X] + E[Y]
+                            (Works even if X, Y are dependent!)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Indicator Random Variables</h3>
+                        <p>
+                            A powerful technique: define Xᵢ = 1 if event i occurs, 0 otherwise.
+                            Then E[Xᵢ] = P(event i occurs).
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Expected comparisons in QuickSort</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-comment"># Let Xᵢⱼ = 1 if elements i and j are compared</span>
+<span class="code-comment"># They're compared iff one is chosen as pivot before</span>
+<span class="code-comment"># any element between them</span>
+
+<span class="code-comment"># P(Xᵢⱼ = 1) = 2 / (j - i + 1)</span>
+<span class="code-comment"># (either i or j must be first pivot in range [i,j])</span>
+
+<span class="code-comment"># E[total comparisons] = Σᵢ Σⱼ>ᵢ E[Xᵢⱼ]</span>
+<span class="code-comment">#                      = Σᵢ Σⱼ>ᵢ 2/(j-i+1)</span>
+<span class="code-comment">#                      ≤ 2n · Hₙ</span>
+<span class="code-comment">#                      = O(n log n)</span>
+
+<span class="code-keyword">def</span> <span class="code-function">expected_comparisons</span>(n):
+    <span class="code-string">"""Compute expected comparisons in randomized QuickSort"""</span>
+    total = <span class="code-number">0</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(i + <span class="code-number">1</span>, n):
+            total += <span class="code-number">2</span> / (j - i + <span class="code-number">1</span>)
+    <span class="code-keyword">return</span> total
+
+<span class="code-function">print</span>(<span class="code-function">expected_comparisons</span>(<span class="code-number">100</span>))  <span class="code-comment"># ~921</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Probability Bounds</h3>
+                        <div class="math-block">MARKOV'S INEQUALITY:
+                            P(X ≥ a) ≤ E[X] / a
+                            (X ≥ 0)
+
+                            CHEBYSHEV'S INEQUALITY:
+                            P(|X - μ| ≥ kσ) ≤ 1/k²
+
+                            CHERNOFF BOUND:
+                            P(X ≥ (1+δ)μ) ≤ exp(-δ²μ/3)
+                            (Exponentially small deviation probability!)</div>
+                        <div class="info">
+                            <strong>Chernoff bounds</strong> are essential for analyzing randomized algorithms.
+                            They show that sums of independent random variables concentrate tightly around their mean.
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="analysis">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Analysis</h2>
-                </div>
-                <div class="section-body">
-                    <div class="math-block">KEY CONCEPTS:
-                        • Expected value: E[X] = Σ x·P(X=x)
-                        • Linearity of expectation: E[X+Y] = E[X] + E[Y]
-                        • Indicator random variables
-
-                        PROBABILITY BOUNDS:
-                        • Markov: P(X ≥ a) ≤ E[X]/a
-                        • Chebyshev: P(|X-μ| ≥ kσ) ≤ 1/k²
-                        • Chernoff: exponential concentration</div>
-                </div>
-            </section>
-
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Deep dives into randomized algorithms from top computer science educators.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -171,12 +391,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -195,20 +419,23 @@
             {
                 title: "Randomized Algorithms",
                 items: [
-                    { title: "Randomized Algorithms Intro", channel: "MIT OCW", vid: "cNB2lADK3_s" },
-                    { title: "Miller-Rabin Primality", channel: "Computerphile", vid: "RU1TFjCofMY" },
+                    { title: "Randomized Algorithms — MIT OCW", channel: "MIT OpenCourseWare", vid: "cNB2lADK3_s" },
+                    { title: "Miller-Rabin Primality Test", channel: "Computerphile", vid: "RU1TFjCofMY" },
+                    { title: "Randomized QuickSort Analysis", channel: "Abdul Bari", vid: "COk73cpQbFQ" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Types", prompt: "Las Vegas: always ___, runtime varies", answer: "correct" },
-            { topic: "Types", prompt: "Monte Carlo: may be incorrect, ___ runtime", answer: "fixed" },
+            { topic: "Types", prompt: "Las Vegas: always ___, time varies", answer: "correct" },
+            { topic: "Types", prompt: "Monte Carlo: fixed time, may be ___", answer: "incorrect", altAnswers: ["wrong"] },
             { topic: "QuickSort", prompt: "Randomized QuickSort uses random ___", answer: "pivot" },
-            { topic: "QuickSort", prompt: "Randomized QuickSort expected time is O(n log ___)", answer: "n" },
+            { topic: "QuickSort", prompt: "Randomized QuickSort expected time: O(n log ___)", answer: "n" },
+            { topic: "Primality", prompt: "Miller-___ is a probabilistic primality test", answer: "rabin" },
             { topic: "Analysis", prompt: "E[X+Y] = E[X] + E[Y] is ___ of expectation", answer: "linearity" },
-            { topic: "Bounds", prompt: "___ inequality: P(X ≥ a) ≤ E[X]/a", answer: "markov" },
-            { topic: "Bounds", prompt: "___ bound gives exponential concentration", answer: "chernoff" },
-            { topic: "Primality", prompt: "Miller-___: probabilistic primality test", answer: "rabin" },
+            { topic: "Bounds", prompt: "___ inequality: P(X ≥ a) ≤ E[X]/a", answer: "markov", altAnswers: ["markov's"] },
+            { topic: "Bounds", prompt: "___ bound gives exponential concentration", answer: "chernoff", altAnswers: ["chernoff's"] },
+            { topic: "Hashing", prompt: "___ hashing randomly selects hash function", answer: "universal" },
+            { topic: "Indicator", prompt: "Indicator variable: 1 if event occurs, ___ otherwise", answer: "0" },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day47_random_v1' });
     </script>

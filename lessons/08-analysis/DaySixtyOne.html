@@ -41,7 +41,28 @@
             Day 61 · Analysis
         </div>
         <h1>Function Spaces</h1>
-        <p class="hero-desc">C[a,b], Lᵖ spaces, and normed function spaces.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                6 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -73,12 +94,29 @@
                     <h2 class="section-title">C[a,b] Space</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">C[a,b] = continuous functions on [a,b]
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="rule">
+                            <strong>C[a,b]:</strong> The set of all continuous real-valued functions defined on the
+                            closed inerval [a,b].
+                        </div>
+                        <div class="math-block">Vector Space Properties:
+                            • (f + g)(x) = f(x) + g(x) is continuous
+                            • (cf)(x) = c·f(x) is continuous
+                            • Includes polynomials, exponentials, sin, cos...</div>
+                    </div>
 
-                        SUPREMUM NORM:
-                        ‖f‖∞ = sup|f(x)| for x ∈ [a,b]
+                    <div class="subsection">
+                        <h3 class="subsection-title">The Supremum Norm</h3>
+                        <p>To measure strict convergence, we use the supremum (uniform) norm.</p>
+                        <div class="math-block">‖f‖∞ = sup{|f(x)| : x ∈ [a,b]}
 
-                        C[a,b] with ‖·‖∞ is complete (Banach space)</div>
+                            (Since [a,b] is compact and f is continuous, sup is actually max)</div>
+                        <div class="info">
+                            <strong>Completeness:</strong> C[a,b] equipped with the ‖·‖∞ norm is a <strong>Banach
+                                Space</strong> (a complete normed vector space).
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -88,12 +126,60 @@
                     <h2 class="section-title">Lᵖ Spaces</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">Lᵖ NORM (1 ≤ p < ∞): ‖f‖ₚ=(∫|f|ᵖ dx)^(1/p) L∞ NORM: ‖f‖∞=ess sup |f| SPECIAL
-                            CASES: • L¹: integrable functions • L²: square-integrable (Hilbert space!) • L∞: essentially
-                            bounded</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">General Lp Norm</h3>
+                        <div class="math-block">For 1 ≤ p < ∞: ‖f‖ₚ=( ∫ₐᵇ |f(x)|ᵖ dx )^(1/p) Lᵖ[a,b]={ f : ‖f‖ₚ < ∞
+                                }</div>
+                        </div>
 
-                            <div class="info"><strong>L² is special:</strong> It's a Hilbert space with inner product
-                                ⟨f,g⟩ = ∫f·g</div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Special Cases</h3>
+                            <div class="math-block">L¹ (Manhattan-like):
+                                ‖f‖₁ = ∫ |f(x)| dx
+                                Area between f and x-axis.
+
+                                L² (Euclidean-like):
+                                ‖f‖₂ = √( ∫ |f(x)|² dx )
+                                Represents "energy" or RMS value.
+
+                                L∞ (Essential Sup):
+                                ‖f‖∞ = inf{ C : |f(x)| ≤ C almost everywhere }
+                                "Ignoring sets of measure zero"</div>
+                        </div>
+
+                        <div class="info">
+                            <strong>L² is special:</strong> It is the ONLY Lᵖ space that is also a <strong>Hilbert
+                                Space</strong>, meaning it has an inner product:
+                            ⟨f, g⟩ = ∫ f(x)g(x) dx
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Computing Function Norms</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">from</span> scipy <span class="code-keyword">import</span> integrate
+
+<span class="code-comment"># Define a function f(x) = x on [0, 1]</span>
+f = <span class="code-keyword">lambda</span> x: x
+
+<span class="code-comment"># L1 Norm: ∫|x| dx = [x²/2]₀¹ = 0.5</span>
+l1, _ = integrate.quad(<span class="code-keyword">lambda</span> x: np.<span class="code-function">abs</span>(f(x)), <span class="code-number">0</span>, <span class="code-number">1</span>)
+
+<span class="code-comment"># L2 Norm: √(∫|x|² dx) = √( [x³/3]₀¹ ) = √(1/3) ≈ 0.577</span>
+l2_sq, _ = integrate.quad(<span class="code-keyword">lambda</span> x: f(x)**<span class="code-number">2</span>, <span class="code-number">0</span>, <span class="code-number">1</span>)
+l2 = np.<span class="code-function">sqrt</span>(l2_sq)
+
+<span class="code-comment"># L-inf Norm: max|x| on [0,1] = 1</span>
+l_inf = <span class="code-number">1.0</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"L1: {l1:.3f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"L2: {l2:.3f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"L∞: {l_inf:.3f}"</span>)</pre>
+                            </div>
+                        </div>
                     </div>
             </section>
 

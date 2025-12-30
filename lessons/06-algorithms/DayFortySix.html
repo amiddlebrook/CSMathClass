@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 46 · Algorithms
         </div>
         <h1>Amortized Analysis</h1>
-        <p class="hero-desc">Averaging cost over sequences of operations.</p>
+        <p class="hero-desc">
+            Understanding true algorithmic cost by averaging over sequences of operations.
+            The secret behind why dynamic arrays and union-find are actually efficient.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~35 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,9 +74,10 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
+                    <li><a href="#why" class="toc-link">Why Amortized Analysis</a></li>
                     <li><a href="#concept" class="toc-link">1. Core Concept</a></li>
-                    <li><a href="#methods" class="toc-link">2. Methods</a></li>
-                    <li><a href="#examples" class="toc-link">3. Examples</a></li>
+                    <li><a href="#methods" class="toc-link">2. Analysis Methods</a></li>
+                    <li><a href="#examples" class="toc-link">3. Classic Examples</a></li>
                     <li><a href="#videos" class="toc-link">4. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">5. Practice</a></li>
                 </ul>
@@ -68,69 +94,279 @@
         </aside>
 
         <main class="content">
+            <!-- Why Amortized Analysis -->
+            <section class="section" id="why">
+                <div class="section-header">
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Amortized Analysis Matters</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Standard worst-case analysis can be misleading. If an operation is usually O(1) but
+                        occasionally O(n), reporting only O(n) hides the true efficiency. Amortized analysis
+                        reveals the average cost per operation over a sequence, giving a more accurate picture.
+                    </p>
+
+                    <div class="rule">
+                        <strong>Key Insight:</strong> Expensive operations don't happen in isolation—they're
+                        "paid for" by many cheap operations. Amortized analysis captures this relationship.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Where you'll use this</h3>
+                        <ul>
+                            <li><strong>Dynamic Arrays:</strong> Python lists, Java ArrayList use amortized O(1) append
+                            </li>
+                            <li><strong>Hash Tables:</strong> Resizing is O(n) but amortized O(1) per insert</li>
+                            <li><strong>Union-Find:</strong> Near-constant time with path compression</li>
+                            <li><strong>Splay Trees:</strong> O(log n) amortized for all operations</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Common Confusion:</strong> Amortized ≠ Average case! Average-case uses probability;
+                        amortized uses worst-case sequences. Amortized analysis is deterministic and guaranteed.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Concept -->
             <section class="section" id="concept">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Core Concept</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Amortized Cost:</strong> Average time per operation over worst-case
-                        sequence of operations.</div>
-                    <div class="math-block">AMORTIZED ≠ AVERAGE CASE
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="rule">
+                            <strong>Amortized Cost:</strong> The average time per operation over a worst-case
+                            sequence of n operations.
+                        </div>
+                        <div class="math-block">Amortized Cost = (Total cost of n operations) / n</div>
+                    </div>
 
-                        Average case: probabilistic analysis
-                        Amortized: worst-case analysis of sequence
+                    <div class="subsection">
+                        <h3 class="subsection-title">The key distinction</h3>
+                        <div class="two-col">
+                            <div class="math-block">WORST-CASE ANALYSIS
+                                Reports: O(n) per operation
+                                Reality: Usually O(1), rarely O(n)
+                                Too pessimistic!</div>
+                            <div class="math-block">AMORTIZED ANALYSIS
+                                Reports: O(1) per operation
+                                Proof: n operations cost O(n)
+                                Accurate representation!</div>
+                        </div>
+                    </div>
 
-                        Key insight: expensive operations happen rarely</div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Dynamic array append - amortized O(1)</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-comment"># Why is list.append() O(1) amortized?</span>
+<span class="code-comment"># When array is full, we double its capacity</span>
+
+<span class="code-keyword">class</span> <span class="code-type">DynamicArray</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
+        self.capacity = <span class="code-number">1</span>
+        self.size = <span class="code-number">0</span>
+        self.data = [<span class="code-keyword">None</span>]
+    
+    <span class="code-keyword">def</span> <span class="code-function">append</span>(self, val):
+        <span class="code-keyword">if</span> self.size == self.capacity:
+            <span class="code-comment"># O(n) resize - but happens rarely!</span>
+            self._resize(<span class="code-number">2</span> * self.capacity)
+        self.data[self.size] = val  <span class="code-comment"># O(1)</span>
+        self.size += <span class="code-number">1</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">_resize</span>(self, new_cap):
+        new_data = [<span class="code-keyword">None</span>] * new_cap
+        <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(self.size):
+            new_data[i] = self.data[i]
+        self.data = new_data
+        self.capacity = new_cap</pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Analysis Methods -->
             <section class="section" id="methods">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Analysis Methods</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">1. AGGREGATE METHOD
-                        Total cost of n operations / n
+                    <div class="subsection">
+                        <h3 class="subsection-title">1. Aggregate Method</h3>
+                        <p>
+                            The simplest approach: calculate total cost of n operations, then divide by n.
+                        </p>
+                        <div class="math-block">Amortized cost = T(n) / n
 
-                        2. ACCOUNTING METHOD
-                        Charge each operation "credits"
-                        Expensive ops use saved credits
+                            Example: Dynamic array with n appends
+                            • Most appends: O(1) each
+                            • Resizes at: 1, 2, 4, 8, ..., n
+                            • Total resize cost: 1 + 2 + 4 + ... + n ≤ 2n
+                            • Total cost: n + 2n = 3n = O(n)
+                            • Amortized: O(n) / n = O(1) per append ✓</div>
+                    </div>
 
-                        3. POTENTIAL METHOD
-                        Φ(D_i) = potential after i operations
-                        amortized = actual + ΔΦ</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">2. Accounting Method (Banker's Method)</h3>
+                        <p>
+                            Assign a "charge" to each operation. Cheap operations store credits;
+                            expensive operations spend them.
+                        </p>
+                        <div class="math-block">Charge each append $3:
+                            • $1 pays for the append itself
+                            • $1 saves for moving this element later
+                            • $1 saves for moving an older element
+
+                            When resize happens:
+                            • Every element has $1 credit saved
+                            • Resize costs $1 per element
+                            • Credits exactly cover the cost!</div>
+                        <div class="info">
+                            <strong>Invariant:</strong> Total credits ≥ 0 at all times. If you can maintain this,
+                            the amortized cost equals the charge.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">3. Potential Method (Physicist's Method)</h3>
+                        <p>
+                            Define a potential function Φ that measures "stored work" in the data structure.
+                        </p>
+                        <div class="math-block">Φ: Data structure state → ℝ
+
+                            Amortized cost = Actual cost + ΔΦ
+                            = Actual cost + Φ(after) - Φ(before)
+
+                            For dynamic array, let Φ = 2·size - capacity
+
+                            • Normal append: actual = 1, ΔΦ = 2
+                            Amortized = 1 + 2 = 3 = O(1) ✓
+
+                            • Resize append: actual = n+1, ΔΦ = 2 - n
+                            Amortized = (n+1) + (2-n) = 3 = O(1) ✓</div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Potential function visualization</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">def</span> <span class="code-function">potential</span>(arr):
+    <span class="code-string">"""Φ = 2*size - capacity"""</span>
+    <span class="code-keyword">return</span> <span class="code-number">2</span> * arr.size - arr.capacity
+
+<span class="code-comment"># Track potential through operations</span>
+arr = DynamicArray()  <span class="code-comment"># Φ = 0 - 1 = -1</span>
+arr.append(<span class="code-number">1</span>)          <span class="code-comment"># Φ = 2 - 1 = 1</span>
+arr.append(<span class="code-number">2</span>)          <span class="code-comment"># resize! Φ = 4 - 2 = 2</span>
+arr.append(<span class="code-number">3</span>)          <span class="code-comment"># Φ = 6 - 4 = 2</span>
+arr.append(<span class="code-number">4</span>)          <span class="code-comment"># Φ = 8 - 4 = 4</span>
+arr.append(<span class="code-number">5</span>)          <span class="code-comment"># resize! Φ = 10 - 8 = 2</span>
+
+<span class="code-comment"># Notice: Φ builds up, then drops on resize</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Classic Examples -->
             <section class="section" id="examples">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
                     <h2 class="section-title">Classic Examples</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">DYNAMIC ARRAY (doubling):
-                        • Most appends: O(1)
-                        • Occasional resize: O(n)
-                        • Amortized append: O(1)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Stack with Multipop</h3>
+                        <p>
+                            A stack with push, pop, and multipop(k) which pops k elements.
+                        </p>
+                        <div class="math-block">Operations:
+                            • push(x): O(1)
+                            • pop(): O(1)
+                            • multipop(k): O(min(k, size))
 
-                        Proof: n inserts cause at most n + n/2 + n/4 + ... ≤ 2n copies
-                        Total = O(n), per operation = O(1)
+                            Worst case for multipop: O(n)
+                            But amortized: O(1)!
 
-                        OTHER EXAMPLES:
-                        • Stack with multipop: O(1) amortized
-                        • Binary counter increment: O(1) amortized
-                        • Splay trees: O(log n) amortized</div>
-                </div>
+                            Proof: Each element can only be popped once.
+                            n operations → at most n pops total
+                            Total cost ≤ 2n = O(n)
+                            Amortized = O(1)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Binary Counter Increment</h3>
+                        <div class="math-block">Incrementing k-bit counter:
+                            000 → 001 → 010 → 011 → 100 → ...
+
+                            Bit 0: flips every operation
+                            Bit 1: flips every 2 operations
+                            Bit i: flips every 2^i operations
+
+                            Total flips for n increments:
+                            n/1 + n/2 + n/4 + ... < 2n Amortized: O(1) per increment!</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Splay Trees</h3>
+                            <div class="info">
+                                <strong>Splay tree guarantee:</strong> Any sequence of m operations on an n-node
+                                splay tree takes O(m log n) time. Individual operations may be O(n), but
+                                amortized cost is O(log n).
+                            </div>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Binary counter increment analysis</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">def</span> <span class="code-function">increment</span>(bits):
+    <span class="code-string">"""Increment binary counter, count bit flips"""</span>
+    flips = <span class="code-number">0</span>
+    i = <span class="code-number">0</span>
+    <span class="code-keyword">while</span> i < <span class="code-function">len</span>(bits) <span class="code-keyword">and</span> bits[i] == <span class="code-number">1</span>:
+        bits[i] = <span class="code-number">0</span>  <span class="code-comment"># flip 1 → 0</span>
+        flips += <span class="code-number">1</span>
+        i += <span class="code-number">1</span>
+    <span class="code-keyword">if</span> i < <span class="code-function">len</span>(bits):
+        bits[i] = <span class="code-number">1</span>  <span class="code-comment"># flip 0 → 1</span>
+        flips += <span class="code-number">1</span>
+    <span class="code-keyword">return</span> flips
+
+<span class="code-comment"># Test: count total flips for n increments</span>
+bits = [<span class="code-number">0</span>] * <span class="code-number">8</span>
+total_flips = <span class="code-function">sum</span>(increment(bits) <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">100</span>))
+<span class="code-function">print</span>(<span class="code-string">f"100 increments: {total_flips} flips"</span>)  <span class="code-comment"># ~200</span>
+<span class="code-function">print</span>(<span class="code-string">f"Amortized: {total_flips/100:.2f} per op"</span>)  <span class="code-comment"># ~2</span></pre>
+                            </div>
+                        </div>
+                    </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Curated explanations from top educators. These videos cover amortized analysis
+                        from multiple perspectives.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -146,12 +382,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -170,20 +410,23 @@
             {
                 title: "Amortized Analysis",
                 items: [
-                    { title: "Amortized Analysis", channel: "MIT OCW", vid: "B3SpQZaAZP4" },
-                    { title: "Dynamic Arrays", channel: "Back To Back SWE", vid: "5AllG-i_yto" },
+                    { title: "Amortized Analysis — MIT OCW", channel: "MIT OpenCourseWare", vid: "B3SpQZaAZP4" },
+                    { title: "Dynamic Arrays Explained", channel: "Back To Back SWE", vid: "5AllG-i_yto" },
+                    { title: "Accounting & Potential Methods", channel: "Abdul Bari", vid: "T7W5E-5mljc" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Core", prompt: "Amortized = average over ___ of operations", answer: "sequence" },
-            { topic: "Difference", prompt: "Amortized is worst-case, not ___ case", answer: "average" },
+            { topic: "Definition", prompt: "Amortized = average over ___ of operations", answer: "sequence", altAnswers: ["sequences", "worst-case sequence"] },
+            { topic: "Distinction", prompt: "Amortized is deterministic, not ___ case", answer: "average" },
             { topic: "Methods", prompt: "___ method: total cost / n operations", answer: "aggregate" },
-            { topic: "Methods", prompt: "___ method uses credits", answer: "accounting" },
-            { topic: "Methods", prompt: "___ method uses Φ function", answer: "potential" },
+            { topic: "Methods", prompt: "___ method uses credits", answer: "accounting", altAnswers: ["banker's", "bankers"] },
+            { topic: "Methods", prompt: "___ method uses Φ function", answer: "potential", altAnswers: ["physicist's", "physicists"] },
             { topic: "Array", prompt: "Dynamic array amortized append is O(___)", answer: "1" },
-            { topic: "Array", prompt: "Dynamic array doubles on ___", answer: "resize", altAnswers: ["overflow", "full"] },
+            { topic: "Array", prompt: "Dynamic array doubles capacity when ___", answer: "full", altAnswers: ["resize", "overflow", "size equals capacity"] },
             { topic: "Counter", prompt: "Binary counter increment is O(___) amortized", answer: "1" },
+            { topic: "Stack", prompt: "Stack with multipop has O(___) amortized pop", answer: "1" },
+            { topic: "Potential", prompt: "Amortized = actual + Δ___", answer: "Φ", altAnswers: ["phi", "potential"] },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day46_amortized_v1' });
     </script>

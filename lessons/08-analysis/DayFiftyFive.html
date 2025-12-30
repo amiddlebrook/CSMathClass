@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 55 · Analysis
         </div>
         <h1>Epsilon-Delta Definitions</h1>
-        <p class="hero-desc">Rigorous foundations of limits and continuity.</p>
+        <p class="hero-desc">
+            The rigorous foundation of calculus. How mathematicians made limits precise and
+            eliminated vague notions of "approaching" and "infinitely close."
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,6 +74,7 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
+                    <li><a href="#why" class="toc-link">Why Rigor</a></li>
                     <li><a href="#limit" class="toc-link">1. Limit Definition</a></li>
                     <li><a href="#continuity" class="toc-link">2. Continuity</a></li>
                     <li><a href="#proofs" class="toc-link">3. Proof Technique</a></li>
@@ -68,56 +94,186 @@
         </aside>
 
         <main class="content">
+            <!-- Why Rigor -->
+            <section class="section" id="why">
+                <div class="section-header">
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Rigorous Definitions Matter</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Before the 19th century, calculus worked with vague notions like "infinitely small"
+                        quantities. The ε-δ definition, developed by Cauchy and Weierstrass, replaced
+                        intuition with precise logical statements that can be verified.
+                    </p>
+
+                    <div class="rule">
+                        <strong>Key Insight:</strong> Every calculus theorem (derivatives, integrals, series)
+                        ultimately rests on the ε-δ definition of limits. Understanding it deeply unlocks
+                        the entire subject.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">CS applications</h3>
+                        <ul>
+                            <li><strong>Numerical analysis:</strong> Convergence of algorithms</li>
+                            <li><strong>Computer graphics:</strong> Continuity of curves and surfaces</li>
+                            <li><strong>Machine learning:</strong> Gradient descent convergence</li>
+                            <li><strong>Formal verification:</strong> Proving program correctness</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Limit Definition -->
             <section class="section" id="limit">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Limit Definition</h2>
+                    <h2 class="section-title">The Epsilon-Delta Definition of Limits</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Epsilon-Delta Definition:</strong></div>
-                    <div class="math-block">lim(x→a) f(x) = L means:
+                    <div class="subsection">
+                        <h3 class="subsection-title">Formal statement</h3>
+                        <div class="rule">
+                            <strong>Definition:</strong> lim(x→a) f(x) = L means:
+                        </div>
+                        <div class="math-block">∀ε > 0, ∃δ > 0 such that:
+                            0 < |x - a| < δ ⟹ |f(x) - L| < ε In words: "For every epsilon (tolerance around L),
+ there exists a delta (tolerance around a),
+ such that if x is within delta of a (but not equal to a),
+ then f(x) is within epsilon of L." </div>
+                        </div>
 
-                        ∀ε > 0, ∃δ > 0 such that:
-                        0 < |x - a| < δ ⟹ |f(x) - L| < ε "For every epsilon, there exists a delta..." </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Breaking it down</h3>
+                            <div class="two-col">
+                                <div class="math-block">THE CHALLENGE:
+                                    ε is given (any positive number)
+                                    Your job: find a δ that works
 
-                            <div class="info"><strong>Intuition:</strong> We can make f(x) arbitrarily close to L by
-                                taking x sufficiently close to a.</div>
-                    </div>
+                                    |x - a| < δ means: x is within δ of a a - δ < x < a + δ</div>
+                                        <div class="math-block">THE GOAL:
+                                            |f(x) - L| < ε means: f(x) is within ε of L L - ε < f(x) < L + ε Shrink ε →
+                                                must shrink δ</div>
+                                        </div>
+                                </div>
+
+                                <div class="info">
+                                    <strong>Intuition:</strong> We can make f(x) arbitrarily close to L by taking
+                                    x sufficiently close to a. The ε-δ language makes "arbitrarily" and "sufficiently"
+                                    precise.
+                                </div>
+                            </div>
             </section>
 
+            <!-- Continuity -->
             <section class="section" id="continuity">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Continuity</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">f is continuous at a iff:
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">f is continuous at a if and only if:
 
-                        ∀ε > 0, ∃δ > 0 such that:
-                        |x - a| < δ ⟹ |f(x) - f(a)| < ε Equivalently: lim(x→a) f(x)=f(a)</div>
+                            ∀ε > 0, ∃δ > 0 such that:
+                            |x - a| < δ ⟹ |f(x) - f(a)| < ε Note: No "0 <" on the left side (x can equal a)
+                                Equivalently: lim(x→a) f(x)=f(a) THREE CONDITIONS FOR CONTINUITY AT a: 1. f(a) is
+                                defined 2. lim(x→a) f(x) exists 3. lim(x→a) f(x)=f(a)</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Types of discontinuity</h3>
+                            <div class="math-block">REMOVABLE: Limit exists but ≠ f(a)
+                                Example: f(x) = (x²-1)/(x-1) at x = 1
+
+                                JUMP: Left and right limits differ
+                                Example: f(x) = sign(x) at x = 0
+
+                                ESSENTIAL: Limit doesn't exist (oscillates or unbounded)
+                                Example: f(x) = sin(1/x) at x = 0</div>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Visualizing ε-δ</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+
+<span class="code-keyword">def</span> <span class="code-function">epsilon_delta_demo</span>(f, a, L, epsilon):
+    <span class="code-string">"""Find delta for given epsilon (numerically)"""</span>
+    x = np.linspace(a - <span class="code-number">1</span>, a + <span class="code-number">1</span>, <span class="code-number">1000</span>)
+    x = x[x != a]  <span class="code-comment"># Remove x = a</span>
+    
+    <span class="code-comment"># Find points where |f(x) - L| < epsilon</span>
+    valid = np.<span class="code-function">abs</span>(f(x) - L) < epsilon
+    
+    <span class="code-comment"># Find largest delta where all points in (a-δ, a+δ) work</span>
+    <span class="code-keyword">for</span> delta <span class="code-keyword">in</span> np.linspace(<span class="code-number">0.01</span>, <span class="code-number">1</span>, <span class="code-number">100</span>):
+        in_delta = np.<span class="code-function">abs</span>(x - a) < delta
+        <span class="code-keyword">if</span> np.<span class="code-function">all</span>(valid[in_delta]):
+            <span class="code-keyword">return</span> delta
+    <span class="code-keyword">return</span> <span class="code-number">None</span>
+
+<span class="code-comment"># Example: f(x) = 2x + 1, limit at x=2 is 5</span>
+f = <span class="code-keyword">lambda</span> x: <span class="code-number">2</span>*x + <span class="code-number">1</span>
+delta = epsilon_delta_demo(f, a=<span class="code-number">2</span>, L=<span class="code-number">5</span>, epsilon=<span class="code-number">0.1</span>)
+<span class="code-function">print</span>(<span class="code-string">f"For ε = 0.1, δ = {delta}"</span>)  <span class="code-comment"># δ = 0.05 works!</span></pre>
+                            </div>
+                        </div>
                     </div>
             </section>
 
+            <!-- Proof Technique -->
             <section class="section" id="proofs">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Proof Technique</h2>
+                    <h2 class="section-title">Epsilon-Delta Proof Technique</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">TO PROVE lim(x→a) f(x) = L:
+                    <div class="subsection">
+                        <h3 class="subsection-title">The template</h3>
+                        <div class="math-block">TO PROVE: lim(x→a) f(x) = L
 
-                        1. Let ε > 0 be given
-                        2. Find δ in terms of ε (scratch work)
-                        3. Show: if 0 < |x-a| < δ, then |f(x)-L| < ε 4. Conclude the limit exists</div>
-                    </div>
+                            STEP 1: Let ε > 0 be given (arbitrary)
+
+                            STEP 2: SCRATCH WORK (not in final proof)
+                            Start with |f(x) - L| < ε Manipulate to find relationship with |x - a| Solve for δ in terms
+                                of ε STEP 3: Choose δ=... (from scratch work) STEP 4: Show that if 0 < |x - a| < δ, then
+                                |f(x) - L| < ε STEP 5: Conclude: Therefore lim(x→a) f(x)=L □</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Example proof</h3>
+                            <div class="math-block">PROVE: lim(x→3) (2x + 1) = 7
+
+                                Let ε > 0 be given.
+
+                                SCRATCH: |(2x + 1) - 7| < ε |2x - 6| < ε 2|x - 3| < ε |x - 3| < ε/2 Choose δ=ε/2.
+                                    Suppose 0 < |x - 3| < δ=ε/2. Then |2x + 1 - 7|=|2x - 6|=2|x - 3| < 2(ε/2)=ε ✓
+                                    Therefore lim(x→3) (2x + 1)=7. □</div>
+                            </div>
+
+                            <div class="warning">
+                                <strong>Common mistake:</strong> The scratch work finds what δ should be, but the
+                                proof must go in the other direction: assume |x - a| < δ and show |f(x) - L| < ε. </div>
+                            </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Visual explanations of epsilon-delta definitions.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -133,12 +289,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -157,20 +317,23 @@
             {
                 title: "Epsilon-Delta",
                 items: [
-                    { title: "Epsilon-Delta Definition", channel: "3Blue1Brown", vid: "kfF40MiS7zA" },
+                    { title: "Epsilon-Delta Intuition — 3Blue1Brown", channel: "3Blue1Brown", vid: "kfF40MiS7zA" },
                     { title: "Epsilon-Delta Proofs", channel: "blackpenredpen", vid: "VsUyy4N1G5I" },
+                    { title: "Limits Formal Definition — Khan Academy", channel: "Khan Academy", vid: "w70af5Ou70M" },
                 ]
             }
         ];
         const QUESTIONS = [
             { topic: "Definition", prompt: "ε is epsilon, δ is ___", answer: "delta" },
-            { topic: "Definition", prompt: "∀ε>0, ∃δ>0 reads 'for all ___, there exists'", answer: "epsilon" },
+            { topic: "Definition", prompt: "∀ε>0, ∃δ>0 reads 'for all ___, there exists delta'", answer: "epsilon" },
             { topic: "Limit", prompt: "|f(x) - L| < ε means f(x) is close to ___", answer: "l" },
             { topic: "Limit", prompt: "|x - a| < δ means x is close to ___", answer: "a" },
             { topic: "Continuity", prompt: "f continuous at a: lim f(x) = f(___)", answer: "a" },
             { topic: "Proof", prompt: "In ε-δ proof, δ depends on ___", answer: "ε", altAnswers: ["epsilon"] },
             { topic: "Symbol", prompt: "∀ means 'for ___'", answer: "all" },
             { topic: "Symbol", prompt: "∃ means 'there ___'", answer: "exists" },
+            { topic: "Discontinuity", prompt: "___ discontinuity: limit exists but ≠ f(a)", answer: "removable" },
+            { topic: "Proof", prompt: "For lim(2x+1) at x=3, δ = ε/___", answer: "2" },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day55_epsilon_v1' });
     </script>

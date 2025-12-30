@@ -41,7 +41,32 @@
             Day 49 · Probability
         </div>
         <h1>Probability Basics</h1>
-        <p class="hero-desc">Sample spaces, events, and the rules of probability.</p>
+        <p class="hero-desc">
+            The mathematical foundation of randomness: sample spaces, events, axioms, and Bayes' theorem.
+            Essential for algorithm analysis, machine learning, and statistical inference.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -49,10 +74,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
+                    <li><a href="#why" class="toc-link">Why Probability</a></li>
                     <li><a href="#sample" class="toc-link">1. Sample Spaces</a></li>
                     <li><a href="#axioms" class="toc-link">2. Axioms</a></li>
-                    <li><a href="#rules" class="toc-link">3. Counting</a></li>
-                    <li><a href="#conditional" class="toc-link">4. Conditional</a></li>
+                    <li><a href="#counting" class="toc-link">3. Counting</a></li>
+                    <li><a href="#conditional" class="toc-link">4. Conditional & Bayes</a></li>
                     <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">6. Practice</a></li>
                 </ul>
@@ -69,81 +95,294 @@
         </aside>
 
         <main class="content">
+            <!-- Why Probability -->
+            <section class="section" id="why">
+                <div class="section-header">
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Probability Matters in CS</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Probability is the language of uncertainty. In computer science, we use it everywhere:
+                        analyzing randomized algorithms, training machine learning models, modeling networks,
+                        and making decisions under incomplete information.
+                    </p>
+
+                    <div class="rule">
+                        <strong>Key Insight:</strong> Probability lets us reason precisely about random events
+                        and make optimal decisions even when the outcome is uncertain.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Where you'll use this</h3>
+                        <ul>
+                            <li><strong>Algorithms:</strong> Randomized quicksort, hash table analysis, primality
+                                testing</li>
+                            <li><strong>Machine Learning:</strong> Bayesian inference, probabilistic models, sampling
+                            </li>
+                            <li><strong>Systems:</strong> Network reliability, queuing theory, load balancing</li>
+                            <li><strong>Security:</strong> Cryptographic protocols, randomness generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sample Spaces -->
             <section class="section" id="sample">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Sample Spaces & Events</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">SAMPLE SPACE Ω: Set of all possible outcomes
-                        EVENT A: Subset of Ω
+                    <div class="subsection">
+                        <h3 class="subsection-title">Core definitions</h3>
+                        <div class="math-block">SAMPLE SPACE Ω: Set of all possible outcomes
+                            EVENT A: Subset of Ω (collection of outcomes)
 
-                        Example (coin flip):
-                        Ω = {H, T}
-                        A = "heads" = {H}
-                        P(A) = 1/2</div>
+                            Example (rolling a die):
+                            Ω = {1, 2, 3, 4, 5, 6}
+                            A = "even number" = {2, 4, 6}
+                            P(A) = |A|/|Ω| = 3/6 = 1/2</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Event operations</h3>
+                        <div class="two-col">
+                            <div class="math-block">A ∪ B: A OR B (union)
+                                A ∩ B: A AND B (intersection)
+                                Aᶜ: NOT A (complement)
+                                A \ B: A but not B</div>
+                            <div class="math-block">A ⊆ B: A implies B
+                                A ∩ B = ∅: A, B mutually exclusive
+                                Ω: certain event
+                                ∅: impossible event</div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Sample spaces as sets</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-comment"># Sample space for two coin flips</span>
+omega = {(<span class="code-string">'H'</span>, <span class="code-string">'H'</span>), (<span class="code-string">'H'</span>, <span class="code-string">'T'</span>), (<span class="code-string">'T'</span>, <span class="code-string">'H'</span>), (<span class="code-string">'T'</span>, <span class="code-string">'T'</span>)}
+
+<span class="code-comment"># Event: at least one head</span>
+A = {x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> omega <span class="code-keyword">if</span> <span class="code-string">'H'</span> <span class="code-keyword">in</span> x}
+<span class="code-comment"># {('H', 'H'), ('H', 'T'), ('T', 'H')}</span>
+
+<span class="code-comment"># Probability (uniform distribution)</span>
+prob_A = <span class="code-function">len</span>(A) / <span class="code-function">len</span>(omega)  <span class="code-comment"># 3/4</span>
+
+<span class="code-comment"># Event operations</span>
+B = {x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> omega <span class="code-keyword">if</span> x[<span class="code-number">0</span>] == <span class="code-string">'H'</span>}  <span class="code-comment"># First is heads</span>
+A_and_B = A & B         <span class="code-comment"># Intersection</span>
+A_or_B = A | B          <span class="code-comment"># Union</span>
+not_A = omega - A       <span class="code-comment"># Complement</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Axioms -->
             <section class="section" id="axioms">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Probability Axioms</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Kolmogorov Axioms:</strong></div>
-                    <div class="math-block">1. P(A) ≥ 0 for all events A
-                        2. P(Ω) = 1
-                        3. P(A ∪ B) = P(A) + P(B) if A ∩ B = ∅
+                    <div class="subsection">
+                        <h3 class="subsection-title">Kolmogorov Axioms</h3>
+                        <div class="rule">
+                            <strong>The three axioms:</strong> All of probability theory derives from these.
+                        </div>
+                        <div class="math-block">1. NON-NEGATIVITY: P(A) ≥ 0 for all events A
 
-                        Derived rules:
-                        • P(Aᶜ) = 1 - P(A)
-                        • P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
-                        • P(∅) = 0</div>
-                </div>
-            </section>
+                            2. NORMALIZATION: P(Ω) = 1
 
-            <section class="section" id="rules">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Counting</h2>
-                </div>
-                <div class="section-body">
-                    <div class="two-col">
-                        <div class="math-block">PERMUTATIONS (order matters)
-                            n! = n × (n-1) × ... × 1
-                            P(n,k) = n!/(n-k)!</div>
-                        <div class="math-block">COMBINATIONS (order doesn't)
-                            C(n,k) = n!/(k!(n-k)!)
-                            "n choose k"</div>
+                            3. ADDITIVITY: If A ∩ B = ∅ (mutually exclusive),
+                            then P(A ∪ B) = P(A) + P(B)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Derived rules</h3>
+                        <div class="math-block">From the axioms, we can prove:
+
+                            • P(∅) = 0
+                            • P(Aᶜ) = 1 - P(A)
+                            • P(A) ≤ 1
+                            • P(A ∪ B) = P(A) + P(B) - P(A ∩ B) (inclusion-exclusion)
+                            • If A ⊆ B, then P(A) ≤ P(B)</div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Common mistake:</strong> P(A ∪ B) = P(A) + P(B) is ONLY true when A and B are
+                        mutually exclusive. For general events, you must subtract P(A ∩ B) to avoid double-counting.
                     </div>
                 </div>
             </section>
 
+            <!-- Counting -->
+            <section class="section" id="counting">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Counting Principles</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        For uniform distributions, P(A) = |A|/|Ω|. The hard part is counting |A| and |Ω|.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Permutations (order matters)</h3>
+                            <div class="math-block">n! = n × (n-1) × ... × 1
+
+                                P(n,k) = n!/(n-k)!
+                                = ways to arrange k items from n
+
+                                Example: 3 medals from 8 runners
+                                P(8,3) = 8!/5! = 8×7×6 = 336</div>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Combinations (order doesn't)</h3>
+                            <div class="math-block">C(n,k) = n!/(k!(n-k)!)
+                                = "n choose k"
+                                = (n k)
+
+                                Example: 3 winners from 8 people
+                                C(8,3) = 8!/(3!5!) = 56</div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Counting in Python</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">from</span> math <span class="code-keyword">import</span> factorial, comb, perm
+<span class="code-keyword">from</span> itertools <span class="code-keyword">import</span> permutations, combinations
+
+<span class="code-comment"># Factorial</span>
+factorial(<span class="code-number">5</span>)  <span class="code-comment"># 120</span>
+
+<span class="code-comment"># Permutations: P(n,k)</span>
+perm(<span class="code-number">8</span>, <span class="code-number">3</span>)  <span class="code-comment"># 336</span>
+<span class="code-function">list</span>(permutations(<span class="code-string">'ABC'</span>, <span class="code-number">2</span>))  <span class="code-comment"># [('A','B'), ('A','C'), ...]</span>
+
+<span class="code-comment"># Combinations: C(n,k)</span>
+comb(<span class="code-number">8</span>, <span class="code-number">3</span>)  <span class="code-comment"># 56</span>
+<span class="code-function">list</span>(combinations(<span class="code-string">'ABC'</span>, <span class="code-number">2</span>))  <span class="code-comment"># [('A','B'), ('A','C'), ('B','C')]</span>
+
+<span class="code-comment"># Probability example: 5-card poker hand</span>
+total_hands = comb(<span class="code-number">52</span>, <span class="code-number">5</span>)  <span class="code-comment"># 2,598,960</span>
+flush_hands = <span class="code-number">4</span> * comb(<span class="code-number">13</span>, <span class="code-number">5</span>)  <span class="code-comment"># 5,148 (any suit, choose 5)</span>
+prob_flush = flush_hands / total_hands  <span class="code-comment"># ~0.198%</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conditional -->
             <section class="section" id="conditional">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Conditional Probability & Bayes</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">CONDITIONAL PROBABILITY:
-                        P(A|B) = P(A ∩ B) / P(B)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Conditional probability</h3>
+                        <div class="rule">
+                            <strong>P(A|B):</strong> Probability of A, given that B occurred.
+                        </div>
+                        <div class="math-block">P(A|B) = P(A ∩ B) / P(B)
 
-                        BAYES' THEOREM:
-                        P(A|B) = P(B|A) · P(A) / P(B)
+                            Intuition: Restrict sample space to B,
+                            then find proportion where A also occurs.
 
-                        INDEPENDENCE:
-                        A, B independent iff P(A ∩ B) = P(A) · P(B)
-                        Equivalently: P(A|B) = P(A)</div>
+                            Example: Roll two dice, sum is 8. What's P(first die = 3)?
+                            B = {sum is 8} = {(2,6), (3,5), (4,4), (5,3), (6,2)}
+                            A = {first = 3}
+                            A ∩ B = {(3,5)}
+                            P(A|B) = 1/5</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Bayes' Theorem</h3>
+                        <div class="math-block">P(A|B) = P(B|A) · P(A) / P(B)
+
+                            Alternative form (with partition):
+                            P(A|B) = P(B|A)P(A) / [P(B|A)P(A) + P(B|Aᶜ)P(Aᶜ)]
+
+                            TERMS:
+                            • P(A): prior (before seeing evidence)
+                            • P(A|B): posterior (after seeing evidence)
+                            • P(B|A): likelihood (evidence given hypothesis)
+                            • P(B): normalizing constant</div>
+                        <div class="info">
+                            <strong>Bayes' theorem</strong> is the foundation of Bayesian statistics and
+                            probabilistic machine learning. It tells us how to update beliefs with evidence.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Independence</h3>
+                        <div class="math-block">A and B are INDEPENDENT if any of these hold:
+                            • P(A ∩ B) = P(A) · P(B)
+                            • P(A|B) = P(A)
+                            • P(B|A) = P(B)
+
+                            Independence ≠ mutually exclusive!
+                            Mutually exclusive: P(A ∩ B) = 0
+                            Independent: P(A ∩ B) = P(A)P(B)</div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Bayes' theorem example: medical testing</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">def</span> <span class="code-function">bayes</span>(p_disease, p_positive_given_disease, p_positive_given_healthy):
+    <span class="code-string">"""
+    Given a positive test, what's the probability of disease?
+    
+    p_disease: prior probability of having disease (prevalence)
+    p_positive_given_disease: sensitivity (true positive rate)
+    p_positive_given_healthy: false positive rate
+    """</span>
+    p_healthy = <span class="code-number">1</span> - p_disease
+    
+    <span class="code-comment"># Total probability of positive test</span>
+    p_positive = (p_positive_given_disease * p_disease + 
+                  p_positive_given_healthy * p_healthy)
+    
+    <span class="code-comment"># Bayes' theorem</span>
+    p_disease_given_positive = (p_positive_given_disease * p_disease) / p_positive
+    <span class="code-keyword">return</span> p_disease_given_positive
+
+<span class="code-comment"># Example: Rare disease (1% prevalence)</span>
+<span class="code-comment"># Test: 99% sensitivity, 5% false positive</span>
+result = bayes(<span class="code-number">0.01</span>, <span class="code-number">0.99</span>, <span class="code-number">0.05</span>)
+<span class="code-function">print</span>(<span class="code-string">f"P(disease | positive) = {result:.2%}"</span>)  <span class="code-comment"># ~16.7%</span>
+<span class="code-comment"># Surprisingly low! The false positives dominate.</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Master probability fundamentals with these excellent explanations.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -159,12 +398,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 6</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -181,22 +424,22 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Probability Basics",
+                title: "Probability Fundamentals",
                 items: [
-                    { title: "Probability Fundamentals", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
-                    { title: "Bayes' Theorem", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
-                    { title: "Counting & Combinatorics", channel: "MIT OCW", vid: "L_Y7A9Y68N8" },
+                    { title: "Probability Fundamentals — 3Blue1Brown", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
+                    { title: "Bayes' Theorem Intuition", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
+                    { title: "Counting & Combinatorics — MIT OCW", channel: "MIT OpenCourseWare", vid: "L_Y7A9Y68N8" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Basics", prompt: "Sample space is denoted ___", answer: "ω", altAnswers: ["omega", "Ω"] },
+            { topic: "Basics", prompt: "Sample space is denoted by ___", answer: "ω", altAnswers: ["omega", "Ω"] },
             { topic: "Axioms", prompt: "P(Ω) = ___", answer: "1" },
             { topic: "Axioms", prompt: "P(Aᶜ) = 1 - P(___)", answer: "a" },
             { topic: "Counting", prompt: "n! = n × (n-1) × ... × ___", answer: "1" },
             { topic: "Counting", prompt: "C(n,k) is called 'n ___ k'", answer: "choose" },
             { topic: "Conditional", prompt: "P(A|B) = P(A ∩ B) / P(___)", answer: "b" },
-            { topic: "Bayes", prompt: "___ theorem: P(A|B) = P(B|A)P(A)/P(B)", answer: "bayes" },
+            { topic: "Bayes", prompt: "___ theorem: P(A|B) = P(B|A)P(A)/P(B)", answer: "bayes", altAnswers: ["bayes'"] },
             { topic: "Independence", prompt: "A,B independent iff P(A∩B) = P(A)·P(___)", answer: "b" },
             { topic: "Independence", prompt: "If independent, P(A|B) = P(___)", answer: "a" },
             { topic: "Counting", prompt: "P(n,k) = n!/(n-___)!", answer: "k" },

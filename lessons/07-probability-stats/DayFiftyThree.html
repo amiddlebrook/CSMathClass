@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -41,7 +41,32 @@
             Day 53 · Statistics
         </div>
         <h1>Estimation & Confidence Intervals</h1>
-        <p class="hero-desc">Point estimates, confidence intervals, and hypothesis testing.</p>
+        <p class="hero-desc">
+            Quantifying uncertainty in estimates. Point estimation, confidence intervals,
+            and the foundations of statistical inference.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -68,71 +93,235 @@
         </aside>
 
         <main class="content">
+            <!-- Point Estimation -->
             <section class="section" id="point">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
                     <h2 class="section-title">Point Estimation</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">ESTIMATOR: Statistic used to estimate parameter
-                        ESTIMATE: Value of estimator for given sample
+                    <div class="subsection">
+                        <h3 class="subsection-title">Estimators and estimates</h3>
+                        <div class="rule">
+                            <strong>Estimator:</strong> A statistic (function of sample data) used to
+                            approximate an unknown population parameter.
+                        </div>
+                        <div class="math-block">COMMON ESTIMATORS:
+                            Sample mean X̄ = (1/n)Σxᵢ → estimates μ
+                            Sample variance s² = Σ(xᵢ-X̄)²/(n-1) → estimates σ²
+                            Sample proportion p̂ = k/n → estimates p
 
-                        Sample mean X̄ estimates population mean μ
-                        Sample variance s² estimates population variance σ²
+                            TERMINOLOGY:
+                            θ = true parameter (unknown)
+                            θ̂ = estimator (random variable)
+                            θ̂ = estimate (specific value)</div>
+                    </div>
 
-                        PROPERTIES:
-                        • Unbiased: E[θ̂] = θ
-                        • Consistent: θ̂ → θ as n → ∞
-                        • Efficient: minimum variance among unbiased</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Desirable properties</h3>
+                        <div class="two-col">
+                            <div class="math-block">UNBIASED:
+                                E[θ̂] = θ
+                                Estimator is correct
+                                on average.
+
+                                CONSISTENT:
+                                θ̂ → θ as n → ∞
+                                Converges to truth
+                                with more data.</div>
+                            <div class="math-block">EFFICIENT:
+                                Minimum variance among
+                                unbiased estimators.
+                                Best precision.
+
+                                MSE = Var(θ̂) + Bias²
+                                Mean squared error
+                                (trade-off)</div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Demonstrating estimator properties</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># True population parameters</span>
+true_mu, true_sigma = <span class="code-number">100</span>, <span class="code-number">15</span>
+
+<span class="code-comment"># Demonstrate unbiasedness of sample mean</span>
+estimates = [np.mean(np.random.normal(true_mu, true_sigma, <span class="code-number">30</span>)) 
+             <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10000</span>)]
+<span class="code-function">print</span>(<span class="code-string">f"E[X̄] ≈ {np.mean(estimates):.2f}"</span>)  <span class="code-comment"># ~100 (unbiased)</span>
+
+<span class="code-comment"># Demonstrate consistency: larger n → tighter estimates</span>
+<span class="code-keyword">for</span> n <span class="code-keyword">in</span> [<span class="code-number">10</span>, <span class="code-number">100</span>, <span class="code-number">1000</span>]:
+    estimates = [np.mean(np.random.normal(true_mu, true_sigma, n)) 
+                 <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">1000</span>)]
+    <span class="code-function">print</span>(<span class="code-string">f"n={n:4d}: std of X̄ = {np.std(estimates):.3f}"</span>)
+<span class="code-comment"># Output: std decreases as 1/√n</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Confidence Intervals -->
             <section class="section" id="interval">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Confidence Intervals</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>95% CI:</strong> Interval that contains true parameter 95% of the time.
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="rule">
+                            <strong>95% Confidence Interval:</strong> A random interval [L, U] such that
+                            P(L ≤ θ ≤ U) = 0.95. If we repeat the experiment many times, 95% of the
+                            intervals will contain the true parameter.
+                        </div>
                     </div>
-                    <div class="math-block">For mean with known σ:
-                        CI = X̄ ± z_(α/2) · σ/√n
 
-                        For mean with unknown σ:
-                        CI = X̄ ± t_(α/2, n-1) · s/√n
+                    <div class="subsection">
+                        <h3 class="subsection-title">Confidence interval for mean</h3>
+                        <div class="math-block">KNOWN VARIANCE σ²:
+                            CI = X̄ ± z_{α/2} · (σ/√n)
 
-                        Common z values:
-                        90% CI: z = 1.645
-                        95% CI: z = 1.96
-                        99% CI: z = 2.576</div>
+                            UNKNOWN VARIANCE (use s):
+                            CI = X̄ ± t_{α/2, n-1} · (s/√n)
+
+                            COMMON z VALUES:
+                            90% CI: z = 1.645
+                            95% CI: z = 1.96
+                            99% CI: z = 2.576</div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Common misconception:</strong> A 95% CI does NOT mean "95% probability that
+                        the true mean is in this interval." The true mean is fixed! It means 95% of
+                        similarly-constructed intervals would contain the true mean.
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Computing confidence intervals</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">from</span> scipy <span class="code-keyword">import</span> stats
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-keyword">def</span> <span class="code-function">confidence_interval</span>(data, confidence=<span class="code-number">0.95</span>):
+    <span class="code-string">"""Compute CI for mean using t-distribution"""</span>
+    n = <span class="code-function">len</span>(data)
+    mean, se = np.mean(data), stats.sem(data)
+    t_crit = stats.t.ppf((<span class="code-number">1</span> + confidence) / <span class="code-number">2</span>, n - <span class="code-number">1</span>)
+    margin = t_crit * se
+    <span class="code-keyword">return</span> mean - margin, mean + margin
+
+<span class="code-comment"># Example: sample data</span>
+data = np.random.normal(<span class="code-number">100</span>, <span class="code-number">15</span>, <span class="code-number">30</span>)
+low, high = confidence_interval(data)
+<span class="code-function">print</span>(<span class="code-string">f"95% CI: [{low:.2f}, {high:.2f}]"</span>)
+
+<span class="code-comment"># Verify coverage: repeat many times</span>
+true_mu = <span class="code-number">100</span>
+covered = <span class="code-number">0</span>
+<span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">1000</span>):
+    data = np.random.normal(true_mu, <span class="code-number">15</span>, <span class="code-number">30</span>)
+    low, high = confidence_interval(data)
+    <span class="code-keyword">if</span> low <= true_mu <= high:
+        covered += <span class="code-number">1</span>
+<span class="code-function">print</span>(<span class="code-string">f"Coverage: {covered/10:.1f}%"</span>)  <span class="code-comment"># ~95%</span></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Hypothesis Testing -->
             <section class="section" id="hypothesis">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
                     <h2 class="section-title">Hypothesis Testing</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">H₀: Null hypothesis (status quo)
-                        H₁: Alternative hypothesis
+                    <div class="subsection">
+                        <h3 class="subsection-title">The framework</h3>
+                        <div class="math-block">H₀: Null hypothesis (status quo, no effect)
+                            H₁: Alternative hypothesis (what we want to show)
 
-                        PROCEDURE:
-                        1. State H₀ and H₁
-                        2. Choose significance level α
-                        3. Compute test statistic
-                        4. Find p-value
-                        5. Reject H₀ if p-value < α ERRORS: Type I: Reject H₀ when true (prob=α) Type II: Fail to reject
-                            H₀ when false (prob=β)</div>
+                            PROCEDURE:
+                            1. State H₀ and H₁
+                            2. Choose significance level α (typically 0.05)
+                            3. Compute test statistic from data
+                            4. Find p-value: P(data this extreme | H₀ true)
+                            5. Decision: Reject H₀ if p-value < α</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Types of errors</h3>
+                            <div class="two-col">
+                                <div class="math-block">TYPE I ERROR:
+                                    Reject H₀ when H₀ is true
+                                    "False positive"
+                                    P(Type I) = α
+
+                                    We control this by
+                                    choosing α</div>
+                                <div class="math-block">TYPE II ERROR:
+                                    Fail to reject H₀ when
+                                    H₀ is false
+                                    "False negative"
+                                    P(Type II) = β
+
+                                    Power = 1 - β</div>
+                            </div>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">One-sample t-test</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">from</span> scipy <span class="code-keyword">import</span> stats
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># Test: is the mean different from 100?</span>
+data = np.array([<span class="code-number">105</span>, <span class="code-number">98</span>, <span class="code-number">112</span>, <span class="code-number">103</span>, <span class="code-number">95</span>, <span class="code-number">108</span>, <span class="code-number">101</span>, <span class="code-number">99</span>, <span class="code-number">107</span>, <span class="code-number">104</span>])
+null_mean = <span class="code-number">100</span>
+
+<span class="code-comment"># One-sample t-test</span>
+t_stat, p_value = stats.ttest_1samp(data, null_mean)
+<span class="code-function">print</span>(<span class="code-string">f"t-statistic: {t_stat:.3f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"p-value: {p_value:.4f}"</span>)
+
+alpha = <span class="code-number">0.05</span>
+<span class="code-keyword">if</span> p_value < alpha:
+    <span class="code-function">print</span>(<span class="code-string">"Reject H₀: Mean is significantly different from 100"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"Fail to reject H₀: No significant difference"</span>)</pre>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <strong>Common tests:</strong> t-test (means), chi-square (proportions/independence),
+                            ANOVA (multiple groups), Mann-Whitney (non-parametric).
+                        </div>
                     </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Statistical inference fundamentals from top educators.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -148,12 +337,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -170,23 +363,26 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Statistics",
+                title: "Statistical Inference",
                 items: [
-                    { title: "Confidence Intervals", channel: "StatQuest", vid: "TqOeMYtOc1w" },
-                    { title: "Hypothesis Testing", channel: "StatQuest", vid: "0oc49DyA3hU" },
-                    { title: "p-value", channel: "StatQuest", vid: "vemZtEM63GY" },
+                    { title: "Confidence Intervals — StatQuest", channel: "StatQuest", vid: "TqOeMYtOc1w" },
+                    { title: "Hypothesis Testing Intro", channel: "StatQuest", vid: "0oc49DyA3hU" },
+                    { title: "p-values Explained", channel: "StatQuest", vid: "vemZtEM63GY" },
+                    { title: "t-tests", channel: "StatQuest", vid: "pTmLQvMM-1M" },
                 ]
             }
         ];
         const QUESTIONS = [
             { topic: "Point", prompt: "X̄ estimates population ___", answer: "mean", altAnswers: ["μ", "mu"] },
             { topic: "Properties", prompt: "E[θ̂] = θ means estimator is ___", answer: "unbiased" },
+            { topic: "Properties", prompt: "θ̂ → θ as n → ∞ means estimator is ___", answer: "consistent" },
             { topic: "CI", prompt: "95% CI uses z = ___", answer: "1.96" },
             { topic: "CI", prompt: "CI width decreases as n ___", answer: "increases" },
             { topic: "CI", prompt: "For unknown σ, use ___-distribution", answer: "t" },
             { topic: "Hypothesis", prompt: "H₀ is the ___ hypothesis", answer: "null" },
-            { topic: "Hypothesis", prompt: "Reject H₀ if p-value < ___", answer: "α", altAnswers: ["alpha"] },
+            { topic: "Hypothesis", prompt: "Reject H₀ if p-value < ___", answer: "α", altAnswers: ["alpha", "0.05"] },
             { topic: "Errors", prompt: "Type ___ error: reject true H₀", answer: "i", altAnswers: ["1", "one"] },
+            { topic: "Errors", prompt: "Type II error: fail to reject ___ H₀", answer: "false" },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day53_est_v1' });
     </script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 58: Completeness, Compactness, Uniform Continuity</title>
+    <title>Day 58: Completeness and Compactness</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,7 +24,7 @@
                 Back to Curriculum
             </a>
             <div class="nav-progress">
-                <span id="progressText">0 / 8 complete</span>
+                <span id="progressText">0 / 10 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -40,8 +40,33 @@
             </svg>
             Day 58 · Analysis
         </div>
-        <h1>Completeness, Compactness, Uniform Continuity</h1>
-        <p class="hero-desc">Advanced topological properties in analysis.</p>
+        <h1>Completeness and Compactness</h1>
+        <p class="hero-desc">
+            The deep properties that make calculus work: why ℝ is special,
+            and how bounded closed sets behave. Essential for optimization and convergence proofs.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -68,56 +93,179 @@
         </aside>
 
         <main class="content">
+            <!-- Completeness -->
             <section class="section" id="complete">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Completeness</h2>
+                    <h2 class="section-title">Completeness of ℝ</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Complete:</strong> Every Cauchy sequence converges.</div>
-                    <div class="math-block">ℝ is complete (fundamental!)
-                        ℚ is NOT complete (e.g., √2 approximations)
+                    <div class="subsection">
+                        <h3 class="subsection-title">What makes ℝ special</h3>
+                        <div class="rule">
+                            <strong>Completeness:</strong> Every Cauchy sequence in ℝ converges to a limit in ℝ.
+                            There are no "holes" in the real line.
+                        </div>
+                        <div class="math-block">COMPLETENESS AXIOM (equivalent formulations):
+                            1. Every Cauchy sequence converges
+                            2. Every nonempty bounded set has a supremum
+                            3. Every bounded monotone sequence converges
 
-                        COMPLETENESS AXIOM:
-                        Every nonempty bounded subset of ℝ has a supremum</div>
+                            WHY ℚ IS NOT COMPLETE:
+                            Consider √2 ≈ 1.414...
+                            Sequence: 1, 1.4, 1.41, 1.414, ...
+                            This is Cauchy in ℚ but doesn't converge in ℚ (√2 ∉ ℚ)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Supremum and infimum</h3>
+                        <div class="math-block">SUPREMUM (sup): Least upper bound
+                            sup S = smallest number b such that x ≤ b for all x ∈ S
+
+                            INFIMUM (inf): Greatest lower bound
+                            inf S = largest number a such that a ≤ x for all x ∈ S
+
+                            EXAMPLE: S = (0, 1)
+                            sup S = 1 (not in S!)
+                            inf S = 0 (not in S!)
+                            max S doesn't exist (no largest element)</div>
+                    </div>
+
+                    <div class="info">
+                        <strong>CS Application:</strong> Completeness is crucial for numerical analysis.
+                        It guarantees that iterative algorithms (Newton's method, gradient descent)
+                        that produce Cauchy sequences will converge to a real answer.
+                    </div>
                 </div>
             </section>
 
+            <!-- Compactness -->
             <section class="section" id="compact">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
                     <h2 class="section-title">Compactness</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">DEFINITIONS (equivalent in ℝⁿ):
-                        1. Every open cover has finite subcover
-                        2. Every sequence has convergent subsequence
-                        3. Closed and bounded (Heine-Borel)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definitions (equivalent in ℝⁿ)</h3>
+                        <div class="math-block">A set K ⊆ ℝⁿ is COMPACT if any of these hold:
 
-                        KEY THEOREM:
-                        Continuous image of compact set is compact</div>
+                            1. COVER DEF: Every open cover has a finite subcover
+                            {Uα} covers K ⟹ finitely many Uα₁,...,Uαₙ cover K
+
+                            2. SEQUENTIAL: Every sequence in K has a convergent
+                            subsequence with limit in K
+
+                            3. HEINE-BOREL: K is closed and bounded
+
+                            All three definitions are equivalent in ℝⁿ!</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Key properties</h3>
+                        <div class="two-col">
+                            <div class="math-block">COMPACT SETS:
+                                • [a, b] ✓
+                                • Finite sets ✓
+                                • {1/n : n ∈ ℕ} ∪ {0} ✓
+
+                                NOT COMPACT:
+                                • (a, b) ✗ (not closed)
+                                • [0, ∞) ✗ (not bounded)
+                                • ℤ ✗ (not bounded)</div>
+                            <div class="math-block">KEY THEOREMS:
+                                • Continuous image of
+                                compact is compact
+                                • Compact ⊂ closed
+                                • Compact ⊂ bounded
+                                • Closed subset of
+                                compact is compact</div>
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Compactness matters for optimization:</strong> The Extreme Value Theorem
+                        (continuous functions attain max/min) requires a compact domain. On non-compact
+                        domains, max/min may not exist!
+                    </div>
                 </div>
             </section>
 
+            <!-- Uniform Continuity -->
             <section class="section" id="uniform">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
                     <h2 class="section-title">Uniform Continuity</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">UNIFORM CONTINUITY:
-                        ∀ε > 0, ∃δ > 0: |x-y| < δ ⟹ |f(x)-f(y)| < ε vs POINTWISE CONTINUITY: ∀ε> 0, ∀a, ∃δ(a,ε): |x-a| <
-                                δ ⟹ |f(x)-f(a)| < ε KEY: δ doesn't depend on point! THEOREM: Continuous on compact ⟹
-                                uniformly continuous</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition and comparison</h3>
+                        <div class="math-block">POINTWISE CONTINUITY (at each point a):
+                            ∀ε > 0, ∃δ(a,ε) > 0: |x-a| < δ ⟹ |f(x)-f(a)| < ε Note: δ can depend on BOTH ε and the point
+                                a UNIFORM CONTINUITY (on a set): ∀ε> 0, ∃δ(ε) > 0: |x-y| < δ ⟹ |f(x)-f(y)| < ε Note: δ
+                                    depends ONLY on ε (works for all points) UNIFORM ⟹ POINTWISE (but not vice
+                                    versa)</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">Key theorem</h3>
+                            <div class="rule">
+                                <strong>Heine-Cantor Theorem:</strong> Continuous on compact ⟹ uniformly continuous.
+                            </div>
+                            <div class="math-block">EXAMPLE: f(x) = x² on [0, 1]
+                                f is continuous on compact [0, 1]
+                                Therefore f is uniformly continuous on [0, 1]
+
+                                COUNTEREXAMPLE: f(x) = 1/x on (0, 1)
+                                f is continuous (pointwise) on (0, 1)
+                                But NOT uniformly continuous!
+                                (near 0, need smaller and smaller δ)</div>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Testing uniform continuity</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-keyword">def</span> <span class="code-function">check_uniform_continuity</span>(f, domain, epsilon):
+    <span class="code-string">"""Find if single δ works for all points (approximately)"""</span>
+    x = np.linspace(domain[<span class="code-number">0</span>] + <span class="code-number">0.01</span>, domain[<span class="code-number">1</span>] - <span class="code-number">0.01</span>, <span class="code-number">100</span>)
+    
+    <span class="code-comment"># For each point, find minimum δ needed</span>
+    min_deltas = []
+    <span class="code-keyword">for</span> a <span class="code-keyword">in</span> x:
+        <span class="code-comment"># Binary search for delta</span>
+        <span class="code-keyword">for</span> delta <span class="code-keyword">in</span> np.logspace(-<span class="code-number">6</span>, <span class="code-number">0</span>, <span class="code-number">100</span>):
+            nearby = x[(np.<span class="code-function">abs</span>(x - a) < delta) & (x != a)]
+            <span class="code-keyword">if</span> <span class="code-function">len</span>(nearby) > <span class="code-number">0</span> <span class="code-keyword">and</span> np.<span class="code-function">all</span>(np.<span class="code-function">abs</span>(f(nearby) - f(a)) < epsilon):
+                min_deltas.append(delta)
+                <span class="code-keyword">break</span>
+    
+    <span class="code-keyword">return</span> np.<span class="code-function">min</span>(min_deltas), np.<span class="code-function">max</span>(min_deltas)
+
+<span class="code-comment"># x² on [0,1]: uniform (bounded delta range)</span>
+d_min, d_max = check_uniform_continuity(<span class="code-keyword">lambda</span> x: x**<span class="code-number">2</span>, [<span class="code-number">0</span>, <span class="code-number">1</span>], <span class="code-number">0.1</span>)
+<span class="code-function">print</span>(<span class="code-string">f"x² on [0,1]: δ range [{d_min:.4f}, {d_max:.4f}]"</span>)
+
+<span class="code-comment"># 1/x on (0,1): NOT uniform (δ→0 near x=0)</span></pre>
+                            </div>
+                        </div>
                     </div>
             </section>
 
+            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Advanced analysis concepts explained visually.
+                    </p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -133,12 +281,16 @@
                 </div>
             </section>
 
+            <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
+                    <p>
+                        Type your answer and press Check (or hit Enter).
+                    </p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -153,16 +305,27 @@
 
     <script src="../shared-scripts.js"></script>
     <script>
-        const VIDEO_GROUPS = [{ title: "Analysis", items: [{ title: "Compactness", channel: "Math Major", vid: "td7Nz9ATyWY" }] }];
+        const VIDEO_GROUPS = [
+            {
+                title: "Analysis Foundations",
+                items: [
+                    { title: "Compactness — Math Major", channel: "Math Major", vid: "td7Nz9ATyWY" },
+                    { title: "Uniform Continuity", channel: "Dr. Trefor Bazett", vid: "z2y7r2wFDHo" },
+                    { title: "Completeness of Reals", channel: "Michael Penn", vid: "1G3SqJxCiJA" },
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Complete", prompt: "Complete: every ___ sequence converges", answer: "cauchy" },
             { topic: "Complete", prompt: "ℚ is ___ complete (is/is not)", answer: "not" },
+            { topic: "Supremum", prompt: "sup S is the ___ upper bound", answer: "least" },
             { topic: "Compact", prompt: "Heine-Borel: closed + ___", answer: "bounded" },
-            { topic: "Compact", prompt: "Every ___ has convergent subsequence", answer: "sequence" },
+            { topic: "Compact", prompt: "Every sequence in compact set has convergent ___", answer: "subsequence" },
             { topic: "Uniform", prompt: "Uniform continuity: δ doesn't depend on ___", answer: "point", altAnswers: ["x", "a"] },
             { topic: "Theorem", prompt: "Continuous on compact ⟹ ___ continuous", answer: "uniformly" },
             { topic: "Image", prompt: "Continuous image of compact is ___", answer: "compact" },
-            { topic: "Supremum", prompt: "Completeness: bounded set has ___", answer: "supremum" },
+            { topic: "Not compact", prompt: "(0,1) is not compact because not ___", answer: "closed" },
+            { topic: "ℝ", prompt: "[0, ∞) is not compact because not ___", answer: "bounded" },
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day58_complete_v1' });
     </script>

@@ -44,6 +44,30 @@
         <p class="hero-desc">Comprehensive review of real analysis concepts.</p>
     </header>
 
+    <div class="hero-meta">
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+            </svg>
+            ~40 min read
+        </div>
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            15 practice problems
+        </div>
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Video lessons
+        </div>
+    </div>
+    </header>
+
     <div class="main-layout">
         <aside class="sidebar">
             <nav class="toc">
@@ -72,25 +96,43 @@
                     <h2 class="section-title">Key Concepts Review</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">FOUNDATIONS:
-                        • ε-δ definitions of limits and continuity
-                        • Completeness of ℝ (Cauchy ⟺ convergent)
-                        • Compactness (closed + bounded in ℝⁿ)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Foundations & Topology</h3>
+                        <div class="math-block">
+                            <strong>ε-δ Formulations:</strong> The rigor behind limits and continuity.
+                            <strong>Completeness of ℝ:</strong> Every Cauchy sequence converges. This distinguishes ℝ
+                            from ℚ.
+                            <strong>Compactness:</strong> Heine-Borel theorem (closed + bounded = compact in ℝⁿ).
+                            Essential for extremes.
+                        </div>
+                    </div>
 
-                        THEOREMS:
-                        • IVT, EVT, MVT
-                        • Fundamental Theorem of Calculus
-                        • Uniform continuity on compact sets
+                    <div class="subsection">
+                        <h3 class="subsection-title">Core Theorems</h3>
+                        <div class="info">
+                            Three Pillars of Calculus on [a,b]:
+                            <ul>
+                                <li><strong>IVT:</strong> Continuous functions skip no values.</li>
+                                <li><strong>EVT:</strong> Continuous functions on compact sets attain Max/Min.</li>
+                                <li><strong>MVT:</strong> Differentiable functions have instant slope = avg slope.</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                        CONVERGENCE:
-                        • Sequence and series tests
-                        • Pointwise vs uniform convergence
-                        • Lᵖ spaces and norms
-
-                        SPACES:
-                        • Metric spaces and topology
-                        • Function spaces C[a,b], Lᵖ
-                        • Banach and Hilbert spaces</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Convergence & Spaces</h3>
+                        <div class="rule">
+                            <strong>Modes of Convergence:</strong>
+                            Pointwise ⇐ Uniform (preserves continuity)
+                            Standard Lᵖ Convergence (norm based)
+                        </div>
+                        <div class="math-block">
+                            <strong>Important Spaces:</strong>
+                            • C[a,b]: Continuous functions (Banach with Sup norm)
+                            • L²: Square integrable (Hilbert Space)
+                            • Metric Spaces: Generalizing "distance"
+                        </div>
+                    </div>
                 </div>
             </section>
 

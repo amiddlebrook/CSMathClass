@@ -42,6 +42,28 @@
         </div>
         <h1>Floating-Point Arithmetic</h1>
         <p class="hero-desc">IEEE 754, machine epsilon, and numerical precision.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~40 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                8 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -74,23 +96,44 @@
                     <h2 class="section-title">IEEE 754 Standard</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">FLOATING-POINT FORMAT:
-                        (-1)ˢ × 1.mantissa × 2^(exponent - bias)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Floating-Point Representation</h3>
+                        <div class="math-block">Value = (-1)ˢ × 1.mantissa × 2^(exponent - bias)</div>
 
-                        SINGLE PRECISION (32-bit):
-                        • 1 sign bit
-                        • 8 exponent bits (bias = 127)
-                        • 23 mantissa bits
-                        • ~7 decimal digits precision
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Binary Layout</span>
+                                <span class="code-label">Single Precision (32-bit)</span>
+                            </div>
+                            <div class="code-content">
+                                <pre>
+ [S] [EEEEEEEE] [MMMMMMMMMMMMMMMMMMMMMMM]
+  1      8                 23             (bits)
+Sign  Exponent          Mantissa
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
 
-                        DOUBLE PRECISION (64-bit):
-                        • 1 sign bit
-                        • 11 exponent bits (bias = 1023)
-                        • 52 mantissa bits
-                        • ~16 decimal digits precision
+                    <div class="subsection">
+                        <h3 class="subsection-title">Formats & Precision</h3>
+                        <div class="math-block">
+                            <strong>Single Precision (float32):</strong>
+                            • Bias: 127
+                            • Precision: ~7 decimal digits
 
-                        SPECIAL VALUES:
-                        • ±0, ±∞, NaN</div>
+                            <strong>Double Precision (float64):</strong>
+                            • Bias: 1023
+                            • Bits: 1 Sign, 11 Exp, 52 Mantissa
+                            • Precision: ~16 decimal digits (Standard in Python/JS)
+                        </div>
+                        <div class="info">
+                            <strong>Special Values:</strong>
+                            • ±0 (Signed zero)
+                            • ±∞ (Infinity: 1.0/0.0)
+                            • NaN (Not a Number: 0.0/0.0)
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -100,85 +143,94 @@
                     <h2 class="section-title">Precision Issues</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">MACHINE EPSILON:
-                        ε_mach = smallest ε where 1 + ε ≠ 1
-                        • float: ~1.2 × 10⁻⁷
-                        • double: ~2.2 × 10⁻¹⁶
+                    <div class="subsection">
+                        <h3 class="subsection-title">Machine Epsilon</h3>
+                        <div class="math-block">ε_mach = smallest ε > 0 where 1 + ε ≠ 1
+                            • float32: ≈ 1.2 × 10⁻⁷
+                            • float64: ≈ 2.2 × 10⁻¹⁶</div>
+                    </div>
 
-                        COMMON PROBLEMS:
-                        • 0.1 + 0.2 ≠ 0.3 (exactly)
-                        • Catastrophic cancellation
-                        • Overflow/underflow</div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Floating-point surprise</span>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Common Pitfalls</h3>
+                        <div class="warning">
+                            <strong>The 0.1 + 0.2 Problem:</strong>
+                            0.1 and 0.2 cannot be represented exactly in binary.
+                            Result: 0.30000000000000004 ≠ 0.3
                         </div>
-                        <div class="code-content">
-                            <pre>&gt;&gt;&gt; <span class="code-number">0.1</span> + <span class="code-number">0.2</span>
-<span class="code-number">0.30000000000000004</span>
 
-&gt;&gt;&gt; <span class="code-number">0.1</span> + <span class="code-number">0.2</span> == <span class="code-number">0.3</span>
-<span class="code-keyword">False</span>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Catastrophic Cancellation</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> math
 
-<span class="code-comment"># Use math.isclose() instead!</span></pre>
-                        </div>
-                    </div>
+<span class="code-comment"># Large numbers cancelling out lose precision</span>
+a = <span class="code-number">1.23456789e10</span>
+b = <span class="code-number">1.23456788e10</span>
+diff = a - b
+<span class="code-function">print</span>(<span class="code-string">f"Difference: {diff}"</span>)
 
-                    <div class="warning"><strong>Never compare floats with ==</strong> Use tolerance: |a - b| < ε</div>
-                    </div>
-            </section>
-
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Best Practices</h2>
-                </div>
-                <div class="section-body">
-                    <div class="math-block">1. Use relative tolerance: |a-b|/max(|a|,|b|) < tol 2. Avoid subtracting
-                            nearly equal numbers 3. Use Kahan summation for many additions 4. Be aware of operation
-                            order 5. Use higher precision when needed (e.g., Decimal) 6. Validate numerical
-                            stability</div>
-                    </div>
-            </section>
-
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
+<span class="code-comment"># Accumulation Error</span>
+sum_val = <span class="code-number">0.0</span>
+<span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10</span>):
+    sum_val += <span class="code-number">0.1</span>
+<span class="code-function">print</span>(<span class="code-string">f"Sum of 0.1 ten times: {sum_val:.20f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Math.fsum would be exact: {math.fsum([0.1]*10):.20f}"</span>)</pre>
                             </div>
                         </div>
-                        <div class="video-list" id="videoList"></div>
                     </div>
-                </div>
-            </section>
 
-            <section class="section" id="quiz">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Practice Problems</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
+                    <section class="section" id="practice">
+                        <div class="section-header">
+                            <div class="section-number">Section 3</div>
+                            <h2 class="section-title">Best Practices</h2>
+                        </div>
+                        <div class="section-body">
+                            <div class="math-block">1. Use relative tolerance: |a-b|/max(|a|,|b|) < tol 2. Avoid
+                                    subtracting nearly equal numbers 3. Use Kahan summation for many additions 4. Be
+                                    aware of operation order 5. Use higher precision when needed (e.g., Decimal) 6.
+                                    Validate numerical stability</div>
+                            </div>
+                    </section>
+
+                    <section class="section" id="videos">
+                        <div class="section-header">
+                            <div class="section-number">Section 4</div>
+                            <h2 class="section-title">Video Lessons</h2>
+                        </div>
+                        <div class="section-body">
+                            <div class="video-container">
+                                <div class="video-player">
+                                    <iframe id="ytPlayer" src=""
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                    <div class="video-info">
+                                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                                        <div class="video-meta" id="videoMeta"></div>
+                                    </div>
+                                </div>
+                                <div class="video-list" id="videoList"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section" id="quiz">
+                        <div class="section-header">
+                            <div class="section-number">Section 5</div>
+                            <h2 class="section-title">Practice Problems</h2>
+                        </div>
+                        <div class="section-body">
+                            <div class="quiz-controls">
+                                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                                <button class="btn" id="btnRevealAll">Reveal All</button>
+                                <button class="btn" id="btnClear">Clear Inputs</button>
+                                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                            </div>
+                            <div id="quizContainer"></div>
+                        </div>
+                    </section>
         </main>
     </div>
 

@@ -44,6 +44,30 @@
         <p class="hero-desc">Pointwise, uniform, Lᵖ, and almost everywhere convergence.</p>
     </header>
 
+    <div class="hero-meta">
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+            </svg>
+            ~40 min read
+        </div>
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            6 practice problems
+        </div>
+        <div class="meta-item">
+            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Video lessons
+        </div>
+    </div>
+    </header>
+
     <div class="main-layout">
         <aside class="sidebar">
             <nav class="toc">
@@ -73,11 +97,31 @@
                     <h2 class="section-title">Modes of Convergence</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">POINTWISE: fₙ(x) → f(x) for each x
-                        ∀x, ∀ε > 0, ∃N(x,ε): n > N ⟹ |fₙ(x) - f(x)| < ε UNIFORM: sup|fₙ(x) - f(x)| → 0 ∀ε> 0, ∃N(ε): n >
-                            N ⟹ sup_x|fₙ(x) - f(x)| < ε (N doesn't depend on x!) Lᵖ CONVERGENCE: ‖fₙ - f‖ₚ → 0 ALMOST
-                                EVERYWHERE: fₙ(x) → f(x) except on measure 0</div>
-                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">1. Pointwise Convergence</h3>
+                        <div class="math-block">fₙ(x) → f(x) for each individual x
+
+                            Formal: ∀x, ∀ε > 0, ∃N(x,ε) such that:
+                            n > N ⟹ |fₙ(x) - f(x)| < ε (N depends on which x you pick!)</div>
+                        </div>
+
+                        <div class="subsection">
+                            <h3 class="subsection-title">2. Uniform Convergence</h3>
+                            <div class="math-block">sup |fₙ(x) - f(x)| → 0 as n → ∞
+
+                                Formal: ∀ε > 0, ∃N(ε) such that:
+                                n > N ⟹ sup_x |fₙ(x) - f(x)| < ε (N is uniform—it works for ALL x simultaneously!)</div>
+                            </div>
+
+                            <div class="subsection">
+                                <h3 class="subsection-title">Other Modes</h3>
+                                <div class="math-block">• Lᵖ Convergence: ‖fₙ - f‖ₚ → 0
+                                    (Distance in function space shrinks to 0)
+
+                                    • Almost Everywhere (a.e.):
+                                    fₙ(x) → f(x) for all x except on a set of measure zero.</div>
+                            </div>
+                        </div>
             </section>
 
             <section class="section" id="implications">
@@ -86,17 +130,48 @@
                     <h2 class="section-title">Implications</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">UNIFORM ⟹ POINTWISE (but not conversely!)
+                    <div class="subsection">
+                        <h3 class="subsection-title">Preservation of Properties</h3>
+                        <div class="rule">
+                            <strong>Theorem:</strong> If (fₙ) is a sequence of continuous functions converging
+                            <strong>uniformly</strong> to f, then f is continuous.
+                        </div>
+                        <div class="info">
+                            Pointwise convergence does NOT guarantee this preserve continuity!
+                        </div>
+                    </div>
 
-                        KEY THEOREM:
-                        Uniform limit of continuous functions is continuous
-                        (Pointwise limit may not be!)
+                    <div class="warning">
+                        <strong>Counterexample:</strong> consider fₙ(x) = xⁿ on [0, 1].
+                        • Pointwise limit: f(x) = 0 for x < 1, f(1)=1. (Discontinuous!) • Uniform limit: None (since
+                            limit is not continuous). </div>
 
-                        Lᵖ convergence ⟹ subsequence converges a.e.</div>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-lang">Python</span>
+                                    <span class="code-label">Visualizing Convergence Failures</span>
+                                </div>
+                                <div class="code-content">
+                                    <pre><span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
 
-                    <div class="warning"><strong>Counterexample:</strong> fₙ(x) = xⁿ on [0,1] converges pointwise to
-                        discontinuous limit!</div>
-                </div>
+x = np.linspace(<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">200</span>)
+ns = [<span class="code-number">1</span>, <span class="code-number">5</span>, <span class="code-number">20</span>, <span class="code-number">100</span>]
+
+plt.figure(figsize=(<span class="code-number">8</span>, <span class="code-number">4</span>))
+<span class="code-keyword">for</span> n <span class="code-keyword">in</span> ns:
+    y = x ** n
+    plt.plot(x, y, label=<span class="code-string">f"n={n}"</span>)
+
+<span class="code-comment"># The limit function is discontinuous at x=1</span>
+plt.title(<span class="code-string">"fₙ(x) = xⁿ on [0, 1]"</span>)
+plt.legend()
+plt.grid(<span class="code-keyword">True</span>)
+<span class="code-comment"># In a real app, plt.show() would render this</span>
+<span class="code-function">print</span>(<span class="code-string">"Plot generated: notice how the curve hugs x-axis then jumps at 1."</span>)</pre>
+                                </div>
+                            </div>
+                    </div>
             </section>
 
             <section class="section" id="videos">
