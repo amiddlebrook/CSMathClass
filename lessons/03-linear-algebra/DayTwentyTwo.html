@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 22: Matrix Operations & Systems</title>
+    <title>Day 21: Complete Matrix Methods</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -776,14 +776,14 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 22 · Linear Algebra</div>
-        <h1>Matrix Operations & Systems</h1>
-        <p class="hero-desc">Matrix multiplication, Gaussian elimination, and solving systems of linear
-            equations—essential for everything from graphics to neural networks.</p>
+            </svg>Day 21 · Linear Algebra</div>
+        <h1>Complete Matrix Methods</h1>
+        <p class="hero-desc">Matrix operations, systems solving, determinants, and inverses—the complete toolkit for
+            linear algebra computations in graphics, ML, and scientific computing.</p>
         <div class="hero-meta">
-            <div class="meta-item">~55 min read</div>
-            <div class="meta-item">6 practice problems</div>
-            <div class="meta-item">4 video lessons</div>
+            <div class="meta-item">~105 min read</div>
+            <div class="meta-item">12 practice problems</div>
+            <div class="meta-item">8 video lessons</div>
         </div>
     </header>
 
@@ -796,8 +796,12 @@
                     <li><a href="#systems" class="toc-link">2. Systems of Equations</a></li>
                     <li><a href="#gauss" class="toc-link">3. Gaussian Elimination</a></li>
                     <li><a href="#code" class="toc-link">4. Solving with NumPy</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice Problems</a></li>
+                    <li><a href="#det" class="toc-link">5. Determinants</a></li>
+                    <li><a href="#properties" class="toc-link">6. Determinant Properties</a></li>
+                    <li><a href="#inverse" class="toc-link">7. Matrix Inverse</a></li>
+                    <li><a href="#det-code" class="toc-link">8. NumPy det & inv</a></li>
+                    <li><a href="#videos" class="toc-link">9. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">10. Practice Problems</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -911,10 +915,94 @@ print(<span class="code-string">"C @ D ="</span>, C @ D)  <span class="code-comm
                 </div>
             </section>
 
+            <!-- Determinants (from Day 23) -->
+            <section class="section" id="det">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Determinants</h2>
+                </div>
+                <div class="section-body">
+                    <p>The <strong>determinant</strong> is a scalar that encodes whether a matrix is invertible.</p>
+                    <div class="rule">
+                        <strong>2×2 Determinant:</strong>
+                        $$ \det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc $$
+                    </div>
+                    <div class="math-block">det([3 1]) = 3×4 - 1×2 = 12 - 2 = 10
+                        ([2 4])</div>
+                    <div class="info">
+                        <strong>Geometric meaning:</strong> |det(A)| = area of parallelogram formed by column vectors.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Properties (from Day 23) -->
+            <section class="section" id="properties">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Determinant Properties</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">• det(AB) = det(A) × det(B)
+                        • det(A^T) = det(A)
+                        • det(A⁻¹) = 1/det(A)
+                        • det(cA) = c^n × det(A) for n×n matrix
+                        • det(I) = 1</div>
+                    <div class="warning">
+                        <strong>Key test:</strong> A is invertible ⟺ det(A) ≠ 0
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inverse (from Day 23) -->
+            <section class="section" id="inverse">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Matrix Inverse</h2>
+                </div>
+                <div class="section-body">
+                    <p>If det(A) ≠ 0, then $A^{-1}$ exists such that $AA^{-1} = A^{-1}A = I$.</p>
+                    <div class="rule">
+                        <strong>2×2 Inverse:</strong>
+                        $$ A^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix} $$
+                    </div>
+                    <p>For larger matrices, use Gauss-Jordan elimination or NumPy.</p>
+                </div>
+            </section>
+
+            <!-- Det Code (from Day 23) -->
+            <section class="section" id="det-code">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">NumPy det & inv</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">Python</span><span
+                                class="code-label">Determinants & Inverses</span></div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+A = np.array([[<span class="code-number">3</span>, <span class="code-number">1</span>], [<span class="code-number">2</span>, <span class="code-number">4</span>]])
+
+<span class="code-comment"># Determinant</span>
+det_A = np.linalg.det(A)
+print(<span class="code-string">f"det(A) = {det_A:.0f}"</span>)  <span class="code-comment"># 10</span>
+
+<span class="code-comment"># Inverse</span>
+A_inv = np.linalg.inv(A)
+print(<span class="code-string">"A⁻¹ ="</span>, A_inv)
+
+<span class="code-comment"># Verify: A @ A⁻¹ = I</span>
+print(<span class="code-string">"A @ A⁻¹ ="</span>, A @ A_inv)</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 9</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -934,7 +1022,7 @@ print(<span class="code-string">"C @ D ="</span>, C @ D)  <span class="code-comm
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 10</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -959,14 +1047,26 @@ print(<span class="code-string">"C @ D ="</span>, C @ D)  <span class="code-comm
             { id: 3, topic: "Systems", prompt: "Ax = b has a unique solution when A is ___", answer: "invertible,nonsingular", display: "invertible" },
             { id: 4, topic: "Gauss", prompt: "Gaussian elimination produces ___ triangular form", answer: "upper", display: "upper" },
             { id: 5, topic: "NumPy", prompt: "np.linalg._____(A, b) solves Ax = b", answer: "solve", display: "solve" },
-            { id: 6, topic: "Identity", prompt: "AI = A. I is the ___ matrix", answer: "identity", display: "identity" }
+            { id: 6, topic: "Identity", prompt: "AI = A. I is the ___ matrix", answer: "identity", display: "identity" },
+            // Day 23: Determinants & Inverses
+            { id: 7, topic: "2×2 det", prompt: "det([[2,3],[1,4]]) = ?", answer: "5", display: "5 (2×4 - 3×1)" },
+            { id: 8, topic: "Invertibility", prompt: "A is invertible iff det(A) ___ 0", answer: "≠,!=,notequal", display: "≠ (not equal to 0)" },
+            { id: 9, topic: "Properties", prompt: "det(AB) = det(A) × det(___)", answer: "b", display: "B" },
+            { id: 10, topic: "Identity", prompt: "det(I) = ?", answer: "1", display: "1" },
+            { id: 11, topic: "Inverse", prompt: "A⁻¹ × A = ?", answer: "i,identity", display: "I (identity)" },
+            { id: 12, topic: "NumPy", prompt: "np.linalg._____(A) computes determinant", answer: "det", display: "det" }
         ];
 
         const VIDEOS = [
             { title: "Matrix Multiplication (Essence of LinAlg)", channel: "3Blue1Brown", vid: "XkY2DOUCWMU" },
             { title: "Gaussian Elimination", channel: "Professor Leonard", vid: "eDb6iugi6Uk" },
             { title: "Solving Systems", channel: "Khan Academy", vid: "AUqeb9Z3y3k" },
-            { title: "Linear Algebra in Python", channel: "freeCodeCamp", vid: "JnTa9XtvmfI" }
+            { title: "Linear Algebra in Python", channel: "freeCodeCamp", vid: "JnTa9XtvmfI" },
+            // Day 23: Determinants & Inverses
+            { title: "Determinant (Essence of LinAlg)", channel: "3Blue1Brown", vid: "Ip3X9LOh2dk" },
+            { title: "Matrix Inverses", channel: "3Blue1Brown", vid: "uQhTuRlWMxw" },
+            { title: "Computing Determinants", channel: "Khan Academy", vid: "H9BWRYJNIv4" },
+            { title: "Cramer's Rule", channel: "Professor Leonard", vid: "Yz4YmRSH4Xk" }
         ];
 
         let stats = JSON.parse(localStorage.getItem('day22_stats') || '{"attempted":0,"correct":0}');
