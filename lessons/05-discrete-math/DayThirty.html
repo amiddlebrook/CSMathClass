@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 30: Mathematical Induction</title>
+    <title>Day 30: Graph Traversal & Correctness</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -40,10 +40,9 @@
             </svg>
             Day 30 · Discrete Math
         </div>
-        <h1>Mathematical Induction</h1>
+        <h1>Trees & Advanced Graphs</h1>
         <p class="hero-desc">
-            The domino effect of mathematics. Proving statements for infinite cases by proving just two things: the
-            start and the step.
+            Navigating the networks. From hierarchical trees to the four-color map theorem.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -58,7 +57,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                12 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,14 +73,13 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#concept" class="toc-link">1. The Principle</a></li>
-                    <li><a href="#examples" class="toc-link">2. Standard Induction</a></li>
-                    <li><a href="#strong" class="toc-link">3. Strong Induction</a></li>
-                    <li><a href="#structural" class="toc-link">4. Structural Induction</a></li>
-                    <li><a href="#wop" class="toc-link">5. Well-Ordering Principle</a></li>
-                    <li><a href="#python" class="toc-link">6. Induction vs Recursion</a></li>
-                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
+                    <li><a href="#paths" class="toc-link">1. Paths & Cycles</a></li>
+                    <li><a href="#trees" class="toc-link">2. Trees</a></li>
+                    <li><a href="#planarity" class="toc-link">3. Planar Graphs</a></li>
+                    <li><a href="#coloring" class="toc-link">4. Graph Coloring</a></li>
+                    <li><a href="#python" class="toc-link">5. Python Coloring</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -96,96 +94,92 @@
         </aside>
 
         <main class="content">
-            <!-- Principle -->
-            <section class="section" id="concept">
+            <!-- Paths -->
+            <section class="section" id="paths">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Domino Effect</h2>
+                    <h2 class="section-title">Connectivity</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule">
-                        To prove a statement $P(n)$ is true for all integers $n \geq k$:
-                        <ol>
-                            <li><strong>Base Case:</strong> Prove $P(k)$ is true.</li>
-                            <li><strong>Inductive Step:</strong> Prove that if $P(n)$ is true (the hypothesis), then
-                                $P(n+1)$ is true.</li>
-                        </ol>
+                    <div class="list-group">
+                        <div class="list-item">
+                            <strong>Path:</strong> A sequence of non-repeating vertices connected by edges.
+                        </div>
+                        <div class="list-item">
+                            <strong>Cycle:</strong> A path that starts and ends at the same vertex.
+                            <br><em>Example: Triangle (A-B-C-A).</em>
+                        </div>
+                        <div class="list-item">
+                            <strong>Eulerian Path:</strong> Visits every EDGE exactly once. Exists iff graph is
+                            connected and has 0 or 2 odd degree vertices.
+                        </div>
+                        <div class="list-item">
+                            <strong>Hamiltonian Path:</strong> Visits every VERTEX exactly once. (Hard problem!)
+                        </div>
                     </div>
-                    <p>
-                        This is conceptually identical to knocking down an infinite line of dominoes. You push the first
-                        one, and you ensure every domino knocks down the next.
-                    </p>
                 </div>
             </section>
 
-            <!-- Examples -->
-            <section class="section" id="examples">
+            <!-- Trees -->
+            <section class="section" id="trees">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Standard Induction</h2>
+                    <h2 class="section-title">Trees</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Example: Sum of Integers</h3>
-                        <p>Prove $\sum_{i=1}^n i = \frac{n(n+1)}{2}$.</p>
-                        <div class="math-block">1. Base Case (n=1):
-                            LHS = 1. RHS = 1(2)/2 = 1. Checked.
-
-                            2. Inductive Step:
-                            Assume 1 + ... + k = k(k+1)/2.
-                            Goal: Show 1 + ... + k + (k+1) = (k+1)(k+2)/2.
-
-                            LHS = [1 + ... + k] + (k+1)
-                            = k(k+1)/2 + (k+1) (by Hypothesis)
-                            = (k+1) [ k/2 + 1 ]
-                            = (k+1) [ (k+2)/2 ]
-                            = (k+1)(k+2)/2.
-                            QED.</div>
+                    <div class="rule">
+                        A <strong>Tree</strong> is a connected graph with no cycles.
                     </div>
+                    <p>Properties of a tree with $n$ vertices:</p>
+                    <ul>
+                        <li>Has exactly $n-1$ edges.</li>
+                        <li>There is a unique path between any two vertices.</li>
+                        <li>Removing any edge disconnects the graph.</li>
+                        <li>Adding any edge creates a cycle.</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- Strong -->
-            <section class="section" id="strong">
+            <!-- Planarity -->
+            <section class="section" id="planarity">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Strong Induction</h2>
+                    <h2 class="section-title">Planar Graphs</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        Sometimes knowing $P(k)$ isn't enough to prove $P(k+1)$, but knowing $P(1), P(2), ..., P(k)$
-                        <strong>all</strong> are true helps.
+                        A graph is <strong>planar</strong> if it can be drawn without edges crossing.
                     </p>
-                    <div class="rule">
-                        <strong>Strong Induction:</strong> Assume $P(i)$ is true for ALL $1 \leq i \leq k$. Prove
-                        $P(k+1)$.
+                    <div class="formula-box">
+                        <div class="formula-label">Euler's Formula</div>
+                        <div class="formula-main">
+                            $v - e + f = 2$
+                        </div>
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Example: Fundamental Theorem of Arithmetic</h3>
-                        <p>
-                            Prove every integer $n > 1$ can be written as a product of primes.
-                            <br>
-                            If $n+1$ is prime, done.
-                            If composite, $n+1 = a \cdot b$.
-                            By Strong Induction, $a$ and $b$ (being smaller than $n+1$) have prime factorizations.
-                            Thus their product $a \cdot b$ is a product of primes.
-                        </p>
+                    <p>Where $f$ is the number of faces (regions bounded by edges, including the outer infinite region).
+                    </p>
+                    <div class="info">
+                        <strong>Kuratowski's Theorem:</strong> A graph is non-planar iff it contains a subgraph
+                        homeomorphic to $K_5$ or $K_{3,3}$.
                     </div>
                 </div>
             </section>
 
-            <!-- Structural -->
-            <section class="section" id="structural">
+            <!-- Coloring -->
+            <section class="section" id="coloring">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Structural Induction</h2>
+                    <h2 class="section-title">Graph Coloring</h2>
                 </div>
                 <div class="section-body">
-                    <p>CS often deals with recursively defined structures (Trees, Lists, Formulas). Structural Induction
-                        is induction on the <em>structure</em> rather than integers.</p>
-                    <div class="math-block">For a Binary Tree T:
-                        1. Base Case: T is empty (or a single leaf). Prove P(T).
-                        2. Inductive Step: Assume P(L) and P(R) for subtrees. Prove P(Tree(L, R)).</div>
+                    <p>
+                        Assigning colors to vertices such that no two adjacent vertices share the same color.
+                        The <strong>Chromatic Number</strong> $\chi(G)$ is the minimum colors needed.
+                    </p>
+                    <div class="rule">
+                        <strong>Four Color Theorem:</strong> Every planar graph can be colored with at most 4 colors.
+                    </div>
+                    <p>Applications: Register allocation in compilers, scheduling.</p>
                 </div>
             </section>
 
@@ -193,37 +187,48 @@
             <section class="section" id="python">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Recursion is Induction</h2>
+                    <h2 class="section-title">Greedy Coloring</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Every recursive function relies on inductive logic for correctness.
-                        You handle the base case (stopping condition) and the recursive step (reducing the problem).
-                    </p>
+                    <p>Finding the exact chromatic number is NP-Hard. We use heuristics like greedy coloring.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Towers of Hanoi</span>
+                            <span class="code-label">Greedy Coloring Implementaton</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">def</span> <span class="code-function">hanoi</span>(n, source, target, auxiliary):
-    <span class="code-comment"># Base Case</span>
-    <span class="code-keyword">if</span> n == <span class="code-number">1</span>:
-        <span class="code-function">print</span>(<span class="code-string">f"Move disk 1 from {source} to {target}"</span>)
-        <span class="code-keyword">return</span>
+                            <pre><span class="code-keyword">def</span> <span class="code-function">greedy_color</span>(graph):
+    <span class="code-comment"># graph is dict: vertex -> list of neighbors</span>
+    colors = {}
     
-    <span class="code-comment"># Inductive Step (Recursive Case)</span>
-    <span class="code-comment"># Move n-1 disks from Source to Aux (Inductive Hypothesis)</span>
-    hanoi(n-<span class="code-number">1</span>, source, auxiliary, target)
+    <span class="code-comment"># Order vertices (e.g., by degree descending)</span>
+    nodes = <span class="code-function">sorted</span>(graph.keys(), key=<span class="code-keyword">lambda</span> x: <span class="code-function">len</span>(graph[x]), reverse=<span class="code-keyword">True</span>)
     
-    <span class="code-comment"># Move nth disk from Source to Target</span>
-    <span class="code-function">print</span>(<span class="code-string">f"Move disk {n} from {source} to {target}"</span>)
-    
-    <span class="code-comment"># Move n-1 disks from Aux to Target (Inductive Hypothesis)</span>
-    hanoi(n-<span class="code-number">1</span>, auxiliary, target, source)
+    <span class="code-keyword">for</span> node <span class="code-keyword">in</span> nodes:
+        neighbor_colors = {colors.get(neigh) <span class="code-keyword">for</span> neigh <span class="code-keyword">in</span> graph[node]}
+        
+        <span class="code-comment"># Find first available color (0, 1, 2...)</span>
+        color = <span class="code-number">0</span>
+        <span class="code-keyword">while</span> color <span class="code-keyword">in</span> neighbor_colors:
+            color += <span class="code-number">1</span>
+            
+        colors[node] = color
+        
+    <span class="code-keyword">return</span> colors
 
-<span class="code-function">print</span>(<span class="code-string">"Solving for 3 disks:"</span>)
-hanoi(<span class="code-number">3</span>, <span class="code-string">'A'</span>, <span class="code-string">'C'</span>, <span class="code-string">'B'</span>)</pre>
+G = {
+    <span class="code-string">'A'</span>: [<span class="code-string">'B'</span>, <span class="code-string">'C'</span>, <span class="code-string">'D'</span>],
+    <span class="code-string">'B'</span>: [<span class="code-string">'A'</span>, <span class="code-string">'C'</span>],
+    <span class="code-string">'C'</span>: [<span class="code-string">'A'</span>, <span class="code-string">'B'</span>, <span class="code-string">'D'</span>],
+    <span class="code-string">'D'</span>: [<span class="code-string">'A'</span>, <span class="code-string">'C'</span>]
+}
+
+coloring = greedy_color(G)
+<span class="code-function">print</span>(coloring)
+<span class="code-comment"># Possible output: {'A': 0, 'C': 1, 'B': 2, 'D': 2} (3 colors used)</span>
+<span class="code-comment"># K4 needs 4, but this is a diamond shape? (B-A-D, B-C-D, A-C). </span>
+<span class="code-comment"># Wait A connects to B,C,D. C connects to A,B,D. </span>
+<span class="code-comment"># A and C are connected to everything. They will force distinct colors.</span></pre>
                         </div>
                     </div>
                 </div>
@@ -274,35 +279,36 @@ hanoi(<span class="code-number">3</span>, <span class="code-string">'A'</span>, 
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Induction",
+                title: "Advanced Graphs",
                 items: [
-                    { title: "Proof by Induction", channel: "TrevTutor", vid: "None" },
-                    { title: "Strong Induction", channel: "TrevTutor", vid: "None" },
-                    { title: "Structural Induction", channel: "MIT OCW", vid: "None" },
+                    { title: "Euler Paths vs Hamiltonian paths", channel: "TrevTutor", vid: "None" },
+                    { title: "Planar Graphs & Euler Formula", channel: "TrevTutor", vid: "None" },
+                    { title: "Graph Coloring", channel: "TrevTutor", vid: "None" },
                 ]
             }
         ];
         const VIDEOS_REAL = [
             {
-                title: "Induction",
+                title: "Graph Theory II",
                 items: [
-                    { title: "Mathematical Induction", channel: "The Organic Chemistry Tutor", vid: "T6350fDcd3I" },
-                    { title: "Strong Induction", channel: "TrevTutor", vid: "C_W7xXm-ZqM" }
+                    { title: "Euler vs Hamiltonian Paths", channel: "The Organic Chemistry Tutor", vid: "7s-cx9nOQm8" },
+                    { title: "Planar Graphs", channel: "TrevTutor", vid: "wnYQPqXk8Kk" },
+                    { title: "Graph Coloring", channel: "Numberphile", vid: "NgbK43jB4rQ" } // Four color theorem
                 ]
             }
         ];
 
         const QUESTIONS = [
-            { topic: "Base Case", prompt: "The first step of induction is the ___ case.", answer: "base" },
-            { topic: "Hypothesis", prompt: "Assuming P(k) is true is called the Inductive ___.", answer: "hypothesis" },
-            { topic: "Domino", prompt: "Induction is often compared to falling ___.", answer: "dominoes" },
-            { topic: "Strong", prompt: "In Strong Induction, we assume P(i) is true for ___ i <= k.", answer: "all" },
-            { topic: "Structure", prompt: "To prove properties of Trees, we use ___ induction.", answer: "structural" },
-            { topic: "WOP", prompt: "The Well-Ordering Principle states every non-empty set of positive integers has a ___ element.", answer: "least", altAnswers: ["smallest", "minimum"] },
-            { topic: "CS", prompt: "Recursion in programming is equivalent to ___ in math.", answer: "induction" },
-            { topic: "Invariant", prompt: "Loop invariants are proved using ___.", answer: "induction" },
+            { topic: "Cycle", prompt: "A path starting and ending at the same vertex is a ___.", answer: "cycle" },
+            { topic: "Tree", prompt: "A tree with n vertices has ___ edges.", answer: "n-1", altAnswers: ["n - 1"] },
+            { topic: "Euler", prompt: "Euler path visits every ___ exactly once.", answer: "edge" },
+            { topic: "Hamilton", prompt: "Hamiltonian path visits every ___ exactly once.", answer: "vertex", altAnswers: ["node"] },
+            { topic: "Planar", prompt: "Planar graphs can be drawn with no edge ___.", answer: "crossings", altAnswers: ["crossing"] },
+            { topic: "Formula", prompt: "Euler's Formula: v - e + f = ___.", answer: "2" },
+            { topic: "Color", prompt: "Chromatic number of a triangle (K3) is ___.", answer: "3" },
+            { topic: "Theorem", prompt: "Every planar graph can be colored with ___ colors.", answer: "4", altAnswers: ["four"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day30_ind_v1' });
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day35_graph2_v1' });
     </script>
 </body>
 

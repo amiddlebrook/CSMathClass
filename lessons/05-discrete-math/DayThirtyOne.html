@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 31: Pigeonhole & Inclusion-Exclusion</title>
+    <title>Day 36: Number Theory Basics</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -40,10 +40,10 @@
             </svg>
             Day 31 · Discrete Math
         </div>
-        <h1>Counting Principles</h1>
+        <h1>Complete Number Theory</h1>
         <p class="hero-desc">
-            Sometimes the hardest math is just counting correctly. From fitting pigeons into holes to subtracting
-            overcounts.
+            The queen of mathematics. From basic divisibility to RSA encryption. The full toolkit for analyzing
+            integers.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -58,7 +58,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                12 practice problems
+                18 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,12 +74,15 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#pigeon" class="toc-link">1. Pigeonhole Principle</a></li>
-                    <li><a href="#generalized" class="toc-link">2. Generalized PHP</a></li>
-                    <li><a href="#pie" class="toc-link">3. Inclusion-Exclusion</a></li>
-                    <li><a href="#python" class="toc-link">4. Python Simulation</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
+                    <li><a href="#divisibility" class="toc-link">1. Divisibility</a></li>
+                    <li><a href="#modular" class="toc-link">2. Modular Arithmetic</a></li>
+                    <li><a href="#primes" class="toc-link">3. Primes</a></li>
+                    <li><a href="#gcd" class="toc-link">4. Euclidean Algorithm</a></li>
+                    <li><a href="#inverse" class="toc-link">5. Modular Inverse</a></li>
+                    <li><a href="#rsa" class="toc-link">6. RSA Encryption</a></li>
+                    <li><a href="#python" class="toc-link">7. Python Number Theory</a></li>
+                    <li><a href="#videos" class="toc-link">8. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">9. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -94,117 +97,178 @@
         </aside>
 
         <main class="content">
-            <!-- Pigeonhole -->
-            <section class="section" id="pigeon">
+            <!-- Divisibility -->
+            <section class="section" id="divisibility">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Pigeonhole Principle</h2>
+                    <h2 class="section-title">Divisibility</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        If $n$ pigeons fly into $k$ holes, and $n > k$, then at least one hole contains <strong>at least
-                            two</strong> pigeons.
+                        We say $a$ divides $b$ ($a \mid b$) if there exists an integer $k$ such that $b = ak$.
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Applications</h3>
-                        <ul>
-                            <li><strong>Hashing:</strong> If you hash $N$ keys into a table of size $M < N$, collisions
-                                    are inevitable.</li>
-                            <li><strong>Compression:</strong> Lossless compression cannot shrink every file (some must
-                                grow or stay same size).</li>
-                            <li><strong>Hair:</strong> Two people in NYC have the exact same number of hairs on their
-                                head (Pop ~8M, hairs ~150k).</li>
-                        </ul>
+                    <p>Properties:</p>
+                    <ul>
+                        <li>If $a \mid b$ and $b \mid c$, then $a \mid c$.</li>
+                        <li>If $a \mid b$ and $a \mid c$, then $a \mid (mb + nc)$ for any integers $m, n$.</li>
+                    </ul>
+                    <div class="math-block">The Division Algorithm:
+                        For any integer a and b > 0, there exist unique q and r such that:
+                        a = bq + r, where 0 ≤ r < b</div>
                     </div>
-                </div>
             </section>
 
-            <!-- Generalized -->
-            <section class="section" id="generalized">
+            <!-- Modular -->
+            <section class="section" id="modular">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Generalized Principle</h2>
+                    <h2 class="section-title">Modular Arithmetic</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Clock arithmetic. We say $a \equiv b \pmod m$ if $m \mid (a-b)$.
+                        Alternatively, $a$ and $b$ have the same remainder when divided by $m$.
+                    </p>
+                    <div class="list-group">
+                        <div class="list-item">
+                            <strong>Addition:</strong> $(a + b) \pmod m = ((a \pmod m) + (b \pmod m)) \pmod m$.
+                        </div>
+                        <div class="list-item">
+                            <strong>Multiplication:</strong> $(a \cdot b) \pmod m = ((a \pmod m) \cdot (b \pmod m))
+                            \pmod m$.
+                        </div>
+                        <div class="list-item">
+                            <strong>Exponentiation:</strong> Fast Modular Exponentiation allows computing large powers
+                            efficiently.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Primes -->
+            <section class="section" id="primes">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Prime Numbers</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least
-                        $\lceil N/k \rceil$ objects.
+                        A prime $p > 1$ has only divisors 1 and $p$.
+                        <br>
+                        <strong>Fundamental Theorem of Arithmetic:</strong> Every integer > 1 is a unique product of
+                        primes.
                     </div>
                     <p>
-                        <strong>Example:</strong> In a class of 30 students, at least $\lceil 30/12 \rceil = 3$ were
-                        born in the same month.
+                        There are infinitely many primes (Euclid's proof).
+                        <br>
+                        The <strong>Prime Number Theorem</strong> says $\pi(x) \approx x / \ln x$, where $\pi(x)$ is the
+                        count of primes $\le x$.
                     </p>
                 </div>
             </section>
 
-            <!-- PIE -->
-            <section class="section" id="pie">
+            <!-- GCD (from Day 32) -->
+            <section class="section" id="gcd">
                 <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Inclusion-Exclusion (PIE)</h2>
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Euclidean Algorithm</h2>
                 </div>
                 <div class="section-body">
-                    <p>How to count the size of a union of sets?</p>
-                    <div class="formula-box">
-                        <div class="formula-label">Two Sets</div>
-                        <div class="formula-main">
-                            $|A \cup B| = |A| + |B| - |A \cap B|$
-                        </div>
-                    </div>
-                    <div class="formula-box">
-                        <div class="formula-label">Three Sets</div>
-                        <div class="formula-main">
-                            $|A \cup B \cup C| = |A| + |B| + |C|$<br>
-                            $- (|A \cap B| + |A \cap C| + |B \cap C|)$<br>
-                            $+ |A \cap B \cap C|$
-                        </div>
-                    </div>
                     <p>
-                        <strong>Pattern:</strong> Add singles, subtract pairs, add triples, subtract quads...
+                        To find $GCD(a, b)$:
+                        <br>
+                        If $b=0$, return $a$.
+                        <br>
+                        Else, return $GCD(b, a \pmod b)$.
                     </p>
+                    <div class="rule">
+                        <strong>Bézout's Identity:</strong> There exist integers $x, y$ such that $ax + by = GCD(a, b)$.
+                        We find them using the <strong>Extended Euclidean Algorithm</strong>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inverse (from Day 32) -->
+            <section class="section" id="inverse">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Modular Inverse</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        We want to solve $ax \equiv 1 \pmod m$.
+                        <br>
+                        The solution exists <strong>if and only if</strong> $GCD(a, m) = 1$.
+                        <br>
+                        The inverse $x$ is the coefficient found by Extended Euclid.
+                    </p>
+                    <div class="math-block">Example: Find inverse of 3 mod 7.
+                        3 * 5 = 15 = 2 * 7 + 1.
+                        So 3 * 5 ≡ 1 mod 7.
+                        Inverse is 5.</div>
+                </div>
+            </section>
+
+            <!-- RSA (from Day 32) -->
+            <section class="section" id="rsa">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">RSA Encryption</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Key Generation</h3>
+                        <ol>
+                            <li>Pick two large primes $p, q$.</li>
+                            <li>Compute $n = pq$ and $\phi(n) = (p-1)(q-1)$.</li>
+                            <li>Choose public exponent $e$ such that $GCD(e, \phi(n)) = 1$ (usually 65537).</li>
+                            <li>Compute private key $d$ such that $ed \equiv 1 \pmod{\phi(n)}$.</li>
+                        </ol>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Encryption / Decryption</h3>
+                        <ul>
+                            <li><strong>Encrypt:</strong> $C = M^e \pmod n$</li>
+                            <li><strong>Decrypt:</strong> $M = C^d \pmod n$</li>
+                        </ul>
+                        <p>Security relies on the difficulty of factoring $n$ back into $p$ and $q$.</p>
+                    </div>
                 </div>
             </section>
 
             <!-- Python -->
             <section class="section" id="python">
                 <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Simulation: Birthday Paradox</h2>
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Python Number Ops</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        The Birthday Paradox is a probabilistic version of the Pigeonhole Principle.
-                        With just 23 people, there's a >50% chance of a collision. Guaranteed collision requires 367
-                        people (PHP).
-                    </p>
+                    <p>Python handles arbitrarily large integers, making it great for number theory.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Birthday Paradox Simulation</span>
+                            <span class="code-label">Primes & Modulo</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">import</span> random
+                            <pre><span class="code-keyword">import</span> math
 
-<span class="code-keyword">def</span> <span class="code-function">has_collision</span>(num_people):
-    birthdays = []
-    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(num_people):
-        day = random.randint(<span class="code-number">1</span>, <span class="code-number">365</span>)
-        <span class="code-keyword">if</span> day <span class="code-keyword">in</span> birthdays:
-            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
-        birthdays.append(day)
-    <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+<span class="code-comment"># Check prime (naive)</span>
+<span class="code-keyword">def</span> <span class="code-function">is_prime</span>(n):
+    <span class="code-keyword">if</span> n < <span class="code-number">2</span>: <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">2</span>, <span class="code-function">int</span>(n**<span class="code-number">0.5</span>) + <span class="code-number">1</span>):
+        <span class="code-keyword">if</span> n % i == <span class="code-number">0</span>:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span>
 
-<span class="code-keyword">def</span> <span class="code-function">run_trials</span>(people, trials=<span class="code-number">10000</span>):
-    collisions = <span class="code-number">0</span>
-    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(trials):
-        <span class="code-keyword">if</span> has_collision(people):
-            collisions += <span class="code-number">1</span>
-    <span class="code-keyword">return</span> collisions / trials
+<span class="code-function">print</span>(<span class="code-string">f"Is 2017 prime? {is_prime(2017)}"</span>)
 
-<span class="code-function">print</span>(<span class="code-string">"Probability of shared birthday:"</span>)
-<span class="code-keyword">for</span> p <span class="code-keyword">in</span> [<span class="code-number">10</span>, <span class="code-number">23</span>, <span class="code-number">50</span>, <span class="code-number">70</span>]:
-    prob = run_trials(p)
-    <span class="code-function">print</span>(<span class="code-string">f"{p} people: {prob:.1%}"</span>)</pre>
+<span class="code-comment"># Modular Exponentiation: (base^exp) % mod</span>
+<span class="code-comment"># pow(base, exp, mod) is efficient O(log exp)</span>
+val = <span class="code-function">pow</span>(<span class="code-number">5</span>, <span class="code-number">100000</span>, <span class="code-number">2017</span>)
+<span class="code-function">print</span>(<span class="code-string">f"5^100000 mod 2017 = {val}"</span>)
+
+<span class="code-comment"># GCD</span>
+<span class="code-function">print</span>(<span class="code-string">f"GCD(48, 18) = {math.gcd(48, 18)}"</span>)</pre>
                         </div>
                     </div>
                 </div>
@@ -213,7 +277,7 @@
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 8</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -235,7 +299,7 @@
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 9</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -255,32 +319,47 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Counting",
+                title: "Number Theory",
                 items: [
-                    { title: "Pigeonhole Principle", channel: "TrevTutor", vid: "None" },
-                    { title: "Inclusion-Exclusion", channel: "TrevTutor", vid: "None" },
+                    { title: "Divisibility & Modular Arithmetic", channel: "TrevTutor", vid: "None" },
+                    { title: "Prime Numbers", channel: "TrevTutor", vid: "None" },
                 ]
             }
         ];
-        // Real Vids
         const VIDEOS_REAL = [
             {
-                title: "Counting Principles",
+                title: "Number Theory",
                 items: [
-                    { title: "The Pigeonhole Principle", channel: "TrevTutor", vid: "3ZJD1tXQp6Q" },
-                    { title: "Inclusion-Exclusion Principle", channel: "TrevTutor", vid: "-xJqW-O8pJA" }
+                    { title: "Divisibility", channel: "TrevTutor", vid: "SRm6191R9Qo" },
+                    { title: "Modular Arithmetic", channel: "The Organic Chemistry Tutor", vid: "RcAb5vBz3Hg" },
+                    { title: "Prime Numbers", channel: "TrevTutor", vid: "None" }
+                ]
+            },
+            {
+                title: "Cryptography",
+                items: [
+                    { title: "Euclidean Algorithm", channel: "TrevTutor", vid: "p5gn2hj51hs" },
+                    { title: "RSA Encryption", channel: "Computerphile", vid: "JD72Ry60eSA" }
                 ]
             }
         ];
 
         const QUESTIONS = [
-            { topic: "PHP", prompt: "If N objects > k boxes, one box has at least ___ objects.", answer: "2" },
-            { topic: "Generalized", prompt: "If N objects in k boxes, worst case box has ceiling(N / ___).", answer: "k" },
-            { topic: "Hashing", prompt: "If input space > hash table size, ___ MUST occur.", answer: "collisions", altAnswers: ["collision"] },
-            { topic: "PIE", prompt: "|AvB| = |A| + |B| - |A ___ B|.", answer: "intersect", altAnswers: ["intersection", "cap", "and"] },
-            { topic: "Paradox", prompt: "Birthday paradox says we only need ___ people for 50% collision chance.", answer: "23" },
+            { topic: "Divisibility", prompt: "If a divides b, then b = a * ___.", answer: "k", altAnswers: ["integer", "c"] },
+            { topic: "Modulo", prompt: "17 mod 5 = ___.", answer: "2" },
+            { topic: "Modulo", prompt: "If a and b have same remainder mod m, then a ___ b (mod m).", answer: "equiv", altAnswers: ["equivalent", "congruent"] },
+            { topic: "Prime", prompt: "A prime number has exactly ___ factors.", answer: "2" },
+            { topic: "Theorem", prompt: "Fundamental Theorem of Arithmetic involves limits of ___ factorization.", answer: "prime" },
+            { topic: "Algorithm", prompt: "Division Algo: a = bq + ___.", answer: "r", altAnswers: ["remainder"] },
+            // Day 32: Cryptography
+            { topic: "GCD", prompt: "Algorithm to find GCD efficiently is ___.", answer: "euclidean" },
+            { topic: "Identity", prompt: "ax + by = GCD(a,b) is ___ Identity.", answer: "bezout", altAnswers: ["bezout's"] },
+            { topic: "Inverse", prompt: "Inverse of 'a' mod 'm' exists iff GCD(a, m) = ___.", answer: "1" },
+            { topic: "RSA", prompt: "In RSA, n is the product of two large ___.", answer: "primes" },
+            { topic: "RSA", prompt: "Public key is (e, n). Private key is (___, n).", answer: "d" },
+            { topic: "Phi", prompt: "Euler's totient function φ(p) for prime p is ___.", answer: "p-1", altAnswers: ["p - 1"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day31_php_v1' });
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day36_num1_v1' });
     </script>
 </body>
 

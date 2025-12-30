@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 23: Vector Spaces & Subspaces</title>
+    <title>Day 23: Checkpoint — Abstract Vectors</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,11 +38,11 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 23 · Linear Algebra
+            Day 23 · Linear Algebra Sequence
         </div>
-        <h1>Vector Spaces</h1>
+        <h1>Linear Transformations</h1>
         <p class="hero-desc">
-            Defining the playground where linear algebra happens. From R^n to function spaces.
+            Thinking of matrices as functions that warp space. Rotations, shears, and scalings.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -74,10 +74,10 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#definition" class="toc-link">1. Definition</a></li>
-                    <li><a href="#subspaces" class="toc-link">2. Subspaces</a></li>
-                    <li><a href="#independence" class="toc-link">3. Linear Independence</a></li>
-                    <li><a href="#basis" class="toc-link">4. Basis & Dimension</a></li>
-                    <li><a href="#python" class="toc-link">5. Python Basis Check</a></li>
+                    <li><a href="#matrix-rep" class="toc-link">2. Matrix Representation</a></li>
+                    <li><a href="#examples" class="toc-link">3. Common Transforms</a></li>
+                    <li><a href="#change-basis" class="toc-link">4. Change of Basis</a></li>
+                    <li><a href="#python" class="toc-link">5. Python Graphics</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -98,86 +98,81 @@
             <section class="section" id="definition">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">What is a Vector Space?</h2>
+                    <h2 class="section-title">A Functional View</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        A <strong>Vector Space</strong> is a set $V$ of objects (vectors) equipped with two operations:
-                        <strong>Addition</strong> and <strong>Scalar Multiplication</strong>, satisfying 10 axioms
-                        (closure, commutativity, associativity, zero vector, etc.).
+                        A function $T: V \to W$ is a <strong>Linear Transformation</strong> if it preserves vector
+                        addition and scalar multiplication:
                     </p>
-                    <div class="list-group">
-                        <div class="list-item">
-                            <strong>Common Spaces:</strong>
-                            <br>$\mathbb{R}^n$: Column vectors of size $n$.
-                            <br>$\mathbb{P}_n$: Polynomials of degree at most $n$.
-                            <br>$M_{m \times n}$: Matrices of size $m \times n$.
-                        </div>
+                    <div class="math-block">
+                        1. T(u + v) = T(u) + T(v)
+                        2. T(cu) = cT(u)
                     </div>
+                    <p>Basically: "Grid lines remain parallel and evenly spaced, and the origin stays fixed."</p>
                 </div>
             </section>
 
-            <!-- Subspaces -->
-            <section class="section" id="subspaces">
+            <!-- Matrix Representation -->
+            <section class="section" id="matrix-rep">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Subspaces</h2>
+                    <h2 class="section-title">Matrix Representation</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        A subset $W \subseteq V$ is a <strong>subspace</strong> if:
-                        <ol>
-                            <li>It contains the zero vector $\vec{0}$.</li>
-                            <li>It is closed under addition ($\vec{u}, \vec{v} \in W \implies \vec{u}+\vec{v} \in W$).
-                            </li>
-                            <li>It is closed under scalar multiplication ($c \in \mathbb{R}, \vec{u} \in W \implies
-                                c\vec{u} \in W$).</li>
-                        </ol>
+                        Every linear transformation $T$ (on finite-dimensional spaces) can be represented by a matrix
+                        $A$.
                     </div>
-                    <p>Example: A line through the origin in $\mathbb{R}^2$ is a subspace. A line NOT through the origin
-                        is NOT.</p>
+                    <p>
+                        The columns of $A$ are simply the images of the basis vectors.
+                        <br>
+                        $A = [T(e_1) \ T(e_2) \ \dots \ T(e_n)]$
+                    </p>
                 </div>
             </section>
 
-            <!-- Independence -->
-            <section class="section" id="independence">
+            <!-- Examples -->
+            <section class="section" id="examples">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Linear Independence</h2>
+                    <h2 class="section-title">2D Examples</h2>
+                </div>
+                <div class="section-body">
+                    <div class="grid-2">
+                        <div class="list-item">
+                            <strong>Scaling:</strong>
+                            $[ k \ 0 ; 0 \ k ]$
+                        </div>
+                        <div class="list-item">
+                            <strong>Rotation (90 deg):</strong>
+                            $[ 0 \ -1 ; 1 \ 0 ]$
+                        </div>
+                        <div class="list-item">
+                            <strong>Shear:</strong>
+                            $[ 1 \ k ; 0 \ 1 ]$
+                        </div>
+                        <div class="list-item">
+                            <strong>Projection (x-axis):</strong>
+                            $[ 1 \ 0 ; 0 \ 0 ]$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Change Basis -->
+            <section class="section" id="change-basis">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Change of Basis</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        A set of vectors $\{v_1, \dots, v_k\}$ is <strong>Linearly Independent</strong> if the only
-                        solution to
-                        $$ c_1 v_1 + \dots + c_k v_k = \vec{0} $$
-                        is the trivial solution ($c_1 = \dots = c_k = 0$).
+                        If we look at the same transformation in a different basis $B$, the matrix changes to:
+                        $$ M = P^{-1} A P $$
+                        Where $P$ is the change-of-basis matrix (columns are new basis vectors).
+                        Matrices $M$ and $A$ are <strong>Similar</strong>.
                     </p>
-                    <p>If there is a non-trivial solution, they are <strong>Dependent</strong> (one vector is a
-                        combination of others).</p>
-                </div>
-            </section>
-
-            <!-- Basis -->
-            <section class="section" id="basis">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Basis & Dimension</h2>
-                </div>
-                <div class="section-body">
-                    <div class="list-group">
-                        <div class="list-item">
-                            <strong>Span:</strong> The set of all linear combinations of a set of vectors.
-                        </div>
-                        <div class="list-item">
-                            <strong>Basis:</strong> A set of vectors that is Linearly Independent AND Spans the space.
-                            It is a "minimal spanning set".
-                        </div>
-                        <div class="list-item">
-                            <strong>Dimension:</strong> The number of vectors in a basis. It is unique for a given
-                            space.
-                            <br>Dim($\mathbb{R}^3$) = 3. Dim($\mathbb{P}_2$) = 3 ($1, t, t^2$).
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -185,38 +180,38 @@
             <section class="section" id="python">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python Check</h2>
+                    <h2 class="section-title">Visualizing Transforms</h2>
                 </div>
                 <div class="section-body">
-                    <p>We can check for independence by forming a matrix and calculating the Rank. If Rank = number of
-                        vectors, they are independent.</p>
+                    <p>We can apply a matrix to a set of points to see the transformation.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Independence Check</span>
+                            <span class="code-label">Applying Transformation</span>
                         </div>
                         <div class="code-content">
                             <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
 
-<span class="code-comment"># Vectors to check: (1,0,0), (0,1,0), (1,1,0)</span>
-<span class="code-comment"># We put them as ROWS or COLUMNS. Let's stack them as rows.</span>
-vectors = np.array([
-    [<span class="code-number">1</span>, <span class="code-number">0</span>, <span class="code-number">0</span>],
-    [<span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">0</span>],
-    [<span class="code-number">1</span>, <span class="code-number">1</span>, <span class="code-number">0</span>]
+<span class="code-comment"># Unit Square corners</span>
+points = np.array([
+    [<span class="code-number">0</span>, <span class="code-number">0</span>],
+    [<span class="code-number">1</span>, <span class="code-number">0</span>],
+    [<span class="code-number">1</span>, <span class="code-number">1</span>],
+    [<span class="code-number">0</span>, <span class="code-number">1</span>]
+]).T <span class="code-comment"># 2x4 matrix</span>
+
+<span class="code-comment"># Shear Matrix</span>
+k = <span class="code-number">1.5</span>
+Shear = np.array([
+    [<span class="code-number">1</span>, k],
+    [<span class="code-number">0</span>, <span class="code-number">1</span>]
 ])
 
-<span class="code-comment"># Calculate rank</span>
-rank = np.linalg.matrix_rank(vectors)
-<span class="code-function">print</span>(<span class="code-string">f"Number of vectors: {len(vectors)}"</span>)
-<span class="code-function">print</span>(<span class="code-string">f"Rank: {rank}"</span>) 
-<span class="code-comment"># Rank is 2. But we have 3 vectors. </span>
-<span class="code-comment"># Thus, they are DEPENDENT. (v3 = v1 + v2)</span>
+<span class="code-comment"># Transform</span>
+transformed_points = Shear @ points
 
-<span class="code-keyword">if</span> rank < <span class="code-function">len</span>(vectors):
-    <span class="code-function">print</span>(<span class="code-string">"Linearly Dependent"</span>)
-<span class="code-keyword">else</span>:
-    <span class="code-function">print</span>(<span class="code-string">"Linearly Independent"</span>)</pre>
+<span class="code-function">print</span>(<span class="code-string">"Original (columns):\n"</span>, points)
+<span class="code-function">print</span>(<span class="code-string">"Transformed:\n"</span>, transformed_points)</pre>
                         </div>
                     </div>
                 </div>
@@ -267,33 +262,31 @@ rank = np.linalg.matrix_rank(vectors)
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Vector Spaces",
+                title: "Linear Transformations",
                 items: [
-                    { title: "Linear Combinations & Span", channel: "3Blue1Brown", vid: "k7RM-ot2NWY" },
-                    { title: "Basis & Dimension", channel: "TrevTutor", vid: "None" },
-                    { title: "Null Space & Column Space", channel: "The Organic Chemistry Tutor", vid: "None" },
+                    { title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
+                    { title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
                 ]
             }
         ];
         const VIDEOS_REAL = [
             {
-                title: "Vector Spaces",
+                title: "Visualizing Matrices",
                 items: [
-                    { title: "Linear Combinations", channel: "3Blue1Brown", vid: "k7RM-ot2NWY" },
-                    { title: "Linear Independence", channel: "Khan Academy", vid: "VJOiWdqlPpw" },
-                    { title: "Basis", channel: "3Blue1Brown", vid: "uQhTuRlWMxw" } // Reuse inverse/basis vid? Actually 3b1b ch 2 is Span.
+                    { title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
+                    { title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
                 ]
             }
         ];
 
         const QUESTIONS = [
-            { topic: "Subspace", prompt: "A subspace must contain the ___ vector.", answer: "zero", altAnswers: ["0", "null"] },
-            { topic: "Span", prompt: "The set of all linear combinations is the ___.", answer: "span" },
-            { topic: "Independence", prompt: "If c1*v1 + ... = 0 only when all c=0, vectors are ___.", answer: "independent" },
-            { topic: "Basis", prompt: "A basis is a linearly independent ___ set.", answer: "spanning" },
-            { topic: "Dimension", prompt: "The number of vectors in a basis is the ___.", answer: "dimension" },
+            { topic: "Linearity", prompt: "T(u+v) must equal ___.", answer: "t(u)+t(v)", altAnswers: ["t(u) + t(v)"] },
+            { topic: "Origin", prompt: "A linear transformation must map the origin to the ___.", answer: "origin", altAnswers: ["zero vector"] },
+            { topic: "ColSpace", prompt: "Columns of the matrix A are the images of the ___ vectors.", answer: "basis" },
+            { topic: "Similar", prompt: "Similar matrices represent the same ___ in different bases.", answer: "transformation", altAnswers: ["map", "operator"] },
+            { topic: "Det", prompt: "The determinant of a rotation matrix is ___.", answer: "1" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day23_vec_v1' });
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day27_trans_v1' });
     </script>
 </body>
 

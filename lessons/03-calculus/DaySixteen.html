@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 16: Checkpoint — Walk Through a Probability Argument</title>
+    <title>Day 18: Multiple Integrals & Change of Variables</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,9 +20,9 @@
             --text: #1c1917;
             --text-secondary: #57534e;
             --text-muted: #78716c;
-            --accent: #0891b2;
-            --accent-light: #cffafe;
-            --accent-dark: #0e7490;
+            --accent: #059669;
+            --accent-light: #d1fae5;
+            --accent-dark: #047857;
             --code-bg: #1e1e1e;
             --code-text: #d4d4d4;
             --success: #16a34a;
@@ -49,9 +49,9 @@
             --text: #ececf1;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
-            --accent: #22d3ee;
-            --accent-light: #164e63;
-            --accent-dark: #67e8f9;
+            --accent: #34d399;
+            --accent-light: #064e3b;
+            --accent-dark: #6ee7b7;
             --code-bg: #0f0f12;
             --success: #86efac;
             --success-bg: #14532d;
@@ -533,66 +533,29 @@
             color: var(--text)
         }
 
-        .annotated-proof {
-            background: var(--surface);
+        .formula-box {
+            background: var(--surface-alt);
             border: 2px solid var(--accent);
             border-radius: var(--radius-lg);
-            margin: 20px 0;
-            overflow: hidden
+            padding: 20px 24px;
+            margin: 16px 0;
+            text-align: center
         }
 
-        .proof-header {
-            background: var(--accent-light);
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--accent)
-        }
-
-        .proof-title {
+        .formula-label {
+            font-size: 12px;
             font-weight: 700;
-            color: var(--accent-dark);
-            font-size: 16px
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px
         }
 
-        [data-theme="dark"] .proof-title {
-            color: var(--accent)
-        }
-
-        .proof-body {
-            padding: 20px
-        }
-
-        .proof-step {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border)
-        }
-
-        .proof-step:last-child {
-            border-bottom: none
-        }
-
-        @media(max-width:700px) {
-            .proof-step {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .step-math {
+        .formula-main {
             font-family: var(--font-mono);
-            font-size: 15px;
-            color: var(--text);
-            line-height: 1.8
-        }
-
-        .step-reason {
-            font-size: 14px;
-            color: var(--text-secondary);
-            background: var(--surface-alt);
-            padding: 12px 16px;
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent)
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text)
         }
 
         .video-container {
@@ -880,7 +843,7 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M10 12L6 8L10 4" />
                 </svg>Back to Curriculum</a>
-            <div class="nav-progress"><span id="progressText">0 / 6 complete</span>
+            <div class="nav-progress"><span id="progressText">0 / 12 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -895,14 +858,13 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 16 · Checkpoint</div>
-        <h1>Checkpoint: Walk Through a Probability Argument</h1>
-        <p class="hero-desc">Practice time! Study complete, annotated probability arguments. Learn to justify every step
-            and spot common errors in probabilistic reasoning.</p>
+            </svg>Day 16 · Multivariable Calculus</div>
+        <h1>Multiple Integrals & Vector Fields</h1>
+        <p class="hero-desc">From double integrals to Maxwell's equations. The complete toolkit for calculus in 3D.</p>
         <div class="hero-meta">
-            <div class="meta-item">~40 min practice</div>
-            <div class="meta-item">4 worked examples</div>
-            <div class="meta-item">6 exercises</div>
+            <div class="meta-item">~80 min read</div>
+            <div class="meta-item">22 practice problems</div>
+            <div class="meta-item">12 video lessons</div>
         </div>
     </header>
 
@@ -912,10 +874,10 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#why" class="toc-link">Why This Matters</a></li>
-                    <li><a href="#example1" class="toc-link">1. Birthday Problem</a></li>
-                    <li><a href="#example2" class="toc-link">2. Coupon Collector</a></li>
-                    <li><a href="#example3" class="toc-link">3. QuickSort Depth</a></li>
-                    <li><a href="#example4" class="toc-link">4. Bayes in Practice</a></li>
+                    <li><a href="#double" class="toc-link">1. Double Integrals</a></li>
+                    <li><a href="#triple" class="toc-link">2. Triple Integrals</a></li>
+                    <li><a href="#change" class="toc-link">3. Change of Variables</a></li>
+                    <li><a href="#polar" class="toc-link">4. Polar & Spherical</a></li>
                     <li><a href="#videos" class="toc-link">5. Videos</a></li>
                     <li><a href="#practice" class="toc-link">6. Practice</a></li>
                 </ul>
@@ -934,239 +896,304 @@
         <main class="content">
             <section class="section" id="why">
                 <div class="section-header">
-                    <div class="section-number">Checkpoint</div>
-                    <h2 class="section-title">The Art of Probability Arguments</h2>
+                    <div class="section-number">Section 0</div>
+                    <h2 class="section-title">Why Multiple Integrals Matter</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>Goal:</strong> Walk through complete probability arguments, understanding
-                        the justification for each step. This is how you learn to construct and critique probabilistic
-                        proofs.</div>
+                    <div class="rule"><strong>Real-world data is multidimensional.</strong> Computing areas, volumes,
+                        mass, probability over regions requires multiple integration.</div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Common justification types</h3>
+                        <h3 class="subsection-title">Applications</h3>
                         <ul>
-                            <li><strong>Definition:</strong> "By definition of conditional probability..."</li>
-                            <li><strong>Independence:</strong> "Since events are independent..."</li>
-                            <li><strong>Linearity:</strong> "By linearity of expectation..."</li>
-                            <li><strong>Complement:</strong> "P(A) = 1 - P(not A)..."</li>
-                            <li><strong>Union bound:</strong> "P(A or B) ≤ P(A) + P(B)..."</li>
-                            <li><strong>Indicator trick:</strong> "Let Xᵢ = 1 if event i occurs..."</li>
+                            <li><strong>Probability:</strong> P(X,Y ∈ Region) = ∫∫ f(x,y) dA</li>
+                            <li><strong>Physics:</strong> Mass = ∫∫∫ ρ(x,y,z) dV</li>
+                            <li><strong>Graphics:</strong> Rendering, volume calculations</li>
+                            <li><strong>Machine Learning:</strong> Marginal distributions, normalizing constants</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="example1">
+            <section class="section" id="double">
                 <div class="section-header">
-                    <div class="section-number">Example 1</div>
-                    <h2 class="section-title">Birthday Problem: P(shared birthday)</h2>
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">Double Integrals</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Problem:</strong> In a room of n people, what is the probability that at least two people
-                        share a birthday?</p>
-
-                    <div class="annotated-proof">
-                        <div class="proof-header">
-                            <div class="proof-title">Complete Annotated Solution</div>
-                        </div>
-                        <div class="proof-body">
-                            <div class="proof-step">
-                                <div class="step-math">P(at least one match) = 1 - P(all different)</div>
-                                <div class="step-reason"><strong>Complement rule:</strong> It's easier to compute P(no
-                                    match) and subtract from 1.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">P(all different) = P(person 1 unique) × P(person 2 unique |
-                                    person 1) × ...</div>
-                                <div class="step-reason"><strong>Chain rule:</strong> P(A₁ and A₂ and ... Aₙ) = P(A₁) ×
-                                    P(A₂|A₁) × P(A₃|A₁,A₂) × ...</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">= (365/365) × (364/365) × (363/365) × ... × ((365-n+1)/365)</div>
-                                <div class="step-reason"><strong>Counting:</strong> Person 1 has 365 options. Person 2
-                                    must avoid 1 date (364 options). Person k must avoid k-1 dates.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">= 365! / ((365-n)! × 365ⁿ)</div>
-                                <div class="step-reason"><strong>Simplification:</strong> Product of consecutive
-                                    integers = falling factorial = 365!/(365-n)!</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">For n = 23: P(all different) ≈ 0.493<br>P(at least one match) ≈
-                                    0.507</div>
-                                <div class="step-reason"><strong>Numerical evaluation:</strong> Plugging in n=23 and
-                                    computing. The 50% threshold is surprisingly low!</div>
-                            </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Double Integral over Region R</div>
+                            <div class="formula-main">∫∫_R f(x,y) dA = lim Σ f(xᵢ,yⱼ) ΔA</div>
                         </div>
                     </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Iterated integrals</h3>
+                        <div class="math-block">For a rectangular region [a,b] × [c,d]:
 
-                    <div class="info"><strong>Key insight:</strong> The complement approach turned a complex "at least
-                        one" problem into a simpler "all different" problem. This is a powerful technique!</div>
-                </div>
-            </section>
+                            ∫∫_R f(x,y) dA = ∫ₐᵇ ∫_c^d f(x,y) dy dx
+                            = ∫_c^d ∫ₐᵇ f(x,y) dx dy
 
-            <section class="section" id="example2">
-                <div class="section-header">
-                    <div class="section-number">Example 2</div>
-                    <h2 class="section-title">Coupon Collector: Expected Time</h2>
-                </div>
-                <div class="section-body">
-                    <p><strong>Problem:</strong> There are n different coupons. Each draw gives a uniformly random
-                        coupon. How many draws to collect all n?</p>
+                            Fubini's Theorem: Order can be switched if f is continuous.</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Non-rectangular regions</h3>
+                        <div class="math-block">Type I: a ≤ x ≤ b, g₁(x) ≤ y ≤ g₂(x)
+                            ∫∫_R f(x,y) dA = ∫ₐᵇ ∫_{g₁(x)}^{g₂(x)} f(x,y) dy dx
 
-                    <div class="annotated-proof">
-                        <div class="proof-header">
-                            <div class="proof-title">Complete Annotated Solution</div>
-                        </div>
-                        <div class="proof-body">
-                            <div class="proof-step">
-                                <div class="step-math">Define phases: Phase i = waiting for the iᵗʰ new coupon (after
-                                    having i-1 unique)</div>
-                                <div class="step-reason"><strong>Problem decomposition:</strong> Break into phases to
-                                    analyze separately.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">In phase i: P(new coupon) = (n-i+1)/n</div>
-                                <div class="step-reason"><strong>Simple counting:</strong> We have i-1 coupons, so
-                                    n-(i-1) = n-i+1 are new.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">Let Xᵢ = draws in phase i. Xᵢ ~ Geometric(pᵢ) where pᵢ =
-                                    (n-i+1)/n</div>
-                                <div class="step-reason"><strong>Geometric distribution:</strong> Waiting time for first
-                                    success with success probability p.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">E[Xᵢ] = 1/pᵢ = n/(n-i+1)</div>
-                                <div class="step-reason"><strong>Known formula:</strong> For geometric distribution,
-                                    E[X] = 1/p.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">E[total] = E[X₁ + X₂ + ... + Xₙ] = Σᵢ E[Xᵢ]</div>
-                                <div class="step-reason"><strong>Linearity of expectation:</strong> E[sum] = sum of
-                                    E[each].</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">= n/n + n/(n-1) + n/(n-2) + ... + n/1<br>= n × (1/n + 1/(n-1) +
-                                    ... + 1/1)<br>= n × Hₙ ≈ n ln n</div>
-                                <div class="step-reason"><strong>Harmonic series:</strong> Hₙ = Σᵢ₌₁ⁿ 1/i ≈ ln n + γ
-                                    where γ ≈ 0.577.</div>
-                            </div>
-                        </div>
+                            Type II: c ≤ y ≤ d, h₁(y) ≤ x ≤ h₂(y)
+                            ∫∫_R f(x,y) dA = ∫_c^d ∫_{h₁(y)}^{h₂(y)} f(x,y) dx dy</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Example</h3>
+                        <div class="math-block">∫∫_R xy dA where R is 0 ≤ x ≤ 1, 0 ≤ y ≤ x
+
+                            = ∫₀¹ ∫₀ˣ xy dy dx
+                            = ∫₀¹ x[y²/2]₀ˣ dx
+                            = ∫₀¹ x·(x²/2) dx
+                            = ∫₀¹ x³/2 dx
+                            = [x⁴/8]₀¹ = 1/8</div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="example3">
+            <section class="section" id="triple">
                 <div class="section-header">
-                    <div class="section-number">Example 3</div>
-                    <h2 class="section-title">QuickSort: Expected Comparisons</h2>
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Triple Integrals</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Problem:</strong> Prove QuickSort with random pivot makes O(n log n) expected
-                        comparisons.</p>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Setup</h3>
+                        <div class="math-block">∫∫∫_E f(x,y,z) dV
 
-                    <div class="annotated-proof">
-                        <div class="proof-header">
-                            <div class="proof-title">Complete Annotated Solution</div>
-                        </div>
-                        <div class="proof-body">
-                            <div class="proof-step">
-                                <div class="step-math">Let elements be z₁ < z₂ < ... < zₙ in sorted order.</div>
-                                        <div class="step-reason"><strong>Setup:</strong> Name elements by their rank for
-                                            analysis.</div>
-                                </div>
-                                <div class="proof-step">
-                                    <div class="step-math">Define Xᵢⱼ = 1 if zᵢ and zⱼ are compared, 0 otherwise.</div>
-                                    <div class="step-reason"><strong>Indicator random variables:</strong> Count
-                                        comparisons using 0/1 variables.</div>
-                                </div>
-                                <div class="proof-step">
-                                    <div class="step-math">Total comparisons X = Σᵢ<ⱼ Xᵢⱼ</div>
-                                            <div class="step-reason"><strong>Counting:</strong> Sum over all pairs.
-                                            </div>
-                                    </div>
-                                    <div class="proof-step">
-                                        <div class="step-math">E[X] = Σᵢ<ⱼ E[Xᵢⱼ]=Σᵢ<ⱼ P(zᵢ, zⱼ compared)</div>
-                                                <div class="step-reason"><strong>Linearity + indicator
-                                                        property:</strong> E[indicator] = P(event).</div>
-                                        </div>
-                                        <div class="proof-step">
-                                            <div class="step-math">zᵢ and zⱼ compared ⟺ one of them is first pivot among
-                                                {zᵢ, zᵢ₊₁, ..., zⱼ}</div>
-                                            <div class="step-reason"><strong>Key insight:</strong> Two elements compare
-                                                only if one is picked as pivot before any element between them separates
-                                                them.</div>
-                                        </div>
-                                        <div class="proof-step">
-                                            <div class="step-math">P(zᵢ, zⱼ compared) = 2/(j-i+1)</div>
-                                            <div class="step-reason"><strong>Uniform probability:</strong> j-i+1
-                                                elements in range, 2 cause comparison.</div>
-                                        </div>
-                                        <div class="proof-step">
-                                            <div class="step-math">E[X] = Σᵢ₌₁ⁿ⁻¹ Σⱼ₌ᵢ₊₁ⁿ 2/(j-i+1)<br> = Σᵢ₌₁ⁿ⁻¹
-                                                Σₖ₌₂ⁿ⁻ⁱ⁺¹ 2/k<br> ≤ 2n × Hₙ = O(n log n)</div>
-                                            <div class="step-reason"><strong>Summation:</strong> Change variables k =
-                                                j-i+1, bound by harmonic series.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            For a box [a,b] × [c,d] × [p,q]:
+                            = ∫ₐᵇ ∫_c^d ∫_p^q f(x,y,z) dz dy dx
+
+                            Volume: ∫∫∫_E 1 dV = Volume(E)</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Applications</h3>
+                        <div class="math-block">Mass: M = ∫∫∫_E ρ(x,y,z) dV
+
+                            Center of mass:
+                            x̄ = (1/M) ∫∫∫ x·ρ dV
+                            ȳ = (1/M) ∫∫∫ y·ρ dV
+                            z̄ = (1/M) ∫∫∫ z·ρ dV</div>
+                    </div>
+                </div>
             </section>
 
-            <section class="section" id="example4">
+            <section class="section" id="change">
                 <div class="section-header">
-                    <div class="section-number">Example 4</div>
-                    <h2 class="section-title">Bayes: Spam Classification</h2>
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Change of Variables</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Problem:</strong> An email contains the word "FREE". Given: 80% of spam contains "FREE",
-                        5% of ham (non-spam) contains "FREE", 20% of all emails are spam. What's P(spam | contains
-                        "FREE")?</p>
-
-                    <div class="annotated-proof">
-                        <div class="proof-header">
-                            <div class="proof-title">Complete Annotated Solution</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">The formula</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Change of Variables</div>
+                            <div class="formula-main">∫∫_R f(x,y) dxdy = ∫∫_S f(x(u,v), y(u,v)) |J| dudv</div>
                         </div>
-                        <div class="proof-body">
-                            <div class="proof-step">
-                                <div class="step-math">Define: S = spam, F = contains "FREE"<br>Given: P(F|S) = 0.80,
-                                    P(F|¬S) = 0.05, P(S) = 0.20</div>
-                                <div class="step-reason"><strong>Define notation:</strong> Clearly state what each
-                                    probability represents.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">Want: P(S|F)</div>
-                                <div class="step-reason"><strong>State the goal:</strong> Probability of spam given the
-                                    word appears.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">P(S|F) = P(F|S) × P(S) / P(F)</div>
-                                <div class="step-reason"><strong>Bayes' Theorem:</strong> Flip the conditional.</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">P(F) = P(F|S)×P(S) + P(F|¬S)×P(¬S)<br> = 0.80×0.20 +
-                                    0.05×0.80<br> = 0.16 + 0.04 = 0.20</div>
-                                <div class="step-reason"><strong>Law of total probability:</strong> Sum over all cases
-                                    (spam and ham).</div>
-                            </div>
-                            <div class="proof-step">
-                                <div class="step-math">P(S|F) = (0.80 × 0.20) / 0.20<br> = 0.16 / 0.20 = 0.80</div>
-                                <div class="step-reason"><strong>Substitute and compute:</strong> 80% probability this
-                                    email is spam!</div>
-                            </div>
-                        </div>
+                        <p>where J is the Jacobian:</p>
+                        <div class="math-block">J = ∂(x,y)/∂(u,v) = |∂x/∂u ∂x/∂v|
+                            |∂y/∂u ∂y/∂v|</div>
                     </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Why the Jacobian?</h3>
+                        <div class="rule"><strong>Key insight:</strong> |det(J)| measures how much area changes under
+                            the transformation. A small rectangle duv in uv-space becomes a parallelogram with area |J|
+                            dudv in xy-space.</div>
+                    </div>
+                </div>
+            </section>
 
-                    <div class="warning"><strong>Common error:</strong> Don't confuse P(F|S) = 0.80 with P(S|F). The
-                        word "FREE" appears in 80% of spam, but that doesn't mean 80% of emails with "FREE" are
-                        spam—until you compute it with Bayes!</div>
+            <section class="section" id="polar">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Polar & Spherical Coordinates</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Polar coordinates (2D)</h3>
+                        <div class="math-block">x = r cos(θ), y = r sin(θ)
+
+                            Jacobian: |J| = r
+
+                            ∫∫_R f(x,y) dxdy = ∫∫_S f(r,θ) r dr dθ
+
+                            Use when: circular symmetry, x² + y² appears</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Example: Area of circle</h3>
+                        <div class="math-block">Area = ∫∫_{x²+y²≤R²} 1 dxdy
+
+                            In polar: 0 ≤ r ≤ R, 0 ≤ θ ≤ 2π
+
+                            = ∫₀^{2π} ∫₀^R r dr dθ
+                            = ∫₀^{2π} [r²/2]₀^R dθ
+                            = ∫₀^{2π} R²/2 dθ
+                            = πR²</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Spherical coordinates (3D)</h3>
+                        <div class="math-block">x = ρ sin(φ) cos(θ)
+                            y = ρ sin(φ) sin(θ)
+                            z = ρ cos(φ)
+
+                            ρ = radius, φ = angle from z-axis, θ = angle in xy-plane
+
+                            |J| = ρ² sin(φ)
+
+                            dV = ρ² sin(φ) dρ dφ dθ</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Cylindrical coordinates</h3>
+                        <div class="math-block">x = r cos(θ)
+                            y = r sin(θ)
+                            z = z
+
+                            |J| = r
+
+                            dV = r dr dθ dz
+
+                            Use when: cylindrical symmetry</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Line Integrals (from Day 19) -->
+            <section class="section" id="line">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Line Integrals</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Scalar line integral</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Line Integral of Scalar Function</div>
+                            <div class="formula-main">∫_C f ds = ∫ₐᵇ f(r(t)) |r'(t)| dt</div>
+                        </div>
+                        <p>Integrates f along the curve C. Think: "weighted arc length."</p>
+                        <div class="math-block">If f = 1: ∫_C 1 ds = arc length of C
+
+                            Example: C is unit circle, f = 1
+                            Arc length = ∫₀^{2π} 1 · 1 dt = 2π</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Vector line integral (work)</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Line Integral of Vector Field</div>
+                            <div class="formula-main">∫_C F · dr = ∫ₐᵇ F(r(t)) · r'(t) dt</div>
+                        </div>
+                        <p>Computes work done by force F along path C.</p>
+                        <div class="math-block">Physical meaning:
+                            • F · dr = component of force along path × distance
+                            • Sum up these tiny work contributions
+
+                            If F ⊥ path everywhere: work = 0
+                            If F ∥ path everywhere: work = |F| × length</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conservative Fields (from Day 19) -->
+            <section class="section" id="conservative">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Conservative Vector Fields</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">F is conservative if F = ∇φ for some potential function φ.
+
+                            Then: ∫_C F · dr = φ(end) - φ(start)
+
+                            Path independent! Only endpoints matter.</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Test for conservative</h3>
+                        <div class="math-block">In 2D: F = (P, Q) is conservative if ∂P/∂y = ∂Q/∂x
+                            In 3D: F is conservative if curl(F) = ∇ × F = 0
+
+                            Conservative ⟺ curl-free (in simply connected domains)</div>
+                    </div>
+                    <div class="info"><strong>Key insight:</strong> Gravity is conservative. Friction is not. This is
+                        why energy is conserved in some systems but not others.</div>
+                </div>
+            </section>
+
+            <!-- Surface Integrals (from Day 19) -->
+            <section class="section" id="surface">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Surface Integrals</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Scalar surface integral</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Surface Integral (Scalar)</div>
+                            <div class="formula-main">∫∫_S f dS = "sum f over surface"</div>
+                        </div>
+                        <p>If f = 1: this gives surface area.</p>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Flux integral</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Flux Through Surface</div>
+                            <div class="formula-main">∫∫_S F · dS = ∫∫_S F · n̂ dS</div>
+                        </div>
+                        <div class="math-block">Measures how much F "flows through" surface S.
+
+                            n̂ = unit normal to surface
+                            F · n̂ = component of F perpendicular to surface
+
+                            Examples:
+                            • Water flow through a net
+                            • Electric field through a surface (Gauss's law)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Big Theorems (from Day 19) -->
+            <section class="section" id="theorems">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">The Big Theorems (Overview)</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Green's Theorem (2D)</h3>
+                        <div class="math-block">∮_C (P dx + Q dy) = ∫∫_D (∂Q/∂x - ∂P/∂y) dA
+
+                            Relates line integral around boundary to double integral over region.</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Stokes' Theorem (3D)</h3>
+                        <div class="math-block">∮_C F · dr = ∫∫_S (∇ × F) · dS
+
+                            Relates line integral around boundary to surface integral of curl.</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Divergence Theorem</h3>
+                        <div class="math-block">∫∫_S F · dS = ∫∫∫_V (∇ · F) dV
+
+                            Relates flux through closed surface to triple integral of divergence.</div>
+                    </div>
+                    <div class="rule"><strong>Pattern:</strong> All three theorems relate a boundary integral to an
+                        integral over the interior. They're all versions of the Fundamental Theorem of Calculus in
+                        higher dimensions!</div>
                 </div>
             </section>
 
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Video Review</h2>
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
                     <div class="video-container">
@@ -1186,8 +1213,8 @@
 
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Practice Exercises</h2>
+                    <div class="section-number">Section 10</div>
+                    <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -1203,19 +1230,36 @@
     </div>
 
     <script>
-        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; }
+        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "").replace(/\*/g, "").replace(/pi/g, "π") : ""; }
         function checkAnswer(input, expected) { return expected.map(a => normalize(a)).includes(normalize(input)); }
 
         const QUESTIONS = [
-            { id: 1, topic: "Birthday", prompt: "Birthday problem uses which rule to simplify? (complement/addition/product)", answer: ["complement"], display: "Complement rule" },
-            { id: 2, topic: "Birthday", prompt: "P(all different) uses which rule for sequential events?", answer: ["chain", "multiplication", "product"], display: "Chain rule (multiplication)" },
-            { id: 3, topic: "Coupon", prompt: "Coupon collector: waiting time follows which distribution?", answer: ["geometric"], display: "Geometric distribution" },
-            { id: 4, topic: "Coupon", prompt: "E[draws to collect n coupons] ≈ n × ln(?)", answer: ["n"], display: "n ln n" },
-            { id: 5, topic: "QuickSort", prompt: "QuickSort analysis uses what type of random variables to count comparisons?", answer: ["indicator"], display: "Indicator random variables" },
-            { id: 6, topic: "Bayes", prompt: "In spam example, P(spam|FREE) = 0.80. What rule was used?", answer: ["bayes", "bayes'"], display: "Bayes' Theorem" },
+            { id: 1, topic: "Double", prompt: "∫₀¹ ∫₀¹ 1 dxdy = ?", answer: ["1"], display: "1" },
+            { id: 2, topic: "Double", prompt: "Order of integration can be switched by ___ theorem", answer: ["fubini", "fubini's"], display: "Fubini's Theorem" },
+            { id: 3, topic: "Polar", prompt: "In polar, dA = ? dr dθ", answer: ["r"], display: "r" },
+            { id: 4, topic: "Polar", prompt: "Area of unit circle: ∫₀^{2π} ∫₀¹ r drdθ = ?", answer: ["π", "pi"], display: "π" },
+            { id: 5, topic: "Spherical", prompt: "In spherical, |J| = ρ² × sin(?)", answer: ["φ", "phi"], display: "sin(φ)" },
+            { id: 6, topic: "Spherical", prompt: "Volume element in spherical: dV = ρ² sin(φ) dρ dφ d?", answer: ["θ", "theta"], display: "dθ" },
+            { id: 7, topic: "Change", prompt: "When changing variables, we multiply by absolute value of ___?", answer: ["jacobian", "det(j)", "determinant"], display: "Jacobian" },
+            { id: 8, topic: "Cylindrical", prompt: "In cylindrical, dV = r dr dθ d?", answer: ["z"], display: "dz" },
+            { id: 9, topic: "Apply", prompt: "Mass of region E with density ρ: M = ∫∫∫ ? dV", answer: ["ρ", "rho", "density"], display: "ρ (density)" },
+            { id: 10, topic: "Apply", prompt: "Volume of region E = ∫∫∫_E ? dV", answer: ["1"], display: "1" },
+            { id: 11, topic: "Polar", prompt: "x² + y² in polar = ?", answer: ["r^2", "r²"], display: "r²" },
+            { id: 12, topic: "Concept", prompt: "Jacobian measures how transformation scales ___?", answer: ["area", "volume"], display: "area/volume" },
+            // Day 19: Vector Calculus
+            { id: 13, topic: "Line", prompt: "∫_C 1 ds gives the ___ of curve C", answer: ["arclength", "arc length", "length"], display: "arc length" },
+            { id: 14, topic: "Line", prompt: "∫_C F·dr computes ___ done by force F?", answer: ["work"], display: "work" },
+            { id: 15, topic: "Conservative", prompt: "F is conservative if F = ∇ ___ for some scalar function", answer: ["φ", "phi", "f", "potential"], display: "φ (potential)" },
+            { id: 16, topic: "Conservative", prompt: "For conservative F, line integral depends only on ___?", answer: ["endpoints", "start and end"], display: "endpoints" },
+            { id: 17, topic: "Conservative", prompt: "F is conservative if curl(F) = ?", answer: ["0", "zero"], display: "0" },
+            { id: 18, topic: "Surface", prompt: "∫∫_S 1 dS gives ___ of surface S", answer: ["area", "surface area"], display: "surface area" },
+            { id: 19, topic: "Flux", prompt: "∫∫_S F·dS measures ___ through surface", answer: ["flux", "flow"], display: "flux" },
+            { id: 20, topic: "Theorem", prompt: "Green's theorem relates line integral to ___ integral", answer: ["double", "area"], display: "double integral" },
+            { id: 21, topic: "Theorem", prompt: "Divergence theorem: ∫∫_S F·dS = ∫∫∫_V (∇·F) dV relates surface to ___", answer: ["volume", "triple"], display: "volume/triple integral" },
+            { id: 22, topic: "Concept", prompt: "All big theorems relate boundary integral to ___ integral?", answer: ["interior", "inside", "region"], display: "interior" },
         ];
 
-        const LS_KEY = "day16_stats_v1";
+        const LS_KEY = "day18_stats_v1";
         let stats = (() => { try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : { attempted: 0, correct: 0 }; } catch { return { attempted: 0, correct: 0 }; } })();
         let sessionCorrect = 0;
         function saveStats() { localStorage.setItem(LS_KEY, JSON.stringify(stats)); }
@@ -1254,11 +1298,39 @@
 
         const VIDEO_GROUPS = [
             {
-                title: "Review Concepts", items: [
-                    { title: "Birthday Problem Explained", channel: "Numberphile", vid: "ofTb57aZHZs" },
-                    { title: "Coupon Collector", channel: "MIT OCW", vid: "Za-mHVT8Ee0" },
-                    { title: "QuickSort Analysis", channel: "MIT OCW", vid: "hP73xrHllbM" },
-                    { title: "Bayes in Practice", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
+                title: "Double Integrals", items: [
+                    { title: "3Blue1Brown — Double Integrals", channel: "3Blue1Brown", vid: "TdLD2Zh-nUQ" },
+                    { title: "Khan Academy — Double Integrals", channel: "Khan Academy", vid: "85_Qu9XJnOo" },
+                ]
+            },
+            {
+                title: "Change of Variables", items: [
+                    { title: "Khan Academy — Change of Variables", channel: "Khan Academy", vid: "wULu5_epoLc" },
+                    { title: "3Blue1Brown — Jacobian", channel: "3Blue1Brown", vid: "wCZ1VEmVjVo" },
+                ]
+            },
+            {
+                title: "Coordinate Systems", items: [
+                    { title: "Khan Academy — Polar", channel: "Khan Academy", vid: "2A0KiJwsZFU" },
+                    { title: "Khan Academy — Spherical", channel: "Khan Academy", vid: "OdT4u7IlN2c" },
+                ]
+            },
+            {
+                title: "Line Integrals", items: [
+                    { title: "3Blue1Brown — Line Integrals", channel: "3Blue1Brown", vid: "2ptFnIj71SM" },
+                    { title: "Khan Academy — Line Integrals", channel: "Khan Academy", vid: "uXjQ8yc9Pdg" },
+                ]
+            },
+            {
+                title: "Surface Integrals", items: [
+                    { title: "Khan Academy — Surface Integrals", channel: "Khan Academy", vid: "DjXoO3VBmqM" },
+                    { title: "3Blue1Brown — Flux", channel: "3Blue1Brown", vid: "rB83DpBJQsE" },
+                ]
+            },
+            {
+                title: "Theorems", items: [
+                    { title: "3Blue1Brown — Divergence Theorem", channel: "3Blue1Brown", vid: "rB83DpBJQsE" },
+                    { title: "Khan Academy — Stokes' Theorem", channel: "Khan Academy", vid: "9iaYNaENVH4" },
                 ]
             },
         ];

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 20: ODEs — First-Order & Second-Order Linear</title>
+    <title>Day 12: Limits, Derivatives & Integrals</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -866,7 +866,7 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M10 12L6 8L10 4" />
                 </svg>Back to Curriculum</a>
-            <div class="nav-progress"><span id="progressText">0 / 12 complete</span>
+            <div class="nav-progress"><span id="progressText">0 / 16 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -881,14 +881,14 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 20 · Differential Equations</div>
-        <h1>ODEs: First-Order & Second-Order Linear</h1>
-        <p class="hero-desc">Differential equations model change. Learn to solve the most common types that appear in
-            CS, physics, and engineering.</p>
+            </svg>Day 14 · Probability</div>
+        <h1>Basic Probability: Independence, Conditional & Bayes</h1>
+        <p class="hero-desc">Probability underpins randomized algorithms, machine learning, and system reliability.
+            Master the core concepts that every CS professional needs.</p>
         <div class="hero-meta">
             <div class="meta-item">~50 min read</div>
-            <div class="meta-item">12 practice problems</div>
-            <div class="meta-item">8 video lessons</div>
+            <div class="meta-item">16 practice problems</div>
+            <div class="meta-item">10 video lessons</div>
         </div>
     </header>
 
@@ -898,11 +898,11 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#why" class="toc-link">Why This Matters</a></li>
-                    <li><a href="#first" class="toc-link">1. First-Order ODEs</a></li>
-                    <li><a href="#separable" class="toc-link">2. Separable Equations</a></li>
-                    <li><a href="#linear" class="toc-link">3. Linear First-Order</a></li>
-                    <li><a href="#second" class="toc-link">4. Second-Order Linear</a></li>
-                    <li><a href="#numerical" class="toc-link">5. Numerical Methods</a></li>
+                    <li><a href="#basics" class="toc-link">1. Probability Basics</a></li>
+                    <li><a href="#rules" class="toc-link">2. Addition & Multiplication</a></li>
+                    <li><a href="#conditional" class="toc-link">3. Conditional Probability</a></li>
+                    <li><a href="#independence" class="toc-link">4. Independence</a></li>
+                    <li><a href="#bayes" class="toc-link">5. Bayes' Theorem</a></li>
                     <li><a href="#videos" class="toc-link">6. Videos</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -922,190 +922,226 @@
             <section class="section" id="why">
                 <div class="section-header">
                     <div class="section-number">Section 0</div>
-                    <h2 class="section-title">Why Differential Equations?</h2>
+                    <h2 class="section-title">Why Probability Matters</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>ODEs describe how things change.</strong> Population growth, system
-                        dynamics, signal processing—all modeled by differential equations.</div>
+                    <div class="rule"><strong>CS is full of uncertainty.</strong> Networks fail, users behave randomly,
+                        algorithms use randomness. Probability lets you reason about uncertain systems.</div>
                     <div class="subsection">
-                        <h3 class="subsection-title">CS applications</h3>
+                        <h3 class="subsection-title">Where you'll use this</h3>
                         <ul>
-                            <li><strong>Control systems:</strong> PID controllers, robotics</li>
-                            <li><strong>Machine learning:</strong> Neural ODEs, gradient flow</li>
-                            <li><strong>Graphics:</strong> Physics simulation, animation</li>
-                            <li><strong>Signal processing:</strong> Filters, frequency response</li>
-                            <li><strong>Networking:</strong> Queueing theory, TCP dynamics</li>
+                            <li><strong>Randomized Algorithms:</strong> QuickSort's expected O(n log n)</li>
+                            <li><strong>Machine Learning:</strong> Every model is probabilistic</li>
+                            <li><strong>Systems:</strong> Failure probability, load balancing</li>
+                            <li><strong>Cryptography:</strong> Security margins</li>
+                            <li><strong>A/B Testing:</strong> Statistical significance</li>
+                            <li><strong>Bloom Filters:</strong> False positive probability</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="first">
+            <section class="section" id="basics">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">First-Order ODEs</h2>
+                    <h2 class="section-title">Probability Basics</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">General form</h3>
+                        <h3 class="subsection-title">Definition</h3>
                         <div class="formula-box">
-                            <div class="formula-label">First-Order ODE</div>
-                            <div class="formula-main">dy/dx = f(x, y)</div>
+                            <div class="formula-label">Probability of Event A</div>
+                            <div class="formula-main">P(A) = |favorable outcomes| / |total outcomes|</div>
                         </div>
-                        <p>One derivative, one unknown function y(x). Initial condition: y(x₀) = y₀.</p>
+                        <div class="math-block">Requirements:
+                            0 ≤ P(A) ≤ 1 for all events A
+                            P(Ω) = 1 where Ω is the sample space (all outcomes)
+                            P(∅) = 0 where ∅ is the empty event</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">The exponential equation</h3>
-                        <div class="math-block">dy/dx = ky
+                        <h3 class="subsection-title">Complement</h3>
+                        <div class="math-block">P(not A) = P(Ā) = 1 - P(A)
 
-                            Solution: y = Ce^{kx}
-
-                            With y(0) = y₀: y = y₀ e^{kx}
-
-                            k > 0: exponential growth
-                            k < 0: exponential decay</div>
-                        </div>
-                        <div class="info"><strong>Key insight:</strong> The solution to dy/dx = ky is the ONLY function
-                            that equals its own derivative (up to scaling). This is why e^x is so special!</div>
+                            Example: P(at least one head in 3 flips)
+                            = 1 - P(all tails)
+                            = 1 - (1/2)³
+                            = 1 - 1/8 = 7/8</div>
                     </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Examples</h3>
+                        <div class="math-block">Fair die: P(roll 6) = 1/6
+                            Fair coin: P(heads) = 1/2
+                            Deck of cards: P(ace) = 4/52 = 1/13
+                            Random bit: P(1) = 1/2</div>
+                    </div>
+                </div>
             </section>
 
-            <section class="section" id="separable">
+            <section class="section" id="rules">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Separable Equations</h2>
+                    <h2 class="section-title">Addition and Multiplication Rules</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Method</h3>
-                        <div class="math-block">If dy/dx = g(x)h(y), then:
+                        <h3 class="subsection-title">Addition rule (OR)</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">General Addition Rule</div>
+                            <div class="formula-main">P(A or B) = P(A) + P(B) - P(A and B)</div>
+                        </div>
+                        <div class="math-block">If A and B are mutually exclusive (can't both happen):
+                            P(A or B) = P(A) + P(B)
 
-                            1. Separate: dy/h(y) = g(x) dx
-                            2. Integrate both sides: ∫ dy/h(y) = ∫ g(x) dx
-                            3. Solve for y if possible</div>
+                            Example: P(roll 1 or 6) = 1/6 + 1/6 = 2/6 = 1/3</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Example</h3>
-                        <div class="math-block">dy/dx = xy
+                        <h3 class="subsection-title">Multiplication rule (AND)</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">General Multiplication Rule</div>
+                            <div class="formula-main">P(A and B) = P(A) × P(B|A)</div>
+                        </div>
+                        <div class="math-block">If A and B are independent:
+                            P(A and B) = P(A) × P(B)
 
-                            Separate: dy/y = x dx
-                            Integrate: ln|y| = x²/2 + C
-                            Solve: y = Ae^{x²/2} where A = ±e^C</div>
+                            Example: P(two heads) = 1/2 × 1/2 = 1/4</div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="linear">
+            <section class="section" id="conditional">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Linear First-Order ODEs</h2>
+                    <h2 class="section-title">Conditional Probability</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Standard form</h3>
+                        <h3 class="subsection-title">Definition</h3>
                         <div class="formula-box">
-                            <div class="formula-label">Linear First-Order</div>
-                            <div class="formula-main">dy/dx + P(x)y = Q(x)</div>
+                            <div class="formula-label">Conditional Probability</div>
+                            <div class="formula-main">P(A|B) = P(A and B) / P(B)</div>
                         </div>
+                        <p>Read as: "probability of A given B" — the probability of A occurring, knowing that B has
+                            occurred.</p>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Integrating factor method</h3>
-                        <div class="math-block">1. Compute μ(x) = e^{∫P(x)dx}
-                            2. Multiply through: μy' + μPy = μQ
-                            3. Recognize: (μy)' = μQ
-                            4. Integrate: μy = ∫μQ dx
-                            5. Solve: y = (1/μ)∫μQ dx</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Example</h3>
-                        <div class="math-block">dy/dx + 2y = e^x
+                        <h3 class="subsection-title">Example: Drawing cards</h3>
+                        <div class="math-block">Draw 2 cards without replacement.
+                            P(second is ace | first was ace)?
 
-                            P(x) = 2, so μ = e^{2x}
-                            (e^{2x}y)' = e^{2x}·e^x = e^{3x}
-                            e^{2x}y = e^{3x}/3 + C
-                            y = e^x/3 + Ce^{-2x}</div>
+                            After removing one ace: 3 aces remain in 51 cards.
+                            P(second ace | first ace) = 3/51 = 1/17
+
+                            Compare to with replacement:
+                            P(second ace | first ace) = 4/52 = 1/13</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Chain rule</h3>
+                        <div class="math-block">P(A and B and C) = P(A) × P(B|A) × P(C|A and B)
+
+                            Example: Draw 3 aces in a row without replacement
+                            = (4/52) × (3/51) × (2/50)
+                            = 24 / 132,600
+                            ≈ 0.00018</div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="second">
+            <section class="section" id="independence">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Second-Order Linear ODEs</h2>
+                    <h2 class="section-title">Independence</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Homogeneous with constant coefficients</h3>
+                        <h3 class="subsection-title">Definition</h3>
                         <div class="formula-box">
-                            <div class="formula-label">Second-Order Homogeneous</div>
-                            <div class="formula-main">ay'' + by' + cy = 0</div>
+                            <div class="formula-label">Independent Events</div>
+                            <div class="formula-main">P(A and B) = P(A) × P(B)</div>
+                        </div>
+                        <p>Equivalently: P(A|B) = P(A) — knowing B gives no information about A.</p>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Independent vs mutually exclusive</h3>
+                        <div class="warning"><strong>Don't confuse these!</strong><br><br>
+                            <strong>Independent:</strong> P(A and B) = P(A) × P(B) — occurrence of one doesn't affect
+                            the other<br>
+                            <strong>Mutually exclusive:</strong> P(A and B) = 0 — can't both happen<br><br>
+                            If P(A) > 0 and P(B) > 0, mutually exclusive events are NOT independent!
                         </div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Characteristic equation</h3>
-                        <div class="math-block">Try y = e^{rx}. Substituting gives:
-                            ar² + br + c = 0
+                        <h3 class="subsection-title">CS example: System reliability</h3>
+                        <div class="math-block">Two independent servers, each fails with probability 0.1.
 
-                            Roots r₁, r₂ determine solution type:
+                            P(both fail) = 0.1 × 0.1 = 0.01
+                            P(at least one works) = 1 - 0.01 = 0.99
 
-                            Case 1: Two distinct real roots r₁ ≠ r₂
-                            y = C₁e^{r₁x} + C₂e^{r₂x}
-
-                            Case 2: Repeated root r = r₁ = r₂
-                            y = (C₁ + C₂x)e^{rx}
-
-                            Case 3: Complex roots r = α ± βi
-                            y = e^{αx}(C₁cos(βx) + C₂sin(βx))</div>
+                            With 3 servers:
+                            P(all fail) = 0.1³ = 0.001
+                            P(at least one works) = 0.999</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Physical interpretation</h3>
-                        <div class="math-block">Mass-spring-damper: my'' + cy' + ky = 0
+                        <h3 class="subsection-title">Birthday paradox intuition</h3>
+                        <div class="math-block">How many people until P(shared birthday) > 50%?
 
-                            • Overdamped (distinct real): slow return, no oscillation
-                            • Critically damped (repeated): fastest return, no oscillation
-                            • Underdamped (complex): oscillates while decaying</div>
+                            Day 12 · Calculus Sequencent) = (365/365) × (364/365) × ... × ((365-n+1)/365)
+
+                            With 23 people: P(all different) ≈ 0.49
+                            So P(at least one shared) ≈ 0.51
+
+                            Surprisingly small! Independence is tricky.</div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="numerical">
+            <section class="section" id="bayes">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Numerical Methods</h2>
+                    <h2 class="section-title">Bayes' Theorem</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Euler's method</h3>
-                        <div class="math-block">Given dy/dx = f(x,y), y(x₀) = y₀
-
-                            yₙ₊₁ = yₙ + h·f(xₙ, yₙ)
-
-                            Step forward by h, using slope at current point.</div>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span
-                                    class="code-label">Euler's Method</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-keyword">def</span> <span class="code-function">euler</span>(f, x0, y0, h, n_steps):
-    <span class="code-string">"""Solve dy/dx = f(x,y) from x0 with y(x0)=y0"""</span>
-    x, y = x0, y0
-    points = [(x, y)]
-    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(n_steps):
-        y = y + h * <span class="code-function">f</span>(x, y)
-        x = x + h
-        points.<span class="code-function">append</span>((x, y))
-    <span class="code-keyword">return</span> points
-
-<span class="code-comment"># Example: dy/dx = y, y(0) = 1 → y = e^x</span>
-f = <span class="code-keyword">lambda</span> x, y: y
-<span class="code-function">euler</span>(f, <span class="code-number">0</span>, <span class="code-number">1</span>, <span class="code-number">0.1</span>, <span class="code-number">10</span>)  <span class="code-comment"># Approximates e^1</span></pre>
-                            </div>
+                        <h3 class="subsection-title">The formula</h3>
+                        <div class="formula-box">
+                            <div class="formula-label">Bayes' Theorem</div>
+                            <div class="formula-main">P(A|B) = P(B|A) × P(A) / P(B)</div>
                         </div>
+                        <div class="math-block">Also written as:
+                            P(hypothesis|evidence) = P(evidence|hypothesis) × P(hypothesis) / P(evidence)
+
+                            • P(A) = prior (belief before evidence)
+                            • P(A|B) = posterior (belief after evidence)
+                            • P(B|A) = likelihood (how likely is evidence if A is true)
+                            • P(B) = marginal (total probability of evidence)</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Better methods</h3>
-                        <div class="math-block">• Runge-Kutta 4 (RK4): Most common, very accurate
-                            • Adams-Bashforth: Multi-step method
-                            • scipy.integrate.odeint: Use this in practice!</div>
+                        <h3 class="subsection-title">Classic example: Disease testing</h3>
+                        <div class="math-block">A disease affects 1% of population.
+                            Test is 99% accurate (for both positive and negative).
+                            You test positive. What's P(you have disease)?
+
+                            P(disease) = 0.01
+                            P(positive | disease) = 0.99
+                            P(positive | no disease) = 0.01
+
+                            P(positive) = P(pos|D)×P(D) + P(pos|¬D)×P(¬D)
+                            = 0.99×0.01 + 0.01×0.99
+                            = 0.0099 + 0.0099 = 0.0198
+
+                            P(disease | positive) = (0.99 × 0.01) / 0.0198
+                            = 0.0099 / 0.0198
+                            = 0.5
+
+                            Only 50%! Base rate matters enormously.</div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">CS applications</h3>
+                        <ul>
+                            <li><strong>Spam filtering:</strong> P(spam | contains "FREE")</li>
+                            <li><strong>Classification:</strong> Naive Bayes classifier</li>
+                            <li><strong>A/B testing:</strong> Bayesian inference</li>
+                            <li><strong>Debugging:</strong> P(bug in module A | test failed)</li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -1150,25 +1186,29 @@ f = <span class="code-keyword">lambda</span> x, y: y
     </div>
 
     <script>
-        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "").replace(/\^/g, "") : ""; }
+        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; }
         function checkAnswer(input, expected) { return expected.map(a => normalize(a)).includes(normalize(input)); }
 
         const QUESTIONS = [
-            { id: 1, topic: "Basics", prompt: "dy/dx = 2y. General solution: y = Ce^(?x)", answer: ["2", "2x"], display: "Ce^{2x}" },
-            { id: 2, topic: "Basics", prompt: "dy/dx = -y, y(0)=5. Solution: y = 5e^(?)", answer: ["-x", "-t"], display: "5e^{-x}" },
-            { id: 3, topic: "Separable", prompt: "To solve dy/dx = xy, first step: separate to dy/y = ? dx", answer: ["x"], display: "x dx" },
-            { id: 4, topic: "Linear", prompt: "For dy/dx + P(x)y = Q(x), integrating factor μ = e^∫? dx", answer: ["p(x)", "p"], display: "e^{∫P(x)dx}" },
-            { id: 5, topic: "Second", prompt: "For ay'' + by' + cy = 0, we try y = e^(?)", answer: ["rx", "r"], display: "e^{rx}" },
-            { id: 6, topic: "Second", prompt: "Characteristic equation ar² + br + c = 0 has complex roots ⟹ solution has ___ and ___ functions", answer: ["sin", "cos", "sine", "cosine"], display: "sin and cos" },
-            { id: 7, topic: "Second", prompt: "y'' - 4y = 0. Char eq: r² = 4, r = ±2. Solution: y = C₁e^{2x} + C₂e^(?)", answer: ["-2x"], display: "e^{-2x}" },
-            { id: 8, topic: "Second", prompt: "y'' + 4y = 0. Char eq: r² = -4, r = ±2i. Solution involves cos(?x) and sin(?x)", answer: ["2"], display: "cos(2x), sin(2x)" },
-            { id: 9, topic: "Numerical", prompt: "Euler's method: y_{n+1} = y_n + h × f(x_n, ?)", answer: ["yn", "y_n", "y"], display: "f(x_n, y_n)" },
-            { id: 10, topic: "Apply", prompt: "Overdamped system has ___ distinct real roots", answer: ["2", "two"], display: "2" },
-            { id: 11, topic: "Apply", prompt: "Underdamped system shows decaying ___", answer: ["oscillation", "oscillations"], display: "oscillations" },
-            { id: 12, topic: "Apply", prompt: "For production use, which scipy function solves ODEs?", answer: ["odeint", "solve_ivp"], display: "odeint / solve_ivp" },
+            { id: 1, topic: "Basic", prompt: "P(heads on fair coin) = ?", answer: ["1/2", "0.5", "50%"], display: "1/2" },
+            { id: 2, topic: "Basic", prompt: "P(roll 6 on fair die) = ?", answer: ["1/6"], display: "1/6" },
+            { id: 3, topic: "Complement", prompt: "P(not A) = 1 - P(?)", answer: ["a", "p(a)"], display: "P(A)" },
+            { id: 4, topic: "Complement", prompt: "If P(rain) = 0.3, P(no rain) = ?", answer: ["0.7", "7/10"], display: "0.7" },
+            { id: 5, topic: "Addition", prompt: "P(roll 1 or 2) = 1/6 + 1/6 = ?", answer: ["2/6", "1/3"], display: "1/3" },
+            { id: 6, topic: "Multiply", prompt: "P(2 heads in a row) = 1/2 × 1/2 = ?", answer: ["1/4", "0.25"], display: "1/4" },
+            { id: 7, topic: "Multiply", prompt: "P(3 heads in a row) = ?", answer: ["1/8", "0.125"], display: "1/8" },
+            { id: 8, topic: "Conditional", prompt: "P(A|B) = P(A and B) / P(?)", answer: ["b", "p(b)"], display: "P(B)" },
+            { id: 9, topic: "Independence", prompt: "If A,B independent: P(A and B) = P(A) × P(?)", answer: ["b", "p(b)"], display: "P(B)" },
+            { id: 10, topic: "Independence", prompt: "Server fails 10%, 2 independent: P(both fail) = ?", answer: ["0.01", "1/100", "1%"], display: "0.01" },
+            { id: 11, topic: "Independence", prompt: "P(at least one of 2 servers works) = 1 - 0.01 = ?", answer: ["0.99", "99%"], display: "0.99" },
+            { id: 12, topic: "Bayes", prompt: "Bayes: P(A|B) = P(B|A) × P(A) / P(?)", answer: ["b", "p(b)"], display: "P(B)" },
+            { id: 13, topic: "Cards", prompt: "P(ace from 52-card deck) = ?", answer: ["4/52", "1/13"], display: "1/13" },
+            { id: 14, topic: "Cards", prompt: "P(second ace | first ace, no replacement) = 3/?", answer: ["51"], display: "3/51" },
+            { id: 15, topic: "Birthday", prompt: "Birthday paradox: ~? people for 50% shared birthday", answer: ["23"], display: "23" },
+            { id: 16, topic: "Bayes", prompt: "In disease test example, P(disease|positive) ≈ 50%. T/F?", answer: ["t", "true", "yes"], display: "True" },
         ];
 
-        const LS_KEY = "day20_stats_v1";
+        const LS_KEY = "day14_stats_v1";
         let stats = (() => { try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : { attempted: 0, correct: 0 }; } catch { return { attempted: 0, correct: 0 }; } })();
         let sessionCorrect = 0;
         function saveStats() { localStorage.setItem(LS_KEY, JSON.stringify(stats)); }
@@ -1207,27 +1247,29 @@ f = <span class="code-keyword">lambda</span> x, y: y
 
         const VIDEO_GROUPS = [
             {
-                title: "First-Order", items: [
-                    { title: "3Blue1Brown — Differential Equations", channel: "3Blue1Brown", vid: "p_di4P1d_ww" },
-                    { title: "Khan Academy — First Order", channel: "Khan Academy", vid: "6o7b9yyhH7k" },
+                title: "Basics", items: [
+                    { title: "3Blue1Brown — Probability", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
+                    { title: "Khan Academy — Probability Intro", channel: "Khan Academy", vid: "uzkc-qNVoOk" },
                 ]
             },
             {
-                title: "Second-Order", items: [
-                    { title: "Khan Academy — Second Order", channel: "Khan Academy", vid: "tyf0khPR81o" },
-                    { title: "3Blue1Brown — Oscillations", channel: "3Blue1Brown", vid: "r6sGWTCMz2k" },
+                title: "Conditional & Independence", items: [
+                    { title: "Khan Academy — Conditional", channel: "Khan Academy", vid: "_IgyaD7vOOA" },
+                    { title: "Stat Quest — Independence", channel: "StatQuest", vid: "9wCnvr7Xw4E" },
                 ]
             },
             {
-                title: "Methods", items: [
-                    { title: "Organic Chemistry — Integrating Factor", channel: "Organic Chemistry Tutor", vid: "dQw4w9WgXcQ" },
-                    { title: "MIT OCW — Characteristic Equation", channel: "MIT OCW", vid: "Loy1bCVS7ac" },
+                title: "Bayes' Theorem", items: [
+                    { title: "3Blue1Brown — Bayes", channel: "3Blue1Brown", vid: "HZGCoVF3YvM" },
+                    { title: "Veritasium — Bayes Explained", channel: "Veritasium", vid: "R13BD8qKeTg" },
+                    { title: "Khan Academy — Bayes", channel: "Khan Academy", vid: "HaYbxQC61pw" },
                 ]
             },
             {
-                title: "Numerical", items: [
-                    { title: "Euler's Method Explained", channel: "PatrickJMT", vid: "VGRf2Wzcpls" },
-                    { title: "RK4 Method", channel: "Steve Brunton", vid: "voILf9FwQ9Y" },
+                title: "Applications", items: [
+                    { title: "Computerphile — Bayes Spam", channel: "Computerphile", vid: "O2L2Uv9pdDA" },
+                    { title: "MIT OCW — Probability Intro", channel: "MIT OCW", vid: "KbB0FjPg0mw" },
+                    { title: "Birthday Paradox", channel: "Numberphile", vid: "ofTb57aZHZs" },
                 ]
             },
         ];

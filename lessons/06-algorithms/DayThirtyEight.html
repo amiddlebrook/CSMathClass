@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 38: Data Structures Overview</title>
+    <title>Day 38: Randomized Algorithms & Hardness</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -40,10 +40,9 @@
             </svg>
             Day 38 · Algorithms
         </div>
-        <h1>Data Structures Overview</h1>
+        <h1>Randomized Algorithms & Hardness</h1>
         <p class="hero-desc">
-            The building blocks of efficient algorithms: choosing the right data structure
-            can mean the difference between O(n²) and O(n log n).
+            Harnessing randomness for speed/simplicity, and understanding computational limits (P vs NP).
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -51,14 +50,14 @@
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~40 min read
+                ~85 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                20 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -74,268 +73,553 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#why" class="toc-link">Why Data Structures</a></li>
-                    <li><a href="#arrays" class="toc-link">1. Arrays</a></li>
-                    <li><a href="#stacks" class="toc-link">2. Stacks & Queues</a></li>
-                    <li><a href="#hashing" class="toc-link">3. Hash Tables</a></li>
-                    <li><a href="#complexity" class="toc-link">4. Complexity Chart</a></li>
-                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">6. Practice Problems</a></li>
+                    <li><a href="#why" class="toc-link">Why Randomization</a></li>
+                    <li><a href="#types" class="toc-link">1. Las Vegas vs Monte Carlo</a></li>
+                    <li><a href="#examples" class="toc-link">2. Classic Examples</a></li>
+                    <li><a href="#analysis" class="toc-link">3. Analysis Techniques</a></li>
+                    <li><a href="#why-hard" class="toc-link">4. Why Hardness Matters</a></li>
+                    <li><a href="#classes" class="toc-link">5. Complexity Classes</a></li>
+                    <li><a href="#reductions" class="toc-link">6. Reductions</a></li>
+                    <li><a href="#npc" class="toc-link">7. NP-Complete</a></li>
+                    <li><a href="#videos" class="toc-link">8. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">9. Practice</a></li>
                 </ul>
             </nav>
-
             <div class="stats-card">
                 <div class="toc-title">Your Progress</div>
-                <div class="stats-row">
-                    <span class="stats-label">Attempted</span>
-                    <span class="stats-value" id="statAttempted">0</span>
-                </div>
-                <div class="stats-row">
-                    <span class="stats-label">Correct</span>
-                    <span class="stats-value" id="statCorrect">0</span>
-                </div>
-                <div class="stats-row">
-                    <span class="stats-label">Accuracy</span>
-                    <span class="stats-value" id="statAccuracy">—</span>
-                </div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
             </div>
         </aside>
 
         <main class="content">
-            <!-- Why Data Structures -->
+            <!-- Why Randomization -->
             <section class="section" id="why">
                 <div class="section-header">
                     <div class="section-number">Section 0</div>
-                    <h2 class="section-title">Why Data Structures Matter</h2>
+                    <h2 class="section-title">Why Randomization Works</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        A data structure is a way of organizing data so that it can be used efficiently.
-                        The choice of data structure often determines the efficiency of an algorithm.
+                        Randomization seems counterintuitive—why add unpredictability to algorithms?
+                        The key insight is that randomness can defeat adversarial inputs and often
+                        leads to simpler algorithms with better average performance.
                     </p>
 
                     <div class="rule">
-                        <strong>Key Insight:</strong> The right data structure can transform an O(n²) algorithm
-                        into O(n log n) or even O(n). Always choose based on your access patterns.
+                        <strong>Core Principle:</strong> A randomized algorithm makes random choices during
+                        execution, so its behavior varies across runs—even on the same input.
                     </div>
 
                     <div class="subsection">
-                        <h3 class="subsection-title">Common Operations to Consider</h3>
+                        <h3 class="subsection-title">Benefits of randomization</h3>
                         <ul>
-                            <li><strong>Access:</strong> How fast can we get element i?</li>
-                            <li><strong>Search:</strong> How fast can we find element x?</li>
-                            <li><strong>Insert:</strong> How fast can we add a new element?</li>
-                            <li><strong>Delete:</strong> How fast can we remove an element?</li>
+                            <li><strong>Simplicity:</strong> Randomized algorithms are often simpler than deterministic
+                                alternatives</li>
+                            <li><strong>Speed:</strong> Expected time can be much better than worst-case</li>
+                            <li><strong>Robustness:</strong> No adversary can craft a worst-case input</li>
+                            <li><strong>Breaking symmetry:</strong> Useful in distributed systems and parallel
+                                algorithms</li>
                         </ul>
                     </div>
 
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Choosing the right structure matters</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><span class="code-comment"># Bad: O(n) lookup in list</span>
-<span class="code-keyword">def</span> <span class="code-function">find_in_list</span>(items, target):
-    <span class="code-keyword">for</span> item <span class="code-keyword">in</span> items:  <span class="code-comment"># O(n)</span>
-        <span class="code-keyword">if</span> item == target:
-            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
-    <span class="code-keyword">return</span> <span class="code-keyword">False</span>
-
-<span class="code-comment"># Good: O(1) lookup in set</span>
-<span class="code-keyword">def</span> <span class="code-function">find_in_set</span>(items_set, target):
-    <span class="code-keyword">return</span> target <span class="code-keyword">in</span> items_set  <span class="code-comment"># O(1) average!</span></pre>
-                        </div>
+                    <div class="info">
+                        <strong>Real-world usage:</strong> Hash functions, load balancing, cryptography,
+                        machine learning (SGD), primality testing, and many more rely on randomization.
                     </div>
                 </div>
             </section>
 
-            <!-- Arrays -->
-            <section class="section" id="arrays">
+            <!-- Types -->
+            <section class="section" id="types">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Arrays</h2>
+                    <h2 class="section-title">Las Vegas vs Monte Carlo</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Randomized algorithms fall into two categories based on what varies:
+                        the running time or the correctness.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Las Vegas Algorithms</h3>
+                            <div class="math-block">GUARANTEES:
+                                • Always correct
+                                • Running time varies
+
+                                EXAMPLES:
+                                • Randomized QuickSort
+                                • Randomized Select
+                                • Skip Lists
+
+                                ANALYSIS: Expected time
+                                "Gambles on time, not correctness"</div>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Monte Carlo Algorithms</h3>
+                            <div class="math-block">GUARANTEES:
+                                • Fixed running time
+                                • May be incorrect
+
+                                EXAMPLES:
+                                • Miller-Rabin primality
+                                • Random sampling
+                                • Approximate counting
+
+                                ANALYSIS: Error probability
+                                "Gambles on correctness, not time"</div>
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>Converting between types:</strong> You can often convert Las Vegas to Monte Carlo
+                        (add a time limit) or Monte Carlo to Las Vegas (repeat until verified correct).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Examples -->
+            <section class="section" id="examples">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Classic Examples</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Fixed-size Arrays</h3>
-                        <p>Contiguous memory block. O(1) access by index, but O(n) insert/delete.</p>
-                        <div class="math-block">Array[i] address = base + (i × element_size)</div>
+                        <h3 class="subsection-title">Randomized QuickSort</h3>
+                        <p>
+                            The classic example: choosing a random pivot avoids the O(n²) worst case
+                            that occurs with deterministic pivot selection on sorted input.
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Randomized QuickSort - O(n log n) expected</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">import</span> random
+
+<span class="code-keyword">def</span> <span class="code-function">quicksort</span>(arr):
+    <span class="code-keyword">if</span> <span class="code-function">len</span>(arr) <= <span class="code-number">1</span>:
+        <span class="code-keyword">return</span> arr
+    
+    <span class="code-comment"># Random pivot defeats adversarial inputs!</span>
+    pivot = random.choice(arr)
+    
+    left = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x < pivot]
+    mid = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x == pivot]
+    right = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> arr <span class="code-keyword">if</span> x > pivot]
+    
+    <span class="code-keyword">return</span> quicksort(left) + mid + quicksort(right)
+
+<span class="code-comment"># Even on sorted input, expected O(n log n)</span>
+sorted_input = <span class="code-function">list</span>(<span class="code-function">range</span>(<span class="code-number">1000</span>))
+result = quicksort(sorted_input)  <span class="code-comment"># Fast!</span></pre>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="subsection">
-                        <h3 class="subsection-title">Dynamic Arrays (Python list, Java ArrayList)</h3>
-                        <p>Automatically resize when full. Amortized O(1) append, O(n) insert at arbitrary position.</p>
-                        <div class="warning">
-                            <strong>Gotcha:</strong> Inserting at the front of a dynamic array is O(n) —
-                            every element must shift. Use a deque if you need fast front insertion.
+                        <h3 class="subsection-title">Randomized Selection (QuickSelect)</h3>
+                        <div class="math-block">PROBLEM: Find kth smallest element
+
+                            DETERMINISTIC: Median-of-medians gives O(n) worst-case
+                            but with large constants
+
+                            RANDOMIZED: Random pivot gives O(n) expected
+                            Much simpler and faster in practice!
+
+                            T(n) = T(n/2) + O(n) = O(n) expected</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Miller-Rabin Primality Test</h3>
+                        <p>
+                            Testing if a number is prime in polynomial time. The deterministic AKS algorithm
+                            is slower, so Miller-Rabin is used in practice (including cryptographic libraries).
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Miller-Rabin primality test</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">def</span> <span class="code-function">is_probable_prime</span>(n, k=<span class="code-number">10</span>):
+    <span class="code-string">"""Miller-Rabin primality test with k rounds."""</span>
+    <span class="code-keyword">if</span> n < <span class="code-number">2</span>: <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    <span class="code-keyword">if</span> n == <span class="code-number">2</span> <span class="code-keyword">or</span> n == <span class="code-number">3</span>: <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+    <span class="code-keyword">if</span> n % <span class="code-number">2</span> == <span class="code-number">0</span>: <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    <span class="code-comment"># Write n-1 = 2^r * d</span>
+    r, d = <span class="code-number">0</span>, n - <span class="code-number">1</span>
+    <span class="code-keyword">while</span> d % <span class="code-number">2</span> == <span class="code-number">0</span>:
+        r += <span class="code-number">1</span>
+        d //= <span class="code-number">2</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">witness</span>(a):
+        x = <span class="code-function">pow</span>(a, d, n)
+        <span class="code-keyword">if</span> x == <span class="code-number">1</span> <span class="code-keyword">or</span> x == n - <span class="code-number">1</span>:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(r - <span class="code-number">1</span>):
+            x = <span class="code-function">pow</span>(x, <span class="code-number">2</span>, n)
+            <span class="code-keyword">if</span> x == n - <span class="code-number">1</span>:
+                <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">True</span>  <span class="code-comment"># Composite witness found</span>
+    
+    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(k):
+        a = random.randrange(<span class="code-number">2</span>, n - <span class="code-number">1</span>)
+        <span class="code-keyword">if</span> witness(a):
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>  <span class="code-comment"># Definitely composite</span>
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span>  <span class="code-comment"># Probably prime (error ≤ 4^(-k))</span></pre>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Array operations and their costs</span>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Universal Hashing</h3>
+                        <div class="math-block">PROBLEM: Hash functions can be attacked
+                            Adversary crafts inputs with collisions
+
+                            SOLUTION: Randomly choose hash function at runtime
+                            Adversary doesn't know which one!
+
+                            GUARANTEE: For any input set,
+                            expected collisions = n²/(2m)
+                            where m = table size</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis -->
+            <section class="section" id="analysis">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Analysis Techniques</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Expected Value</h3>
+                        <div class="math-block">E[X] = Σ x · P(X = x)
+
+                            LINEARITY OF EXPECTATION:
+                            E[X + Y] = E[X] + E[Y]
+                            (Works even if X, Y are dependent!)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Indicator Random Variables</h3>
+                        <p>
+                            A powerful technique: define Xᵢ = 1 if event i occurs, 0 otherwise.
+                            Then E[Xᵢ] = P(event i occurs).
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Expected comparisons in QuickSort</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-comment"># Let Xᵢⱼ = 1 if elements i and j are compared</span>
+<span class="code-comment"># They're compared iff one is chosen as pivot before</span>
+<span class="code-comment"># any element between them</span>
+
+<span class="code-comment"># P(Xᵢⱼ = 1) = 2 / (j - i + 1)</span>
+<span class="code-comment"># (either i or j must be first pivot in range [i,j])</span>
+
+<span class="code-comment"># E[total comparisons] = Σᵢ Σⱼ>ᵢ E[Xᵢⱼ]</span>
+<span class="code-comment">#                      = Σᵢ Σⱼ>ᵢ 2/(j-i+1)</span>
+<span class="code-comment">#                      ≤ 2n · Hₙ</span>
+<span class="code-comment">#                      = O(n log n)</span>
+
+<span class="code-keyword">def</span> <span class="code-function">expected_comparisons</span>(n):
+    <span class="code-string">"""Compute expected comparisons in randomized QuickSort"""</span>
+    total = <span class="code-number">0</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(i + <span class="code-number">1</span>, n):
+            total += <span class="code-number">2</span> / (j - i + <span class="code-number">1</span>)
+    <span class="code-keyword">return</span> total
+
+<span class="code-function">print</span>(<span class="code-function">expected_comparisons</span>(<span class="code-number">100</span>))  <span class="code-comment"># ~921</span></pre>
+                            </div>
                         </div>
-                        <div class="code-content">
-                            <pre>arr = [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+                    </div>
 
-<span class="code-comment"># O(1) - Direct access</span>
-x = arr[<span class="code-number">2</span>]        <span class="code-comment"># 3</span>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Probability Bounds</h3>
+                        <div class="math-block">MARKOV'S INEQUALITY:
+                            P(X ≥ a) ≤ E[X] / a
+                            (X ≥ 0)
 
-<span class="code-comment"># O(1) amortized - Append</span>
-arr.append(<span class="code-number">6</span>)    <span class="code-comment"># [1, 2, 3, 4, 5, 6]</span>
+                            CHEBYSHEV'S INEQUALITY:
+                            P(|X - μ| ≥ kσ) ≤ 1/k²
 
-<span class="code-comment"># O(n) - Insert at position</span>
-arr.insert(<span class="code-number">0</span>, <span class="code-number">0</span>) <span class="code-comment"># [0, 1, 2, 3, 4, 5, 6] - shifts all!</span>
-
-<span class="code-comment"># O(n) - Search</span>
-idx = arr.index(<span class="code-number">3</span>) <span class="code-comment"># Linear scan to find</span></pre>
+                            CHERNOFF BOUND:
+                            P(X ≥ (1+δ)μ) ≤ exp(-δ²μ/3)
+                            (Exponentially small deviation probability!)</div>
+                        <div class="info">
+                            <strong>Chernoff bounds</strong> are essential for analyzing randomized algorithms.
+                            They show that sums of independent random variables concentrate tightly around their mean.
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Stacks & Queues -->
-            <section class="section" id="stacks">
+            <!-- Hardness Content (From Day 48) -->
+            <section class="section" id="why-hard">
                 <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Stacks & Queues</h2>
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Why Hardness Matters</h2>
                 </div>
                 <div class="section-body">
-                    <div class="two-col">
-                        <div class="subsection">
-                            <h3 class="subsection-title">Stack (LIFO)</h3>
-                            <div class="math-block">push(x): Add to top
-                                pop(): Remove from top
-                                peek(): View top
-                                All O(1)</div>
-                            <p>Use cases: function calls, undo, parsing parentheses</p>
+                    <p>
+                        When you can't find an efficient algorithm for a problem, it's crucial to know:
+                        is it your fault, or is the problem fundamentally hard? Complexity theory gives
+                        us the tools to prove that certain problems likely have no efficient solution.
+                    </p>
+
+                    <div class="rule">
+                        <strong>Practical Impact:</strong> If your problem is NP-hard, stop looking for a
+                        perfect algorithm. Use approximation algorithms, heuristics, or solve special cases.
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Real-world NP-complete problems</h3>
+                        <ul>
+                            <li><strong>Scheduling:</strong> Optimal job scheduling, exam timetabling</li>
+                            <li><strong>Routing:</strong> Traveling salesman, vehicle routing</li>
+                            <li><strong>Packing:</strong> Bin packing, knapsack optimization</li>
+                            <li><strong>Networking:</strong> Network design, frequency assignment</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning">
+                        <strong>P vs NP</strong> is one of the seven Millennium Prize Problems.
+                        Solving it wins you $1 million! The question: does P = NP?
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="classes">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Complexity Classes</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Class P</h3>
+                        <div class="math-block">P = Problems solvable in polynomial time
+
+                            Definition: O(n^k) for some constant k
+
+                            Examples in P:
+                            • Sorting: O(n log n)
+                            • Shortest path: O(V + E)
+                            • Maximum flow: O(VE²)
+                            • Linear programming: polynomial
+                            • Primality testing: O(log^6 n)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Class NP</h3>
+                        <div class="math-block">NP = Problems VERIFIABLE in polynomial time
+
+                            Given a solution, we can CHECK it quickly.
+                            Doesn't mean we can FIND it quickly!
+
+                            Examples in NP:
+                            • SAT: Given assignment, verify in O(n)
+                            • Clique: Given vertices, verify edges in O(k²)
+                            • TSP: Given tour, verify length in O(n)
+
+                            Note: P ⊆ NP (anything solvable is verifiable)</div>
+                        <div class="info">
+                            <strong>NP does NOT mean "not polynomial."</strong>
+                            NP stands for "Nondeterministic Polynomial" — problems solvable in polynomial
+                            time by a nondeterministic Turing machine.
                         </div>
-                        <div class="subsection">
-                            <h3 class="subsection-title">Queue (FIFO)</h3>
-                            <div class="math-block">enqueue(x): Add to back
-                                dequeue(): Remove from front
-                                peek(): View front
-                                All O(1)*</div>
-                            <p>Use cases: BFS, task scheduling, buffers</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">The hierarchy</h3>
+                        <div class="math-block"> +---------------------------+
+                            | PSPACE |
+                            | +-------------------+ |
+                            | | NP | |
+                            | | +-----------+ | |
+                            | | | P | | |
+                            | | +-----------+ | |
+                            | | NP-complete | |
+                            | +-------------------+ |
+                            +---------------------------+
+
+                            If P ≠ NP (widely believed):
+                            • P ⊂ NP strictly
+                            • NP-complete problems are NOT in P</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="reductions">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Polynomial Reductions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">What is a reduction?</h3>
+                        <div class="rule">
+                            <strong>A ≤ₚ B</strong> means "A reduces to B in polynomial time."
+                            If we can solve B efficiently, we can solve A efficiently.
+                        </div>
+                        <div class="math-block">REDUCTION A ≤ₚ B:
+
+                            1. Transform input x of A to input f(x) of B
+                            (f must run in polynomial time)
+                            2. Solve B on f(x)
+                            3. Answer for A is same as answer for B
+
+                            If B ∈ P, then A ∈ P
+                            If A ∉ P, then B ∉ P (contrapositive)</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Hardness direction</h3>
+                        <div class="warning">
+                            <strong>Careful with direction!</strong><br>
+                            A ≤ₚ B means B is AT LEAST as hard as A.<br>
+                            To prove B is hard, reduce FROM a hard problem TO B.
+                        </div>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Python</span>
+                                <span class="code-label">Reduction example: Independent Set ≤ₚ Vertex Cover</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><span class="code-comment"># Independent Set: Find k vertices with no edges between them</span>
+<span class="code-comment"># Vertex Cover: Find k vertices covering all edges</span>
+
+<span class="code-comment"># KEY INSIGHT: S is independent set ⟺ V-S is vertex cover</span>
+
+<span class="code-keyword">def</span> <span class="code-function">reduce_indep_set_to_vertex_cover</span>(G, k):
+    <span class="code-string">"""
+    Reduce Independent Set to Vertex Cover.
+    G has independent set of size k
+    ⟺ G has vertex cover of size |V| - k
+    """</span>
+    n = G.num_vertices
+    <span class="code-comment"># Ask: does G have vertex cover of size (n - k)?</span>
+    <span class="code-keyword">return</span> (G, n - k)
+
+<span class="code-comment"># If Vertex Cover is easy, so is Independent Set</span>
+<span class="code-comment"># Since Independent Set is NP-complete,</span>
+<span class="code-comment"># Vertex Cover must also be NP-complete!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="npc">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">NP-Complete Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">NP-COMPLETE = Hardest problems in NP
+
+                            A problem L is NP-complete if:
+                            1. L ∈ NP (solutions verifiable in poly time)
+                            2. ∀ L' ∈ NP: L' ≤ₚ L (everything reduces to it)
+
+                            If ANY NP-complete problem is in P, then P = NP</div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">The Cook-Levin Theorem</h3>
+                        <div class="rule">
+                            <strong>SAT is NP-complete.</strong> This was proven directly by showing any
+                            NP problem can be encoded as a SAT formula. All other NP-complete proofs
+                            reduce from SAT (or another known NP-complete problem).
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Famous NP-complete problems</h3>
+                        <div class="two-col">
+                            <div class="math-block">GRAPH PROBLEMS:
+                                • Clique
+                                • Independent Set
+                                • Vertex Cover
+                                • Hamiltonian Path/Cycle
+                                • Graph Coloring
+                                • Subgraph Isomorphism</div>
+                            <div class="math-block">LOGIC & NUMBERS:
+                                • SAT, 3-SAT
+                                • Circuit SAT
+                                • Subset Sum
+                                • Knapsack (decision)
+                                • Partition
+                                • Integer Programming</div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Proving NP-completeness</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">Text</span>
+                                <span class="code-label">Recipe for NP-completeness proof</span>
+                            </div>
+                            <div class="code-content">
+                                <pre>To prove problem L is NP-complete:
+
+1. SHOW L ∈ NP
+   - Given a solution, verify it in polynomial time
+   - Usually the easy part!
+
+2. CHOOSE a known NP-complete problem L'
+   - Pick one that "looks similar" to L
+   - Classic choices: 3-SAT, Vertex Cover, Subset Sum
+
+3. REDUCE: Show L' ≤ₚ L
+   - For any instance x of L', construct instance f(x) of L
+   - Prove: x ∈ L' ⟺ f(x) ∈ L
+   - Prove: f runs in polynomial time
+
+4. CONCLUDE: L is NP-complete
+   - By transitivity: every NP problem reduces to L</pre>
+                            </div>
                         </div>
                     </div>
 
                     <div class="info">
-                        <strong>*Note:</strong> Queue with array needs circular buffer for O(1) dequeue,
-                        or use linked list. Python's <span class="math-inline">collections.deque</span> handles this.
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Stack and Queue implementations</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><span class="code-keyword">from</span> collections <span class="code-keyword">import</span> deque
-
-<span class="code-comment"># Stack (use list)</span>
-stack = []
-stack.append(<span class="code-number">1</span>)      <span class="code-comment"># push</span>
-stack.append(<span class="code-number">2</span>)
-top = stack.pop()    <span class="code-comment"># 2</span>
-
-<span class="code-comment"># Queue (use deque)</span>
-queue = deque()
-queue.append(<span class="code-number">1</span>)      <span class="code-comment"># enqueue</span>
-queue.append(<span class="code-number">2</span>)
-front = queue.popleft()  <span class="code-comment"># 1 - O(1)!</span></pre>
-                        </div>
+                        <strong>What to do with NP-hard problems:</strong>
+                        <ul>
+                            <li>Approximation algorithms (get close to optimal)</li>
+                            <li>Special cases (e.g., 2-SAT is in P)</li>
+                            <li>Parameterized algorithms (fast when k is small)</li>
+                            <li>Heuristics (work well in practice)</li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Hash Tables -->
-            <section class="section" id="hashing">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Hash Tables</h2>
-                </div>
-                <div class="section-body">
-                    <div class="rule">
-                        <strong>Hash Table:</strong> Maps keys to values using a hash function.
-                        Average O(1) for insert, delete, and lookup!
-                    </div>
-
-                    <div class="subsection">
-                        <h3 class="subsection-title">How it works</h3>
-                        <div class="math-block">1. hash(key) → integer
-                            2. index = hash(key) % table_size
-                            3. Store (key, value) at that index
-                            4. Handle collisions (chaining or probing)</div>
-                    </div>
-
-                    <div class="warning">
-                        <strong>Worst case is O(n)</strong> if many collisions. Good hash functions
-                        and proper load factor (typically &lt; 0.75) keep performance at O(1).
-                    </div>
-
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Python dict is a hash table</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><span class="code-comment"># Python dict = hash table</span>
-counts = {}
-counts[<span class="code-string">"apple"</span>] = <span class="code-number">3</span>    <span class="code-comment"># O(1) insert</span>
-counts[<span class="code-string">"banana"</span>] = <span class="code-number">5</span>
-
-<span class="code-comment"># O(1) lookup</span>
-<span class="code-keyword">print</span>(counts[<span class="code-string">"apple"</span>])  <span class="code-comment"># 3</span>
-
-<span class="code-comment"># O(1) membership test</span>
-<span class="code-keyword">if</span> <span class="code-string">"apple"</span> <span class="code-keyword">in</span> counts:
-    <span class="code-keyword">print</span>(<span class="code-string">"Found!"</span>)
-
-<span class="code-comment"># Set = hash table with only keys</span>
-seen = {<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>}
-<span class="code-keyword">print</span>(<span class="code-number">2</span> <span class="code-keyword">in</span> seen)  <span class="code-comment"># True, O(1)</span></pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Complexity Chart -->
-            <section class="section" id="complexity">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Complexity Comparison</h2>
-                </div>
-                <div class="section-body">
-                    <div class="math-block">
-                        DATA STRUCTURE | ACCESS | SEARCH | INSERT | DELETE
-                        ------------------|---------|---------|---------|--------
-                        Array | O(1) | O(n) | O(n) | O(n)
-                        Dynamic Array | O(1) | O(n) | O(n)* | O(n)
-                        Stack | O(n) | O(n) | O(1) | O(1)
-                        Queue | O(n) | O(n) | O(1) | O(1)
-                        Hash Table | N/A | O(1)† | O(1)† | O(1)†
-                        Linked List | O(n) | O(n) | O(1)‡ | O(1)‡
-
-                        * O(1) amortized for append
-                        † Average case; O(n) worst case
-                        ‡ O(1) if you have the node; O(n) to find it</div>
-                </div>
-            </section>
-
-            <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 8</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        Curated explanations from top educators. Click any video to watch.
+                        Deep dives into randomized algorithms from top computer science educators.
                     </p>
-
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -354,21 +638,19 @@ seen = {<span class="code-number">1</span>, <span class="code-number">2</span>, 
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 9</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
                     <p>
                         Type your answer and press Check (or hit Enter).
                     </p>
-
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
                         <button class="btn" id="btnClear">Clear Inputs</button>
                         <button class="btn btn-danger" id="btnReset">Reset Stats</button>
                     </div>
-
                     <div id="quizContainer"></div>
                 </div>
             </section>
@@ -377,50 +659,48 @@ seen = {<span class="code-number">1</span>, <span class="code-number">2</span>, 
 
     <script src="../shared-scripts.js"></script>
     <script>
-        // Lesson-specific configuration
         const VIDEO_GROUPS = [
             {
-                title: "Data Structures Overview",
+                title: "Randomized Algorithms",
                 items: [
-                    { title: "CS50 — Data Structures", channel: "CS50", vid: "X8h4dq9Hzq8" },
-                    { title: "Data Structures Easy to Advanced", channel: "freeCodeCamp", vid: "RBSGKlAvoiM" },
+                    { title: "Randomized Algorithms — MIT OCW", channel: "MIT OpenCourseWare", vid: "cNB2lADK3_s" },
+                    { title: "Miller-Rabin Primality Test", channel: "Computerphile", vid: "RU1TFjCofMY" },
+                    { title: "Randomized QuickSort Analysis", channel: "Abdul Bari", vid: "COk73cpQbFQ" },
                 ]
             },
             {
-                title: "Arrays & Lists",
+                title: "Complexity Theory",
                 items: [
-                    { title: "Arrays vs Linked Lists", channel: "Computerphile", vid: "DyG9S9nAlUM" },
-                    { title: "Dynamic Arrays", channel: "WilliamFiset", vid: "tvw4v7FEF1w" },
-                ]
-            },
-            {
-                title: "Hash Tables",
-                items: [
-                    { title: "Hash Tables Explained", channel: "Computerphile", vid: "shs0KM3wKv8" },
-                    { title: "Hash Tables in Python", channel: "CS Dojo", vid: "ea8BRGxGmlA" },
+                    { title: "P vs NP — Computerphile", channel: "Computerphile", vid: "YX40hbAHx3s" },
+                    { title: "NP-Completeness — MIT OCW", channel: "MIT OpenCourseWare", vid: "eHZifpgyH_4" },
+                    { title: "Reductions Explained", channel: "Back To Back SWE", vid: "AynCrM6w-h8" },
+                    { title: "Cook-Levin Theorem", channel: "Easy Theory", vid: "LSwgbbnQ-hU" },
                 ]
             }
         ];
-
         const QUESTIONS = [
-            { topic: "Arrays", prompt: "Array access by index is O(___)", answer: "1" },
-            { topic: "Arrays", prompt: "Insert at front of dynamic array is O(___)", answer: "n" },
-            { topic: "Stack", prompt: "Stack follows ___ order (acronym)", answer: "lifo", altAnswers: ["last in first out"] },
-            { topic: "Queue", prompt: "Queue follows ___ order (acronym)", answer: "fifo", altAnswers: ["first in first out"] },
-            { topic: "Hash", prompt: "Hash table average lookup is O(___)", answer: "1" },
-            { topic: "Hash", prompt: "Hash table worst-case lookup is O(___)", answer: "n" },
-            { topic: "Hash", prompt: "Python dict is a ___ table", answer: "hash" },
-            { topic: "Stack", prompt: "Use stack for ___ function calls", answer: "tracking", altAnswers: ["managing", "handling"] },
-            { topic: "Queue", prompt: "BFS uses a ___", answer: "queue" },
-            { topic: "General", prompt: "Set membership test is O(___) average", answer: "1" },
+            { topic: "Types", prompt: "Las Vegas: always ___, time varies", answer: "correct" },
+            { topic: "Types", prompt: "Monte Carlo: fixed time, may be ___", answer: "incorrect", altAnswers: ["wrong"] },
+            { topic: "QuickSort", prompt: "Randomized QuickSort uses random ___", answer: "pivot" },
+            { topic: "QuickSort", prompt: "Randomized QuickSort expected time: O(n log ___)", answer: "n" },
+            { topic: "Primality", prompt: "Miller-___ is a probabilistic primality test", answer: "rabin" },
+            { topic: "Analysis", prompt: "E[X+Y] = E[X] + E[Y] is ___ of expectation", answer: "linearity" },
+            { topic: "Bounds", prompt: "___ inequality: P(X ≥ a) ≤ E[X]/a", answer: "markov", altAnswers: ["markov's"] },
+            { topic: "Bounds", prompt: "___ bound gives exponential concentration", answer: "chernoff", altAnswers: ["chernoff's"] },
+            { topic: "Hashing", prompt: "___ hashing randomly selects hash function", answer: "universal" },
+            { topic: "Indicator", prompt: "Indicator variable: 1 if event occurs, ___ otherwise", answer: "0" },
+            { topic: "Classes", prompt: "P = problems solvable in ___ time", answer: "polynomial" },
+            { topic: "Classes", prompt: "NP = problems ___ in polynomial time", answer: "verifiable" },
+            { topic: "Question", prompt: "P = NP is an ___ problem", answer: "open", altAnswers: ["unsolved", "unknown"] },
+            { topic: "Reduction", prompt: "A ≤ₚ B means A ___ to B", answer: "reduces" },
+            { topic: "Reduction", prompt: "If A ≤ₚ B and A is hard, then B is ___", answer: "hard" },
+            { topic: "NPC", prompt: "NP-___ = in NP + all NP reduces to it", answer: "complete" },
+            { topic: "Theorem", prompt: "Cook-Levin proved ___ is NP-complete", answer: "sat" },
+            { topic: "Examples", prompt: "TSP = Traveling ___ Problem", answer: "salesman" },
+            { topic: "Prize", prompt: "P vs NP has a ___ prize", answer: "millennium", altAnswers: ["million", "$1 million"] },
+            { topic: "Relation", prompt: "P ⊆ ___ (P is a subset of)", answer: "np" },
         ];
-
-        // Initialize the lesson
-        initLesson({
-            videos: VIDEO_GROUPS,
-            questions: QUESTIONS,
-            storageKey: 'day38_ds_overview_v1'
-        });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day38_complexity_v1' });
     </script>
 </body>
 

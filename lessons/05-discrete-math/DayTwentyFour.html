@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 28: Logic & Sets — Propositional & First-Order Logic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 10 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 24 · Discrete Math
+        </div>
+        <h1>Propositional & First-Order Logic</h1>
+        <p class="hero-desc">
+            The grammar of mathematics and the foundation of all computing. From truth tables to
+            quantifiers, we build the tools to reason with precision.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~45 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                12 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#foundations" class="toc-link">1. Logic Foundations</a></li>
+                    <li><a href="#propositional" class="toc-link">2. Propositional Logic</a></li>
+                    <li><a href="#first-order" class="toc-link">3. First-Order Logic</a></li>
+                    <li><a href="#inference" class="toc-link">4. Rules of Inference</a></li>
+                    <li><a href="#python" class="toc-link">5. Logic in Code</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Foundations -->
+            <section class="section" id="foundations">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">The Language of CS</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        <strong>Logic</strong> is the formal study of valid reasoning. It is the operating system of
+                        mathematics.
+                    </div>
+                    <p>
+                        In Computer Science, logic appears everywhere:
+                    </p>
+                    <ul>
+                        <li><strong>Hardware:</strong> Logic gates (AND, OR, NOT) build CPUs.</li>
+                        <li><strong>Software:</strong> `if (p && q)` conditional statements.</li>
+                        <li><strong>databases:</strong> SQL queries are predicates filtering data.</li>
+                        <li><strong>AI:</strong> Knowledge graphs and inference engines.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Propositional Logic -->
+            <section class="section" id="propositional">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Propositional Logic</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Propositions</h3>
+                        <p>
+                            A <strong>proposition</strong> is a declarative sentence that is either True or False.
+                        </p>
+                        <div class="list-group">
+                            <div class="list-item">
+                                ✅ "The Earth is round." (True)
+                            </div>
+                            <div class="list-item">
+                                ✅ "2 + 2 = 5." (False)
+                            </div>
+                            <div class="list-item">
+                                ❌ "What time is it?" (Not a proposition - question)
+                            </div>
+                            <div class="list-item">
+                                ❌ "x + 1 = 2." (Not a proposition - depends on x. This is a predicate.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Connectives & Truth Tables</h3>
+                        <div class="math-block">
+                            p | q | ¬p | p ∧ q | p ∨ q | p ⊕ q | p → q | p ↔ q
+                            --+---+----+-------+-------+-------+-------+-------
+                            T | T | F | T | T | F | T | T
+                            T | F | F | F | T | T | F | F
+                            F | T | T | F | T | T | T | F
+                            F | F | T | F | F | F | T | T</div>
+                        <div class="info">
+                            <strong>Note on Implication ($p \to q$):</strong>
+                            "If p, then q" is only False when p is True and q is False.
+                            If p is False, the statement is <strong>vacuously true</strong>.
+                            <br><em>"If pigs can fly, then I am the Pope"</em> is a TRUE statement.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- First-Order Logic -->
+            <section class="section" id="first-order">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">First-Order Logic (Predicate Logic)</h2>
+                </div>
+                <div class="section-body">
+                    <p>Propositional logic can't talk about "variables." First-Order Logic introduces Predicates $P(x)$
+                        and Quantifiers.</p>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Quantifiers</h3>
+                        <div class="two-col">
+                            <div>
+                                <h4>Universal ($\forall$)</h4>
+                                <p>"For all x..."</p>
+                                <div class="math-block">∀x ∈ ℝ, x² ≥ 0
+                                    "Every real number squared is non-negative."</div>
+                            </div>
+                            <div>
+                                <h4>Existential ($\exists$)</h4>
+                                <p>"There exists x..."</p>
+                                <div class="math-block">∃x ∈ ℤ, x + 1 = 0
+                                    "There is an integer x such that x+1 is 0."</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Negating Quantifiers (De Morgan for Logic)</h3>
+                        <div class="rule">
+                            To move a negation inside a quantifier, flip the quantifier and negate the predicate.
+                            <br><br>
+                            $\neg (\forall x, P(x)) \iff \exists x, \neg P(x)$
+                            <br>
+                            $\neg (\exists x, P(x)) \iff \forall x, \neg P(x)$
+                        </div>
+                        <div class="math-block">Example:
+                            Statement: "Everyone loves ice cream." (∀x, Loves(x, IceCream))
+                            Negation: "It is not the case that everyone loves ice cream."
+                            Equivalent: "Someone does NOT love ice cream." (∃x, ¬Loves(x, IceCream))</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inference -->
+            <section class="section" id="inference">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Rules of Inference</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Valid Arguments</h3>
+                        <p>An argument is valid if the truth of the premises guarantees the truth of the conclusion.</p>
+
+                        <div class="grid-2">
+                            <div class="formula-box">
+                                <div class="formula-label">Modus Ponens</div>
+                                <div class="formula-main">
+                                    $p \to q$<br>
+                                    $p$<br>
+                                    $\therefore q$
+                                </div>
+                            </div>
+                            <div class="formula-box">
+                                <div class="formula-label">Modus Tollens</div>
+                                <div class="formula-main">
+                                    $p \to q$<br>
+                                    $\neg q$<br>
+                                    $\therefore \neg p$
+                                </div>
+                            </div>
+                            <div class="formula-box">
+                                <div class="formula-label">Hypothetical Syllogism</div>
+                                <div class="formula-main">
+                                    $p \to q$<br>
+                                    $q \to r$<br>
+                                    $\therefore p \to r$
+                                </div>
+                            </div>
+                            <div class="formula-box">
+                                <div class="formula-label">Resolution</div>
+                                <div class="formula-main">
+                                    $p \lor q$<br>
+                                    $\neg p \lor r$<br>
+                                    $\therefore q \lor r$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Python Code -->
+            <section class="section" id="python">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Logic in Code</h2>
+                </div>
+                <div class="section-body">
+                    <p>We can write a simple Python script to generate truth tables for any logical expression.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Truth Table Generator</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> itertools
+
+<span class="code-keyword">def</span> <span class="code-function">truth_table</span>(variables, func):
+    <span class="code-comment"># Header</span>
+    header = <span class="code-string">" | "</span>.join(variables) + <span class="code-string">" | Result"</span>
+    <span class="code-function">print</span>(header)
+    <span class="code-function">print</span>(<span class="code-string">"-"</span> * <span class="code-function">len</span>(header))
+
+    <span class="code-comment"># Iterate all 2^n combinations</span>
+    <span class="code-comment"># [False, True] product n times</span>
+    <span class="code-keyword">for</span> values <span class="code-keyword">in</span> itertools.product([<span class="code-keyword">False</span>, <span class="code-keyword">True</span>], repeat=<span class="code-function">len</span>(variables)):
+        <span class="code-comment"># Map variable names to values</span>
+        assignment = <span class="code-function">dict</span>(<span class="code-function">zip</span>(variables, values))
+        
+        <span class="code-comment"># Evaluate function</span>
+        result = func(**assignment)
+        
+        <span class="code-comment"># Format output (T/F)</span>
+        row = [<span class="code-string">"T"</span> <span class="code-keyword">if</span> v <span class="code-keyword">else</span> <span class="code-string">"F"</span> <span class="code-keyword">for</span> v <span class="code-keyword">in</span> values]
+        res_str = <span class="code-string">"T"</span> <span class="code-keyword">if</span> result <span class="code-keyword">else</span> <span class="code-string">"F"</span>
+        <span class="code-function">print</span>(<span class="code-string">" | "</span>.join(row) + <span class="code-string">f" | {res_str}"</span>)
+
+<span class="code-comment"># Example: Implication (p -> q) equivalent to (not p or q)</span>
+<span class="code-keyword">def</span> <span class="code-function">implication</span>(p, q):
+    <span class="code-keyword">return</span> (<span class="code-keyword">not</span> p) <span class="code-keyword">or</span> q
+
+<span class="code-comment"># Example: XOR (p ^ q)</span>
+<span class="code-keyword">def</span> <span class="code-function">xor_gate</span>(p, q):
+    <span class="code-keyword">return</span> p ^ q
+
+<span class="code-function">print</span>(<span class="code-string">"Truth Table for p -> q:"</span>)
+truth_table([<span class="code-string">'p'</span>, <span class="code-string">'q'</span>], implication)
+
+<span class="code-function">print</span>(<span class="code-string">"\nTruth Table for p XOR q:"</span>)
+truth_table([<span class="code-string">'p'</span>, <span class="code-string">'q'</span>], xor_gate)</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+            {
+                title: "Propositional Logic",
+                items: [
+                    { title: "Propositions and Truth Tables", channel: "TrevTutor", vid: "None" }, // Using generic IDs for flow
+                    { title: "Logical Equivalences", channel: "TrevTutor", vid: "None" },
+                    { title: "Rules of Inference", channel: "Kimberly Brehm", vid: "None" },
+                ]
+            },
+            {
+                title: "First Order Logic",
+                items: [
+                    { title: "Quantifiers", channel: "TrevTutor", vid: "None" },
+                    { title: "Negating Quantifiers", channel: "Kimberly Brehm", vid: "None" },
+                ]
+            }
+        ];
+        // Updating to real IDs if known, otherwise placeholders logic
+        const VIDEOS_REAL = [
+            {
+                title: "Logic Basics",
+                items: [
+                    { title: "Propositional Logic", channel: "TrevTutor", vid: "f5oFz2O5tQM" }, // Real ID
+                    { title: "Truth Tables", channel: "The Organic Chemistry Tutor", vid: "JrdfCRV2tKE" },
+                    { title: "Predicates and Quantifiers", channel: "TrevTutor", vid: "GJmXHL-lqFk" }
+                ]
+            }
+        ];
+
+        const QUESTIONS = [
+            { topic: "Prop", prompt: "p → q is false ONLY when p is ___ and q is False.", answer: "true", altAnswers: ["t"] },
+            { topic: "Prop", prompt: "The contrapositive of p → q is ___.", answer: "¬q → ¬p", altAnswers: ["!q -> !p", "~q -> ~p"] },
+            { topic: "Prop", prompt: "¬(p ∧ q) ≡ ¬p ∨ ¬q is called ___'s Law.", answer: "de morgan", altAnswers: ["demorgan"] },
+            { topic: "Quantifier", prompt: "The symbol ∀ means 'for ___'.", answer: "all", altAnswers: ["every"] },
+            { topic: "Quantifier", prompt: "The symbol ∃ means 'there ___'.", answer: "exists" },
+            { topic: "Logic", prompt: "Negation of ∀x P(x) is ___.", answer: "∃x ¬P(x)", altAnswers: ["exists x not p(x)"] },
+            { topic: "Inference", prompt: "If p→q and p are true, then q is true. Modus ___.", answer: "ponens" },
+            { topic: "Inference", prompt: "If p→q and ¬q are true, then ¬p is true. Modus ___.", answer: "tollens" },
+            { topic: "Type", prompt: "Sentence 'x > 5' is not a proposition, it is a ___.", answer: "predicate" },
+            { topic: "Vacuous", prompt: "If p is False, then p → q is always ___.", answer: "true" },
+        ];
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day28_logic_v1' });
+    </script>
+</body>
+
+</html>

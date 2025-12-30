@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 22: Matrix Operations & Elimination</title>
+    <title>Day 22: Inner Product Spaces & Spectral Theorem</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,11 +38,11 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 22 · Linear Algebra
+            Day 22 · Linear Algebra Sequence
         </div>
-        <h1>Matrices & Gaussian Elimination</h1>
+        <h1>Singular Value Decomposition</h1>
         <p class="hero-desc">
-            Solving systems of equations systematically. The algorithmic heart of linear algebra.
+            The "Fundamental Theorem of Linear Algebra". Decomposing any matrix into rotation, scaling, and rotation.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -73,13 +73,12 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#systems" class="toc-link">1. Systems of Equations</a></li>
-                    <li><a href="#matrix-ops" class="toc-link">2. Matrix Operations</a></li>
-                    <li><a href="#elimination" class="toc-link">3. Gaussian Elimination</a></li>
-                    <li><a href="#rank" class="toc-link">4. Rank & Solvability</a></li>
-                    <li><a href="#python" class="toc-link">5. NumPy Implementation</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#svd-def" class="toc-link">1. SVD Definition</a></li>
+                    <li><a href="#geometry" class="toc-link">2. Geometry of SVD</a></li>
+                    <li><a href="#approximation" class="toc-link">3. Low-Rank Approximation</a></li>
+                    <li><a href="#python" class="toc-link">4. Python Image Compression</a></li>
+                    <li><a href="#videos" class="toc-link">5. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">6. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -94,130 +93,105 @@
         </aside>
 
         <main class="content">
-            <!-- Systems -->
-            <section class="section" id="systems">
+            <!-- SVD Def -->
+            <section class="section" id="svd-def">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Linear Systems</h2>
+                    <h2 class="section-title">The Decomposition</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        A linear system $Ax = b$ represents a set of linear equations.
+                        Every matrix $A$ (even rectangular ones) can be factored into:
                     </p>
-                    <div class="math-block">
-                        2x + 3y = 5
-                        4x - y = 3
-
-                        Matrix Form:
-                        [ 2 3 ] [ x ] [ 5 ]
-                        [ 4 -1 ] [ y ] = [ 3 ]
-                    </div>
-                </div>
-            </section>
-
-            <!-- Matrix Ops -->
-            <section class="section" id="matrix-ops">
-                <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Operations</h2>
-                </div>
-                <div class="section-body">
-                    <div class="list-group">
-                        <div class="list-item">
-                            <strong>Addition:</strong> Element-wise. Requires same dimensions.
+                    <div class="formula-box">
+                        <div class="formula-label">SVD</div>
+                        <div class="formula-main">
+                            $A = U \Sigma V^T$
                         </div>
-                        <div class="list-item">
-                            <strong>Multiplication (Dot Product):</strong> Row times Column.
-                            <br>$(AB)_{ij} = \sum_k A_{ik} B_{kj}$
-                            <br>Requires inner dimensions to match ($M \times N$ times $N \times K$).
-                        </div>
-                        <div class="list-item">
-                            <strong>Transpose ($A^T$):</strong> Flip rows and columns.
-                        </div>
-                        <div class="list-item">
-                            <strong>Inverse ($A^{-1}$):</strong> $A A^{-1} = I$. Only for square, non-singular matrices.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Elimination -->
-            <section class="section" id="elimination">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Gaussian Elimination</h2>
-                </div>
-                <div class="section-body">
-                    <p>
-                        The systematic algorithm to solve $Ax=b$ by converting $A$ to <strong>Row Echelon Form
-                            (REF)</strong>.
-                    </p>
-                    <ol>
-                        <li>Subtract multiples of the pivot row from rows below to produce zeros.</li>
-                        <li>Move to next pivot.</li>
-                        <li><strong>Back Substitution:</strong> Solve for variables from bottom up.</li>
-                    </ol>
-                    <div class="info">
-                        <strong>LU Decomposition:</strong> Gaussian elimination factors $A$ into lower ($L$) and upper
-                        ($U$) triangular matrices. $A = LU$.
-                        This allows solving $Ax=b$ quickly for multiple vectors $b$.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Rank -->
-            <section class="section" id="rank">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Rank & Solutions</h2>
-                </div>
-                <div class="section-body">
-                    <div class="rule">
-                        The <strong>Rank</strong> of a matrix is the number of linearly independent rows (or pivots).
                     </div>
                     <ul>
-                        <li><strong>Rank $r = m = n$:</strong> Full rank. Unique solution.</li>
-                        <li><strong>Rank $r < n$:</strong> Infinite solutions (free variables exist).</li>
-                        <li><strong>Rank $r < m$:</strong> May have no solution (if system inconsistent).</li>
+                        <li>$U$: Orthogonal matrix ($AA^T$ eigenvectors). Columns are "Left Singular Vectors",</li>
+                        <li>$\Sigma$: Diagonal matrix of "Singular Values" ($\sigma_i \ge 0$). Sq roots of $A^T A$
+                            eigenvalues.</li>
+                        <li>$V^T$: Orthogonal matrix ($A^T A$ eigenvectors). Rows are "Right Singular Vectors".</li>
                     </ul>
+                </div>
+            </section>
+
+            <!-- Geometry -->
+            <section class="section" id="geometry">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Geometric Interpretation</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        1. $V^T$ <strong>rotates</strong> space to align basis with singular vectors.
+                        <br>2. $\Sigma$ <strong>stretches</strong> space along axes by factors $\sigma_i$.
+                        <br>3. $U$ <strong>rotates</strong> the result back to the standard orientation.
+                    </p>
+                    <div class="rule">
+                        Any linear transformation sends the unit sphere to a hyper-ellipse.
+                        The lengths of the ellipse axes are the singular values.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Approximation -->
+            <section class="section" id="approximation">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Low Rank Approximation</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Theorem (Eckart-Young): The best rank-$k$ approximation of $A$ (in Frobenius norm) is obtained
+                        by keeping only the largest $k$ singular values.
+                    </p>
+                    <p>
+                        $$ A_k = \sum_{i=1}^k \sigma_i u_i v_i^T $$
+                    </p>
+                    <p>This is used for image compression, data denoisng, and Latent Semantic Indexing.</p>
                 </div>
             </section>
 
             <!-- Python -->
             <section class="section" id="python">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">NumPy Matrix Power</h2>
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Image Compression</h2>
                 </div>
                 <div class="section-body">
-                    <p>NumPy is the standard for Linear Algebra in Python.</p>
+                    <p>Images are matrices. We can compress them using SVD.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Solving Ax=b</span>
+                            <span class="code-label">SVD Compression</span>
                         </div>
                         <div class="code-content">
                             <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
 
-<span class="code-comment"># Define Matrix A and Vector b</span>
-A = np.array([
-    [<span class="code-number">2</span>, <span class="code-number">3</span>],
-    [<span class="code-number">4</span>, -<span class="code-number">1</span>]
+<span class="code-comment"># Create a dummy 5x5 image (gradient)</span>
+Image = np.array([
+    [<span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">0</span>, <span class="code-number">0</span>],
+    [<span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">0</span>, <span class="code-number">0</span>],
+    [<span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">10</span>, <span class="code-number">0</span>, <span class="code-number">0</span>],
+    [<span class="code-number">2</span>,  <span class="code-number">2</span>,  <span class="code-number">2</span>, <span class="code-number">5</span>, <span class="code-number">5</span>],
+    [<span class="code-number">2</span>,  <span class="code-number">2</span>,  <span class="code-number">2</span>, <span class="code-number">5</span>, <span class="code-number">5</span>]
 ])
-b = np.array([<span class="code-number">5</span>, <span class="code-number">3</span>])
 
-<span class="code-comment"># Solve Ax = b</span>
-x = np.linalg.solve(A, b)
-<span class="code-function">print</span>(<span class="code-string">f"Solution x: {x}"</span>) <span class="code-comment"># [1. 1.]</span>
+<span class="code-comment"># Compute SVD</span>
+U, S, Vt = np.linalg.svd(Image)
+<span class="code-function">print</span>(<span class="code-string">"Singular values:"</span>, S) 
+<span class="code-comment"># Prob has 2 non-zero singular values because Rank is 2</span>
 
-<span class="code-comment"># Matrix Multiplication</span>
-B = np.array([[<span class="code-number">1</span>, <span class="code-number">0</span>], [<span class="code-number">0</span>, <span class="code-number">1</span>]]) <span class="code-comment"># Identity</span>
-C = A @ B <span class="code-comment"># @ operator is matrix mult</span>
-<span class="code-function">print</span>(<span class="code-string">f"\nA @ I:\n{C}"</span>)
+<span class="code-comment"># Reconstruct with Rank 1</span>
+<span class="code-comment"># S is a vector, need diagonal matrix</span>
+k = <span class="code-number">1</span>
+Recon = np.matrix(U[:, :k]) * np.diag(S[:k]) * np.matrix(Vt[:k, :])
 
-<span class="code-comment"># Rank</span>
-rank = np.linalg.matrix_rank(A)
-<span class="code-function">print</span>(<span class="code-string">f"Rank: {rank}"</span>)</pre>
+<span class="code-function">print</span>(<span class="code-string">"\nRank 1 Approximation:"</span>)
+<span class="code-function">print</span>(np.around(Recon, <span class="code-number">1</span>))</pre>
                         </div>
                     </div>
                 </div>
@@ -226,7 +200,7 @@ rank = np.linalg.matrix_rank(A)
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 5</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -248,7 +222,7 @@ rank = np.linalg.matrix_rank(A)
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -268,34 +242,31 @@ rank = np.linalg.matrix_rank(A)
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Linear Algebra Basics",
+                title: "SVD",
                 items: [
-                    { title: "Vectors and Spaces", channel: "3Blue1Brown", vid: "fNk_zzaMoSs" },
-                    { title: "Matrix Multiplication as Composition", channel: "3Blue1Brown", vid: "XkY2DOUCWMU" },
-                    { title: "Gaussian Elimination", channel: "The Organic Chemistry Tutor", vid: "2j5Ic2V7wq4" },
+                    { title: "Singular Value Decomposition Intro", channel: "MIT OpenCourseWare", vid: "cOUTpqlX-Xs" }, // Strang
+                    { title: "SVD Visualized", channel: "Visual Kernel", vid: "None" },
                 ]
             }
         ];
         const VIDEOS_REAL = [
             {
-                title: "Essence of Linear Algebra",
+                title: "SVD Deep Dive",
                 items: [
-                    { title: "Vectors | Chapter 1", channel: "3Blue1Brown", vid: "fNk_zzaMoSs" },
-                    { title: "Matrix Multiplication", channel: "3Blue1Brown", vid: "XkY2DOUCWMU" },
-                    { title: "Inverse Matrices", channel: "3Blue1Brown", vid: "uQhTuRlWMxw" }
+                    { title: "SVD Overview", channel: "Steve Brunton", vid: "gXbThCXjZFM" },
+                    { title: "Image Compression with SVD", channel: "Steve Brunton", vid: "H7qMMudh3f8" }
                 ]
             }
         ];
 
         const QUESTIONS = [
-            { topic: "System", prompt: "A linear system Ax = b can be solved unless A is ___.", answer: "singular", altAnswers: ["non-invertible", "degenerate"] },
-            { topic: "Mult", prompt: "To multiply (m x n) by (n x p), the result is sized ___.", answer: "m x p", altAnswers: ["mxp"] },
-            { topic: "Elimination", prompt: "The goal of Gaussian elimination is ___ echelon form.", answer: "row" },
-            { topic: "Rank", prompt: "Number of pivots in row echelon form is the ___.", answer: "rank" },
-            { topic: "Ops", prompt: "Matrix addition is done element-___.", answer: "wise" },
-            { topic: "Identity", prompt: "Matrix I such that AI = A is the ___ matrix.", answer: "identity" },
+            { topic: "SVD", prompt: "SVD decomposes A into U, Sigma, and ___.", answer: "v transpose", altAnswers: ["vt", "v^t"] },
+            { topic: "Sigma", prompt: "Sigma contains the ___ values.", answer: "singular" },
+            { topic: "Ortho", prompt: "U and V are ___ matrices.", answer: "orthogonal", altAnswers: ["orthonormal"] },
+            { topic: "Rank", prompt: "The number of non-zero singular values equals the ___ of the matrix.", answer: "rank" },
+            { topic: "Approx", prompt: "We can approximate A by keeping the ___ k singular values.", answer: "largest", altAnswers: ["top", "first"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day22_lin_v1' });
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day26_svd_v1' });
     </script>
 </body>
 

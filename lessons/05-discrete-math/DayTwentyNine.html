@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 29: Relations & Orders</title>
+    <title>Day 29: Trees & Flows</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -40,9 +40,9 @@
             </svg>
             Day 29 · Discrete Math
         </div>
-        <h1>Relations, Equivalence & Order</h1>
+        <h1>Graph Theory I</h1>
         <p class="hero-desc">
-            How things connect. From database keys to task scheduling, relations define the structure of data.
+            Points and lines. The simple structure that models the internet, brain connections, and social networks.
         </p>
         <div class="hero-meta">
             <div class="meta-item">
@@ -57,7 +57,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                12 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,11 +73,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#definition" class="toc-link">1. Relations Defined</a></li>
-                    <li><a href="#properties" class="toc-link">2. Properties</a></li>
-                    <li><a href="#equivalence" class="toc-link">3. Equivalence Relations</a></li>
-                    <li><a href="#order" class="toc-link">4. Partial Orders (Posets)</a></li>
-                    <li><a href="#python" class="toc-link">5. Relations in Python</a></li>
+                    <li><a href="#basics" class="toc-link">1. Definitions</a></li>
+                    <li><a href="#types" class="toc-link">2. Graph Types</a></li>
+                    <li><a href="#handshaking" class="toc-link">3. Handshaking Lemma</a></li>
+                    <li><a href="#isomorphism" class="toc-link">4. Isomorphism</a></li>
+                    <li><a href="#python" class="toc-link">5. NetworkX in Python</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -94,103 +94,91 @@
         </aside>
 
         <main class="content">
-            <!-- Definition -->
-            <section class="section" id="definition">
+            <!-- Basics -->
+            <section class="section" id="basics">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">What is a Relation?</h2>
+                    <h2 class="section-title">What is a Graph?</h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        A binary relation $R$ from set $A$ to set $B$ is a subset of the Cartesian product $A \times B$.
-                        If $(a, b) \in R$, we say "a is related to b" ($aRb$).
+                        A graph $G = (V, E)$ consists of a set of vertices $V$ and edges $E$.
                     </p>
-                    <div class="math-block">Example: "Less than" on {1, 2, 3}
-                        R = {(1,2), (1,3), (2,3)}</div>
-                    <p>
-                        <strong>Functions</strong> are just special types of relations where every $a \in A$ appears
-                        exactly once as a first element.
-                    </p>
+                    <div class="math-block">V = {A, B, C, D}
+                        E = {(A,B), (B,C), (C,A)} (Triangle)</div>
                 </div>
             </section>
 
-            <!-- Properties -->
-            <section class="section" id="properties">
+            <!-- Types -->
+            <section class="section" id="types">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Key Properties</h2>
+                    <h2 class="section-title">Types of Graphs</h2>
                 </div>
                 <div class="section-body">
-                    <p>For a relation $R$ on a set $A$ (i.e., $R \subseteq A \times A$):</p>
-
                     <div class="list-group">
                         <div class="list-item">
-                            <strong>Reflexive:</strong> $\forall a \in A, (a,a) \in R$.
-                            <br><em>Example: $\leq$ (since $x \leq x$).</em>
+                            <strong>Simple Graph:</strong> Undirected, no loops, no multiple edges between same
+                            vertices.
                         </div>
                         <div class="list-item">
-                            <strong>Symmetric:</strong> If $(a,b) \in R$, then $(b,a) \in R$.
-                            <br><em>Example: "=" or "is sibling of".</em>
+                            <strong>Directed Graph (Digraph):</strong> Edges have direction (A -> B is different from B
+                            -> A).
                         </div>
                         <div class="list-item">
-                            <strong>Antisymmetric:</strong> If $(a,b) \in R$ and $(b,a) \in R$, then $a=b$.
-                            <br><em>Example: $\leq$ (If $x \le y$ and $y \le x$, then x=y).</em>
+                            <strong>Complete Graph ($K_n$):</strong> Every vertex is connected to every other vertex.
+                            Edges = $n(n-1)/2$.
                         </div>
                         <div class="list-item">
-                            <strong>Transitive:</strong> If $(a,b) \in R$ and $(b,c) \in R$, then $(a,c) \in R$.
-                            <br><em>Example: "Ancestor of".</em>
+                            <strong>Bipartite Graph:</strong> Vertices can be split into two sets $V_1, V_2$ where edges
+                            only go between $V_1$ and $V_2$ (no internal connections).
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Equivalence -->
-            <section class="section" id="equivalence">
+            <!-- Handshaking -->
+            <section class="section" id="handshaking">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Equivalence Relations</h2>
+                    <h2 class="section-title">The Handshaking Lemma</h2>
                 </div>
                 <div class="section-body">
                     <div class="rule">
-                        An <strong>Equivalence Relation</strong> is Reflexive, Symmetric, and Transitive.
+                        In any undirected graph, the sum of degrees is equal to twice the number of edges.
+                        <br>
+                        $\sum_{v \in V} \deg(v) = 2|E|$
                     </div>
                     <p>
-                        It generalizes the concept of equality. It partitions the set $A$ into disjoint
-                        <strong>Equivalence Classes</strong>.
+                        <strong>Corollary:</strong> An undirected graph has an even number of vertices of odd degree.
+                        <br><em>Try shaking hands at a party; the number of people who shook an odd number of hands is
+                            even.</em>
                     </p>
-                    <div class="math-block">Example: Modulo 3
-                        Integers related if x % 3 == y % 3.
-                        Classes:
-                        [0] = {..., -3, 0, 3, 6, ...}
-                        [1] = {..., -2, 1, 4, 7, ...}
-                        [2] = {..., -1, 2, 5, 8, ...}</div>
                 </div>
             </section>
 
-            <!-- Order -->
-            <section class="section" id="order">
+            <!-- Isomorphism -->
+            <section class="section" id="isomorphism">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Partial Orders</h2>
+                    <h2 class="section-title">Graph Isomorphism</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule">
-                        A <strong>Partial Order</strong> is Reflexive, Antisymmetric, and Transitive.
-                    </div>
                     <p>
-                        We call the set a <strong>Poset</strong>. It captures the idea of "precedence" or "hierarchy".
+                        Two graphs $G_1$ and $G_2$ are isomorphic if there is a bijection between their vertices that
+                        preserves adjacency.
                     </p>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Hasse Diagrams</h3>
-                        <p>A visual way to represent finite posets. We draw $b$ above $a$ if $a < b$, and connect them
-                                avoiding redundant transitive edges.</p>
-                                <div class="info">
-                                    <strong>Total Order:</strong> A partial order where every pair is comparable (e.g.,
-                                    $\leq$ on Integers).
-                                    <br><strong>Lattice:</strong> A poset where every pair has a Least Upper Bound
-                                    (Join) and Greatest Lower Bound (Meet).
-                                </div>
+                    <div class="info">
+                        <strong>Hard Problem:</strong> Determining if two arbitrary graphs are isomorphic is
+                        computationally difficult (not known to be P or NP-complete).
                     </div>
+                    <h4>Invariants (Quick Checks)</h4>
+                    <ul>
+                        <li>Same number of vertices?</li>
+                        <li>Same number of edges?</li>
+                        <li>Same degree sequence?</li>
+                    </ul>
+                    <p>If any of these fail, they are definitely NOT isomorphic.</p>
                 </div>
             </section>
 
@@ -198,47 +186,41 @@
             <section class="section" id="python">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Relations in Python</h2>
+                    <h2 class="section-title">Graphing in Python</h2>
                 </div>
                 <div class="section-body">
-                    <p>We can model a relation as a set of tuples or a boolean matrix.</p>
-
+                    <p>We use the <code>networkx</code> library for graph theory.</p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Analyzing Relation Properties</span>
+                            <span class="code-label">Basic Graph Ops (Pseudocode/Concepts)</span>
                         </div>
                         <div class="code-content">
-                            <pre><span class="code-keyword">def</span> <span class="code-function">is_reflexive</span>(R, A):
-    <span class="code-keyword">for</span> a <span class="code-keyword">in</span> A:
-        <span class="code-keyword">if</span> (a, a) <span class="code-keyword">not in</span> R:
-            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
-    <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+                            <pre><span class="code-keyword">import</span> networkx <span class="code-keyword">as</span> nx
+<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
 
-<span class="code-keyword">def</span> <span class="code-function">is_symmetric</span>(R):
-    <span class="code-keyword">for</span> (a, b) <span class="code-keyword">in</span> R:
-        <span class="code-keyword">if</span> (b, a) <span class="code-keyword">not in</span> R:
-            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
-    <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+<span class="code-comment"># Create a graph</span>
+G = nx.Graph()
 
-<span class="code-keyword">def</span> <span class="code-function">is_transitive</span>(R):
-    <span class="code-keyword">for</span> (a, b) <span class="code-keyword">in</span> R:
-        <span class="code-keyword">for</span> (c, d) <span class="code-keyword">in</span> R:
-            <span class="code-comment"># If we have (a,b) and (b,c), we need (a,c)</span>
-            <span class="code-keyword">if</span> b == c <span class="code-keyword">and</span> (a, d) <span class="code-keyword">not in</span> R:
-                <span class="code-keyword">return</span> <span class="code-keyword">False</span>
-    <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+<span class="code-comment"># Add nodes</span>
+G.add_nodes_from([<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>])
 
-<span class="code-comment"># Define Set A and Relation R</span>
-A = {<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>}
-R = {(<span class="code-number">1</span>,<span class="code-number">1</span>), (<span class="code-number">2</span>,<span class="code-number">2</span>), (<span class="code-number">3</span>,<span class="code-number">3</span>), (<span class="code-number">1</span>,<span class="code-number">2</span>), (<span class="code-number">2</span>,<span class="code-number">1</span>)}
+<span class="code-comment"># Add edges</span>
+G.add_edge(<span class="code-number">1</span>, <span class="code-number">2</span>)
+G.add_edge(<span class="code-number">2</span>, <span class="code-number">3</span>)
+G.add_edge(<span class="code-number">3</span>, <span class="code-number">1</span>)
+G.add_edge(<span class="code-number">3</span>, <span class="code-number">4</span>)
 
-<span class="code-function">print</span>(<span class="code-string">f"Reflexive? {is_reflexive(R, A)}"</span>)  <span class="code-comment"># True</span>
-<span class="code-function">print</span>(<span class="code-string">f"Symmetric? {is_symmetric(R)}"</span>)    <span class="code-comment"># True</span>
-<span class="code-function">print</span>(<span class="code-string">f"Transitive? {is_transitive(R)}"</span>)  <span class="code-comment"># False! (1,2) and (2,1) exist, but (1,1) is needed (it is there)</span>
-<span class="code-comment"># Wait, (1,2) and (2,1) -> needs (1,1) and (2,2). Both are there.</span>
-<span class="code-comment"># Let's verify manually: 1->2, 2->1. Transitive needs 1->1. YES.</span>
-<span class="code-comment"># Actually, transitivity holds for this R.</span></pre>
+<span class="code-function">print</span>(<span class="code-string">f"Nodes: {G.number_of_nodes()}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Edges: {G.number_of_edges()}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Degrees: {G.degree()}"</span>)
+
+<span class="code-comment"># Check Isomorphism against another graph</span>
+H = nx.Graph()
+H.add_edges_from([(<span class="code-string">'A'</span>,<span class="code-string">'B'</span>), (<span class="code-string">'B'</span>,<span class="code-string">'C'</span>), (<span class="code-string">'C'</span>,<span class="code-string">'A'</span>), (<span class="code-string">'C'</span>,<span class="code-string">'D'</span>)])
+
+is_iso = nx.is_isomorphic(G, H)
+<span class="code-function">print</span>(<span class="code-string">f"Isomorphic? {is_iso}"</span>) <span class="code-comment"># True</span></pre>
                         </div>
                     </div>
                 </div>
@@ -289,38 +271,36 @@ R = {(<span class="code-number">1</span>,<span class="code-number">1</span>), (<
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Relations",
+                title: "Graph Basics",
                 items: [
-                    { title: "Relations Types (Reflexive, etc)", channel: "TrevTutor", vid: "None" },
-                    { title: "Equivalence Relations", channel: "The Organic Chemistry Tutor", vid: "None" },
-                    { title: "Partial Orders & Hasse Diagrams", channel: "TrevTutor", vid: "None" },
+                    { title: "Intro to Graph Theory", channel: "TrevTutor", vid: "None" },
+                    { title: "Handshaking Lemma", channel: "TrevTutor", vid: "None" },
+                    { title: "Isomorphism", channel: "Sarada Herke", vid: "None" },
                 ]
             }
         ];
         const VIDEOS_REAL = [
             {
-                title: "Relations",
+                title: "Graph Theory",
                 items: [
-                    { title: "Properties of Relations", channel: "TrevTutor", vid: "wIqnJ8b6n0g" },
-                    { title: "Equivalence Relations", channel: "TrevTutor", vid: "ecODhVfsZwk" },
-                    { title: "Partial Orders", channel: "TrevTutor", vid: "5c8Nl7cMjgU" }
+                    { title: "Introduction to Graphs", channel: "TrevTutor", vid: "gZnaP32k_cI" },
+                    { title: "Handshaking Lemma", channel: "TrevTutor", vid: "5hP4D758wYQ" },
+                    { title: "Isomorphism", channel: "Sarada Herke", vid: "Uod17yOREoQ" } // Assuming
                 ]
             }
         ];
 
         const QUESTIONS = [
-            { topic: "Property", prompt: "Reflexive means (a, ___) is in R for all a.", answer: "a" },
-            { topic: "Property", prompt: "Symmetric: If (a,b) in R then (___,a) in R.", answer: "b" },
-            { topic: "Property", prompt: "Transitive: If (a,b) and (b,c) then (___, c).", answer: "a" },
-            { topic: "Equivalence", prompt: "Equivalence relations are Reflexive, Symmetric, and ___.", answer: "transitive" },
-            { topic: "Order", prompt: "Partial Orders are Reflexive, Transitive, and ___.", answer: "antisymmetric" },
-            { topic: "Concept", prompt: "Equivalence relations partition a set into ___ classes.", answer: "equivalence" },
-            { topic: "Poset", prompt: "Diagrams for partial orders are called ___ diagrams.", answer: "hasse" },
-            { topic: "Example", prompt: "The relation '<=' on integers is a ___ order.", answer: "partial" },
-            { topic: "Example", prompt: "The relation 'is sibling of' is ___ (Symmetric/Antisymmetric).", answer: "symmetric" },
-            { topic: "Total", prompt: "In a ___ order, every pair of elements is comparable.", answer: "total" },
+            { topic: "Edges", prompt: "A set of vertices V and edges E make a ___.", answer: "graph" },
+            { topic: "Degree", prompt: "Number of edges connected to a vertex is its ___.", answer: "degree" },
+            { topic: "Handshake", prompt: "Sum of degrees is ___ times the number of edges.", answer: "2", altAnswers: ["two"] },
+            { topic: "Complete", prompt: "A graph where all nodes connect to all others is ___.", answer: "complete" },
+            { topic: "Bipartite", prompt: "Graph with 2 sets of nodes only connecting to each other is ___.", answer: "bipartite" },
+            { topic: "Isomorphism", prompt: "Isomorphism requires preserving ___.", answer: "adjacency" },
+            { topic: "Digraph", prompt: "In a directed graph, edges have ___.", answer: "direction" },
+            { topic: "Loop", prompt: "An edge from a vertex to itself is a ___.", answer: "loop" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day29_rel_v1' });
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day34_graph_v1' });
     </script>
 </body>
 

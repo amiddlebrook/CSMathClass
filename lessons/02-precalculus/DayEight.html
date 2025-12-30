@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 7: Writing Proofs — Definitions, Claims, and Structure</title>
+    <title>Day 10: Floors, Ceilings & Integer Arithmetic</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,9 +20,9 @@
             --text: #1c1917;
             --text-secondary: #57534e;
             --text-muted: #78716c;
-            --accent: #ea580c;
-            --accent-light: #ffedd5;
-            --accent-dark: #c2410c;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --accent-dark: #1d4ed8;
             --code-bg: #1e1e1e;
             --code-text: #d4d4d4;
             --success: #16a34a;
@@ -49,9 +49,9 @@
             --text: #ececf1;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
-            --accent: #fb923c;
-            --accent-light: #431407;
-            --accent-dark: #fdba74;
+            --accent: #60a5fa;
+            --accent-light: #1e3a5f;
+            --accent-dark: #93c5fd;
             --code-bg: #0f0f12;
             --success: #86efac;
             --success-bg: #14532d;
@@ -413,14 +413,6 @@
             white-space: pre-wrap;
         }
 
-        .math-inline {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            background: var(--surface-alt);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
         .rule {
             background: var(--accent-light);
             border-left: 3px solid var(--accent);
@@ -541,36 +533,27 @@
             color: var(--text);
         }
 
-        .proof-box {
-            background: var(--surface-alt);
-            border: 2px solid var(--accent);
-            border-radius: var(--radius-lg);
-            padding: 20px 24px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 16px 0;
+            font-size: 14px;
         }
 
-        .proof-label {
+        th,
+        td {
+            padding: 12px 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface-alt);
+            font-weight: 600;
+        }
+
+        td {
             font-family: var(--font-mono);
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-
-        .proof-content {
-            font-family: var(--font-serif);
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--text);
-        }
-
-        .proof-qed {
-            text-align: right;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            margin-top: 12px;
         }
 
         .video-container {
@@ -583,6 +566,19 @@
         @media (max-width: 800px) {
             .video-container {
                 grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 32px 16px 24px;
+            }
+
+            .main-layout {
+                padding: 0 16px 60px;
+            }
+
+            .section-header,
+            .section-body {
+                padding: 20px;
             }
         }
 
@@ -621,7 +617,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            max-height: 480px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
@@ -834,21 +830,6 @@
         [data-theme="dark"] .question-answer {
             color: var(--accent);
         }
-
-        @media (max-width: 600px) {
-            .hero {
-                padding: 32px 16px 24px;
-            }
-
-            .main-layout {
-                padding: 0 16px 60px;
-            }
-
-            .section-header,
-            .section-body {
-                padding: 20px;
-            }
-        }
     </style>
     <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
 </head>
@@ -860,7 +841,7 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M10 12L6 8L10 4" />
                 </svg>Back to Curriculum</a>
-            <div class="nav-progress"><span id="progressText">0 / 12 complete</span>
+            <div class="nav-progress"><span id="progressText">0 / 18 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -875,13 +856,13 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 7 · Foundation</div>
-        <h1>Writing Proofs: Definition → Claim → Proof → QED</h1>
-        <p class="hero-desc">Good proofs are like good code: structured, clear, and verifiable. Learn the standard
-            format that mathematicians and computer scientists use to communicate rigorous arguments.</p>
+            </svg>Day 10 · Discrete Math</div>
+        <h1>Floors, Ceilings & Integer Arithmetic</h1>
+        <p class="hero-desc">Computers work with integers. Floors (⌊x⌋), ceilings (⌈x⌉), and modular arithmetic are
+            everywhere—array indices, hash functions, pagination, and more.</p>
         <div class="hero-meta">
             <div class="meta-item">~40 min read</div>
-            <div class="meta-item">12 practice problems</div>
+            <div class="meta-item">18 practice problems</div>
             <div class="meta-item">6 video lessons</div>
         </div>
     </header>
@@ -892,12 +873,12 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#why" class="toc-link">Why This Matters</a></li>
-                    <li><a href="#structure" class="toc-link">1. Proof Structure</a></li>
-                    <li><a href="#definitions" class="toc-link">2. Definitions</a></li>
-                    <li><a href="#claims" class="toc-link">3. Claims & Theorems</a></li>
-                    <li><a href="#writing" class="toc-link">4. Writing the Proof</a></li>
-                    <li><a href="#style" class="toc-link">5. Style Guide</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#floor" class="toc-link">1. Floor Function</a></li>
+                    <li><a href="#ceiling" class="toc-link">2. Ceiling Function</a></li>
+                    <li><a href="#division" class="toc-link">3. Integer Division</a></li>
+                    <li><a href="#modulo" class="toc-link">4. Modulo Operator</a></li>
+                    <li><a href="#applications" class="toc-link">5. Applications</a></li>
+                    <li><a href="#videos" class="toc-link">6. Videos</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
@@ -916,276 +897,313 @@
             <section class="section" id="why">
                 <div class="section-header">
                     <div class="section-number">Section 0</div>
-                    <h2 class="section-title">Why Proof Writing Matters in CS</h2>
+                    <h2 class="section-title">Why Integer Math Matters</h2>
                 </div>
                 <div class="section-body">
-                    <p>Writing proofs is like writing documentation for your logical reasoning. Just as code needs
-                        structure (functions, modules, classes), proofs need structure (definitions, claims, steps).</p>
-                    <div class="rule"><strong>Key insight:</strong> A well-structured proof is readable, verifiable, and
-                        maintainable—just like good code.</div>
+                    <div class="rule"><strong>Reality:</strong> Computers fundamentally operate on integers. Array
+                        indices, memory addresses, loop counts—all integers. Understanding integer math prevents subtle
+                        bugs.</div>
                     <div class="subsection">
-                        <h3 class="subsection-title">The parallel to code</h3>
+                        <h3 class="subsection-title">Where you'll use this</h3>
                         <ul>
-                            <li><strong>Definitions</strong> = Type declarations and interfaces</li>
-                            <li><strong>Claims/Theorems</strong> = Function signatures (what you promise to deliver)
-                            </li>
-                            <li><strong>Proof</strong> = Implementation (how you deliver it)</li>
-                            <li><strong>QED</strong> = Return statement / tests passing</li>
+                            <li><strong>Array Indexing:</strong> Finding the middle element: mid = (lo + hi) // 2</li>
+                            <li><strong>Pagination:</strong> Number of pages = ⌈items / page_size⌉</li>
+                            <li><strong>Hash Tables:</strong> Bucket index = hash(key) mod table_size</li>
+                            <li><strong>Cryptography:</strong> RSA, Diffie-Hellman use modular arithmetic</li>
+                            <li><strong>Graphics:</strong> Pixel coordinates, grid snapping</li>
+                            <li><strong>Time:</strong> hours = minutes // 60, remaining = minutes % 60</li>
                         </ul>
-                    </div>
-                    <div class="code-block">
-                        <div class="code-header"><span class="code-lang">Comparison</span><span class="code-label">Proof
-                                structure ≈ Code structure</span></div>
-                        <div class="code-content">
-                            <pre><span class="code-comment">// CODE</span>
-<span class="code-keyword">interface</span> <span class="code-type">Number</span> { ... }     <span class="code-comment">// Definition</span>
-<span class="code-keyword">function</span> <span class="code-function">isEven</span>(n): <span class="code-type">bool</span>    <span class="code-comment">// Claim (signature)</span>
-{ <span class="code-keyword">return</span> n % 2 == 0; }      <span class="code-comment">// Proof (implementation)</span>
-
-<span class="code-comment">// PROOF</span>
-<span class="code-keyword">Definition:</span> n is even if n = 2k for some integer k.
-<span class="code-keyword">Claim:</span> The sum of two even numbers is even.
-<span class="code-keyword">Proof:</span> Let a = 2m and b = 2n. Then a + b = 2(m+n). ∎</pre>
-                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="structure">
+            <section class="section" id="floor">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The Standard Proof Structure</h2>
+                    <h2 class="section-title">The Floor Function ⌊x⌋</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">The four parts</h3>
-                        <div class="math-block">1. DEFINITIONS — State precisely what terms mean
-                            2. CLAIM/THEOREM — State exactly what you will prove
-                            3. PROOF — The logical argument
-                            4. QED — Signal that the proof is complete (∎ or □ or QED)</div>
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">⌊x⌋ = the greatest integer less than or equal to x
+
+                            Also called: "floor of x" or "round down"
+
+                            Examples:
+                            ⌊3.7⌋ = 3
+                            ⌊5.0⌋ = 5
+                            ⌊-2.3⌋ = -3 (← watch out for negatives!)
+                            ⌊π⌋ = 3</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Complete example</h3>
-                        <div class="proof-box">
-                            <div class="proof-label">Definition</div>
-                            <div class="proof-content">An integer n is <strong>even</strong> if n = 2k for some integer
-                                k.<br>An integer n is <strong>odd</strong> if n = 2k + 1 for some integer k.</div>
+                        <h3 class="subsection-title">Key properties</h3>
+                        <div class="math-block">For any real x and integer n:
+
+                            1. ⌊x⌋ ≤ x < ⌊x⌋ + 1 2. ⌊x + n⌋=⌊x⌋ + n 3. ⌊⌊x⌋⌋=⌊x⌋ (idempotent) 4. x - 1 < ⌊x⌋ ≤ x</div>
                         </div>
-                        <div class="proof-box">
-                            <div class="proof-label">Theorem</div>
-                            <div class="proof-content">The sum of two even integers is even.</div>
-                        </div>
-                        <div class="proof-box">
-                            <div class="proof-label">Proof</div>
-                            <div class="proof-content">
-                                Let a and b be even integers.<br>
-                                By definition, a = 2m for some integer m, and b = 2n for some integer n.<br>
-                                Then a + b = 2m + 2n = 2(m + n).<br>
-                                Since m + n is an integer, a + b has the form 2k where k = m + n.<br>
-                                Therefore, by definition, a + b is even.
+                        <div class="warning"><strong>Negative numbers!</strong><br>
+                            ⌊-2.3⌋ = -3, NOT -2<br>
+                            Floor goes toward negative infinity, not toward zero.</div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">In code</h3>
+                            <div class="code-block">
+                                <div class="code-header"><span class="code-lang">Python</span></div>
+                                <div class="code-content">
+                                    <pre><span class="code-keyword">import</span> math
+
+<span class="code-comment"># Python's math.floor</span>
+math.<span class="code-function">floor</span>(<span class="code-number">3.7</span>)   <span class="code-comment"># 3</span>
+math.<span class="code-function">floor</span>(-<span class="code-number">2.3</span>)  <span class="code-comment"># -3</span>
+
+<span class="code-comment"># Integer division with // (floor division)</span>
+<span class="code-number">7</span> // <span class="code-number">2</span>    <span class="code-comment"># 3</span>
+-<span class="code-number">7</span> // <span class="code-number">2</span>   <span class="code-comment"># -4 (floors toward -∞)</span>
+
+<span class="code-comment"># int() truncates toward zero (different!)</span>
+<span class="code-function">int</span>(-<span class="code-number">2.3</span>)  <span class="code-comment"># -2 (not floor!)</span></pre>
+                                </div>
                             </div>
-                            <div class="proof-qed">∎</div>
                         </div>
                     </div>
-                </div>
             </section>
 
-            <section class="section" id="definitions">
+            <section class="section" id="ceiling">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Writing Good Definitions</h2>
+                    <h2 class="section-title">The Ceiling Function ⌈x⌉</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">What makes a good definition</h3>
-                        <div class="rule"><strong>A good definition is:</strong><br>• Precise — no ambiguity<br>•
-                            Complete — covers all cases<br>• Minimal — no redundant conditions<br>• Usable — easy to
-                            apply in proofs</div>
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">⌈x⌉ = the least integer greater than or equal to x
+
+                            Also called: "ceiling of x" or "round up"
+
+                            Examples:
+                            ⌈3.2⌉ = 4
+                            ⌈5.0⌉ = 5
+                            ⌈-2.7⌉ = -2 (toward zero for negatives)
+                            ⌈π⌉ = 4</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Definition patterns</h3>
-                        <div class="math-block"><strong>Existential:</strong> "X is Y if there exists Z such that..."
-                            Example: n is even if there exists an integer k such that n = 2k.
+                        <h3 class="subsection-title">Key properties</h3>
+                        <div class="math-block">For any real x and integer n:
 
-                            <strong>Universal:</strong> "X is Y if for all Z, ..."
-                            Example: f is continuous if for all ε > 0, there exists δ > 0...
-
-                            <strong>Recursive:</strong> Base case + recursive case
-                            Example: 0! = 1, and n! = n × (n-1)! for n > 0.
+                            1. ⌈x⌉ - 1 < x ≤ ⌈x⌉ 2. ⌈x + n⌉=⌈x⌉ + n 3. ⌈-x⌉=-⌊x⌋ (important identity!) 4. x ≤ ⌈x⌉ < x +
+                                1</div>
                         </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">CS parallel: Type definitions</h3>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">TypeScript</span><span
-                                    class="code-label">Definitions in code</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment">// Existential definition</span>
-<span class="code-keyword">type</span> <span class="code-type">Even</span> = <span class="code-type">number</span> & { _brand: <span class="code-string">'even'</span> };
-<span class="code-keyword">const</span> <span class="code-function">isEven</span> = (n: <span class="code-type">number</span>): n <span class="code-keyword">is</span> <span class="code-type">Even</span> => n % <span class="code-number">2</span> === <span class="code-number">0</span>;
+                        <div class="subsection">
+                            <h3 class="subsection-title">Relationship to floor</h3>
+                            <div class="rule"><strong>Key identity:</strong><br><br>
+                                ⌈x⌉ = -⌊-x⌋<br><br>
+                                For non-integers: ⌈x⌉ = ⌊x⌋ + 1<br>
+                                For integers: ⌈n⌉ = ⌊n⌋ = n</div>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">In code</h3>
+                            <div class="code-block">
+                                <div class="code-header"><span class="code-lang">Python</span></div>
+                                <div class="code-content">
+                                    <pre><span class="code-keyword">import</span> math
 
-<span class="code-comment">// Recursive definition</span>
-<span class="code-keyword">type</span> <span class="code-type">Tree</span><T> = 
-  | { kind: <span class="code-string">'leaf'</span>, value: T }
-  | { kind: <span class="code-string">'node'</span>, left: <span class="code-type">Tree</span><T>, right: <span class="code-type">Tree</span><T> };</pre>
+math.<span class="code-function">ceil</span>(<span class="code-number">3.2</span>)   <span class="code-comment"># 4</span>
+math.<span class="code-function">ceil</span>(-<span class="code-number">2.7</span>)  <span class="code-comment"># -2</span>
+math.<span class="code-function">ceil</span>(<span class="code-number">5.0</span>)   <span class="code-comment"># 5</span>
+
+<span class="code-comment"># Ceiling division (no built-in operator)</span>
+<span class="code-keyword">def</span> <span class="code-function">ceildiv</span>(a, b):
+    <span class="code-keyword">return</span> -(-a // b)  <span class="code-comment"># trick: negate, floor div, negate</span>
+
+<span class="code-function">ceildiv</span>(<span class="code-number">7</span>, <span class="code-number">2</span>)  <span class="code-comment"># 4</span>
+<span class="code-function">ceildiv</span>(<span class="code-number">6</span>, <span class="code-number">2</span>)  <span class="code-comment"># 3</span></pre>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
 
-            <section class="section" id="claims">
+            <section class="section" id="division">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Stating Claims and Theorems</h2>
+                    <h2 class="section-title">Integer Division</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">The hierarchy</h3>
-                        <div class="math-block"><strong>Theorem:</strong> A major result, often the main goal
-                            <strong>Lemma:</strong> A helper result used to prove theorems
-                            <strong>Corollary:</strong> An easy consequence of a theorem
-                            <strong>Proposition:</strong> A result of medium importance
-                            <strong>Claim:</strong> An informal assertion (often inside a proof)
+                        <h3 class="subsection-title">The division algorithm</h3>
+                        <div class="math-block">For integers a and positive b, there exist unique integers q and r:
+
+                            a = b × q + r where 0 ≤ r < b q=quotient=⌊a/b⌋ r=remainder=a mod b Example: 17=5 × 3 + 2 17
+                                ÷ 5: quotient=3, remainder=2</div>
                         </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Writing precise claims</h3>
-                        <div class="warning"><strong>Bad:</strong> "Even numbers plus even numbers are
-                            even."<br><strong>Good:</strong> "For all integers a and b, if a is even and b is even, then
-                            a + b is even."</div>
-                        <p>A precise claim should:</p>
-                        <ul>
-                            <li>Quantify all variables (for all, there exists)</li>
-                            <li>Specify the domain (integers, reals, etc.)</li>
-                            <li>Make the logical structure explicit (if...then)</li>
-                        </ul>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Common claim patterns</h3>
-                        <div class="math-block"><strong>Universal:</strong> For all x in S, P(x).
-                            "Every prime > 2 is odd."
-
-                            <strong>Existential:</strong> There exists x in S such that P(x).
-                            "There exists a prime between n and 2n."
-
-                            <strong>Conditional:</strong> If P, then Q.
-                            "If n² is even, then n is even."
-
-                            <strong>Biconditional:</strong> P if and only if Q.
-                            "n is even iff n² is even."
+                        <div class="subsection">
+                            <h3 class="subsection-title">Comparison table</h3>
+                            <table>
+                                <tr>
+                                    <th>a</th>
+                                    <th>b</th>
+                                    <th>a / b (float)</th>
+                                    <th>a // b (floor)</th>
+                                    <th>a % b (mod)</th>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>5</td>
+                                    <td>3.4</td>
+                                    <td>3</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>-17</td>
+                                    <td>5</td>
+                                    <td>-3.4</td>
+                                    <td>-4</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>-5</td>
+                                    <td>-3.4</td>
+                                    <td>-4</td>
+                                    <td>-3</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>5</td>
+                                    <td>4.0</td>
+                                    <td>4</td>
+                                    <td>0</td>
+                                </tr>
+                            </table>
                         </div>
+                        <div class="warning"><strong>Languages differ on negative division!</strong><br>
+                            Python: floors toward -∞ (mathematically consistent)<br>
+                            C/Java: truncates toward 0 (different for negatives)<br>
+                            Always test with negative numbers in a new language.</div>
                     </div>
-                </div>
             </section>
 
-            <section class="section" id="writing">
+            <section class="section" id="modulo">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Writing the Proof Body</h2>
+                    <h2 class="section-title">Modulo Operator</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Start with a roadmap</h3>
-                        <div class="rule"><strong>Opening line should state your approach:</strong><br>"We proceed by
-                            induction on n."<br>"We prove the contrapositive."<br>"Suppose for contradiction
-                            that..."<br>"Let a and b be arbitrary even integers."</div>
+                        <h3 class="subsection-title">Definition</h3>
+                        <div class="math-block">a mod b = a - b × ⌊a/b⌋
+
+                            "a mod b" is the remainder when a is divided by b.
+
+                            Examples:
+                            17 mod 5 = 2 (17 = 5×3 + 2)
+                            23 mod 7 = 2 (23 = 7×3 + 2)
+                            100 mod 10 = 0 (100 = 10×10 + 0)</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Justify every step</h3>
-                        <div class="math-block">Each step should have a reason:
-                            - "by definition"
-                            - "by assumption"
-                            - "by the inductive hypothesis"
-                            - "by Theorem 2.3"
-                            - "since a = 2k"
-                            - "by algebra"</div>
+                        <h3 class="subsection-title">Key properties</h3>
+                        <div class="math-block">(a + b) mod n = ((a mod n) + (b mod n)) mod n
+                            (a × b) mod n = ((a mod n) × (b mod n)) mod n
+                            (a - b) mod n = ((a mod n) - (b mod n) + n) mod n
+
+                            These let you compute mod of huge numbers!</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Proof template</h3>
+                        <h3 class="subsection-title">Common uses</h3>
                         <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Template</span><span
-                                    class="code-label">Standard proof structure</span></div>
+                            <div class="code-header"><span class="code-lang">Python</span><span
+                                    class="code-label">Modulo patterns</span></div>
                             <div class="code-content">
-                                <pre><span class="code-keyword">Proof:</span>
-  <span class="code-comment">// 1. State your setup</span>
-  Let [variables] be [what they are].
-  
-  <span class="code-comment">// 2. Apply definitions</span>
-  By definition, [variable] = [form].
-  
-  <span class="code-comment">// 3. Do the work</span>
-  Then [calculation or logical step].
-  [More steps as needed, each justified.]
-  
-  <span class="code-comment">// 4. Connect to goal</span>
-  Therefore, [conclusion].
-  
-  <span class="code-comment">// 5. End marker</span>
-  ∎</pre>
+                                <pre><span class="code-comment"># Check if even/odd</span>
+is_even = n % <span class="code-number">2</span> == <span class="code-number">0</span>
+
+<span class="code-comment"># Wrap around (circular array)</span>
+next_index = (i + <span class="code-number">1</span>) % <span class="code-function">len</span>(arr)
+
+<span class="code-comment"># Extract last digit</span>
+last_digit = n % <span class="code-number">10</span>
+
+<span class="code-comment"># Check divisibility</span>
+divisible_by_3 = n % <span class="code-number">3</span> == <span class="code-number">0</span>
+
+<span class="code-comment"># Hash table index</span>
+bucket = <span class="code-function">hash</span>(key) % num_buckets
+
+<span class="code-comment"># Convert to hours/minutes</span>
+hours = total_minutes // <span class="code-number">60</span>
+minutes = total_minutes % <span class="code-number">60</span></pre>
                             </div>
-                        </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Complete worked example</h3>
-                        <div class="proof-box">
-                            <div class="proof-label">Theorem</div>
-                            <div class="proof-content">For all integers n, if n² is odd, then n is odd.</div>
-                        </div>
-                        <div class="proof-box">
-                            <div class="proof-label">Proof (by contrapositive)</div>
-                            <div class="proof-content">
-                                We prove the contrapositive: if n is even, then n² is even.<br><br>
-                                Let n be an even integer.<br>
-                                By definition, n = 2k for some integer k.<br>
-                                Then n² = (2k)² = 4k² = 2(2k²).<br>
-                                Since 2k² is an integer, n² has the form 2m where m = 2k².<br>
-                                Therefore n² is even by definition.<br><br>
-                                Since the contrapositive is true, the original statement holds.
-                            </div>
-                            <div class="proof-qed">∎</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="style">
+            <section class="section" id="applications">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Style Guide for Proofs</h2>
+                    <h2 class="section-title">CS Applications</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Do's</h3>
-                        <ul>
-                            <li><strong>Write in complete sentences.</strong> "Let n be an integer." not "n = integer"
-                            </li>
-                            <li><strong>Define variables before using them.</strong> "Let ε > 0." before using ε</li>
-                            <li><strong>Be explicit about assumptions.</strong> "Assume P(k) holds for some k ≥ 1."</li>
-                            <li><strong>Use transitional words.</strong> "Then", "Therefore", "Hence", "Thus", "Since"
-                            </li>
-                            <li><strong>End with a clear conclusion.</strong> "Therefore, the claim holds."</li>
-                        </ul>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Don'ts</h3>
-                        <div class="warning">
-                            <strong>Don't use undefined variables.</strong> Always introduce before use.<br><br>
-                            <strong>Don't skip steps.</strong> What's obvious to you may not be to readers.<br><br>
-                            <strong>Don't prove by example.</strong> Showing P(5) doesn't prove "for all n".<br><br>
-                            <strong>Don't assume what you're proving.</strong> Circular reasoning is invalid.<br><br>
-                            <strong>Don't forget edge cases.</strong> Handle n = 0, empty sets, etc.
+                        <h3 class="subsection-title">Binary search midpoint</h3>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">Python</span></div>
+                            <div class="code-content">
+                                <pre><span class="code-comment"># Classic (can overflow in some languages)</span>
+mid = (lo + hi) // <span class="code-number">2</span>
+
+<span class="code-comment"># Overflow-safe version</span>
+mid = lo + (hi - lo) // <span class="code-number">2</span></pre>
+                            </div>
                         </div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Mathematical notation</h3>
-                        <div class="math-block">∀ — "for all"
-                            ∃ — "there exists"
-                            ∈ — "is an element of"
-                            ⊆ — "is a subset of"
-                            ⟹ or → — "implies"
-                            ⟺ or ↔ — "if and only if"
-                            ∎ or □ or QED — "end of proof"</div>
+                        <h3 class="subsection-title">Pagination</h3>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">Python</span></div>
+                            <div class="code-content">
+                                <pre>items = <span class="code-number">47</span>
+page_size = <span class="code-number">10</span>
+
+<span class="code-comment"># How many pages needed? Use ceiling!</span>
+num_pages = -(-items // page_size)  <span class="code-comment"># = ⌈47/10⌉ = 5</span>
+
+<span class="code-comment"># Or equivalently:</span>
+num_pages = (items + page_size - <span class="code-number">1</span>) // page_size</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Circular buffers</h3>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">Python</span></div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">class</span> <span class="code-type">CircularBuffer</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, size):
+        self.buf = [<span class="code-keyword">None</span>] * size
+        self.head = <span class="code-number">0</span>
+        self.size = size
+    
+    <span class="code-keyword">def</span> <span class="code-function">push</span>(self, item):
+        self.buf[self.head] = item
+        self.head = (self.head + <span class="code-number">1</span>) % self.size  <span class="code-comment"># wrap around!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Digits of a number</h3>
+                        <div class="code-block">
+                            <div class="code-header"><span class="code-lang">Python</span></div>
+                            <div class="code-content">
+                                <pre><span class="code-keyword">def</span> <span class="code-function">get_digits</span>(n):
+    digits = []
+    <span class="code-keyword">while</span> n > <span class="code-number">0</span>:
+        digits.<span class="code-function">append</span>(n % <span class="code-number">10</span>)  <span class="code-comment"># last digit</span>
+        n = n // <span class="code-number">10</span>           <span class="code-comment"># remove last digit</span>
+    <span class="code-keyword">return</span> digits[::-<span class="code-number">1</span>]
+
+<span class="code-function">get_digits</span>(<span class="code-number">12345</span>)  <span class="code-comment"># [1, 2, 3, 4, 5]</span></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1196,7 +1214,6 @@
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-                    <p>Click any video to play.</p>
                     <div class="video-container">
                         <div class="video-player">
                             <iframe id="ytPlayer" src=""
@@ -1218,7 +1235,6 @@
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
-                    <p>Fill in the missing parts of proofs or identify errors.</p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -1232,25 +1248,31 @@
     </div>
 
     <script>
-        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, " ") : ""; }
+        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; }
         function checkAnswer(input, expected) { return expected.map(a => normalize(a)).includes(normalize(input)); }
 
         const QUESTIONS = [
-            { id: 1, topic: "Structure", prompt: "The four parts of a proof are: Definitions, Claim, Proof, and ___", answer: ["qed", "∎"], display: "QED (or ∎)" },
-            { id: 2, topic: "Structure", prompt: "A helper result used to prove a theorem is called a ___", answer: ["lemma"], display: "Lemma" },
-            { id: 3, topic: "Structure", prompt: "An easy consequence of a theorem is called a ___", answer: ["corollary"], display: "Corollary" },
-            { id: 4, topic: "Definitions", prompt: "n is even means n = ___ for some integer k", answer: ["2k"], display: "2k" },
-            { id: 5, topic: "Definitions", prompt: "n is odd means n = ___ for some integer k", answer: ["2k+1", "2k + 1"], display: "2k + 1" },
-            { id: 6, topic: "Claims", prompt: "Complete: 'For all x, if P(x) then ___'", answer: ["q(x)"], display: "Q(x)" },
-            { id: 7, topic: "Claims", prompt: "The symbol ∀ means ___", answer: ["for all", "for every"], display: "for all" },
-            { id: 8, topic: "Claims", prompt: "The symbol ∃ means ___", answer: ["there exists", "exists"], display: "there exists" },
-            { id: 9, topic: "Claims", prompt: "'P if and only if Q' can be written with symbol ___", answer: ["⟺", "↔", "iff"], display: "⟺ or ↔" },
-            { id: 10, topic: "Style", prompt: "Before using variable ε, you should first ___ it", answer: ["define", "introduce", "declare"], display: "define/introduce" },
-            { id: 11, topic: "Error", prompt: "Proving P(5) is true shows 'for all n, P(n)' — True or False?", answer: ["false", "f", "no"], display: "False" },
-            { id: 12, topic: "Style", prompt: "Using what you're trying to prove as a step is called ___ reasoning", answer: ["circular"], display: "Circular" },
+            { id: 1, topic: "Floor", prompt: "⌊4.7⌋ = ?", answer: ["4"], display: "4" },
+            { id: 2, topic: "Floor", prompt: "⌊-2.3⌋ = ?", answer: ["-3"], display: "-3" },
+            { id: 3, topic: "Floor", prompt: "⌊5.0⌋ = ?", answer: ["5"], display: "5" },
+            { id: 4, topic: "Ceiling", prompt: "⌈3.1⌉ = ?", answer: ["4"], display: "4" },
+            { id: 5, topic: "Ceiling", prompt: "⌈-1.5⌉ = ?", answer: ["-1"], display: "-1" },
+            { id: 6, topic: "Ceiling", prompt: "⌈7.0⌉ = ?", answer: ["7"], display: "7" },
+            { id: 7, topic: "Division", prompt: "17 // 5 = ? (Python)", answer: ["3"], display: "3" },
+            { id: 8, topic: "Division", prompt: "-17 // 5 = ? (Python)", answer: ["-4"], display: "-4" },
+            { id: 9, topic: "Modulo", prompt: "17 % 5 = ?", answer: ["2"], display: "2" },
+            { id: 10, topic: "Modulo", prompt: "23 % 7 = ?", answer: ["2"], display: "2" },
+            { id: 11, topic: "Modulo", prompt: "100 % 10 = ?", answer: ["0"], display: "0" },
+            { id: 12, topic: "Modulo", prompt: "15 % 4 = ?", answer: ["3"], display: "3" },
+            { id: 13, topic: "Apply", prompt: "Pagination: ⌈47/10⌉ pages = ?", answer: ["5"], display: "5" },
+            { id: 14, topic: "Apply", prompt: "Binary search mid: (3 + 9) // 2 = ?", answer: ["6"], display: "6" },
+            { id: 15, topic: "Apply", prompt: "Last digit of 12345: 12345 % 10 = ?", answer: ["5"], display: "5" },
+            { id: 16, topic: "Apply", prompt: "Is 24 divisible by 6? (24 % 6 == 0): yes/no", answer: ["yes", "y"], display: "Yes" },
+            { id: 17, topic: "Apply", prompt: "Wrap index: (4 + 1) % 5 = ?", answer: ["0"], display: "0" },
+            { id: 18, topic: "Identity", prompt: "⌈x⌉ = -⌊?⌋ (fill in blank)", answer: ["-x"], display: "-x" },
         ];
 
-        const LS_KEY = "day7_stats_v1";
+        const LS_KEY = "day10_stats_v1";
         let stats = (() => { try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : { attempted: 0, correct: 0 }; } catch { return { attempted: 0, correct: 0 }; } })();
         let sessionCorrect = 0;
         function saveStats() { localStorage.setItem(LS_KEY, JSON.stringify(stats)); }
@@ -1291,21 +1313,21 @@
 
         const VIDEO_GROUPS = [
             {
-                title: "Proof Writing Basics", items: [
-                    { title: "How to Write Proofs", channel: "Trefor Bazett", vid: "brU5yLm9DZM" },
-                    { title: "Mathematical Writing Tips", channel: "MIT OCW", vid: "L-bdLhx20Tk" },
+                title: "Floors & Ceilings", items: [
+                    { title: "Khan Academy — Floor and Ceiling", channel: "Khan Academy", vid: "sTENvD1d-WA" },
+                    { title: "Math Antics — Rounding", channel: "Math Antics", vid: "UP7YmXJjvaU" },
                 ]
             },
             {
-                title: "Definitions & Notation", items: [
-                    { title: "Mathematical Notation", channel: "3Blue1Brown", vid: "M6xp4B9jqZg" },
-                    { title: "Reading & Writing Math", channel: "Numberphile", vid: "D2xYjiL8yyE" },
+                title: "Integer Division & Modulo", items: [
+                    { title: "Khan Academy — Division Algorithm", channel: "Khan Academy", vid: "KKs3mXI5IZQ" },
+                    { title: "CS50 — Modulo Operator", channel: "CS50", vid: "b5cb_nfDyyM" },
                 ]
             },
             {
-                title: "Examples & Practice", items: [
-                    { title: "First Proof Examples", channel: "Trefor Bazett", vid: "KRLmjJyqGFM" },
-                    { title: "Common Proof Mistakes", channel: "Mathologer", vid: "YBbBbY4heGM" },
+                title: "Applications", items: [
+                    { title: "Computerphile — Modular Arithmetic", channel: "Computerphile", vid: "M7kEpw1tn50" },
+                    { title: "MIT OCW — Integer Arithmetic", channel: "MIT OCW", vid: "xq8pSE3WHPI" },
                 ]
             },
         ];

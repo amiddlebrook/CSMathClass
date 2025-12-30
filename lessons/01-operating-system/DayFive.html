@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 5: Functions — Domain, Range, Inverses & Composition</title>
+    <title>Day 5: Writing Proofs — Definitions, Claims, and Structure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,9 +20,9 @@
             --text: #1c1917;
             --text-secondary: #57534e;
             --text-muted: #78716c;
-            --accent: #dc2626;
-            --accent-light: #fee2e2;
-            --accent-dark: #b91c1c;
+            --accent: #ea580c;
+            --accent-light: #ffedd5;
+            --accent-dark: #c2410c;
             --code-bg: #1e1e1e;
             --code-text: #d4d4d4;
             --success: #16a34a;
@@ -49,9 +49,9 @@
             --text: #ececf1;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
-            --accent: #f87171;
-            --accent-light: #7f1d1d;
-            --accent-dark: #fca5a5;
+            --accent: #fb923c;
+            --accent-light: #431407;
+            --accent-dark: #fdba74;
             --code-bg: #0f0f12;
             --success: #86efac;
             --success-bg: #14532d;
@@ -206,7 +206,7 @@
 
         .hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(32px, 5vw, 48px);
+            font-size: clamp(32px, 5vw, 44px);
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: -0.02em;
@@ -541,17 +541,36 @@
             color: var(--text);
         }
 
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .proof-box {
+            background: var(--surface-alt);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-lg);
+            padding: 20px 24px;
             margin: 16px 0;
         }
 
-        @media (max-width: 700px) {
-            .two-col {
-                grid-template-columns: 1fr;
-            }
+        .proof-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .proof-content {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .proof-qed {
+            text-align: right;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            margin-top: 12px;
         }
 
         .video-container {
@@ -841,7 +860,7 @@
                     stroke="currentColor" stroke-width="2">
                     <path d="M10 12L6 8L10 4" />
                 </svg>Back to Curriculum</a>
-            <div class="nav-progress"><span id="progressText">0 / 20 complete</span>
+            <div class="nav-progress"><span id="progressText">0 / 12 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -856,14 +875,14 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 5 · Foundation</div>
-        <h1>Functions: Domain, Range, Inverses & Composition</h1>
-        <p class="hero-desc">Functions are the building blocks of programming. Every method you write is a function.
-            Understanding domain, range, inverses, and composition makes you a better programmer.</p>
+            </svg>Day 7 · Foundation</div>
+        <h1>Writing Proofs: Definition → Claim → Proof → QED</h1>
+        <p class="hero-desc">Good proofs are like good code: structured, clear, and verifiable. Learn the standard
+            format that mathematicians and computer scientists use to communicate rigorous arguments.</p>
         <div class="hero-meta">
-            <div class="meta-item">~50 min read</div>
-            <div class="meta-item">20 practice problems</div>
-            <div class="meta-item">10 video lessons</div>
+            <div class="meta-item">~40 min read</div>
+            <div class="meta-item">12 practice problems</div>
+            <div class="meta-item">6 video lessons</div>
         </div>
     </header>
 
@@ -873,13 +892,13 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#why" class="toc-link">Why This Matters</a></li>
-                    <li><a href="#basics" class="toc-link">1. Function Basics</a></li>
-                    <li><a href="#domain" class="toc-link">2. Domain & Range</a></li>
-                    <li><a href="#inverse" class="toc-link">3. Inverse Functions</a></li>
-                    <li><a href="#composition" class="toc-link">4. Composition</a></li>
-                    <li><a href="#gotchas" class="toc-link">5. Common Gotchas</a></li>
+                    <li><a href="#structure" class="toc-link">1. Proof Structure</a></li>
+                    <li><a href="#definitions" class="toc-link">2. Definitions</a></li>
+                    <li><a href="#claims" class="toc-link">3. Claims & Theorems</a></li>
+                    <li><a href="#writing" class="toc-link">4. Writing the Proof</a></li>
+                    <li><a href="#style" class="toc-link">5. Style Guide</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice Problems</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -897,264 +916,277 @@
             <section class="section" id="why">
                 <div class="section-header">
                     <div class="section-number">Section 0</div>
-                    <h2 class="section-title">Why Functions Matter in CS</h2>
+                    <h2 class="section-title">Why Proof Writing Matters in CS</h2>
                 </div>
                 <div class="section-body">
-                    <p>In programming, functions are everywhere. A method that takes parameters and returns a value is
-                        exactly the mathematical concept of a function. Understanding the theory helps you write better
-                        code.</p>
-                    <div class="rule"><strong>Key insight:</strong> A function maps each input to exactly one output.
-                        This is why pure functions are predictable and testable.</div>
+                    <p>Writing proofs is like writing documentation for your logical reasoning. Just as code needs
+                        structure (functions, modules, classes), proofs need structure (definitions, claims, steps).</p>
+                    <div class="rule"><strong>Key insight:</strong> A well-structured proof is readable, verifiable, and
+                        maintainable—just like good code.</div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Where you'll use this</h3>
+                        <h3 class="subsection-title">The parallel to code</h3>
                         <ul>
-                            <li><strong>Type Systems:</strong> Function signatures are domain → range declarations</li>
-                            <li><strong>Functional Programming:</strong> Composition, currying, higher-order functions
+                            <li><strong>Definitions</strong> = Type declarations and interfaces</li>
+                            <li><strong>Claims/Theorems</strong> = Function signatures (what you promise to deliver)
                             </li>
-                            <li><strong>Encryption:</strong> Encryption and decryption are inverse functions</li>
-                            <li><strong>Data Pipelines:</strong> ETL is function composition: Extract → Transform → Load
-                            </li>
-                            <li><strong>APIs:</strong> Request → Response is a function (input → output)</li>
+                            <li><strong>Proof</strong> = Implementation (how you deliver it)</li>
+                            <li><strong>QED</strong> = Return statement / tests passing</li>
                         </ul>
                     </div>
                     <div class="code-block">
-                        <div class="code-header"><span class="code-lang">Python</span><span class="code-label">Functions
-                                in code = mathematical functions</span></div>
+                        <div class="code-header"><span class="code-lang">Comparison</span><span class="code-label">Proof
+                                structure ≈ Code structure</span></div>
                         <div class="code-content">
-                            <pre><span class="code-comment"># Mathematical function: f(x) = x²</span>
-<span class="code-keyword">def</span> <span class="code-function">f</span>(x: <span class="code-type">float</span>) -> <span class="code-type">float</span>:
-    <span class="code-keyword">return</span> x ** <span class="code-number">2</span>
+                            <pre><span class="code-comment">// CODE</span>
+<span class="code-keyword">interface</span> <span class="code-type">Number</span> { ... }     <span class="code-comment">// Definition</span>
+<span class="code-keyword">function</span> <span class="code-function">isEven</span>(n): <span class="code-type">bool</span>    <span class="code-comment">// Claim (signature)</span>
+{ <span class="code-keyword">return</span> n % 2 == 0; }      <span class="code-comment">// Proof (implementation)</span>
 
-<span class="code-comment"># Domain: all real numbers (float)</span>
-<span class="code-comment"># Range: non-negative reals (x² ≥ 0)</span>
-<span class="code-comment"># Type hint is literally: domain → range</span>
-
-<span class="code-comment"># Composition: g(f(x))</span>
-<span class="code-keyword">def</span> <span class="code-function">g</span>(x): <span class="code-keyword">return</span> x + <span class="code-number">1</span>
-result = <span class="code-function">g</span>(<span class="code-function">f</span>(<span class="code-number">3</span>))  <span class="code-comment"># g(f(3)) = g(9) = 10</span></pre>
+<span class="code-comment">// PROOF</span>
+<span class="code-keyword">Definition:</span> n is even if n = 2k for some integer k.
+<span class="code-keyword">Claim:</span> The sum of two even numbers is even.
+<span class="code-keyword">Proof:</span> Let a = 2m and b = 2n. Then a + b = 2(m+n). ∎</pre>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="basics">
+            <section class="section" id="structure">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Function Basics</h2>
+                    <h2 class="section-title">The Standard Proof Structure</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">What is a function?</h3>
-                        <div class="math-block">A function f: A → B maps each element x ∈ A to exactly one element f(x)
-                            ∈ B.
-
-                            Key requirement: Each input gives exactly ONE output.
-                            (Same input must always give same output)</div>
+                        <h3 class="subsection-title">The four parts</h3>
+                        <div class="math-block">1. DEFINITIONS — State precisely what terms mean
+                            2. CLAIM/THEOREM — State exactly what you will prove
+                            3. PROOF — The logical argument
+                            4. QED — Signal that the proof is complete (∎ or □ or QED)</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Function notation</h3>
-                        <div class="math-block">f(x) = 2x + 3
-
-                            To evaluate f(5):
-                            f(5) = 2(5) + 3 = 13
-
-                            The function f takes input x and outputs 2x + 3.</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Vertical line test</h3>
-                        <p>A graph represents a function if every vertical line crosses it at most once. Multiple
-                            y-values for one x-value means it's NOT a function.</p>
-                        <div class="info"><strong>Example:</strong> y = x² is a function (parabola passes test). x² + y²
-                            = 1 is NOT a function (circle fails test).</div>
+                        <h3 class="subsection-title">Complete example</h3>
+                        <div class="proof-box">
+                            <div class="proof-label">Definition</div>
+                            <div class="proof-content">An integer n is <strong>even</strong> if n = 2k for some integer
+                                k.<br>An integer n is <strong>odd</strong> if n = 2k + 1 for some integer k.</div>
+                        </div>
+                        <div class="proof-box">
+                            <div class="proof-label">Theorem</div>
+                            <div class="proof-content">The sum of two even integers is even.</div>
+                        </div>
+                        <div class="proof-box">
+                            <div class="proof-label">Proof</div>
+                            <div class="proof-content">
+                                Let a and b be even integers.<br>
+                                By definition, a = 2m for some integer m, and b = 2n for some integer n.<br>
+                                Then a + b = 2m + 2n = 2(m + n).<br>
+                                Since m + n is an integer, a + b has the form 2k where k = m + n.<br>
+                                Therefore, by definition, a + b is even.
+                            </div>
+                            <div class="proof-qed">∎</div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="domain">
+            <section class="section" id="definitions">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Domain & Range</h2>
+                    <h2 class="section-title">Writing Good Definitions</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Definitions</h3>
-                        <div class="math-block">Domain: Set of all valid inputs (x-values)
-                            Range: Set of all possible outputs (y-values)
-
-                            f(x) = √x
-                            Domain: x ≥ 0 (can't take square root of negative)
-                            Range: y ≥ 0 (square roots are non-negative)</div>
+                        <h3 class="subsection-title">What makes a good definition</h3>
+                        <div class="rule"><strong>A good definition is:</strong><br>• Precise — no ambiguity<br>•
+                            Complete — covers all cases<br>• Minimal — no redundant conditions<br>• Usable — easy to
+                            apply in proofs</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Finding domain restrictions</h3>
-                        <div class="rule"><strong>Look for:</strong><br>• Division by zero (denominator ≠ 0)<br>• Square
-                            roots of negatives (radicand ≥ 0)<br>• Logarithms of non-positives (argument > 0)</div>
-                        <div class="math-block">f(x) = 1/(x - 3)
-                            Domain: x ≠ 3 (avoid division by zero)
+                        <h3 class="subsection-title">Definition patterns</h3>
+                        <div class="math-block"><strong>Existential:</strong> "X is Y if there exists Z such that..."
+                            Example: n is even if there exists an integer k such that n = 2k.
 
-                            g(x) = √(x - 2)
-                            Domain: x ≥ 2 (radicand must be ≥ 0)
+                            <strong>Universal:</strong> "X is Y if for all Z, ..."
+                            Example: f is continuous if for all ε > 0, there exists δ > 0...
 
-                            h(x) = √(x - 1) / (x - 4)
-                            Domain: x ≥ 1 AND x ≠ 4</div>
+                            <strong>Recursive:</strong> Base case + recursive case
+                            Example: 0! = 1, and n! = n × (n-1)! for n > 0.
+                        </div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">CS parallel: Type systems</h3>
+                        <h3 class="subsection-title">CS parallel: Type definitions</h3>
                         <div class="code-block">
                             <div class="code-header"><span class="code-lang">TypeScript</span><span
-                                    class="code-label">Types are domain/range declarations</span></div>
+                                    class="code-label">Definitions in code</span></div>
                             <div class="code-content">
-                                <pre><span class="code-comment">// Domain: string, Range: number</span>
-<span class="code-keyword">function</span> <span class="code-function">parseAge</span>(input: <span class="code-type">string</span>): <span class="code-type">number</span> {
-    <span class="code-keyword">return</span> parseInt(input, <span class="code-number">10</span>);
-}
+                                <pre><span class="code-comment">// Existential definition</span>
+<span class="code-keyword">type</span> <span class="code-type">Even</span> = <span class="code-type">number</span> & { _brand: <span class="code-string">'even'</span> };
+<span class="code-keyword">const</span> <span class="code-function">isEven</span> = (n: <span class="code-type">number</span>): n <span class="code-keyword">is</span> <span class="code-type">Even</span> => n % <span class="code-number">2</span> === <span class="code-number">0</span>;
 
-<span class="code-comment">// Restricting domain with types</span>
-<span class="code-keyword">type</span> <span class="code-type">PositiveNumber</span> = <span class="code-type">number</span> & { __positive: <span class="code-keyword">true</span> };
-
-<span class="code-keyword">function</span> <span class="code-function">sqrt</span>(x: <span class="code-type">PositiveNumber</span>): <span class="code-type">number</span> {
-    <span class="code-keyword">return</span> Math.sqrt(x);
-}</pre>
+<span class="code-comment">// Recursive definition</span>
+<span class="code-keyword">type</span> <span class="code-type">Tree</span><T> = 
+  | { kind: <span class="code-string">'leaf'</span>, value: T }
+  | { kind: <span class="code-string">'node'</span>, left: <span class="code-type">Tree</span><T>, right: <span class="code-type">Tree</span><T> };</pre>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="inverse">
+            <section class="section" id="claims">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Inverse Functions</h2>
+                    <h2 class="section-title">Stating Claims and Theorems</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">What is an inverse?</h3>
-                        <div class="math-block">If f(x) = y, then f⁻¹(y) = x
-
-                            The inverse "undoes" the function:
-                            f⁻¹(f(x)) = x
-                            f(f⁻¹(x)) = x</div>
+                        <h3 class="subsection-title">The hierarchy</h3>
+                        <div class="math-block"><strong>Theorem:</strong> A major result, often the main goal
+                            <strong>Lemma:</strong> A helper result used to prove theorems
+                            <strong>Corollary:</strong> An easy consequence of a theorem
+                            <strong>Proposition:</strong> A result of medium importance
+                            <strong>Claim:</strong> An informal assertion (often inside a proof)
+                        </div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Finding an inverse</h3>
-                        <div class="rule"><strong>Method:</strong><br>1. Replace f(x) with y<br>2. Swap x and y<br>3.
-                            Solve for y<br>4. Replace y with f⁻¹(x)</div>
-                        <div class="math-block">Find inverse of f(x) = 2x + 3:
-
-                            1. y = 2x + 3
-                            2. x = 2y + 3 (swap)
-                            3. x - 3 = 2y
-                            y = (x - 3)/2
-                            4. f⁻¹(x) = (x - 3)/2
-
-                            Verify: f(f⁻¹(x)) = 2((x-3)/2) + 3 = x - 3 + 3 = x ✓</div>
+                        <h3 class="subsection-title">Writing precise claims</h3>
+                        <div class="warning"><strong>Bad:</strong> "Even numbers plus even numbers are
+                            even."<br><strong>Good:</strong> "For all integers a and b, if a is even and b is even, then
+                            a + b is even."</div>
+                        <p>A precise claim should:</p>
+                        <ul>
+                            <li>Quantify all variables (for all, there exists)</li>
+                            <li>Specify the domain (integers, reals, etc.)</li>
+                            <li>Make the logical structure explicit (if...then)</li>
+                        </ul>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">One-to-one requirement</h3>
-                        <div class="warning"><strong>Important:</strong> Only one-to-one functions have inverses. A
-                            function is one-to-one if different inputs give different outputs (passes horizontal line
-                            test).</div>
-                        <div class="math-block">f(x) = x² is NOT one-to-one (f(2) = f(-2) = 4)
-                            So x² has no inverse over all reals.
+                        <h3 class="subsection-title">Common claim patterns</h3>
+                        <div class="math-block"><strong>Universal:</strong> For all x in S, P(x).
+                            "Every prime > 2 is odd."
 
-                            But if we restrict domain to x ≥ 0:
-                            f(x) = x² (x ≥ 0) → f⁻¹(x) = √x</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">CS application: Encryption</h3>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span
-                                    class="code-label">Encrypt/Decrypt are inverse functions</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment"># Simple Caesar cipher</span>
-<span class="code-keyword">def</span> <span class="code-function">encrypt</span>(text, shift):
-    <span class="code-keyword">return</span> <span class="code-string">''</span>.join(<span class="code-function">chr</span>((<span class="code-function">ord</span>(c) - <span class="code-number">97</span> + shift) % <span class="code-number">26</span> + <span class="code-number">97</span>) <span class="code-keyword">for</span> c <span class="code-keyword">in</span> text)
+                            <strong>Existential:</strong> There exists x in S such that P(x).
+                            "There exists a prime between n and 2n."
 
-<span class="code-keyword">def</span> <span class="code-function">decrypt</span>(text, shift):
-    <span class="code-keyword">return</span> <span class="code-function">encrypt</span>(text, -shift)  <span class="code-comment"># Inverse!</span>
+                            <strong>Conditional:</strong> If P, then Q.
+                            "If n² is even, then n is even."
 
-msg = <span class="code-string">"hello"</span>
-encrypted = <span class="code-function">encrypt</span>(msg, <span class="code-number">3</span>)   <span class="code-comment"># "khoor"</span>
-decrypted = <span class="code-function">decrypt</span>(encrypted, <span class="code-number">3</span>)  <span class="code-comment"># "hello"</span>
-
-<span class="code-comment"># decrypt(encrypt(x)) = x ← inverse property!</span></pre>
-                            </div>
+                            <strong>Biconditional:</strong> P if and only if Q.
+                            "n is even iff n² is even."
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="composition">
+            <section class="section" id="writing">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Function Composition</h2>
+                    <h2 class="section-title">Writing the Proof Body</h2>
                 </div>
                 <div class="section-body">
                     <div class="subsection">
-                        <h3 class="subsection-title">Definition</h3>
-                        <div class="math-block">(f ∘ g)(x) = f(g(x))
-
-                            "f composed with g" means: first apply g, then apply f.
-
-                            If f(x) = x² and g(x) = x + 1:
-                            (f ∘ g)(x) = f(g(x)) = f(x + 1) = (x + 1)²
-                            (g ∘ f)(x) = g(f(x)) = g(x²) = x² + 1
-
-                            Note: f ∘ g ≠ g ∘ f in general!</div>
+                        <h3 class="subsection-title">Start with a roadmap</h3>
+                        <div class="rule"><strong>Opening line should state your approach:</strong><br>"We proceed by
+                            induction on n."<br>"We prove the contrapositive."<br>"Suppose for contradiction
+                            that..."<br>"Let a and b be arbitrary even integers."</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">Evaluating compositions</h3>
-                        <div class="math-block">Given f(x) = 2x and g(x) = x - 3:
-
-                            (f ∘ g)(5) = f(g(5)) = f(2) = 4
-                            (g ∘ f)(5) = g(f(5)) = g(10) = 7
-
-                            Find (f ∘ g)(x):
-                            (f ∘ g)(x) = f(g(x)) = f(x - 3) = 2(x - 3) = 2x - 6</div>
+                        <h3 class="subsection-title">Justify every step</h3>
+                        <div class="math-block">Each step should have a reason:
+                            - "by definition"
+                            - "by assumption"
+                            - "by the inductive hypothesis"
+                            - "by Theorem 2.3"
+                            - "since a = 2k"
+                            - "by algebra"</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">CS application: Pipelines</h3>
+                        <h3 class="subsection-title">Proof template</h3>
                         <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span class="code-label">Data
-                                    pipelines = function composition</span></div>
+                            <div class="code-header"><span class="code-lang">Template</span><span
+                                    class="code-label">Standard proof structure</span></div>
                             <div class="code-content">
-                                <pre><span class="code-comment"># Individual transformation functions</span>
-<span class="code-keyword">def</span> <span class="code-function">clean</span>(data): <span class="code-keyword">return</span> data.strip().lower()
-<span class="code-keyword">def</span> <span class="code-function">tokenize</span>(data): <span class="code-keyword">return</span> data.split()
-<span class="code-keyword">def</span> <span class="code-function">count</span>(tokens): <span class="code-keyword">return</span> <span class="code-function">len</span>(tokens)
-
-<span class="code-comment"># Composition: count(tokenize(clean(x)))</span>
-<span class="code-keyword">def</span> <span class="code-function">word_count</span>(text):
-    <span class="code-keyword">return</span> <span class="code-function">count</span>(<span class="code-function">tokenize</span>(<span class="code-function">clean</span>(text)))
-
-<span class="code-comment"># Or use a compose helper</span>
-<span class="code-keyword">from</span> functools <span class="code-keyword">import</span> reduce
-<span class="code-keyword">def</span> <span class="code-function">compose</span>(*funcs):
-    <span class="code-keyword">return</span> reduce(<span class="code-keyword">lambda</span> f, g: <span class="code-keyword">lambda</span> x: f(g(x)), funcs)
-
-word_count = <span class="code-function">compose</span>(count, tokenize, clean)</pre>
+                                <pre><span class="code-keyword">Proof:</span>
+  <span class="code-comment">// 1. State your setup</span>
+  Let [variables] be [what they are].
+  
+  <span class="code-comment">// 2. Apply definitions</span>
+  By definition, [variable] = [form].
+  
+  <span class="code-comment">// 3. Do the work</span>
+  Then [calculation or logical step].
+  [More steps as needed, each justified.]
+  
+  <span class="code-comment">// 4. Connect to goal</span>
+  Therefore, [conclusion].
+  
+  <span class="code-comment">// 5. End marker</span>
+  ∎</pre>
                             </div>
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Complete worked example</h3>
+                        <div class="proof-box">
+                            <div class="proof-label">Theorem</div>
+                            <div class="proof-content">For all integers n, if n² is odd, then n is odd.</div>
+                        </div>
+                        <div class="proof-box">
+                            <div class="proof-label">Proof (by contrapositive)</div>
+                            <div class="proof-content">
+                                We prove the contrapositive: if n is even, then n² is even.<br><br>
+                                Let n be an even integer.<br>
+                                By definition, n = 2k for some integer k.<br>
+                                Then n² = (2k)² = 4k² = 2(2k²).<br>
+                                Since 2k² is an integer, n² has the form 2m where m = 2k².<br>
+                                Therefore n² is even by definition.<br><br>
+                                Since the contrapositive is true, the original statement holds.
+                            </div>
+                            <div class="proof-qed">∎</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="gotchas">
+            <section class="section" id="style">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Common Gotchas</h2>
+                    <h2 class="section-title">Style Guide for Proofs</h2>
                 </div>
                 <div class="section-body">
-                    <div class="warning"><strong>1. f⁻¹(x) ≠ 1/f(x)</strong><br>The inverse notation f⁻¹ does NOT mean
-                        reciprocal! f⁻¹ is the inverse function, 1/f is the reciprocal.</div>
-                    <div class="warning"><strong>2. Composition order matters</strong><br>(f ∘ g)(x) = f(g(x)), not
-                        g(f(x)). Read right to left: apply g first, then f.</div>
-                    <div class="warning"><strong>3. Not all functions have inverses</strong><br>x² doesn't have an
-                        inverse over all reals because f(2) = f(-2). Must restrict domain.</div>
-                    <div class="warning"><strong>4. Domain of composition</strong><br>For (f ∘ g)(x), the output of g
-                        must be in the domain of f.</div>
-                    <div class="warning"><strong>5. Inverse swaps domain and range</strong><br>Domain of f = Range of
-                        f⁻¹, and vice versa.</div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Do's</h3>
+                        <ul>
+                            <li><strong>Write in complete sentences.</strong> "Let n be an integer." not "n = integer"
+                            </li>
+                            <li><strong>Define variables before using them.</strong> "Let ε > 0." before using ε</li>
+                            <li><strong>Be explicit about assumptions.</strong> "Assume P(k) holds for some k ≥ 1."</li>
+                            <li><strong>Use transitional words.</strong> "Then", "Therefore", "Hence", "Thus", "Since"
+                            </li>
+                            <li><strong>End with a clear conclusion.</strong> "Therefore, the claim holds."</li>
+                        </ul>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Don'ts</h3>
+                        <div class="warning">
+                            <strong>Don't use undefined variables.</strong> Always introduce before use.<br><br>
+                            <strong>Don't skip steps.</strong> What's obvious to you may not be to readers.<br><br>
+                            <strong>Don't prove by example.</strong> Showing P(5) doesn't prove "for all n".<br><br>
+                            <strong>Don't assume what you're proving.</strong> Circular reasoning is invalid.<br><br>
+                            <strong>Don't forget edge cases.</strong> Handle n = 0, empty sets, etc.
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Mathematical notation</h3>
+                        <div class="math-block">∀ — "for all"
+                            ∃ — "there exists"
+                            ∈ — "is an element of"
+                            ⊆ — "is a subset of"
+                            ⟹ or → — "implies"
+                            ⟺ or ↔ — "if and only if"
+                            ∎ or □ or QED — "end of proof"</div>
+                    </div>
                 </div>
             </section>
 
@@ -1186,7 +1218,7 @@ word_count = <span class="code-function">compose</span>(count, tokenize, clean)<
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
-                    <p>Type your answer. Use standard notation: sqrt(x), x>=2, etc.</p>
+                    <p>Fill in the missing parts of proofs or identify errors.</p>
                     <div class="quiz-controls">
                         <button class="btn btn-primary" id="btnCheckAll">Check All</button>
                         <button class="btn" id="btnRevealAll">Reveal All</button>
@@ -1200,33 +1232,25 @@ word_count = <span class="code-function">compose</span>(count, tokenize, clean)<
     </div>
 
     <script>
-        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, "").replace(/\*\*/g, "^") : ""; }
+        function normalize(s) { return s ? s.trim().toLowerCase().replace(/\s+/g, " ") : ""; }
         function checkAnswer(input, expected) { return expected.map(a => normalize(a)).includes(normalize(input)); }
 
         const QUESTIONS = [
-            { id: 1, topic: "Evaluate", prompt: "f(x) = 3x - 2. Find f(4).", answer: ["10"], display: "10" },
-            { id: 2, topic: "Evaluate", prompt: "g(x) = x² + 1. Find g(-3).", answer: ["10"], display: "10" },
-            { id: 3, topic: "Evaluate", prompt: "h(x) = 2x² - x. Find h(2).", answer: ["6"], display: "6" },
-            { id: 4, topic: "Domain", prompt: "f(x) = 1/(x-5). What value is excluded?", answer: ["5", "x=5"], display: "x = 5" },
-            { id: 5, topic: "Domain", prompt: "g(x) = √(x-3). Domain: x ≥ ?", answer: ["3"], display: "x ≥ 3" },
-            { id: 6, topic: "Domain", prompt: "h(x) = 1/√(x-2). Domain: x > ?", answer: ["2"], display: "x > 2" },
-            { id: 7, topic: "Inverse", prompt: "f(x) = x + 7. Find f⁻¹(x).", answer: ["x-7"], display: "x - 7" },
-            { id: 8, topic: "Inverse", prompt: "f(x) = 3x. Find f⁻¹(x).", answer: ["x/3"], display: "x/3" },
-            { id: 9, topic: "Inverse", prompt: "f(x) = 2x - 5. Find f⁻¹(x).", answer: ["(x+5)/2"], display: "(x + 5)/2" },
-            { id: 10, topic: "Inverse", prompt: "f(x) = x³. Find f⁻¹(x).", answer: ["x^(1/3)", "cbrt(x)", "∛x"], display: "∛x or x^(1/3)" },
-            { id: 11, topic: "Compose", prompt: "f(x)=x+2, g(x)=3x. Find (f∘g)(4).", answer: ["14"], display: "14" },
-            { id: 12, topic: "Compose", prompt: "f(x)=x+2, g(x)=3x. Find (g∘f)(4).", answer: ["18"], display: "18" },
-            { id: 13, topic: "Compose", prompt: "f(x)=x², g(x)=x+1. Find (f∘g)(2).", answer: ["9"], display: "9" },
-            { id: 14, topic: "Compose", prompt: "f(x)=x², g(x)=x+1. Find (g∘f)(2).", answer: ["5"], display: "5" },
-            { id: 15, topic: "Compose", prompt: "f(x)=2x, g(x)=x-3. Find (f∘g)(x).", answer: ["2x-6", "2(x-3)"], display: "2x - 6" },
-            { id: 16, topic: "Compose", prompt: "f(x)=2x, g(x)=x-3. Find (g∘f)(x).", answer: ["2x-3"], display: "2x - 3" },
-            { id: 17, topic: "Verify", prompt: "f(x)=x+5, f⁻¹(x)=x-5. Find f(f⁻¹(7)).", answer: ["7"], display: "7" },
-            { id: 18, topic: "Range", prompt: "f(x) = x² has range y ≥ ?", answer: ["0"], display: "y ≥ 0" },
-            { id: 19, topic: "Range", prompt: "f(x) = |x| + 3 has range y ≥ ?", answer: ["3"], display: "y ≥ 3" },
-            { id: 20, topic: "One-to-One", prompt: "Is f(x)=x³ one-to-one? (yes/no)", answer: ["yes", "y"], display: "Yes" },
+            { id: 1, topic: "Structure", prompt: "The four parts of a proof are: Definitions, Claim, Proof, and ___", answer: ["qed", "∎"], display: "QED (or ∎)" },
+            { id: 2, topic: "Structure", prompt: "A helper result used to prove a theorem is called a ___", answer: ["lemma"], display: "Lemma" },
+            { id: 3, topic: "Structure", prompt: "An easy consequence of a theorem is called a ___", answer: ["corollary"], display: "Corollary" },
+            { id: 4, topic: "Definitions", prompt: "n is even means n = ___ for some integer k", answer: ["2k"], display: "2k" },
+            { id: 5, topic: "Definitions", prompt: "n is odd means n = ___ for some integer k", answer: ["2k+1", "2k + 1"], display: "2k + 1" },
+            { id: 6, topic: "Claims", prompt: "Complete: 'For all x, if P(x) then ___'", answer: ["q(x)"], display: "Q(x)" },
+            { id: 7, topic: "Claims", prompt: "The symbol ∀ means ___", answer: ["for all", "for every"], display: "for all" },
+            { id: 8, topic: "Claims", prompt: "The symbol ∃ means ___", answer: ["there exists", "exists"], display: "there exists" },
+            { id: 9, topic: "Claims", prompt: "'P if and only if Q' can be written with symbol ___", answer: ["⟺", "↔", "iff"], display: "⟺ or ↔" },
+            { id: 10, topic: "Style", prompt: "Before using variable ε, you should first ___ it", answer: ["define", "introduce", "declare"], display: "define/introduce" },
+            { id: 11, topic: "Error", prompt: "Proving P(5) is true shows 'for all n, P(n)' — True or False?", answer: ["false", "f", "no"], display: "False" },
+            { id: 12, topic: "Style", prompt: "Using what you're trying to prove as a step is called ___ reasoning", answer: ["circular"], display: "Circular" },
         ];
 
-        const LS_KEY = "day5_stats_v1";
+        const LS_KEY = "day7_stats_v1";
         let stats = (() => { try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : { attempted: 0, correct: 0 }; } catch { return { attempted: 0, correct: 0 }; } })();
         let sessionCorrect = 0;
         function saveStats() { localStorage.setItem(LS_KEY, JSON.stringify(stats)); }
@@ -1266,10 +1290,24 @@ word_count = <span class="code-function">compose</span>(count, tokenize, clean)<
         document.getElementById("btnReset").addEventListener("click", () => { if (!confirm("Reset all stats?")) return; stats = { attempted: 0, correct: 0 }; saveStats(); sessionCorrect = 0; updateUI(); });
 
         const VIDEO_GROUPS = [
-            { title: "Function Basics", items: [{ title: "Khan Academy — What is a Function", channel: "Khan Academy", vid: "kvGsIo1TmsM" }, { title: "Organic Chem Tutor — Evaluating Functions", channel: "Organic Chemistry Tutor", vid: "nFVuBwfgpHc" }] },
-            { title: "Domain & Range", items: [{ title: "Khan Academy — Domain and Range", channel: "Khan Academy", vid: "O0uUVH8dRiU" }, { title: "Organic Chem Tutor — Finding Domain", channel: "Organic Chemistry Tutor", vid: "djT6-YamHaA" }] },
-            { title: "Inverse Functions", items: [{ title: "Khan Academy — Intro to Inverses", channel: "Khan Academy", vid: "TN4ybFiuV3k" }, { title: "Organic Chem Tutor — Finding Inverses", channel: "Organic Chemistry Tutor", vid: "2zeYEx4eTdc" }, { title: "Professor Leonard — Inverse Functions", channel: "Professor Leonard", vid: "DACWPnlbqiU" }] },
-            { title: "Composition", items: [{ title: "Khan Academy — Function Composition", channel: "Khan Academy", vid: "ZFPvIfLe1mM" }, { title: "Organic Chem Tutor — Composite Functions", channel: "Organic Chemistry Tutor", vid: "sYaTqS8XPFM" }, { title: "Math Antics — Function Composition", channel: "Math Antics", vid: "wMrHc3bXmcc" }] }
+            {
+                title: "Proof Writing Basics", items: [
+                    { title: "How to Write Proofs", channel: "Trefor Bazett", vid: "brU5yLm9DZM" },
+                    { title: "Mathematical Writing Tips", channel: "MIT OCW", vid: "L-bdLhx20Tk" },
+                ]
+            },
+            {
+                title: "Definitions & Notation", items: [
+                    { title: "Mathematical Notation", channel: "3Blue1Brown", vid: "M6xp4B9jqZg" },
+                    { title: "Reading & Writing Math", channel: "Numberphile", vid: "D2xYjiL8yyE" },
+                ]
+            },
+            {
+                title: "Examples & Practice", items: [
+                    { title: "First Proof Examples", channel: "Trefor Bazett", vid: "KRLmjJyqGFM" },
+                    { title: "Common Proof Mistakes", channel: "Mathologer", vid: "YBbBbY4heGM" },
+                ]
+            },
         ];
 
         function renderVideos() {
