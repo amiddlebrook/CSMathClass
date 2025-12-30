@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 108: Analytic Number Theory</title>
+    <title>Day 88: Probability: Random Matrices</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,10 +38,10 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 108 · Specialization
+            Day 88 · Specialization
         </div>
-        <h1>Analytic Number Theory</h1>
-        <p class="hero-desc">Using Complex Analysis to count primes. The Riemann Zeta Function.</p>
+        <h1>Random Matrix Theory</h1>
+        <p class="hero-desc">The Wigner Semicircle Law and Universality. Where Physics meets Number Theory.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,14 +71,13 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#pnt" class="toc-link">1. Prime Number Theorem</a></li>
-                    <li><a href="#zeta" class="toc-link">2. Riemann Zeta Function</a></li>
-                    <li><a href="#product" class="toc-link">3. Euler Product</a></li>
-                    <li><a href="#rh" class="toc-link">4. Riemann Hypothesis</a></li>
-                    <li><a href="#dirichlet" class="toc-link">5. Dirichlet Series</a></li>
-                    <li><a href="#code" class="toc-link">6. Python: Sieve of Eratosthenes</a></li>
-                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
+                    <li><a href="#ensembles" class="toc-link">1. Ensembles (GOE/GUE)</a></li>
+                    <li><a href="#semicircle" class="toc-link">2. Wigner Semicircle Law</a></li>
+                    <li><a href="#spacings" class="toc-link">3. Level Spacings</a></li>
+                    <li><a href="#universality" class="toc-link">4. Universality</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Eigen Hist</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -93,122 +92,104 @@
         </aside>
 
         <main class="content">
-            <!-- PNT -->
-            <section class="section" id="pnt">
+            <!-- Ensembles -->
+            <section class="section" id="ensembles">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Prime Number Theorem (PNT)</h2>
+                    <h2 class="section-title">Matrix Ensembles</h2>
                 </div>
                 <div class="section-body">
-                    <p>Let `\pi(x)` be the number of primes less than or equal to `x`.</p>
-                    <div class="math-block">
-                        \pi(x) \sim \frac{x}{\ln x}
-                    </div>
-                    <p>Or more precisely, `\pi(x) \sim \text{Li}(x) = \int_2^x \frac{dt}{\ln t}`.</p>
+                    <p>We study properties of `N \times N` matrices with random entries.</p>
+                    <ul>
+                        <li><strong>Gaussian Orthogonal Ensemble (GOE):</strong> Real symmetric matrices, entries are
+                            Gaussian. Invariant under orthogonal changes basis `O(N)`.</li>
+                        <li><strong>Gaussian Unitary Ensemble (GUE):</strong> Complex Hermitian matrices. Invariant
+                            under unitary changes `U(N)`.</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- Zeta -->
-            <section class="section" id="zeta">
+            <!-- Semicircle -->
+            <section class="section" id="semicircle">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Riemann Zeta Function</h2>
+                    <h2 class="section-title">Wigner Semicircle Law</h2>
                 </div>
                 <div class="section-body">
-                    <p>Defined for `\text{Re}(s) > 1` by:</p>
+                    <p>For a large symmetric random matrix `X` with i.i.d entries (mean 0, var 1), the eigenvalues of `A
+                        = X/\sqrt{N}` distribute according to:</p>
                     <div class="math-block">
-                        \zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}
+                        \rho(x) = \frac{1}{2\pi} \sqrt{4-x^2}, \quad x \in [-2, 2]
                     </div>
-                    <p>It can be analytically continued to the entire complex plane (except a pole at `s=1`).</p>
+                    <p>This is the "Central Limit Theorem" for eigenvalues.</p>
                 </div>
             </section>
 
-            <!-- Product -->
-            <section class="section" id="product">
+            <!-- Spacings -->
+            <section class="section" id="spacings">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Euler Product Formula</h2>
+                    <h2 class="section-title">Level Spacings</h2>
                 </div>
                 <div class="section-body">
-                    <p>This connects analysis (sum over integers) to number theory (product over primes).</p>
-                    <div class="math-block">
-                        \sum_{n=1}^\infty \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}
+                    <p>Unlike random numbers (Poisson process), eigenvalues <strong>repel</strong> each other.</p>
+                    <p>The probability of two eigenvalues being distance `s` apart goes to 0 as `s \to 0`. This is
+                        "Dyson repulsion".</p>
+                    <div class="info">
+                        <strong>Connection:</strong> The zeros of the Riemann Zeta Function appear to have the same
+                        spacing distribution as GUE eigenvalues (Montgomery-Odlyzko Law).
                     </div>
-                    <p>This identity is equivalent to the Fundamental Theorem of Arithmetic (Unique Factorization).</p>
                 </div>
             </section>
 
-            <!-- RH -->
-            <section class="section" id="rh">
+            <!-- Universality -->
+            <section class="section" id="universality">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Riemann Hypothesis</h2>
+                    <h2 class="section-title">Universality</h2>
                 </div>
                 <div class="section-body">
-                    <p>The zeros of `\zeta(s)` control the error term in the Prime Number Theorem.</p>
-                    <div class="rule">
-                        <strong>Hypothesis:</strong> All non-trivial zeros lie on the critical line `\text{Re}(s) =
-                        1/2`.
-                    </div>
-                    <p>If true, `|\pi(x) - \text{Li}(x)| = O(\sqrt{x} \ln x)`. This is the "square root cancellation" of
-                        randomness.</p>
-                </div>
-            </section>
-
-            <!-- Dirichlet -->
-            <section class="section" id="dirichlet">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Dirichlet Series</h2>
-                </div>
-                <div class="section-body">
-                    <p>General series of the form `\sum \frac{a_n}{n^s}`.</p>
-                    <p>Example: `L(s, \chi) = \sum \frac{\chi(n)}{n^s}` where `\chi` is a Dirichlet character. These are
-                        used to prove Dirichlet's theorem on primes in arithmetic progressions.</p>
+                    <p>Remarkably, the local statistics (spacings) of eigenvalues depend only on the <strong>symmetry
+                            class</strong> (Real/Complex/Quaternion), not on the distribution of the entries (Gaussian
+                        vs Bernoulli).</p>
+                    <p>This explains why RMT appears in heavy nuclei physics, bus arrival times, and number theory.</p>
                 </div>
             </section>
 
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Python: Sieve of Eratosthenes</h2>
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Python: Wigner Semicircle Law</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">Counting Primes</span>
+                            <span class="code-label">Eigenvalue Distribution</span>
                         </div>
                         <div class="code-content">
                             <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
-def sieve(n):
-    """Returns all primes <= n"""
-    is_prime = np.ones(n+1, dtype=bool)
-    is_prime[0:2] = False
-    for i in range(2, int(np.sqrt(n)) + 1):
-        if is_prime[i]:
-            is_prime[i*i:n+1:i] = False
-    return np.nonzero(is_prime)[0]
-
 N = 1000
-primes = sieve(N)
-count = np.arange(1, len(primes)+1)
+# Generate random symmetric matrix (GOE)
+A = np.random.randn(N, N)
+A = (A + A.T) / 2  # Symmetrize
+A = A / np.sqrt(N) # Scale
 
-# Compare pi(x) vs x/ln(x)
-x = primes
-li_approx = x / np.log(x)
+# Compute Eigenvalues
+evals = np.linalg.eigvalsh(A)
+
+# Theoretical density
+x = np.linspace(-2, 2, 100)
+density = (1/(2 * np.pi)) * np.sqrt(4 - x**2)
 
 plt.figure(figsize=(10, 6))
-plt.plot(x, count, label='Actual pi(x)', lw=2)
-plt.plot(x, li_approx, 'r--', label='Approx x/ln(x)', lw=2)
-plt.title(f"Prime Number Theorem Check (N={N})")
-plt.xlabel("x")
-plt.ylabel("Count")
+plt.hist(evals, bins=50, density=True, alpha=0.6, color='blue', label='Empirical')
+plt.plot(x, density, 'r-', lw=3, label='Wigner Semicircle')
+plt.title(f"Eigenvalue Density (N={N})")
 plt.legend()
-plt.grid(True)
 plt.show()</code></pre>
                         </div>
                     </div>
@@ -218,7 +199,7 @@ plt.show()</code></pre>
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -240,7 +221,7 @@ plt.show()</code></pre>
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 8</div>
+                    <div class="section-number">Section 7</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -260,26 +241,26 @@ plt.show()</code></pre>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Analytic Number Theory",
+                title: "RMT",
                 items: [
-                    { title: "Riemann Hypothesis Visualized", channel: "3Blue1Brown", vid: "video_id_placeholder" },
-                    { title: "Prime Number Theorem", channel: "Mathologer", vid: "video_id_placeholder" },
+                    { title: "Random Matrices and Transport", channel: "Terence Tao", vid: "video_id_placeholder" },
+                    { title: "Riemann Hypothesis and RMT", channel: "Numberphile", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "PNT", prompt: "The number of primes pi(x) is approximately x / ___.", answer: "ln x", altAnswers: ["log x"] },
-            { topic: "Zeta", prompt: "The Riemann Zeta function is defined as sum of 1/n^___.", answer: "s" },
-            { topic: "Euler", prompt: "The Euler product is a product over all ___.", answer: "primes" },
-            { topic: "RH", prompt: "The Riemann Hypothesis states non-trivial zeros have real part ___.", answer: "1/2", altAnswers: ["0.5"] },
-            { topic: "Pole", prompt: "Zeta(s) has a simple pole at s = ___.", answer: "1" },
-            { topic: "Dirichlet", prompt: "Dirichlet series generalize Zeta: sum of a_n / ___.", answer: "n^s" },
-            { topic: "LogInt", prompt: "A better approximation for pi(x) is the ___ integral Li(x).", answer: "logarithmic", altAnswers: ["log"] },
-            { topic: "Factorization", prompt: "Euler product is equivalent to Unique ___ Theorem.", answer: "Factorization" },
-            { topic: "Complex", prompt: "Analytic Continuation extends the domain of ___ functions.", answer: "complex" },
-            { topic: "Random", prompt: "The error term O(sqrt(x)) suggests primes behave like ___ variables.", answer: "random" },
+            { topic: "Wigner", prompt: "Eigenvalues of random symmetric matrices follow a ___ Law.", answer: "Semicircle" },
+            { topic: "GOE", prompt: "GOE stands for Gaussian ___ Ensemble (Real Symmetric).", answer: "Orthogonal" },
+            { topic: "GUE", prompt: "GUE stands for Gaussian ___ Ensemble (Complex Hermitian).", answer: "Unitary" },
+            { topic: "Repulsion", prompt: "Eigenvalues exhibit level ___, meaning they don't like to be close.", answer: "repulsion" },
+            { topic: "Scaling", prompt: "To get the semicircle law, we divide entries by sqrt(___).", answer: "N" },
+            { topic: "Universality", prompt: "Local statistics do not depend on the entry distribution. This is ___.", answer: "universality" },
+            { topic: "Zeta", prompt: "RMT models the zeros of the ___ Zeta function.", answer: "Riemann" },
+            { topic: "Trace", prompt: "The Method of Moments involves computing the Expected ___ of A^k.", answer: "Trace" },
+            { topic: "Physics", prompt: "Wigner invented RMT to model the energy levels of heavy ___.", answer: "nuclei" },
+            { topic: "Free Prob", prompt: "In Free Probability, random matrices behave like non-commuting ___ variables.", answer: "random" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day108_ant_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day88_random_matrices_v1' });
     </script>
 </body>
 

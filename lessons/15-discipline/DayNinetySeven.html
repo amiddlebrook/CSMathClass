@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 113: Theoretical CS II</title>
+    <title>Day 97: Feynman Method</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,24 +38,24 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 113 · Specialization
+            Day 97 · Discipline
         </div>
-        <h1>Complexity II</h1>
-        <p class="hero-desc">The PCP Theorem, Hardness of Approximation, and Interactive Proofs.</p>
+        <h1>The Feynman Technique</h1>
+        <p class="hero-desc">The ultimate test of knowledge: Can you explain it to a child?</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~45 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                Final Review
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#pcp" class="toc-link">1. The PCP Theorem</a></li>
-                    <li><a href="#hardness" class="toc-link">2. Hardness of Approximation</a></li>
-                    <li><a href="#ip" class="toc-link">3. Interactive Proofs</a></li>
-                    <li><a href="#crypto" class="toc-link">4. Zero Knowledge</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: 3SAT Check</a></li>
+                    <li><a href="#feynman" class="toc-link">1. The Feynman Technique</a></li>
+                    <li><a href="#gaps" class="toc-link">2. Identify Gaps</a></li>
+                    <li><a href="#simplify" class="toc-link">3. Simplify & Analogize</a></li>
+                    <li><a href="#blog" class="toc-link">4. Start a Blog</a></li>
+                    <li><a href="#beyond" class="toc-link">5. Beyond Day 120</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -92,107 +92,82 @@
         </aside>
 
         <main class="content">
-            <!-- PCP -->
-            <section class="section" id="pcp">
+            <!-- Feynman -->
+            <section class="section" id="feynman">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">The PCP Theorem</h2>
+                    <h2 class="section-title">The Algorithm</h2>
                 </div>
                 <div class="section-body">
-                    <p><strong>Probabilistically Checkable Proofs.</strong></p>
-                    <div class="rule">
-                        Theorem: NP = PCP(log n, 1).
-                    </div>
-                    <p>This means any mathematical proof (of length `L`) can be rewritten in a format where a verifier
-                        can check it with 99% confidence by looking at only a <strong>constant</strong> number of bits!
-                    </p>
+                    <p>Richard Feynman was the "Great Explainer". His method:</p>
+                    <ol>
+                        <li>Choose a concept.</li>
+                        <li>Explain it to an imaginary 12-year-old.</li>
+                        <li>Identify where you get stuck (your gaps).</li>
+                        <li>Return to the source material to fill gaps.</li>
+                        <li>Simplify and create analogies.</li>
+                    </ol>
                 </div>
             </section>
 
-            <!-- Hardness -->
-            <section class="section" id="hardness">
+            <!-- Gaps -->
+            <section class="section" id="gaps">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Hardness of Approximation</h2>
+                    <h2 class="section-title">Inability to Explain is Ignorance</h2>
                 </div>
                 <div class="section-body">
-                    <p>The PCP theorem revolutionized optimization. It implies that for many NP-Hard problems (like
-                        Max-Clique), finding even an <strong>approximate</strong> solution is NP-Hard.</p>
-                    <p>It creates a gap: If a formula is satisfiable, we can satisfy 100% of clauses. If not, we can
-                        satisfy at most 90%. Detecting the difference is easy (constant queries), so finding the opt is
-                        hard.</p>
+                    <p>If you use jargon like "homomorphism" or "tensor" without defining it simply, you might be hiding
+                        your own lack of understanding.</p>
+                    <p>Jargon is a compression algorithm for experts. When learning, you must decompress it.</p>
                 </div>
             </section>
 
-            <!-- IP -->
-            <section class="section" id="ip">
+            <!-- Simplify -->
+            <section class="section" id="simplify">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Interactive Proofs</h2>
+                    <h2 class="section-title">Power of Analogy</h2>
                 </div>
                 <div class="section-body">
-                    <p>What if the prover and verifier can talk? `IP` is the class of problems solvable this way.</p>
-                    <div class="math-block">
-                        IP = PSPACE
-                    </div>
-                    <p>This means interactive proofs are incredibly powerful—able to prove things like "this Chess
-                        position is a win" (in principle).</p>
+                    <p><strong>Voltage</strong> is like water pressure.</p>
+                    <p><strong>Eigenvectors</strong> are the axes of rotation.</p>
+                    <p><strong>Entropy</strong> is the number of yes/no questions to guess the state.</p>
+                    <p>Good analogies bridge the known to the unknown.</p>
                 </div>
             </section>
 
-            <!-- Crypto -->
-            <section class="section" id="crypto">
+            <!-- Blog -->
+            <section class="section" id="blog">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Zero Knowledge Proofs</h2>
+                    <h2 class="section-title">Learn in Public</h2>
                 </div>
                 <div class="section-body">
-                    <p>A proof that conveys <strong>zero</strong> information other than the validity of the statement.
-                    </p>
-                    <p>Example: Proving you know a graph coloring without revealing the colors. Crucial for crypto
-                        (Z-Cash, Authentication).</p>
+                    <p>The best way to force yourself to teach is to write online.</p>
+                    <ul>
+                        <li>Start a technical blog.</li>
+                        <li>Answer questions on StackOverflow.</li>
+                        <li>Write Twitter threads explaining papers.</li>
+                    </ul>
+                    <p>This not only solidifies your knowledge but builds your career capital.</p>
                 </div>
             </section>
 
-            <!-- Code -->
-            <section class="section" id="code">
+            <!-- Beyond -->
+            <section class="section" id="beyond">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: 3-SAT Verifier</h2>
+                    <h2 class="section-title">Beyond Day 120</h2>
                 </div>
                 <div class="section-body">
-                    <p>A simple verifier for a 3-SAT assignment.</p>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">SAT Checker</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">def is_satisfied(clauses, assignment):
-    """
-    clauses: list of tuples (e.g., [(1, 2, -3), ...])
-    assignment: dict {1: True, 2: False, ...}
-    """
-    for clause in clauses:
-        clause_sat = False
-        for lit in clause:
-            var = abs(lit)
-            val = assignment.get(var, False)
-            if lit < 0: val = not val
-            
-            if val:
-                clause_sat = True
-                break
-        
-        if not clause_sat:
-            return False # Failed constraint
-    return True
-
-# Example (x1 OR x2 OR NOT x3)
-clauses = [(1, 2, -3)]
-sol = {1: False, 2: False, 3: True} # 0 0 0 -> Fail
-print("Satisfied?", is_satisfied(clauses, sol))</code></pre>
-                        </div>
+                    <p>Congratulations. You have completed the curriculum.</p>
+                    <p>But math and CS are infinite. This was just the map.</p>
+                    <div class="rule">
+                        Next Steps:
+                        1. Pick ONE specialization (e.g., Computer Vision, Number Theory).
+                        2. Read definitions on Day 114 (Deep Work) again.
+                        3. Go build something great.
                     </div>
                 </div>
             </section>
@@ -223,7 +198,7 @@ print("Satisfied?", is_satisfied(clauses, sol))</code></pre>
             <section class="section" id="practice">
                 <div class="section-header">
                     <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Practice Problems</h2>
+                    <h2 class="section-title">Final Quiz</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls">
@@ -242,26 +217,21 @@ print("Satisfied?", is_satisfied(clauses, sol))</code></pre>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Advanced Complexity",
+                title: "Feynman",
                 items: [
-                    { title: "The PCP Theorem", channel: "Simons Institute", vid: "video_id_placeholder" },
-                    { title: "Zero Knowledge Proofs", channel: "Numberphile", vid: "video_id_placeholder" },
+                    { title: "The Feynman Technique", channel: "Farnam Street", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "PCP", prompt: "PCP(log n, 1) equals ___.", answer: "NP" },
-            { topic: "Verifier", prompt: "A PCP verifier reads only a ___ number of bits.", answer: "constant" },
-            { topic: "Approx", prompt: "PCP implies that ___ solutions are hard to find.", answer: "approximate" },
-            { topic: "IP", prompt: "IP equals ___.", answer: "PSPACE" },
-            { topic: "ZK", prompt: "Zero Knowledge Proofs reveal ___.", answer: "nothing", altAnswers: ["zero knowledge", "no info"] },
-            { topic: "Gap", prompt: "PCP creates a ___ in the objective value between satisfiable and unsatisfiable instances.", answer: "gap" },
-            { topic: "Graph", prompt: "Graph Non-Isomorphism has an ___ proof.", answer: "interactive" },
-            { topic: "SAT", prompt: "If PCP holds, then max-3SAT is hard to approximate within a factor of ___.", answer: "constant" },
-            { topic: "Randomness", prompt: "The verifier must use ___ to check the proof.", answer: "randomness" },
-            { topic: "Length", prompt: "The PCP proof is polynomially ___ than the original proof.", answer: "longer" },
+            { topic: "Audience", prompt: "Explain the concept to an imaginary ___.", answer: "child", altAnswers: ["12 year old", "novice"] },
+            { topic: "Gaps", prompt: "When you get stuck, go back to the ___ material.", answer: "source" },
+            { topic: "Jargon", prompt: "Avoid using complicated ___.", answer: "jargon" },
+            { topic: "Analogy", prompt: "Use ___ to connect new ideas to old ones.", answer: "analogies" },
+            { topic: "Public", prompt: "Learning in ___ (e.g. blogging) forces clarity.", answer: "public" },
+            { topic: "Simple", prompt: "If you can't explain it simply, you don't ___ it well enough.", answer: "understand" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day113_tcs_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day97_discipline_v1' });
     </script>
 </body>
 

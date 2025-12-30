@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 116: Writing Proofs</title>
+    <title>Day 94: The Lemma Notebook</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,10 +38,10 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 116 · Discipline
+            Day 94 · Discipline
         </div>
-        <h1>Writing Proofs</h1>
-        <p class="hero-desc">How to write mathematics clearly, concisely, and correctly.</p>
+        <h1>The Lemma Notebook</h1>
+        <p class="hero-desc">Building a Second Brain. How to organize mathematical knowledge.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Templates Included
+                System Design
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,11 +71,11 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#clarity" class="toc-link">1. Clarity First</a></li>
-                    <li><a href="#structure" class="toc-link">2. Structure of a Proof</a></li>
-                    <li><a href="#types" class="toc-link">3. Common Techniques</a></li>
-                    <li><a href="#latex" class="toc-link">4. LaTeX Basics</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Automated Proving?</a></li>
+                    <li><a href="#brain" class="toc-link">1. Second Brain</a></li>
+                    <li><a href="#obsidian" class="toc-link">2. Atomic Notes (Zettelkasten)</a></li>
+                    <li><a href="#lemmas" class="toc-link">3. Collecting Lemmas</a></li>
+                    <li><a href="#spaced" class="toc-link">4. Spaced Repetition (Anki)</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Graph Viz</a></li>
                     <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -92,80 +92,65 @@
         </aside>
 
         <main class="content">
-            <!-- Clarity -->
-            <section class="section" id="clarity">
+            <!-- Brain -->
+            <section class="section" id="brain">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Clarity is King</h2>
+                    <h2 class="section-title">Your Brain is for Thinking, Not Holding</h2>
                 </div>
                 <div class="section-body">
-                    <p>Mathematics is communication. If your proof is correct but unreadable, it fails.</p>
-                    <div class="rule">
-                        Rule: Write in complete sentences. Equations are parts of speech (nouns).
-                    </div>
-                    <p>Bad: "x^2 = 4 -> x = 2."</p>
-                    <p>Good: "Since `x^2 = 4` and we assume `x > 0`, it follows that `x = 2`."</p>
+                    <p>David Allen (GTD): "Your mind is for having ideas, not holding them."</p>
+                    <p>You cannot remember every theorem, proof, and technique in this 120-day course. You need an
+                        external system.</p>
                 </div>
             </section>
 
-            <!-- Structure -->
-            <section class="section" id="structure">
+            <!-- Obsidian -->
+            <section class="section" id="obsidian">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Structure of a Proof</h2>
+                    <h2 class="section-title">Atomic Notes (Zettelkasten)</h2>
                 </div>
                 <div class="section-body">
-                    <ol>
-                        <li><strong>Statement:</strong> Clearly state what you are proving (Theorem / Lemma).</li>
-                        <li><strong>Setup:</strong> Define variables. "Let `\epsilon > 0` be given."</li>
-                        <li><strong>Body:</strong> Logical steps. "Then...", "Therefore...", "Note that..."</li>
-                        <li><strong>Conclusion:</strong> Restate what was shown. "Thus, the limit exists." `\square`
-                        </li>
-                    </ol>
+                    <p>Don't write long summaries. Write <strong>Atomic Notes</strong>. One concept per note.</p>
+                    <div class="rule">
+                        Structure:
+                        1. Concept Name
+                        2. Definition (in your own words)
+                        3. Example
+                        4. Links to related concepts.
+                    </div>
+                    <p>Tools: Obsidian, Roam Research, Notion.</p>
                 </div>
             </section>
 
-            <!-- Types -->
-            <section class="section" id="types">
+            <!-- Lemmas -->
+            <section class="section" id="lemmas">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Common Techniques</h2>
+                    <h2 class="section-title">The Lemma Notebook</h2>
                 </div>
                 <div class="section-body">
+                    <p>Keep a specific list of "Tricks of the Trade" or "Lemmas".</p>
                     <ul>
-                        <li><strong>Direct:</strong> `P \implies Q`. Assume `P`. Show `Q`.</li>
-                        <li><strong>Contrapositive:</strong> `\neg Q \implies \neg P`. Assume `Q` is false. Show `P` is
-                            false.</li>
-                        <li><strong>Contradiction:</strong> Assume `P` and `\neg Q`. Derive nonsense (`1=0`).</li>
-                        <li><strong>Induction:</strong> Base case. Inductive Hypothesis `P(k)`. Show `P(k+1)`.</li>
+                        <li>"When you see a sum, think Integral Test."</li>
+                        <li>"To bound a probability, try Markov or Chebyshev."</li>
+                        <li>"To show a matrix is PSD, check eigenvalues."</li>
                     </ul>
+                    <p>Review this list before starting any problem set.</p>
                 </div>
             </section>
 
-            <!-- LaTeX -->
-            <section class="section" id="latex">
+            <!-- Spaced -->
+            <section class="section" id="spaced">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Learn LaTeX</h2>
+                    <h2 class="section-title">Spaced Repetition</h2>
                 </div>
                 <div class="section-body">
-                    <p>Serious math is written in LaTeX.</p>
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">LaTeX</span>
-                            <span class="code-label">Example</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code class="language-latex">\begin{theorem}
-    If $n$ is even, then $n^2$ is even.
-\end{theorem}
-\begin{proof}
-    Let $n$ be an even integer. By definition, $n = 2k$ for some integer $k$.
-    Then $n^2 = (2k)^2 = 4k^2 = 2(2k^2)$.
-    Since $2k^2$ is an integer, $n^2$ is even.
-\end{proof}</code></pre>
-                        </div>
-                    </div>
+                    <p>For fundamental definitions that you MUST memorize, use Spaced Repetition Systems (SRS) like
+                        Anki.</p>
+                    <p>Create flashcards: Front = "Definition of Convolution", Back = Formula. Review daily.</p>
                 </div>
             </section>
 
@@ -173,31 +158,38 @@
             <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Symbolic Logic</h2>
+                    <h2 class="section-title">Python: Knowledge Graph</h2>
                 </div>
                 <div class="section-body">
-                    <p>Computer Assisted Proofs (e.g., Lean, Coq) are the future, but SymPy can help with algebra steps.
-                    </p>
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
-                            <span class="code-label">SymPy Verification</span>
+                            <span class="code-label">Graph Visualization</span>
                         </div>
                         <div class="code-content">
-                            <pre><code class="language-python">from sympy import symbols, expand, Eq
+                            <pre><code class="language-python">import networkx as nx
+import matplotlib.pyplot as plt
 
-n, k = symbols('n k', integer=True)
+# Simulate Zettelkasten Links
+topics = [
+    ("LinAlg", "Calculus"),
+    ("Calculus", "Optimization"),
+    ("LinAlg", "Optimization"),
+    ("Probability", "Stats"),
+    ("Stats", "Optimization"), # ML
+    ("Algorithms", "Graph Theory"),
+    ("Graph Theory", "LinAlg") # Spectral Graph Theory
+]
 
-# Problem: Prove (2k)^2 is divisible by 2
-expr = (2*k)**2
-print(f"Expression: {expr}")
+G = nx.Graph()
+G.add_edges_from(topics)
 
-# Check divisibility
-is_even = (expr % 2 == 0)
-print(f"Is divisible by 2? {is_even}")
-
-if is_even:
-    print("Q.E.D. (via Python)")</code></pre>
+plt.figure(figsize=(8, 6))
+pos = nx.spring_layout(G, seed=42)
+nx.draw(G, pos, with_labels=True, node_color='lightblue', 
+        node_size=2000, font_size=10, font_weight='bold')
+plt.title("Your Knowledge Graph")
+plt.show()</code></pre>
                         </div>
                     </div>
                 </div>
@@ -248,23 +240,23 @@ if is_even:
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Writing Proofs",
+                title: "PKM",
                 items: [
-                    { title: "Mathematical Writing", channel: "Knuth", vid: "video_id_placeholder" },
-                    { title: "Intro to LaTeX", channel: "Overleaf", vid: "video_id_placeholder" },
+                    { title: "Building a Second Brain", channel: "Tiago Forte", vid: "video_id_placeholder" },
+                    { title: "How I take notes", channel: "Ali Abdaal", vid: "video_id_placeholder" },
                 ]
             }
         ];
         const QUESTIONS = [
-            { topic: "Sentences", prompt: "In proofs, mathematical expressions should be treated as parts of ___.", answer: "speech" },
-            { topic: "Contrapositive", prompt: "To prove P => Q, you can prove Not Q => ___.", answer: "Not P", altAnswers: ["!P", "~P"] },
-            { topic: "Contradiction", prompt: "Proof by contradiction involves assuming the negation and deriving a ___.", answer: "contradiction" },
-            { topic: "Induction", prompt: "The two steps of induction are the ___ case and the inductive step.", answer: "base" },
-            { topic: "QED", prompt: "The symbol used to end a proof is a ___, or Q.E.D.", answer: "square", altAnswers: ["box"] },
-            { topic: "Definitions", prompt: "Good proofs rely heavily on precise ___.", answer: "definitions" },
-            { topic: "Audience", prompt: "Always write for a specific ___ (e.g., your peers).", answer: "audience" },
+            { topic: "Atomic", prompt: "Notes should be ___, containing one idea.", answer: "atomic" },
+            { topic: "Linking", prompt: "The power of a second brain comes from ___ notes together.", answer: "linking" },
+            { topic: "SRS", prompt: "Spaced Repetition helps combat the ___ curve.", answer: "forgetting" },
+            { topic: "Lemma", prompt: "A ___ is a helper theorem or a trick you can reuse.", answer: "lemma" },
+            { topic: "Own Words", prompt: "Always rewrite definitions in your ___ words.", answer: "own" },
+            { topic: "Anki", prompt: "___ is a popular tool for spaced repetition.", answer: "Anki" },
+            { topic: "Graph", prompt: "Knowledge is not a list, it is a ___.", answer: "graph", altAnswers: ["network"] },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day116_proofs_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day94_discipline_v1' });
     </script>
 </body>
 

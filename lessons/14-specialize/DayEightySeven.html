@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 109: Harmonic Analysis</title>
+    <title>Day 87: Harmonic Analysis & PDE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -38,17 +38,17 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
             </svg>
-            Day 109 · Specialization
+            Day 87 · Specialization
         </div>
-        <h1>Harmonic Analysis</h1>
-        <p class="hero-desc">Fourier Series on R, Z, and general Groups. The Uncertainty Principle.</p>
+        <h1>Harmonic Analysis & PDE</h1>
+        <p class="hero-desc">Fourier Analysis, Uncertainty Principle, and Geometric flows.</p>
         <div class="hero-meta">
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
                 </svg>
-                ~60 min read
+                ~120 min read
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -75,9 +75,14 @@
                     <li><a href="#groups" class="toc-link">2. Pontryagin Duality</a></li>
                     <li><a href="#uncertainty" class="toc-link">3. Uncertainty Principle</a></li>
                     <li><a href="#wavelets" class="toc-link">4. Wavelets</a></li>
-                    <li><a href="#code" class="toc-link">5. Python: Spectrogram</a></li>
-                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                    <li><a href="#heat" class="toc-link">5. The Heat Equation</a></li>
+                    <li><a href="#smoothing" class="toc-link">6. Smoothing Property</a></li>
+                    <li><a href="#ricci" class="toc-link">7. Ricci Flow</a></li>
+                    <li><a href="#poincare" class="toc-link">8. Poincaré Conjecture</a></li>
+                    <li><a href="#analysis" class="toc-link">9. Analysis on Manifolds</a></li>
+                    <li><a href="#code" class="toc-link">10. Python: Spectra & Heat</a></li>
+                    <li><a href="#videos" class="toc-link">11. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">12. Practice</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -155,11 +160,89 @@
                 </div>
             </section>
 
+            <!-- Heat -->
+            <section class="section" id="heat">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">The Heat Equation</h2>
+                </div>
+                <div class="section-body">
+                    <p>The prototype parabolic PDE:</p>
+                    <div class="math-block">
+                        \frac{\partial u}{\partial t} = \Delta u
+                    </div>
+                    <p>It describes diffusion. In 1D: `u_t = u_{xx}`.</p>
+                </div>
+            </section>
+
+            <!-- Smoothing -->
+            <section class="section" id="smoothing">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Smoothing</h2>
+                </div>
+                <div class="section-body">
+                    <p>The heat equation instantly smooths rough initial data. If `u(x, 0)` is merely `L^2`, then `u(x,
+                        t)` is `C^\infty` for all `t > 0`.</p>
+                    <div class="info">
+                        <strong>Geometric Insight:</strong> Heat flow tries to minimize "energy" (gradient) by
+                        flattening the curve.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ricci -->
+            <section class="section" id="ricci">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Ricci Flow</h2>
+                </div>
+                <div class="section-body">
+                    <p>Heat equation for the metric tensor `g_{ij}` of a manifold.</p>
+                    <div class="math-block">
+                        \frac{\partial g_{ij}}{\partial t} = -2 R_{ij}
+                    </div>
+                    <p>Here `R_{ij}` is the Ricci curvature. Positive curvature areas shrink; negative areas expand. It
+                        tries to make the curvature constant.</p>
+                </div>
+            </section>
+
+            <!-- Poincare -->
+            <section class="section" id="poincare">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Poincaré Conjecture</h2>
+                </div>
+                <div class="section-body">
+                    <p>"Every simply connected, closed 3-manifold is homeomorphic to the 3-sphere."</p>
+                    <p>Perelman proved this by running Ricci Flow. He showed that any 3-manifold evolves into a set of
+                        recognizable pieces (Geometrization). He famously dealt with <strong>singularities</strong>
+                        (pinched necks) by surgery.</p>
+                </div>
+            </section>
+
+            <!-- Analysis -->
+            <section class="section" id="analysis">
+                <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Analysis on Manifolds</h2>
+                </div>
+                <div class="section-body">
+                    <p>Extending calculus to curved spaces. The Laplacian `\Delta` becomes the Laplace-Beltrami
+                        operator.</p>
+                    <div class="math-block">
+                        \Delta u = \frac{1}{\sqrt{|g|}} \partial_i (\sqrt{|g|} g^{ij} \partial_j u)
+                    </div>
+                    <p>Spectra of the Laplacian relate to the shape of the drum (Kac's question: "Can you hear the shape
+                        of a drum?").</p>
+                </div>
+            </section>
+
             <!-- Code -->
             <section class="section" id="code">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Time-Freq Uncertainty</h2>
+                    <div class="section-number">Section 10</div>
+                    <h2 class="section-title">Python: Spectra & Heat</h2>
                 </div>
                 <div class="section-body">
                     <div class="code-block">
@@ -197,7 +280,7 @@ plt.show()</code></pre>
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
+                    <div class="section-number">Section 11</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -219,7 +302,7 @@ plt.show()</code></pre>
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
+                    <div class="section-number">Section 12</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">
@@ -244,6 +327,13 @@ plt.show()</code></pre>
                     { title: "Heisenberg Uncertainty Principle", channel: "3Blue1Brown", vid: "video_id_placeholder" },
                     { title: "Wavelets Intro", channel: "Steve Brunton", vid: "video_id_placeholder" },
                 ]
+            },
+            {
+                title: "Geometric Analysis",
+                items: [
+                    { title: "Ricci Flow and Perelman", channel: "Numberphile", vid: "video_id_placeholder" },
+                    { title: "The Heat Equation", channel: "3Blue1Brown", vid: "video_id_placeholder" },
+                ]
             }
         ];
         const QUESTIONS = [
@@ -255,10 +345,16 @@ plt.show()</code></pre>
             { topic: "LCA", prompt: "Pontryagin duality applies to Locally Compact ___ Groups.", answer: "Abelian" },
             { topic: "Spectrogram", prompt: "A spectrogram uses the ___ Fourier Transform.", answer: "Short-Time", altAnswers: ["Short Time", "STFT"] },
             { topic: "Gaussian", prompt: "Minimizing the uncertainty principle is achieved by ___ functions.", answer: "Gaussian" },
-            { topic: "Basis", prompt: "Fourier basis functions extend infinitely; Wavelets have ___ support.", answer: "compact" },
-            { topic: "Plancherel", prompt: "The Plancherel theorem states that the FT preserves ___ (energy).", answer: "norms", altAnswers: ["energy", "L2 norm"] },
+            { topic: "Heat", prompt: "The Heat Equation is u_t = ___ u.", answer: "laplacian", altAnswers: ["Del^2", "Delta"] },
+            { topic: "Parabolic", prompt: "Heat equation is an example of a ___ PDE.", answer: "parabolic" },
+            { topic: "Smoothing", prompt: "Infinite propagation speed leads to instant ___ of data.", answer: "smoothing" },
+            { topic: "Ricci", prompt: "Ricci Flow evolves the ___ tensor.", answer: "metric" },
+            { topic: "Curvature", prompt: "Ricci flow tries to make curvature ___.", answer: "uniform", altAnswers: ["constant"] },
+            { topic: "Poincare", prompt: "Poincare conjecture states every simply connected closed 3-manifold is a ___.", answer: "sphere", altAnswers: ["3-sphere"] },
+            { topic: "Perelman", prompt: "Perelman solved Poincare by handling ___ in Ricci Flow.", answer: "singularities" },
+            { topic: "Surgery", prompt: "Removing singularities is done via manifold ___.", answer: "surgery" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day109_harm_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day87_harmpde_v1' });
     </script>
 </body>
 
