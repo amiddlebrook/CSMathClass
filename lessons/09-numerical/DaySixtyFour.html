@@ -5,10 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Day 64: Floating-Point Arithmetic</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:wght@400;700&family=DM+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -19,14 +17,21 @@
             --text: #1c1917;
             --text-secondary: #57534e;
             --text-muted: #78716c;
-            --accent: #ea580c;
-            --accent-light: #ffedd5;
-            --accent-dark: #c2410c;
+            --accent: #059669;
+            --accent-light: #d1fae5;
+            --accent-dark: #047857;
             --success: #16a34a;
+            --success-bg: #dcfce7;
             --error: #dc2626;
+            --error-bg: #fee2e2;
+            --warning: #d97706;
+            --warning-bg: #fef3c7;
+            --info: #0891b2;
+            --info-bg: #cffafe;
             --radius: 8px;
-            --font-serif: 'Source Serif 4', Georgia, serif;
-            --font-sans: 'DM Sans', system-ui, sans-serif;
+            --radius-lg: 12px;
+            --font-serif: 'Source Serif 4', serif;
+            --font-sans: 'DM Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace
         }
 
@@ -38,9 +43,25 @@
             --text: #ececf1;
             --text-secondary: #a1a1aa;
             --text-muted: #71717a;
-            --accent: #fb923c;
-            --accent-light: #431407;
-            --accent-dark: #fdba74
+            --accent: #34d399;
+            --accent-light: #064e3b;
+            --accent-dark: #6ee7b7
+        }
+
+        [data-theme="dark"] .nav {
+            background: rgba(22, 22, 26, 0.92)
+        }
+
+        [data-theme="dark"] .warning {
+            color: #fef3c7
+        }
+
+        [data-theme="dark"] .info {
+            color: #cffafe
+        }
+
+        [data-theme="dark"] .rule {
+            color: var(--accent-dark)
         }
 
         * {
@@ -60,13 +81,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: var(--surface);
+            background: rgba(250, 250, 249, 0.92);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             padding: 12px 24px
         }
 
         .nav-inner {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -76,13 +98,34 @@
         .nav-back {
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
             font-size: 14px
         }
 
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted)
+        }
+
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%
+        }
+
         .theme-toggle {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius);
             border: 1px solid var(--border);
             background: var(--surface);
@@ -90,20 +133,20 @@
         }
 
         .hero {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 48px 24px 32px
+            padding: 48px 24px
         }
 
         .hero-label {
-            display: inline-block;
             font-size: 13px;
             font-weight: 600;
             color: var(--accent-dark);
             background: var(--accent-light);
             padding: 6px 12px;
             border-radius: 999px;
-            margin-bottom: 16px
+            margin-bottom: 16px;
+            display: inline-block
         }
 
         [data-theme="dark"] .hero-label {
@@ -112,15 +155,27 @@
 
         .hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(28px, 5vw, 40px);
+            font-size: clamp(28px, 5vw, 44px);
             font-weight: 700;
             margin-bottom: 16px
         }
 
         .hero-desc {
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 640px
+            font-size: 18px;
+            color: var(--text-secondary)
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border)
+        }
+
+        .meta-item {
+            font-size: 14px;
+            color: var(--text-muted)
         }
 
         .main-layout {
@@ -144,14 +199,13 @@
 
         .sidebar {
             position: sticky;
-            top: 80px;
-            align-self: start
+            top: 80px
         }
 
         .toc {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             padding: 16px
         }
 
@@ -159,7 +213,6 @@
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: .05em;
             color: var(--text-muted);
             margin-bottom: 12px
         }
@@ -174,21 +227,12 @@
             font-size: 14px;
             color: var(--text-secondary);
             text-decoration: none;
-            border-radius: var(--radius);
-            border-left: 2px solid transparent;
-            margin-left: -2px;
-            transition: all .15s
-        }
-
-        .toc-link:hover {
-            color: var(--text);
-            background: var(--surface-alt)
+            border-radius: var(--radius)
         }
 
         .toc-link.active {
             color: var(--accent-dark);
-            background: var(--accent-light);
-            border-left-color: var(--accent)
+            background: var(--accent-light)
         }
 
         [data-theme="dark"] .toc-link.active {
@@ -198,7 +242,7 @@
         .stats-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             padding: 16px;
             margin-top: 16px
         }
@@ -206,7 +250,6 @@
         .stats-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 8px 0;
             font-size: 13px
         }
@@ -217,65 +260,37 @@
 
         .stats-value {
             font-weight: 600;
-            font-family: var(--font-mono);
-            color: var(--text)
-        }
-
-        .content {
-            min-width: 0
-        }
-
-        .nav-progress {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 13px;
-            color: var(--text-muted)
-        }
-
-        .progress-bar {
-            width: 120px;
-            height: 6px;
-            background: var(--border);
-            border-radius: 999px;
-            overflow: hidden
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            width: 0%;
-            transition: width .3s ease
+            font-family: var(--font-mono)
         }
 
         .section {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             margin-bottom: 24px;
             overflow: hidden
         }
 
         .section-header {
-            padding: 20px 24px;
+            padding: 24px 28px;
             border-bottom: 1px solid var(--border)
         }
 
         .section-number {
             font-family: var(--font-mono);
             font-size: 12px;
-            font-weight: 600;
-            color: var(--accent)
+            color: var(--accent);
+            margin-bottom: 4px
         }
 
         .section-title {
             font-family: var(--font-serif);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700
         }
 
         .section-body {
-            padding: 20px 24px
+            padding: 24px 28px
         }
 
         p {
@@ -300,20 +315,32 @@
             border-left: 3px solid var(--accent);
             padding: 16px;
             margin: 16px 0;
-            font-weight: 500;
-            color: var(--accent-dark)
+            color: var(--accent-dark);
+            font-weight: 500
         }
 
-        [data-theme="dark"] .rule {
-            color: var(--accent)
+        .warning {
+            background: var(--warning-bg);
+            border-left: 3px solid var(--warning);
+            padding: 16px;
+            margin: 16px 0;
+            color: #92400e
+        }
+
+        .info {
+            background: var(--info-bg);
+            border-left: 3px solid var(--info);
+            padding: 16px;
+            margin: 16px 0;
+            color: #155e75
         }
 
         .quiz-controls {
             display: flex;
             gap: 10px;
-            margin-bottom: 16px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border)
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px
         }
 
         .btn {
@@ -323,7 +350,6 @@
             border-radius: var(--radius);
             border: 1px solid var(--border);
             background: var(--surface);
-            color: var(--text);
             cursor: pointer
         }
 
@@ -336,49 +362,52 @@
         .question {
             background: var(--surface-alt);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 12px
         }
 
-        .q-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px
-        }
-
-        .q-num {
+        .question-num {
             font-family: var(--font-mono);
             font-size: 13px;
             font-weight: 700;
             color: var(--accent)
         }
 
-        .q-topic {
-            font-size: 11px;
+        .question-topic {
+            font-size: 12px;
             color: var(--text-muted);
             background: var(--surface);
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 999px
         }
 
-        .q-prompt {
+        .question-prompt {
             font-family: var(--font-mono);
-            font-size: 14px;
+            font-size: 15px;
             background: var(--surface);
-            padding: 12px;
+            padding: 16px;
             border-radius: var(--radius);
-            margin-bottom: 12px
+            border: 1px solid var(--border);
+            margin-bottom: 16px
         }
 
-        .q-row {
+        .question-input-row {
             display: flex;
-            gap: 8px
+            gap: 10px;
+            flex-wrap: wrap
         }
 
-        .q-input {
+        .question-input {
             flex: 1;
-            padding: 10px;
+            min-width: 200px;
+            padding: 12px;
             font-family: var(--font-mono);
             border: 2px solid var(--border);
             border-radius: var(--radius);
@@ -386,25 +415,18 @@
             color: var(--text)
         }
 
-        .q-input:focus {
-            border-color: var(--accent);
-            outline: none
-        }
-
-        .q-input.correct {
+        .question-input.correct {
             border-color: var(--success);
-            background: #dcfce7
+            background: var(--success-bg)
         }
 
-        .q-input.incorrect {
+        .question-input.incorrect {
             border-color: var(--error);
-            background: #fee2e2
+            background: var(--error-bg)
         }
 
-        .q-result {
-            margin-top: 8px;
-            font-size: 13px;
-            font-weight: 500
+        .question-result {
+            margin-top: 12px
         }
 
         .success {
@@ -415,24 +437,27 @@
             color: var(--error)
         }
 
-        .q-answer {
-            margin-top: 6px;
+        .question-answer {
             font-family: var(--font-mono);
-            font-size: 12px;
             color: var(--accent-dark);
             background: var(--accent-light);
-            padding: 6px 10px;
+            padding: 8px 12px;
             border-radius: var(--radius);
-            display: inline-block
+            display: inline-block;
+            margin-top: 8px
+        }
+
+        [data-theme="dark"] .question-answer {
+            color: var(--accent)
         }
     </style>
-    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t) })();</script>
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
 </head>
 
 <body>
     <nav class="nav">
         <div class="nav-inner"><a href="../../index.html" class="nav-back">← Back</a>
-            <div class="nav-progress"><span id="progressText">0 / 0</span>
+            <div class="nav-progress"><span id="progressText">0 / 10</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -440,18 +465,27 @@
         </div>
     </nav>
     <header class="hero">
-        <div class="hero-label">Day 64 · Numerical Methods</div>
+        <div class="hero-label">Day 64 · Numerical</div>
         <h1>Floating-Point Arithmetic</h1>
-        <p class="hero-desc">Understand how computers represent real numbers and why it matters.</p>
+        <p class="hero-desc">How computers represent real numbers and why 0.1 + 0.2 ≠ 0.3.</p>
+        <div class="hero-meta">
+            <div class="meta-item">~50 min read</div>
+            <div class="meta-item">10 practice problems</div>
+        </div>
     </header>
     <div class="main-layout">
         <aside class="sidebar">
             <nav class="toc">
                 <div class="toc-title">On this page</div>
-                <div id="toc-container"></div>
+                <ul class="toc-list">
+                    <li><a href="#ieee" class="toc-link">1. IEEE 754 Standard</a></li>
+                    <li><a href="#errors" class="toc-link">2. Rounding Errors</a></li>
+                    <li><a href="#stability" class="toc-link">3. Numerical Stability</a></li>
+                    <li><a href="#practice" class="toc-link">4. Practice</a></li>
+                </ul>
             </nav>
             <div class="stats-card">
-                <div class="toc-title">Your Progress</div>
+                <div class="toc-title">Progress</div>
                 <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
                         id="statCorrect">0</span></div>
                 <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
@@ -459,214 +493,115 @@
             </div>
         </aside>
         <main class="content">
-            <section class="section">
+            <section class="section" id="ieee">
                 <div class="section-header">
-                    <div class="section-number">01</div>
+                    <div class="section-number">Section 1</div>
                     <h2 class="section-title">IEEE 754 Standard</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>IEEE 754:</strong> The universal standard for floating-point
-                        representation.</div>
-                    <div class="math-block">SCIENTIFIC NOTATION:
-                        x = ±m × 2^e (base 2, not 10!)
+                    <div class="rule"><strong>IEEE 754:</strong> Universal standard for floating-point representation.
+                    </div>
+                    <div class="math-block">FLOATING-POINT FORMAT:
+                        x = (-1)^s × (1.mantissa) × 2^(exponent - bias)
 
-                        IEEE 754 SINGLE PRECISION (32 bits):
-                        ┌─────┬──────────┬───────────────────────┐
-                        │ 1 │ 8 │ 23 │
-                        │sign │ exponent │ mantissa │
-                        └─────┴──────────┴───────────────────────┘
+                        FLOAT (32-bit): 1 sign + 8 exp + 23 mantissa
+                        DOUBLE (64-bit): 1 sign + 11 exp + 52 mantissa
 
-                        IEEE 754 DOUBLE PRECISION (64 bits):
-                        ┌─────┬───────────┬────────────────────────────────────────────────┐
-                        │ 1 │ 11 │ 52 │
-                        │sign │ exponent │ mantissa │
-                        └─────┴───────────┴────────────────────────────────────────────────┘
-
-                        VALUE: (-1)^s × 1.mantissa × 2^(exponent-bias)
-                        Bias: 127 (single), 1023 (double)</div>
+                        SPECIAL VALUES:
+                        • ±∞ (exponent all 1s, mantissa 0)
+                        • NaN (exponent all 1s, mantissa ≠ 0)
+                        • ±0 (exponent all 0s, mantissa 0)
+                        • Denormalized (exponent all 0s, mantissa ≠ 0)</div>
+                    <div class="info"><strong>Machine epsilon ε:</strong> Smallest x where 1 + x > 1. For double: ε ≈
+                        2.2 × 10⁻¹⁶</div>
                 </div>
             </section>
-            <section class="section">
+
+            <section class="section" id="errors">
                 <div class="section-header">
-                    <div class="section-number">02</div>
-                    <h2 class="section-title">Special Values</h2>
-                </div>
-                <div class="section-body">
-                    <div class="math-block">SPECIAL CASES IN IEEE 754:
-
-                        ZERO:
-                        exponent = 0, mantissa = 0
-                        +0 and -0 both exist (compare equal)
-
-                        INFINITY:
-                        exponent = all 1s, mantissa = 0
-                        +∞ and -∞ (result of overflow)
-
-                        NaN (Not a Number):
-                        exponent = all 1s, mantissa ≠ 0
-                        Results from: 0/0, ∞-∞, √(-1)
-                        NaN ≠ NaN (only value not equal to itself!)
-
-                        DENORMALIZED (Subnormal):
-                        exponent = 0, mantissa ≠ 0
-                        Allows gradual underflow near 0</div>
-                </div>
-            </section>
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">03</div>
-                    <h2 class="section-title">Machine Epsilon</h2>
-                </div>
-                <div class="section-body">
-                    <div class="rule"><strong>Machine epsilon (ε):</strong> Smallest x such that 1 + x ≠ 1 in
-                        floating-point.</div>
-                    <div class="math-block">MACHINE EPSILON:
-                        Single precision: ε ≈ 1.19 × 10⁻⁷ (≈ 7 decimal digits)
-                        Double precision: ε ≈ 2.22 × 10⁻¹⁶ (≈ 16 decimal digits)
-
-                        RELATIVE ERROR:
-                        For any real x, closest float fl(x) satisfies:
-                        |fl(x) - x| / |x| ≤ ε/2 (rounding)
-
-                        FUNDAMENTAL AXIOM:
-                        fl(x ⊕ y) = (x ⊕ y)(1 + δ), |δ| ≤ ε
-                        where ⊕ is any of +, -, ×, ÷
-
-                        This means EACH operation introduces error up to ε!</div>
-                </div>
-            </section>
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">04</div>
+                    <div class="section-number">Section 2</div>
                     <h2 class="section-title">Rounding Errors</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">EXAMPLE: 0.1 IN BINARY
-                        0.1₁₀ = 0.0001100110011...₂ (repeating!)
-                        Cannot be exactly represented!
+                    <div class="math-block">THE CLASSIC BUG:
+                        0.1 + 0.2 = 0.30000000000000004 in IEEE 754!
 
-                        In Python:
-                        >>> 0.1 + 0.2
-                        0.30000000000000004
+                        WHY?
+                        0.1₁₀ = 0.0001100110011...₂ (infinite repeating!)
+                        Must be truncated → rounding error
 
-                        ROUNDING MODES:
-                        • Round to nearest, ties to even (default)
-                        • Round toward +∞
-                        • Round toward -∞
-                        • Round toward 0 (truncation)
-
-                        WARNING:
-                        for i in range(100):
-                        x += 0.01
-                        # x ≠ 1.0 exactly!</div>
-                    <p>Never compare floats with ==. Use |a - b| < tolerance instead.</p>
+                        ERROR TYPES:
+                        • Round-off error: Single operation approximation
+                        • Truncation error: Algorithm approximation
+                        • Catastrophic cancellation: a - b when a ≈ b</div>
+                    <div class="warning"><strong>Catastrophic cancellation:</strong> When subtracting nearly equal
+                        numbers, relative error explodes. Example: (1 + 10⁻¹⁵) - 1 loses all precision!</div>
                 </div>
             </section>
-            <section class="section">
+
+            <section class="section" id="stability">
                 <div class="section-header">
-                    <div class="section-number">05</div>
-                    <h2 class="section-title">Catastrophic Cancellation</h2>
-                </div>
-                <div class="section-body">
-                    <div class="rule"><strong>Cancellation:</strong> Subtracting nearly equal numbers loses precision.
-                    </div>
-                    <div class="math-block">EXAMPLE:
-                        a = 1.234567890123456
-                        b = 1.234567890123455
-
-                        a - b = 0.000000000000001 (only 1 sig fig!)
-
-                        All the matching leading digits "cancel"
-                        Remaining digits carry all the error!
-
-                        QUADRATIC FORMULA PROBLEM:
-                        x = (-b ± √(b²-4ac)) / 2a
-
-                        If b² >> 4ac:
-                        √(b²-4ac) ≈ |b|
-                        One root: (-b + |b|)/2a ≈ 0/2a ← cancellation!
-
-                        FIX: Use x₁x₂ = c/a to get second root</div>
-                </div>
-            </section>
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">06</div>
+                    <div class="section-number">Section 3</div>
                     <h2 class="section-title">Numerical Stability</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block">STABLE ALGORITHM:
-                        Small input perturbations → small output changes
-                        Errors don't grow exponentially
+                    <div class="math-block">STABILITY CONCEPTS:
 
-                        UNSTABLE ALGORITHM:
-                        Small perturbations → large output changes
-                        Errors amplify catastrophically
+                        FORWARD STABILITY:
+                        Algorithm produces result close to exact answer
 
-                        BACKWARD STABLE:
-                        Computed answer is exact answer for slightly
-                        perturbed input
+                        BACKWARD STABILITY:
+                        Result is exact answer to slightly perturbed input
+                        f̃(x) = f(x + δx) for small δx
 
-                        FORWARD ERROR: |computed - exact|
-                        BACKWARD ERROR: |perturbed_input - true_input|
+                        CONDITION NUMBER κ:
+                        κ = |x f'(x) / f(x)|
+                        κ large → problem is ill-conditioned
 
-                        CONDITION NUMBER:
-                        κ = (relative change in output) / (relative change in input)
-                        κ >> 1 means problem is ILL-CONDITIONED</div>
+                        BEST PRACTICES:
+                        • Avoid subtracting nearly equal numbers
+                        • Use numerically stable algorithms
+                        • Sum small numbers first
+                        • Use compensated summation (Kahan)</div>
                 </div>
             </section>
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">07</div>
-                    <h2 class="section-title">Best Practices</h2>
-                </div>
-                <div class="section-body">
-                    <div class="math-block">AVOID:
-                        • Testing equality with ==
-                        • Subtracting nearly equal numbers
-                        • Adding numbers of very different magnitudes
-                        • Dividing by small numbers
-                        • Iterating unstable recurrences
 
-                        PREFER:
-                        • Relative error comparisons
-                        • Compensated summation (Kahan algorithm)
-                        • Reformulating to avoid cancellation
-                        • Using higher precision for intermediates
-                        • Pivoting in linear algebra
-
-                        KAHAN SUMMATION:
-                        sum = 0
-                        c = 0 # compensation
-                        for x in data:
-                        y = x - c
-                        t = sum + y
-                        c = (t - sum) - y # recover lost low bits
-                        sum = t</div>
-                </div>
-            </section>
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">08</div>
+                    <div class="section-number">Section 4</div>
                     <h2 class="section-title">Practice</h2>
                 </div>
                 <div class="section-body">
                     <div class="quiz-controls"><button class="btn btn-primary" id="checkAll">Check All</button><button
-                            class="btn" id="showAll">Show All</button></div>
+                            class="btn" id="showAll">Show All</button><button class="btn" id="clear">Clear</button>
+                    </div>
                     <div id="quiz"></div>
                 </div>
             </section>
         </main>
     </div>
     <script>
-        const Q = [{ id: 1, t: "IEEE", q: "Double precision uses ___ bits total", a: ["64"], d: "64" }, { id: 2, t: "ε", q: "Machine ___ is smallest x where 1+x ≠ 1", a: ["epsilon"], d: "epsilon" }, { id: 3, t: "Prec", q: "Double has ~___ decimal digits of precision", a: ["16", "15", "15-16"], d: "16" }, { id: 4, t: "NaN", q: "NaN is the only value where x ≠ ___", a: ["x", "itself"], d: "x (itself)" }, { id: 5, t: "0.1", q: "0.1 cannot be ___ represented in binary", a: ["exactly"], d: "exactly" }, { id: 6, t: "Cancel", q: "Catastrophic ___ occurs with nearly equal numbers", a: ["cancellation"], d: "cancellation" }, { id: 7, t: "Stable", q: "Backward ___ means exact for perturbed input", a: ["stable"], d: "stable" }, { id: 8, t: "κ", q: "Condition ___ measures sensitivity to perturbation", a: ["number"], d: "number" }, { id: 9, t: "Kahan", q: "___ summation compensates for rounding", a: ["kahan"], d: "Kahan" }, { id: 10, t: "Test", q: "Never compare floats with ___, use tolerance", a: ["==", "equals"], d: "==" }];
-        const norm = s => s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; const check = (v, a) => a.map(x => norm(x)).includes(norm(v)); let correct = 0, attempted = 0;
-        function updateUI() { document.getElementById("statCorrect").textContent = correct; document.getElementById("statAccuracy").textContent = attempted > 0 ? `${Math.round(correct / attempted * 100)}%` : "—"; document.getElementById("progressText").textContent = `${correct}/${Q.length}`; document.getElementById("progressFill").style.width = `${Math.round(correct / Q.length * 100)}%` }
-        function renderQuiz() { const c = document.getElementById("quiz"); c.innerHTML = ""; Q.forEach(q => { const d = document.createElement("div"); d.className = "question"; d.innerHTML = `<div class="q-header"><span class="q-num">Q${q.id}</span><span class="q-topic">${q.t}</span></div><div class="q-prompt">${q.q}</div><div class="q-row"><input class="q-input" placeholder="Answer..."/><button class="btn btn-primary bc">Check</button><button class="btn bs">Show</button></div><div class="q-result"></div>`; const inp = d.querySelector(".q-input"), res = d.querySelector(".q-result"); d.querySelector(".bc").onclick = () => { attempted++; if (check(inp.value, q.a)) { correct++; inp.classList.add("correct"); inp.classList.remove("incorrect"); res.innerHTML = `<span class="success">✓ Correct</span>` } else { inp.classList.add("incorrect"); inp.classList.remove("correct"); res.innerHTML = `<span class="error">✗ Try again</span>` } updateUI() }; d.querySelector(".bs").onclick = () => { res.innerHTML = `<div class="q-answer">Answer: ${q.d}</div>` }; inp.onkeydown = e => { if (e.key === "Enter") d.querySelector(".bc").click() }; c.appendChild(d) }); updateUI() }
-        document.getElementById("checkAll").onclick = () => document.querySelectorAll(".bc").forEach(b => b.click()); document.getElementById("showAll").onclick = () => document.querySelectorAll(".bs").forEach(b => b.click());
-        const tocContainer = document.getElementById("toc-container"); const list = document.createElement("ul"); list.className = "toc-list"; document.querySelectorAll(".section").forEach(s => { const h2 = s.querySelector(".section-title"); if (h2) { if (!s.id) s.id = h2.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); const li = document.createElement("li"); const a = document.createElement("a"); a.href = "#" + s.id; a.className = "toc-link"; a.textContent = h2.textContent; li.appendChild(a); list.appendChild(li) } }); tocContainer.appendChild(list);
-        const tocLinks = document.querySelectorAll(".toc-link"), sections = document.querySelectorAll(".section"); function updateToc() { let current = ""; sections.forEach(s => { if (s.getBoundingClientRect().top < 150) current = s.id }); tocLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === `#${current}`)) } window.addEventListener("scroll", updateToc);
-        const tt = document.getElementById("themeToggle"); tt.onclick = () => { const n = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", n); localStorage.setItem("math_cs_theme", n); tt.textContent = n === "dark" ? "☀️" : "🌙" }; tt.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙"; renderQuiz();
+        const Q = [
+            { t: "IEEE", q: "IEEE ___ is the floating-point standard", a: "754" },
+            { t: "IEEE", q: "Double has ___ mantissa bits", a: "52" },
+            { t: "IEEE", q: "Float has ___ exponent bits", a: "8" },
+            { t: "Error", q: "0.1 in binary is ___ repeating", a: "infinite" },
+            { t: "Error", q: "Subtracting nearly equal numbers causes ___ cancellation", a: "catastrophic" },
+            { t: "Error", q: "Machine ___ is smallest x where 1+x > 1", a: "epsilon" },
+            { t: "Stability", q: "κ large means problem is ill-___", a: "conditioned" },
+            { t: "Stability", q: "Backward stability: result is exact for ___ input", a: "perturbed" },
+            { t: "IEEE", q: "NaN = Not a ___", a: "number" },
+            { t: "Tips", q: "___ summation reduces round-off error", a: "kahan" }
+        ];
+        const norm = s => s ? s.trim().toLowerCase().replace(/\s+/g, "") : ""; let correct = 0, attempted = 0;
+        function updateUI() { document.getElementById("statCorrect").textContent = correct; document.getElementById("statAccuracy").textContent = attempted > 0 ? `${Math.round(correct / attempted * 100)}%` : "—"; document.getElementById("progressText").textContent = `${correct} / ${Q.length}`; document.getElementById("progressFill").style.width = `${Math.round(correct / Q.length * 100)}%`; }
+        function render() { const c = document.getElementById("quiz"); c.innerHTML = ""; Q.forEach((q, i) => { const d = document.createElement("div"); d.className = "question"; d.innerHTML = `<div class="question-header"><span class="question-num">Q${i + 1}</span><span class="question-topic">${q.t}</span></div><div class="question-prompt">${q.q}</div><div class="question-input-row"><input class="question-input" placeholder="Answer..."/><button class="btn btn-primary bc">Check</button><button class="btn bs">Show</button></div><div class="question-result"></div>`; const inp = d.querySelector(".question-input"), res = d.querySelector(".question-result"); d.querySelector(".bc").onclick = () => { attempted++; if (norm(inp.value) === norm(q.a)) { correct++; inp.classList.add("correct"); inp.classList.remove("incorrect"); res.innerHTML = `<span class="success">✓</span>`; } else { inp.classList.add("incorrect"); inp.classList.remove("correct"); res.innerHTML = `<span class="error">✗</span>`; } updateUI(); }; d.querySelector(".bs").onclick = () => { res.innerHTML = `<div class="question-answer">${q.a}</div>`; }; inp.onkeydown = e => { if (e.key === "Enter") d.querySelector(".bc").click(); }; c.appendChild(d); }); updateUI(); }
+        document.getElementById("checkAll").onclick = () => document.querySelectorAll(".bc").forEach(b => b.click());
+        document.getElementById("showAll").onclick = () => document.querySelectorAll(".bs").forEach(b => b.click());
+        document.getElementById("clear").onclick = () => { document.querySelectorAll(".question").forEach(d => { d.querySelector(".question-input").value = ""; d.querySelector(".question-input").classList.remove("correct", "incorrect"); d.querySelector(".question-result").innerHTML = ""; }); correct = 0; attempted = 0; updateUI(); };
+        const tocLinks = document.querySelectorAll(".toc-link"), sections = document.querySelectorAll(".section"); window.addEventListener("scroll", () => { let cur = ""; sections.forEach(s => { if (s.getBoundingClientRect().top < 150) cur = s.id; }); tocLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + cur)); });
+        const tt = document.getElementById("themeToggle"); tt.onclick = () => { const n = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; document.documentElement.setAttribute("data-theme", n); localStorage.setItem("math_cs_theme", n); tt.textContent = n === "dark" ? "☀️" : "🌙"; }; tt.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+        render();
     </script>
 </body>
 
