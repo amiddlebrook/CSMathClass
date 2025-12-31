@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Convergence
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -138,7 +138,15 @@
                     </div>
                     <p>Convergence Almost Surely. "The sample path `\bar{X}_n` will eventually stay arbitrarily close to
                         `\mu` with probability 1."</p>
-                    <p>Historically harder to prove (Kolmogorov).</p>
+                    <div class="info">
+                        <strong>📊 Simple:</strong> The "Survey" Analogy.
+                        <br>• <strong>WLLN:</strong> As you survey more people, your margin of error (e.g. ±3%) gets
+                        smaller. Be confident the average is close.
+                        <br>• <strong>SLLN:</strong> If you keep surveying forever, your running average will stop
+                        fluctuating wildy and settle exactly on the truth.
+                        <br>• <strong>CLT:</strong> Not only is the average close, but the <em>probability distribution
+                            of your error</em> looks like a Bell Curve.
+                    </div>
                 </div>
             </section>
 
@@ -275,27 +283,20 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 6", channel: "Course Reference", vid: "probability" },
-                    { title: "Video 8", channel: "Course Reference", vid: "independent" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Lesson Videos",
+                "items": [
+                    { "title": "Law of Large Numbers", "channel": "The Bright Side of Mathematics", "vid": "video-title" },
+                    { "title": "Characteristic Functions", "channel": "The Bright Side of Mathematics", "vid": "video-title" },
+                    { "title": "Central Limit Theorem", "channel": "The Bright Side of Mathematics", "vid": "video-title" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "WLLN", prompt: "The Weak Law asserts convergence in ___.", answer: "probability" },
-            { topic: "SLLN", prompt: "The Strong Law asserts convergence ___ surely.", answer: "almost" },
-            { topic: "CLT", prompt: "The Central Limit Theorem describes convergence in ___.", answer: "distribution" },
-            { topic: "Scaling", prompt: "In CLT, the fluctuations scale as 1 over the square root of ___.", answer: "n" },
-            { topic: "Tool", prompt: "Characteristic functions are useful for proving convergence in ___.", answer: "distribution" },
-            { topic: "Assumption", prompt: "Both Laws require the random variables to be ___ and identically distributed.", answer: "independent" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day61_clt_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day61'], storageKey: 'day61_clt_v1' });
     </script>
 </body>
 

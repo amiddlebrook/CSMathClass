@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Infinite Dimensions
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -155,7 +155,16 @@
                         <li>pythagorean Theorem.</li>
                         <li>Projections (closest point intuition).</li>
                     </ul>
-                    <p>Example: `L^2(\mathbb{R})`, `\ell^2`.</p>
+                    <div class="info">
+                        <strong>🛰️ Simple:</strong> The "GPS" Analogy.
+                        <br>• In 3D space (`\mathbb{R}^3`), we find our position using 3 coordinates (Projections onto
+                        x, y, z axes).
+                        <br>• A <strong>Hilbert Space</strong> is just a space where we can do this with
+                        <em>infinite</em> coordinates.
+                        <br>• We can measure angles, find distances, and decompose a signal into "infinite axes" (like
+                        Fourier Series uses sine waves as axes). It's the only infinite-dimensional space where
+                        "Geometry" works like High School Geometry.
+                    </div>
                 </div>
             </section>
 
@@ -375,30 +384,20 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 4", channel: "Course Reference", vid: "Boundedness" },
-                    { title: "Video 7", channel: "Course Reference", vid: "Hahn-Banach" },
-                    { title: "Video 9", channel: "Course Reference", vid: "boundedness" },
-                    { title: "Video 10", channel: "Course Reference", vid: "functionals" }
+                "title": "Lesson Videos",
+                "items": [
+                    { "title": "Functional Analysis 1 - Overview", "channel": "The Bright Side of Mathematics", "vid": "video-title" },
+                    { "title": "Hilbert Spaces", "channel": "The Bright Side of Mathematics", "vid": "A3sP4b30k7I" },
+                    { "title": "Banach Spaces", "channel": "The Bright Side of Mathematics", "vid": "video-title" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Norm", prompt: "The triangle inequality states ||x+y|| <= ||x|| + ___.", answer: "||y||" },
-            { topic: "Banach", prompt: "A Banach space is a normed space that is ___.", answer: "complete" },
-            { topic: "Hilbert", prompt: "A Hilbert space norm comes from an ___.", answer: "inner product" },
-            { topic: "Lp", prompt: "Which Lp space is a Hilbert Space?", answer: "L2" },
-            { topic: "Boundedness", prompt: "For linear maps, continuity is equivalent to ___.", answer: "boundedness" },
-            { topic: "Dual Space", prompt: "The dual space V* consists of linear ___ on V.", answer: "functionals" },
-            { topic: "Riesz", prompt: "In a Hilbert space, every functional corresponds to an ___ product.", answer: "inner" },
-            { topic: "Hahn-Banach", prompt: "Hahn-Banach allows us to ___ functionals from a subspace to the whole space.", answer: "extend" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day62_functional_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day62'], storageKey: 'day62_functional_v1' });
     </script>
 </body>
 

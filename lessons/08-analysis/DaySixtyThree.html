@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Compactness
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -140,8 +140,14 @@
                         <li><strong>Weakly:</strong> For any `g \in L^2`, `\langle u_n, g \rangle = \int \sin(nx) g(x)
                             dx`. By Riemann-Lebesgue Lemma, this integral goes to 0 as `n \to \infty`.</li>
                     </ul>
-                    <p>So `\sin(nx) \rightharpoonup 0`. The oscillations become so fast they "cancel out" against any
-                        fixed function.</p>
+                    <div class="info">
+                        <strong>🖼️ Simple:</strong> The "Pixelated Image" Analogy.
+                        <br>• <strong>Strong Convergence:</strong> A high-res photo gradually morphs exactly into the
+                        target image. Every pixel matches perfectly in the limit.
+                        <br>• <strong>Weak Convergence:</strong> The image might look like static noise (high frequency
+                        oscillations), but if you squint (average over regions), it assumes the correct shape.
+                        <br>Essentially, the "average" behavior is correct, even if the fine details are going crazy.
+                    </div>
                 </div>
             </section>
 
@@ -268,28 +274,20 @@ plt.show()
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 4", channel: "Course Reference", vid: "oscillation" },
-                    { title: "Video 8", channel: "Course Reference", vid: "functionals" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" },
-                    { title: "Video 10", channel: "Course Reference", vid: "Convergence" }
+                "title": "Lesson Videos",
+                "items": [
+                    { "title": "Weak Convergence", "channel": "The Bright Side of Mathematics", "vid": "video-title" },
+                    { "title": "Banach-Alaoglu", "channel": "The Bright Side of Mathematics", "vid": "video-title" },
+                    { "title": "Reflexive Spaces", "channel": "The Bright Side of Mathematics", "vid": "video-title" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Strong", prompt: "Strong convergence is convergence in ___.", answer: "norm" },
-            { topic: "Weak", prompt: "Weak convergence relies on testing against linear ___.", answer: "functionals" },
-            { topic: "Example", prompt: "The sequence sin(nx) converges weakly to ___.", answer: "0" },
-            { topic: "Alaoglu", prompt: "Banach-Alaoglu states the unit ball in the dual space is ___ compact.", answer: "weak-*" },
-            { topic: "Reflexive", prompt: "In a reflexive space, bounded sequences have a ___ convergent subsequence.", answer: "weakly" },
-            { topic: "Finite Dim", prompt: "In finite dimensions, weak and strong convergence are ___.", answer: "equivalent" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day63_weak_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day63'], storageKey: 'day63_weak_v1' });
     </script>
 </body>
 
