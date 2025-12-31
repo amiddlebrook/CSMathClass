@@ -110,6 +110,12 @@
                         2. T(cu) = cT(u)
                     </div>
                     <p>Basically: "Grid lines remain parallel and evenly spaced, and the origin stays fixed."</p>
+                    <div class="info">
+                        <strong>🖼️ Simple:</strong> The Photoshop Warp.
+                        <br>Think of your vector space as a picture on a rubber sheet.
+                        <br>A Linear Transformation is stretching, skewing, or rotating that sheet.
+                        <br>You CANNOT tear it, fold it, or curve the grid lines.
+                    </div>
                 </div>
             </section>
 
@@ -173,6 +179,12 @@
                         Where $P$ is the change-of-basis matrix (columns are new basis vectors).
                         Matrices $M$ and $A$ are <strong>Similar</strong>.
                     </p>
+                    <div class="info">
+                        <strong>🗣️ Simple:</strong> The Universal Translator.
+                        <br>The "Transformation" (Object A) is the same physical movement/idea.
+                        <br>But "Basis 1" speaks English and "Basis 2" speaks Spanish.
+                        <br>$P$ is the dictionary that translates the vector names between languages.
+                    </div>
                 </div>
             </section>
 
@@ -260,36 +272,25 @@ transformed_points = Shear @ points
 
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
-        const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "k7RM-ot2NWY" },
-            { title: "Video 2", channel: "Course Reference", vid: "k7RM-ot2NWY" },
-            { title: "Video 3", channel: "Course Reference", vid: "VJOiWdqlPpw" },
-            { title: "Video 4", channel: "Course Reference", vid: "uQhTuRlWMxw" },
-            { title: "Video 5", channel: "Course Reference", vid: "HZGCoVF3YvM" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
+        <script>
+            const VIDEO_GROUPS = [
             {
                 title: "Visualizing Matrices",
-                items: [
-                    { title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
-                    { title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
-                ]
+            items: [
+            {title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
+            {title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
+            {title: "Matrices as Transforms", channel: "Khan Academy", vid: "TnV5a1c3rHg" }
+            ]
             }
-        ];
-
-        const QUESTIONS = [
-            { topic: "Linearity", prompt: "T(u+v) must equal ___.", answer: "t(u)+t(v)", altAnswers: ["t(u) + t(v)"] },
-            { topic: "Origin", prompt: "A linear transformation must map the origin to the ___.", answer: "origin", altAnswers: ["zero vector"] },
-            { topic: "ColSpace", prompt: "Columns of the matrix A are the images of the ___ vectors.", answer: "basis" },
-            { topic: "Similar", prompt: "Similar matrices represent the same ___ in different bases.", answer: "transformation", altAnswers: ["map", "operator"] },
-            { topic: "Det", prompt: "The determinant of a rotation matrix is ___.", answer: "1" },
-        ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day27_trans_v1' });
+            ];
+            const QUESTIONS = [
+            {topic: "Linearity", prompt: "T(u+v) must equal ___.", answer: "t(u)+t(v)", altAnswers: ["t(u) + t(v)"] },
+            {topic: "Origin", prompt: "A linear transformation must map the origin to the ___.", answer: "origin", altAnswers: ["zero vector"] },
+            {topic: "ColSpace", prompt: "Columns of the matrix A are the images of the ___ vectors.", answer: "basis" },
+            {topic: "Similar", prompt: "Similar matrices represent the same ___ in different bases.", answer: "transformation", altAnswers: ["map", "operator"] },
+            {topic: "Det", prompt: "The determinant of a rotation matrix is ___.", answer: "1" },
+            ];
+            initLesson({videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day23_trans_v2' });
     </script>
 </body>
 
