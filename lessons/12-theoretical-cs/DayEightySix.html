@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -129,147 +129,184 @@
                             doubling".</li>
                     </ul>
                     <div class="info">
-                        <strong>The Philosophy:</strong> Groups with small sumsets MUST look like Arithmetic
-                        Progressions.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Ruzsa -->
-            <section class="section" id="ruzsa">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Plünnecke-Ruzsa Inequality</h2>
-                </div>
-                <div class="section-body">
-                    <p>This powerful inequality controls iterated sumsets `kA` based on `2A`.</p>
-                    <div class="math-block">
-                        |nA - mA| \le \left(\frac{|A+A|}{|A|}\right)^{n+m} |A|
-                    </div>
-                    <p>It implies that if `A` has small doubling, then even `100A` is relatively small.</p>
-                </div>
-            </section>
-
-            <!-- Freiman -->
-            <section class="section" id="freiman">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Freiman's Theorem</h2>
-                </div>
-                <div class="section-body">
-                    <p>A central result in the field.</p>
-                    <div class="rule">
-                        Theorem: If `|A+A| \le K|A|`, then `A` is contained in a <strong>Generalized Arithmetic
-                            Progression (GAP)</strong> of dimension `d(K)` and size `C(K)|A|`.
-                    </div>
-                    <p>This formalizes the intuition that "small doubling implies structure."</p>
-                </div>
-            </section>
-
-            <!-- Roth -->
-            <section class="section" id="roth">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Roth's Theorem</h2>
-                </div>
-                <div class="section-body">
-                    <p>Any subset of the integers with positive density contains a 3-term Arithmetic Progression.</p>
-                    <div class="math-block">
-                        A \subseteq \{1, \dots, N\}, \quad |A| \ge \delta N \implies \exists x, d : \{x, x+d, x+2d\}
-                        \subseteq A
-                    </div>
-                </div>
-            </section>
-
-            <!-- PNT -->
-            <section class="section" id="pnt">
-                <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Prime Number Theorem (PNT)</h2>
-                </div>
-                <div class="section-body">
-                    <p>Let `\pi(x)` be the number of primes less than or equal to `x`.</p>
-                    <div class="math-block">
-                        \pi(x) \sim \frac{x}{\ln x}
-                    </div>
-                    <p>Or more precisely, `\pi(x) \sim \text{Li}(x) = \int_2^x \frac{dt}{\ln t}`.</p>
-                </div>
-            </section>
-
-            <!-- Zeta -->
-            <section class="section" id="zeta">
-                <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Riemann Zeta Function</h2>
-                </div>
-                <div class="section-body">
-                    <p>Defined for `\text{Re}(s) > 1` by:</p>
-                    <div class="math-block">
-                        \zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}
-                    </div>
-                    <p>It can be analytically continued to the entire complex plane (except a pole at `s=1`).</p>
-                </div>
-            </section>
-
-            <!-- Product -->
-            <section class="section" id="product">
-                <div class="section-header">
-                    <div class="section-number">Section 8</div>
-                    <h2 class="section-title">Euler Product Formula</h2>
-                </div>
-                <div class="section-body">
-                    <p>This connects analysis (sum over integers) to number theory (product over primes).</p>
-                    <div class="math-block">
-                        \sum_{n=1}^\infty \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}
-                    </div>
-                    <p>This identity is equivalent to the Fundamental Theorem of Arithmetic (Unique Factorization).</p>
-                </div>
-            </section>
-
-            <!-- RH -->
-            <section class="section" id="rh">
-                <div class="section-header">
-                    <div class="section-number">Section 9</div>
-                    <h2 class="section-title">Riemann Hypothesis</h2>
-                </div>
-                <div class="section-body">
-                    <p>The zeros of `\zeta(s)` control the error term in the Prime Number Theorem.</p>
-                    <div class="rule">
-                        <strong>Hypothesis:</strong> All non-trivial zeros lie on the critical line `\text{Re}(s) =
-                        1/2`.
-                    </div>
-                    <p>If true, `|\pi(x) - \text{Li}(x)| = O(\sqrt{x} \ln x)`. This is the "square root cancellation" of
-                        randomness.</p>
-                </div>
-            </section>
-
-            <!-- Dirichlet -->
-            <section class="section" id="dirichlet">
-                <div class="section-header">
-                    <div class="section-number">Section 10</div>
-                    <h2 class="section-title">Dirichlet Series</h2>
-                </div>
-                <div class="section-body">
-                    <p>General series of the form `\sum \frac{a_n}{n^s}`.</p>
-                    <p>Example: `L(s, \chi) = \sum \frac{\chi(n)}{n^s}` where `\chi` is a Dirichlet character. These are
-                        used to prove Dirichlet's theorem on primes in arithmetic progressions.</p>
-                </div>
-            </section>
-
-            <!-- Code -->
-            <section class="section" id="code">
-                <div class="section-header">
-                    <div class="section-number">Section 11</div>
-                    <h2 class="section-title">Python: Sumsets & Sieve</h2>
-                </div>
-                <div class="section-body">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Sumset Calculator</span>
+                        <span class="info-icon">🎒</span>
+                        <div>
+                            <strong>The Grocery Bag Analogy:</strong> Think of a set `A` as a grocery bag of items with
+                            prices. The sumset `A+A` is the set of all possible total prices you could get by picking
+                            exactly two items. If the prices are `{1, 2, 3}`, the sumset is `{2, 3, 4, 5, 6}` (very
+                            structured/small). If the prices are `{1, 10, 100}`, the sumset is `{2, 11, 20, 101, 110,
+                            200}` (very spread out/random/large).
                         </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">import matplotlib.pyplot as plt
+                    </div>
+                    <div class="info">
+                        <span class="info-icon">🪜</span>
+                        <div>
+                            <strong>The Staircase Analogy:</strong> An arithmetic progression is like a staircase with
+                            perfectly uniform steps. No matter where you are, the "next step" is the same distance away.
+                            This uniformity makes finding "patterns" (sumsets) extremely predictable and efficient.
+                            Groups with "small doubling" are proved to be "staircase-like."
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Ruzsa -->
+    <section class="section" id="ruzsa">
+        <div class="section-header">
+            <div class="section-number">Section 3</div>
+            <h2 class="section-title">Plünnecke-Ruzsa Inequality</h2>
+        </div>
+        <div class="section-body">
+            <p>This powerful inequality controls iterated sumsets `kA` based on `2A`.</p>
+            <div class="math-block">
+                |nA - mA| \le \left(\frac{|A+A|}{|A|}\right)^{n+m} |A|
+            </div>
+            <p>It implies that if `A` has small doubling, then even `100A` is relatively small.</p>
+        </div>
+    </section>
+
+    <!-- Freiman -->
+    <section class="section" id="freiman">
+        <div class="section-header">
+            <div class="section-number">Section 4</div>
+            <h2 class="section-title">Freiman's Theorem</h2>
+        </div>
+        <div class="section-body">
+            <p>A central result in the field.</p>
+            <div class="rule">
+                Theorem: If `|A+A| \le K|A|`, then `A` is contained in a <strong>Generalized Arithmetic
+                    Progression (GAP)</strong> of dimension `d(K)` and size `C(K)|A|`.
+            </div>
+            <p>This formalizes the intuition that "small doubling implies structure."</p>
+        </div>
+    </section>
+
+    <!-- Roth -->
+    <section class="section" id="roth">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <h2 class="section-title">Roth's Theorem</h2>
+        </div>
+        <div class="section-body">
+            <p>Any subset of the integers with positive density contains a 3-term Arithmetic Progression.</p>
+            <div class="math-block">
+                A \subseteq \{1, \dots, N\}, \quad |A| \ge \delta N \implies \exists x, d : \{x, x+d, x+2d\}
+                \subseteq A
+            </div>
+        </div>
+    </section>
+
+    <!-- PNT -->
+    <section class="section" id="pnt">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <h2 class="section-title">Prime Number Theorem (PNT)</h2>
+        </div>
+        <div class="section-body">
+            <p>Let `\pi(x)` be the number of primes less than or equal to `x`.</p>
+            <div class="math-block">
+                \pi(x) \sim \frac{x}{\ln x}
+            </div>
+            <p>Or more precisely, `\pi(x) \sim \text{Li}(x) = \int_2^x \frac{dt}{\ln t}`.</p>
+        </div>
+    </section>
+
+    <!-- Zeta -->
+    <section class="section" id="zeta">
+        <div class="section-header">
+            <div class="section-number">Section 7</div>
+            <h2 class="section-title">Riemann Zeta Function</h2>
+        </div>
+        <div class="section-body">
+            <p>Defined for `\text{Re}(s) > 1` by:</p>
+            <div class="math-block">
+                \zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}
+            </div>
+            <p>It can be analytically continued to the entire complex plane (except a pole at `s=1`).</p>
+        </div>
+    </section>
+
+    <!-- Product -->
+    <section class="section" id="product">
+        <div class="section-header">
+            <div class="section-number">Section 8</div>
+            <h2 class="section-title">Euler Product Formula</h2>
+        </div>
+        <div class="section-body">
+            <p>This connects analysis (sum over integers) to number theory (product over primes).</p>
+            <div class="math-block">
+                \sum_{n=1}^\infty \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1-p^{-s}}
+            </div>
+            <p>This identity is equivalent to the Fundamental Theorem of Arithmetic (Unique Factorization).</p>
+        </div>
+    </section>
+
+    <!-- RH -->
+    <section class="section" id="rh">
+        <div class="section-header">
+            <div class="section-number">Section 9</div>
+            <h2 class="section-title">Riemann Hypothesis</h2>
+        </div>
+        <div class="section-body">
+            <p>The zeros of `\zeta(s)` control the error term in the Prime Number Theorem.</p>
+            <div class="rule">
+                <strong>Hypothesis:</strong> All non-trivial zeros lie on the critical line `\text{Re}(s) =
+                1/2`.
+            </div>
+            <p>If true, `|\pi(x) - \text{Li}(x)| = O(\sqrt{x} \ln x)`. This is the "square root cancellation" of
+                randomness.</p>
+
+            <div class="info">
+                <span class="info-icon">🗺️</span>
+                <div>
+                    <strong>The Map Analogy:</strong> Imagine the complex plane as a vast ocean. The zeros of the Zeta
+                    function are like hidden reefs. The Riemann Hypothesis claims that all these reefs lie exactly along
+                    a single longitude line (the critical line). If a single reef is found off that line, our entire
+                    navigation (the Prime Number Theorem's error term) would be thrown into chaos.
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Dirichlet -->
+    <section class="section" id="dirichlet">
+        <div class="section-header">
+            <div class="section-number">Section 10</div>
+            <h2 class="section-title">Dirichlet Series</h2>
+        </div>
+        <div class="section-body">
+            <p>General series of the form `\sum \frac{a_n}{n^s}`.</p>
+            <p>Example: `L(s, \chi) = \sum \frac{\chi(n)}{n^s}` where `\chi` is a Dirichlet character. These are
+                used to prove Dirichlet's theorem on primes in arithmetic progressions.</p>
+
+            <div class="subsection">
+                <h3>Why This Matters in CS</h3>
+                <p><strong>Pseudorandomness:</strong> In CS, we often need "random" numbers that aren't actually random.
+                    Additive combinatorics provides tools to prove that certain sets (like those with large sumsets)
+                    "act" random. This is fundamental in <strong>Hashing</strong> (avoiding collisions) and
+                    <strong>Derandomization</strong> (turning randomized algorithms into deterministic ones).
+                </p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Code -->
+    <section class="section" id="code">
+        <div class="section-header">
+            <div class="section-number">Section 11</div>
+            <h2 class="section-title">Python: Sumsets & Sieve</h2>
+        </div>
+        <div class="section-body">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-label">Sumset Calculator</span>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-python">import matplotlib.pyplot as plt
 import numpy as np
 
 def get_sumset(A):
@@ -301,82 +338,74 @@ plt.yticks([0, 1], ['Random', 'Structured'])
 plt.title("Set vs Sumset")
 plt.legend()
 plt.show()</code></pre>
-                        </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Videos -->
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 12</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
+    <!-- Videos -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <div class="section-number">Section 12</div>
+            <h2 class="section-title">Video Lessons</h2>
+        </div>
+        <div class="section-body">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe id="ytPlayer" src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="video-info">
+                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                        <div class="video-meta" id="videoMeta"></div>
                     </div>
                 </div>
-            </section>
+                <div class="video-list" id="videoList"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Practice -->
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 13</div>
-                    <h2 class="section-title">Practice Problems</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
-        </main>
+    <!-- Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <div class="section-number">Section 13</div>
+            <h2 class="section-title">Practice Problems</h2>
+        </div>
+        <div class="section-body">
+            <div class="quiz-controls">
+                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                <button class="btn" id="btnRevealAll">Reveal All</button>
+                <button class="btn" id="btnClear">Clear Inputs</button>
+                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </section>
+    </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "statistical" },
-                    { title: "Video 2", channel: "Course Reference", vid: "Numberphile" },
-                    { title: "Video 10", channel: "Course Reference", vid: "logarithmic" }
+                "title": "Additive Combinatorics",
+                "items": [
+                    { "title": "Structure and Randomness", "channel": "Simons Institute", "vid": "7pP1_e_S6nE" },
+                    { "title": "Roth's Theorem on APs", "channel": "Geometric View", "vid": "v6rOaY8u_RE" },
+                    { "title": "Sumsets and Doubling", "channel": "Numberphile", "vid": "mSbe5S28Nf0" }
+                ]
+            },
+            {
+                "title": "Analytic Number Theory",
+                "items": [
+                    { "title": "Visualizing the Zeta Function", "channel": "3Blue1Brown", "vid": "sD0NjAl746A" },
+                    { "title": "The Riemann Hypothesis", "channel": "Veritasium", "vid": "zlm1aajH6gY" },
+                    { "title": "The Prime Number Theorem", "channel": "Numberphile", "vid": "mSbe5S28Nf0" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Sumset", prompt: "The sumset A+A is the set of all sums x + y where x, y are in ___.", answer: "A" },
-            { topic: "Small Doubling", prompt: "If |A+A| approx 2|A|, then A resembles an ___ progression.", answer: "arithmetic" },
-            { topic: "Large Doubling", prompt: "If |A+A| approx |A|^2/2, then A behaves like a ___ set.", answer: "random" },
-            { topic: "Freiman", prompt: "Freiman's theorem states sets with small doubling are contained in ___.", answer: "GAPs", altAnswers: ["Generalized Arithmetic Progressions", "GAP"] },
-            { topic: "Roth", prompt: "Roth's theorem guarantees existence of 3-term ___.", answer: "AP", altAnswers: ["arithmetic progression"] },
-            { topic: "Ruzsa", prompt: "The Plünnecke-Ruzsa inequality bounds iterated ___.", answer: "sumsets" },
-            { topic: "Density", prompt: "Roth's theorem applies to sets with positive ___.", answer: "density" },
-            { topic: "Structure", prompt: "Additive Combinatorics studies the interplay between additive structure and ___ randomness.", answer: "statistical", altAnswers: ["multiplicative"] },
-            { topic: "PNT", prompt: "The number of primes pi(x) is approximately x / ___.", answer: "ln x", altAnswers: ["log x"] },
-            { topic: "Zeta", prompt: "The Riemann Zeta function is defined as sum of 1/n^___.", answer: "s" },
-            { topic: "Euler", prompt: "The Euler product is a product over all ___.", answer: "primes" },
-            { topic: "RH", prompt: "The Riemann Hypothesis states non-trivial zeros have real part ___.", answer: "1/2", altAnswers: ["0.5"] },
-            { topic: "Pole", prompt: "Zeta(s) has a simple pole at s = ___.", answer: "1" },
-            { topic: "Dirichlet", prompt: "Dirichlet series generalize Zeta: sum of a_n / ___.", answer: "n^s" },
-            { topic: "LogInt", prompt: "A better approximation for pi(x) is the ___ integral Li(x).", answer: "logarithmic", altAnswers: ["log"] },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day86_specialize_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day86'], storageKey: 'day86_specialize_v1' });
     </script>
 </body>
 

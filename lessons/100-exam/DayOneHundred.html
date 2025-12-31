@@ -27,8 +27,37 @@
     </nav>
 
     <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 100 · Graduation
+        </div>
         <h1>The Final Exam</h1>
-        <p class="hero-desc">The cumulative challenge. 10% of the curriculum. Good luck.</p>
+        <p class="hero-desc">The cumulative challenge. 10% of the curriculum. This is the moment you've worked 100 days
+            for.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~180 min exam
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                250 questions
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                Graduation
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -36,7 +65,8 @@
             <nav class="toc">
                 <div class="toc-title">Exam Status</div>
                 <ul class="toc-list">
-                    <li><a href="#exam" class="toc-link active">Questions</a></li>
+                    <li><a href="#exam" class="toc-link active">1. The Exam</a></li>
+                    <li><a href="#graduation" class="toc-link">2. Beyond Day 100</a></li>
                 </ul>
             </nav>
         </aside>
@@ -55,20 +85,78 @@
                 </div>
             </div>
 
-            <script>
-                initLesson({
-                    proctor: { strict: true, noCopy: true },
-                    questions: [] // Handled by EXAM_LOGIC
-                });
+            <!-- Graduation -->
+            <section class="section" id="graduation">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Beyond Day 100</h2>
+                </div>
+                <div class="section-body">
+                    <p>Mathematics and Computer Science are not destinations; they are languages for describing the
+                        universe. Today, you become a fluent speaker.</p>
 
-                // Load exam but hide it initially
-                const questions = window.EXAM_LOGIC.getExam();
-                initQuiz(questions, 'day100_exam_stats');
+                    <div class="info">
+                        <span class="info-icon">🚀</span>
+                        <div>
+                            <strong>The Live Deployment Analogy:</strong> For 99 days, you have been writing code in
+                            your local environment. You've had mentors, textbooks, and practice runs. The Final Exam is
+                            the **Live Deployment**. Once you pass, your "code" (your mind) is running in production.
+                            The stakes are higher, but so is the impact of everything you build.
+                        </div>
+                    </div>
 
-                // Move quiz container into examContent because initQuiz might have put it elsewhere or cleared it
-                // Actually initQuiz targets 'quizContainer', which is now inside examContent.
-                // We just need to make sure the styles are correct.
-            </script>
+                    <div class="info">
+                        <span class="info-icon">🎓</span>
+                        <div>
+                            <strong>The Certification Analogy:</strong> A degree is just a piece of paper; the **actual
+                            skill** is the ability to walk into a room of experts and hold your own. You have earned
+                            that right. You aren't "finished"; you are now **certified to explore**. The real learning
+                            begins now that you have the tools to teach yourself anything.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Zero-Day Readiness:</strong> In cybersecurity, a "Zero-Day" is a threat that has
+                            never been seen before. You can't prepare for it with a specific manual; you prepare for it
+                            by having a <strong>deep, fundamental understanding</strong> of the system. This curriculum
+                            has given you that foundation. No matter how much the industry changes (AI, Quantum,
+                            Bio-computing), the fundamental math remains the same.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const VIDEO_GROUPS = [
+                {
+                    "title": "Graduation & Beyond",
+                    "items": [
+                        { "title": "Richard Feynman: The Joy of Discovery", "channel": "Muon Ray", "vid": "v2T9nJvg_L0" },
+                        { "title": "The Most Beautiful Equation", "channel": "3Blue1Brown", "vid": "mvmuCPvRoeg" },
+                        { "title": "You Are Not a Software Engineer", "channel": "The Primeagen", "vid": "v2T9nJvg_L0" }
+                    ]
+                }
+            ];
+            initLesson({
+                videos: VIDEO_GROUPS,
+                proctor: { strict: true, noCopy: true },
+                questions: [] // Handled by EXAM_LOGIC
+            });
+
+            // Load exam but hide it initially
+            const questions = window.EXAM_LOGIC.getExam();
+            initQuiz(questions, 'day100_exam_stats');
+
+            document.getElementById('btnStartExam').addEventListener('click', () => {
+                document.getElementById('startScreen').style.display = 'none';
+                document.getElementById('examContent').style.display = 'block';
+                // Trigger proctor fullscreen if needed
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                }
+            });
+        </script>
 </body>
 
 </html>

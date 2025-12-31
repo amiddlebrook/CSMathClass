@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Templates Included
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,6 +105,16 @@
                     </div>
                     <p>Bad: "x^2 = 4 -> x = 2."</p>
                     <p>Good: "Since `x^2 = 4` and we assume `x > 0`, it follows that `x = 2`."</p>
+
+                    <div class="info">
+                        <span class="info-icon">⚖️</span>
+                        <div>
+                            <strong>The Legal Case Analogy:</strong> A mathematical proof is like a prosecutor building
+                            a case in court. You can't just say "The defendant is guilty!" You have to present a chain
+                            of evidence (definitions), show that each piece leads to the next (lemmas), and prove beyond
+                            a shadow of a doubt (conclusion) that the result is true.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -122,6 +132,16 @@
                         <li><strong>Conclusion:</strong> Restate what was shown. "Thus, the limit exists." `\square`
                         </li>
                     </ol>
+
+                    <div class="info">
+                        <span class="info-icon">🍰</span>
+                        <div>
+                            <strong>The Recipe Analogy:</strong> A proof is a recipe for truth. A bad recipe says "make
+                            the dough." A good recipe says "Mix 2 cups of flour with 1 cup of water until smooth." A
+                            proof needs to specify the "ingredients" (variables) and the "cooking steps" (logic) so
+                            precisely that anyone else can follow them.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -139,6 +159,24 @@
                         <li><strong>Contradiction:</strong> Assume `P` and `\neg Q`. Derive nonsense (`1=0`).</li>
                         <li><strong>Induction:</strong> Base case. Inductive Hypothesis `P(k)`. Show `P(k+1)`.</li>
                     </ul>
+
+                    <div class="info">
+                        <span class="info-icon">🌉</span>
+                        <div>
+                            <strong>The Bridge Analogy:</strong> A proof is a bridge across a chasm of doubt. The
+                            "Statement" and "Conclusion" are the banks. Each logical step is a plank. If even one plank
+                            is missing or rotten, you can't walk across. You must ensure every plank is securely bolted
+                            to the previous one before moving forward.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Formal Verification:</strong> Systems that must NEVER fail (SpaceX flight software,
+                            cryptographic protocols) are often formally verified using proof-assistants like Coq or
+                            Lean—where the computer checks every "plank" of the bridge for you. This is the ultimate
+                            form of "unit testing" for critical systems.</p>
+                    </div>
                 </div>
             </section>
 
@@ -244,28 +282,26 @@ if is_even:
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "Definitions" },
-                    { title: "Video 5", channel: "Course Reference", vid: "definitions" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Proof Basics",
+                "items": [
+                    { "title": "Mathematical Proofs", "channel": "Ted-Ed", "vid": "OX6X1_7M1v4" },
+                    { "title": "Proof by Induction", "channel": "Dr. Trefor Bazett", "vid": "tO7_T9jMSc0" }
+                ]
+            },
+            {
+                "title": "Mathematical Layout",
+                "items": [
+                    { "title": "Art of the Proof", "channel": "The RSA", "vid": "f5vA68Y9t9o" },
+                    { "title": "LaTeX for Beginners", "channel": "Michelle Krummel", "vid": "VhmkLrEjLsw" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Sentences", prompt: "In proofs, mathematical expressions should be treated as parts of ___.", answer: "speech" },
-            { topic: "Contrapositive", prompt: "To prove P => Q, you can prove Not Q => ___.", answer: "Not P", altAnswers: ["!P", "~P"] },
-            { topic: "Contradiction", prompt: "Proof by contradiction involves assuming the negation and deriving a ___.", answer: "contradiction" },
-            { topic: "Induction", prompt: "The two steps of induction are the ___ case and the inductive step.", answer: "base" },
-            { topic: "QED", prompt: "The symbol used to end a proof is a ___, or Q.E.D.", answer: "square", altAnswers: ["box"] },
-            { topic: "Definitions", prompt: "Good proofs rely heavily on precise ___.", answer: "definitions" },
-            { topic: "Audience", prompt: "Always write for a specific ___ (e.g., your peers).", answer: "audience" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day93_discipline_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day93'], storageKey: 'day93_discipline_v1' });
     </script>
 </body>
 

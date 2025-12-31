@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Strategy
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -104,6 +104,16 @@
                     <div class="info">
                         <strong>Rule:</strong> Do not just read a proof. Re-derive it.
                     </div>
+
+                    <div class="info">
+                        <span class="info-icon">📐</span>
+                        <div>
+                            <strong>The Blueprint Analogy:</strong> Pass 1 was looking at the blueprints of a house. You
+                            know where the kitchen is and how many rooms there are. Pass 2 is **pouring the concrete**
+                            and framing the walls. You can't live in a blueprint; you can only live in a house that has
+                            been physically built. You must "build" the math in your head.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -119,6 +129,16 @@
                     <p>3. Try to prove it yourself for 15 minutes.</p>
                     <p>4. If stuck, look at the first line of the proof. Close the book again.</p>
                     <p>This struggle generates the neural connections. Reading feels easy; learning feels hard.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🎹</span>
+                        <div>
+                            <strong>The Piano Piece Analogy:</strong> Reading a proof is like listening to a recording
+                            of a master pianist. It sounds beautiful and easy. Pass 2 is you sitting at the piano and
+                            trying to play that piece yourself. You will hit wrong notes and get frustrated, but by the
+                            end, **you** are the one playing.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -135,6 +155,25 @@
                         <li><strong>Trivial Example:</strong> The simplest case (e.g., Identity matrix).</li>
                         <li><strong>Pathological Example:</strong> The weird case (e.g., Cantor set).</li>
                     </ul>
+
+                    <div class="info">
+                        <span class="info-icon">🪟</span>
+                        <div>
+                            <strong>The IKEA Analogy:</strong> Pass 1 is looking at the picture on the box of the
+                            bookshelf. Pass 2 is actually **using the Allen wrench** to assemble it. If you just look at
+                            the box, you have nowhere to put your books. If you assemble it yourself, you understand how
+                            it holds together.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Test-Driven Learning (TDL):</strong> In software, we write tests to prove our code
+                            works. In math, <strong>derivation</strong> is your unit test. If you can't derive the
+                            proof, you've failed the test. Treat every logical step like an <strong>assertion</strong>.
+                            If the assertion fails, you stop, debug your understanding, and don't move "to production"
+                            until the test passes.</p>
+                    </div>
                 </div>
             </section>
 
@@ -236,26 +275,26 @@ print("Reduced shape:", reduced.shape)</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "programming" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Depth Strategies",
+                "items": [
+                    { "title": "Expert Learning: The Struggle", "channel": "Matt D'Avella", "vid": "7mscj5D0Fp8" },
+                    { "title": "How to Derive Anything", "channel": "Sprouts", "vid": "tkvQ7iH_2uY" }
+                ]
+            },
+            {
+                "title": "Rigor & CS",
+                "items": [
+                    { "title": "Deep Work and Mathematics", "channel": "Cal Newport", "vid": "itK73R8t-Uo" },
+                    { "title": "Learning by Implementing", "channel": "Fireship", "vid": "LscJscH2V1I" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Pass 2", prompt: "Pass 2 focuses on ___, proofs, and implementation.", answer: "details" },
-            { topic: "Close Book", prompt: "To test understanding, try to reproduce the proof with the book ___.", answer: "closed" },
-            { topic: "Implementation", prompt: "Writing code makes abstract algorithms ___.", answer: "concrete" },
-            { topic: "Examples", prompt: "You should construct standard, trivial, and ___ examples.", answer: "pathological", altAnswers: ["counter"] },
-            { topic: "Struggle", prompt: "The feeling of ___ indicates learning is happening.", answer: "struggle" },
-            { topic: "Rigor", prompt: "Pass 2 is the time for mathematical ___.", answer: "rigor" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day96_discipline_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day96'], storageKey: 'day96_discipline_v1' });
     </script>
 </body>
 

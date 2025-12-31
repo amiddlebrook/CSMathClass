@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                The Big Three
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -201,6 +201,16 @@
                     </div>
                     <p>The Green's Function IS the inverse matrix (with continuous indices).</p>
                     <p>`\int G(x,y) f(y) dy` corresponds to `\sum_j (A^{-1})_{ij} b_j`.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🔊</span>
+                        <div>
+                            <strong>The Soundboard Analogy:</strong> Imagine a soundboard with many sliders. Pushing one
+                            slider (the impulse at `y`) creates a specific sound profile (the Green's Function
+                            `G(x,y)`). To create a complex symphony (the solution `u`), you just sum up (integrate) the
+                            profiles of all the individual sliders you pushed (the source `f`).
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -339,27 +349,21 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 8", channel: "Course Reference", vid: "fundamental" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Partial Differential Equations",
+                "items": [
+                    { "title": "The Heat Equation", "channel": "The Bright Side of Mathematics", "vid": "ToY_oKqA6_s" },
+                    { "title": "The Wave Equation", "channel": "The Bright Side of Mathematics", "vid": "e_L_u2n7Q9o" },
+                    { "title": "Laplace Equation & Harmonic Functions", "channel": "The Bright Side of Mathematics", "vid": "fNk_zzaMoSs" },
+                    { "title": "Green's Functions Introduction", "channel": "The Bright Side of Mathematics", "vid": "T87uH2w-02M" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Heat", prompt: "The heat equation implies ___ speed of propagation.", answer: "infinite" },
-            { topic: "Wave", prompt: "The wave equation implies ___ speed of propagation.", answer: "finite" },
-            { topic: "Equation", prompt: "u_t + c u_x = 0 is the ___ equation.", answer: "transport" },
-            { topic: "Laplace", prompt: "Solutions to Delta u = 0 are called ___ functions.", answer: "harmonic" },
-            { topic: "Definition", prompt: "A Green's function is the impulse ___ of a linear differential operator.", answer: "response" },
-            { topic: "Linear Algebra", prompt: "The Green's function corresponds to the ___ of the operator matrix.", answer: "inverse" },
-            { topic: "Linearity", prompt: "Green's functions are typically used for ___ linear equations.", answer: "inhomogeneous" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day68_pde_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day68'], storageKey: 'day68_pde_v1' });
     </script>
 </body>
 

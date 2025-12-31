@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -106,70 +106,108 @@
                         V(y - x^2) = \{(x, y) \in \mathbb{R}^2 \mid y = x^2\} \quad \text{(Parabola)}
                     </div>
                     <p>Algebra (Polynomials) `\leftrightarrow` Geometry (Shapes).</p>
-                </div>
-            </section>
 
-            <!-- Ideals -->
-            <section class="section" id="ideals">
-                <div class="section-header">
-                    <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Ideals</h2>
-                </div>
-                <div class="section-body">
-                    <p>Given a variety `V`, the set of all polynomials that vanish on `V` forms an
-                        <strong>ideal</strong> `I(V)`.
-                    </p>
-                    <div class="math-block">
-                        I(V) = \{f \in k[x_1, \dots, x_n] \mid f(p) = 0 \forall p \in V\}
-                    </div>
-                    <p>If two polynomials vanish on `V`, their sum does too. If `f` vanishes, `f \cdot g` also vanishes.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Nullstellensatz -->
-            <section class="section" id="nullstellensatz">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Hilbert's Nullstellensatz</h2>
-                </div>
-                <div class="section-body">
-                    <p>The "Zeros Theorem". It establishes a perfect dictionary between geometry and algebra over
-                        algebraically closed fields (like `\mathbb{C}`).</p>
-                    <div class="rule">
-                        Theorem: `I(V(J)) = \sqrt{J}` (The radical of the ideal).
-                    </div>
-                </div>
-            </section>
-
-            <!-- Groebner -->
-            <section class="section" id="groebner">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Groebner Bases</h2>
-                </div>
-                <div class="section-body">
-                    <p>How do we solve systems of polynomial equations computationally? We can't use Gaussian
-                        Elimination (linear only).</p>
-                    <p><strong>Buchberger's Algorithm</strong> computes a Groebner Basis, which is like "Ref Row Echelon
-                        Form" for ideals. It allows us to determine if a system has solutions.</p>
-                </div>
-            </section>
-
-            <!-- Code -->
-            <section class="section" id="code">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Plotting a Variety</h2>
-                </div>
-                <div class="section-body">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Implicit Plot</span>
+                    <div class="info">
+                        <span class="info-icon">👤</span>
+                        <div>
+                            <strong>The Shadow Analogy:</strong> Imagine a complex 3D castle. Its "shadows" on the
+                            ground (2D) are varieties. By looking at enough shadow shapes (polynomials), you can
+                            perfectly understand and reconstruct the castle's geometry.
                         </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">import numpy as np
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Ideals -->
+    <section class="section" id="ideals">
+        <div class="section-header">
+            <div class="section-number">Section 2</div>
+            <h2 class="section-title">Ideals</h2>
+        </div>
+        <div class="section-body">
+            <p>Given a variety `V`, the set of all polynomials that vanish on `V` forms an
+                <strong>ideal</strong> `I(V)`.
+            </p>
+            <div class="math-block">
+                I(V) = \{f \in k[x_1, \dots, x_n] \mid f(p) = 0 \forall p \in V\}
+            </div>
+            <p>If two polynomials vanish on `V`, their sum does too. If `f` vanishes, `f \cdot g` also vanishes.
+            </p>
+
+            <div class="info">
+                <span class="info-icon">🔑</span>
+                <div>
+                    <strong>The Lock and Key Analogy:</strong> An ideal is like a set of **universal keys**. If a key
+                    (polynomial) opens a lock (vanishes at a point), then any bigger key ring containing it (the product
+                    with another polynomial) will also open that same lock. The ideal is the whole "ring of keys" that
+                    work on a specific variety.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nullstellensatz -->
+    <section class="section" id="nullstellensatz">
+        <div class="section-header">
+            <div class="section-number">Section 3</div>
+            <h2 class="section-title">Hilbert's Nullstellensatz</h2>
+        </div>
+        <div class="section-body">
+            <p>The "Zeros Theorem". It establishes a perfect dictionary between geometry and algebra over
+                algebraically closed fields (like `\mathbb{C}`).</p>
+            <div class="rule">
+                Theorem: `I(V(J)) = \sqrt{J}` (The radical of the ideal).
+            </div>
+        </div>
+    </section>
+
+    <!-- Groebner -->
+    <section class="section" id="groebner">
+        <div class="section-header">
+            <div class="section-number">Section 4</div>
+            <h2 class="section-title">Groebner Bases</h2>
+        </div>
+        <div class="section-body">
+            <p>How do we solve systems of polynomial equations computationally? We can't use Gaussian
+                Elimination (linear only).</p>
+            <p><strong>Buchberger's Algorithm</strong> computes a Groebner Basis, which is like "Ref Row Echelon
+                Form" for ideals. It allows us to determine if a system has solutions.</p>
+
+            <div class="info">
+                <span class="info-icon">🧩</span>
+                <div>
+                    <strong>The Sudoku Analogy:</strong> Solving a system of polynomial equations is like a
+                    high-dimensional Sudoku puzzle. A standard system is the "clues." A **Groebner Basis** is the
+                    simplest possible set of clues that force the same solution. Once you have it, the path to the
+                    answer is clear.
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Why This Matters in CS</h3>
+                <p><strong>Robotics:</strong> When a robot arm moves, its joints must satisfy physical constraints
+                    (links, angles) defined by polynomial equations. To find the exact configurations that put the
+                    robot's hand where you want it, algorithms use Groebner bases to solve the "Inverse Kinematics"
+                    problem.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code -->
+    <section class="section" id="code">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <h2 class="section-title">Python: Plotting a Variety</h2>
+        </div>
+        <div class="section-body">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-label">Implicit Plot</span>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 # Plot the variety defined by y^2 = x^3 - x (Elliptic Curve)
@@ -186,76 +224,73 @@ plt.grid(True)
 plt.axhline(0, color='black', lw=1)
 plt.axvline(0, color='black', lw=1)
 plt.show()</code></pre>
-                        </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Videos -->
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
+    <!-- Videos -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <h2 class="section-title">Video Lessons</h2>
+        </div>
+        <div class="section-body">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe id="ytPlayer" src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="video-info">
+                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                        <div class="video-meta" id="videoMeta"></div>
                     </div>
                 </div>
-            </section>
+                <div class="video-list" id="videoList"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Practice -->
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Practice Problems</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
-        </main>
+    <!-- Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <div class="section-number">Section 7</div>
+            <h2 class="section-title">Practice Problems</h2>
+        </div>
+        <div class="section-body">
+            <div class="quiz-controls">
+                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                <button class="btn" id="btnRevealAll">Reveal All</button>
+                <button class="btn" id="btnClear">Clear Inputs</button>
+                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </section>
+    </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 6", channel: "Course Reference", vid: "elimination" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Introduction to Varieties",
+                "items": [
+                    { "title": "What is Algebraic Geometry?", "channel": "The Advanced School", "vid": "G6Nn7U0f0as" },
+                    { "title": "Visualizing Elliptic Curves", "channel": "3Blue1Brown", "vid": "mFVKuFZ2974" },
+                    { "title": "Ideals and Varieties", "channel": "Mathematical", "vid": "0mI6K_7B1X8" }
+                ]
+            },
+            {
+                "title": "Computation & Schemes",
+                "items": [
+                    { "title": "Groebner Bases", "channel": "Simons Institute", "vid": "R2J_78p_0Qk" },
+                    { "title": "The Grothendieck Revolution", "channel": "Quanta Magazine", "vid": "W_v1vH-X5U8" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Variety", prompt: "A variety is the set of solutions to a system of ___ equations.", answer: "polynomial" },
-            { topic: "Ideal", prompt: "The set of polynomials vanishing on a variety forms an ___.", answer: "ideal" },
-            { topic: "Nullstellensatz", prompt: "Hilbert's Nullstellensatz means 'Theorem of ___'.", answer: "Zeros" },
-            { topic: "Field", prompt: "Algebraic geometry works best over an algebraically ___ field.", answer: "closed" },
-            { topic: "Basis", prompt: "Groebner Bases generalize Gaussian ___.", answer: "elimination" },
-            { topic: "Elliptic", prompt: "y^2 = x^3 + ax + b defines an ___ curve.", answer: "elliptic" },
-            { topic: "Dimension", prompt: "The dimension of a variety corresponds to the 'degrees of ___'.", answer: "freedom" },
-            { topic: "Zariski", prompt: "The ___ topology is the standard topology in algebraic geometry.", answer: "Zariski" },
-            { topic: "Scheme", prompt: "Grothendieck generalized varieties to ___.", answer: "schemes" },
-            { topic: "Radical", prompt: "I(V(J)) is the ___ of J.", answer: "radical" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day89_alg_geom_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day89'], storageKey: 'day89_alg_geom_v1' });
     </script>
 </body>
 

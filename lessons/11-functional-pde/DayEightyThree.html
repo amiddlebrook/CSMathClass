@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -106,6 +106,17 @@
                     </div>
                     <p>For double precision (64-bit), machine epsilon `\epsilon_{mach} \approx 10^{-16}`. This small
                         error can explode.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🔭</span>
+                        <div>
+                            <strong>The Telescope Analogy:</strong> Imagine looking through a telescope. If you nudge
+                            the eyepiece by just 1 millimeter, the view of a star millions of miles away might shift by
+                            thousands of miles. A "Well-Conditioned" problem is like looking at a nearby tree: a small
+                            nudge barely changes the view. An "Ill-Conditioned" problem is the telescope: the tiniest
+                            error at the input (machine precision) creates a massive, catastrophic error at the output.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -251,29 +262,22 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "Numerical Stability Foundations",
+                "items": [
+                    { "title": "Floating Point Numbers", "channel": "Computerphile", "vid": "PZRI1IfStY0" },
+                    { "title": "Condition Number & Matrix Stability", "channel": "Mathematical Optimization", "vid": "G3yK7rIiy4M" },
+                    { "title": "Catastrophic Cancellation", "channel": "NPTEL", "vid": "rX0L0-I6H_o" },
+                    { "title": "Backward vs Forward Error", "channel": "Numerical Analysis", "vid": "_VgeFp-mH9k" },
+                    { "title": "Solving Linear Systems: Stability", "channel": "MIT OpenCourseWare", "vid": "N_z-TshjCOI" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Floats", prompt: "Machine epsilon is roughly 10 power minus ___ for doubles.", answer: "16" },
-            { topic: "Cond", prompt: "If cond(A) = 1e6, we essentially lose ___ digits of accuracy.", answer: "6" },
-            { topic: "Singular", prompt: "A singular matrix has a condition number of ___.", answer: "infinity" },
-            { topic: "Stability", prompt: "A ___ stable algorithm gives the exact answer to a nearby problem.", answer: "backward" },
-            { topic: "Cancellation", prompt: "Catastrophic ___ occurs when subtracting two nearly equal numbers.", answer: "cancellation" },
-            { topic: "Hilbert", prompt: "The ___ matrix is famous for being extremely ill-conditioned.", answer: "Hilbert" },
-            { topic: "Norms", prompt: "Condition number is the product of norms of A and ___.", answer: "A inverse", altAnswers: ["inverse", "A^-1"] },
-            { topic: "SVD", prompt: "Condition number is ratio of max singular value to ___.", answer: "min" },
-            { topic: "Precision", prompt: "IEEE 754 defines standard ___ point arithmetic.", answer: "floating" },
-            { topic: "Error", prompt: "Relative error is absolute error divided by the ___ value.", answer: "true" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day83_numerical_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day83'], storageKey: 'day83_numerical_v1' });
     </script>
 </body>
 

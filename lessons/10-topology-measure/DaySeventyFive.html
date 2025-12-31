@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Incompleteness
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -101,8 +101,19 @@
                 </div>
                 <div class="section-body">
                     <p>Propositional Logic: `P \implies Q`. (Boolean).</p>
-                    <p>First-Order Logic: `\forall x \exists y, P(x, y)`. Adds predicates, quantifiers, and objects.</p>
                     <p>It is expressive enough to formalize most of mathematics (ZFC Set Theory).</p>
+
+                    <div class="info">
+                        <span class="info-icon">🏛️</span>
+                        <div>
+                            <strong>The Blueprint Analogy:</strong> Mathematical logic is like the blueprint for a
+                            building (mathematics). Propositional logic tells you how to connect parts (AND, OR).
+                            First-Order Logic gives you the materials (objects) and how to quantify them (ALL bricks,
+                            SOME windows). You can build an entire city of math on these blueprints, but Gödel showed
+                            that no matter how complex your blueprint is, there will always be a part of the city you
+                            can see but can't prove exists just by looking at the drawing.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -239,24 +250,20 @@ print(s.format(chr(39), s, chr(10)))
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "Mathematical Logic",
+                "items": [
+                    { "title": "Mathematical Logic Introduction", "channel": "The Bright Side of Mathematics", "vid": "fNk_zzaMoSs" },
+                    { "title": "Gödel's Incompleteness Theorem", "channel": "Computerphile", "vid": "O4ndIDcDSGc" },
+                    { "title": "Math's Existential Crisis", "channel": "Veritasium", "vid": "HeQX2H1qVJg" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "FOL", prompt: "First Order Logic allows quantifying over ___.", answer: "objects", altAnswers: ["variables"] },
-            { topic: "Soundness", prompt: "Soundness means if a statement is provable, it is ___.", answer: "true" },
-            { topic: "Completeness", prompt: "Gödel's Completeness Theorem links syntax (proofs) with ___.", answer: "semantics", altAnswers: ["truth"] },
-            { topic: "Incompleteness", prompt: "Any consistent system capable of arithmetic contains statements that are true but ___.", answer: "unprovable" },
-            { topic: "Self-Reference", prompt: "Gödel's proof typically relies on self-___.", answer: "reference" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day75_logic_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day75'], storageKey: 'day75_logic_v1' });
     </script>
 </body>
 

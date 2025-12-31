@@ -113,8 +113,36 @@
     </nav>
 
     <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 98 · Final Review
+        </div>
         <h1>Flashcard Review</h1>
         <p class="hero-desc">Spaced repetition is key to mastery. Select a section to review randomized concepts.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~60 min review
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                2,500+ total questions
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Spaced Repetition
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -122,7 +150,9 @@
             <nav class="toc">
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
-                    <li><a href="#review" class="toc-link active">Flashcards</a></li>
+                    <li><a href="#review" class="toc-link active">1. Flashcards</a></li>
+                    <li><a href="#mindset" class="toc-link">2. Review Mindset</a></li>
+                    <li><a href="#cs" class="toc-link">3. Why This Matters in CS</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -161,6 +191,58 @@
                 </div>
                 <p style="text-align: center; margin-top: 16px; color: var(--text-muted);" id="counter">0 / 0</p>
             </div>
+
+            <!-- Mindset -->
+            <section class="section" id="mindset">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Review Mindset</h2>
+                </div>
+                <div class="section-body">
+                    <p>The final days are for <strong>refinement</strong>. You have the knowledge; now you must ensure
+                        it can be retrieved instantly under pressure.</p>
+
+                    <div class="info">
+                        <span class="info-icon">⚔️</span>
+                        <div>
+                            <strong>The Refining the Sword Analogy:</strong> For 97 days, you have been forging the
+                            blade. You've hammered the steel (the math) and tempered it (the code). Day 98 is the
+                            **final polishing**. A dull sword can still cut, but a sharp one cuts with zero resistance.
+                            You want the math to feel like it's "at your fingertips."
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">🎭</span>
+                        <div>
+                            <strong>The Performance Review Analogy:</strong> Think of this as the final dress rehearsal
+                            before the curtain rises. Musicians don't learn the notes on stage; they learn them so well
+                            in the practice room that they can focus on the **interpretation** on stage. You are
+                            automating the "notes" of math so you can focus on the "music" of problem-solving.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CS -->
+            <section class="section" id="cs">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Why This Matters in CS</h2>
+                </div>
+                <div class="section-body">
+                    <p><strong>Cache Warming:</strong> In high-performance systems, we "warm the cache" by loading the
+                        most important data into RAM before the first request hits. Reviewing flashcards is
+                        <strong>warming your mental cache</strong>. When the exam (the request) hits, you don't want to
+                        be fetching from the "disk" of long-term memory; you want the data in L1 cache (active recall).
+                    </p>
+
+                    <p><strong>Regression Testing:</strong> Every time you learn something new, you risk forgetting
+                        something old. Spaced repetition is your <strong>regression suite</strong> for your brain. It
+                        ensures that the new "features" you've added (Day 97) haven't broken the "legacy code" (Day 1).
+                    </p>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -234,15 +316,15 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 5", channel: "Course Reference", vid: "HZGCoVF3YvM" }
+                "title": "Spaced Repetition & Mastery",
+                "items": [
+                    { "title": "How to remember anything", "channel": "Ali Abdaal", "vid": "pT_vO8N2h5s" },
+                    { "title": "The Science of Better Learning", "channel": "Sprouts", "vid": "v0YEaeIClKY" }
                 ]
             }
         ];
-        initLesson({ videos: VIDEO_GROUPS, storageKey: 'day98_v1' });
+        initLesson({ videos: VIDEO_GROUPS, storageKey: 'day98_discipline_v1' });
     </script>
-</body>
 </body>
 
 </html>

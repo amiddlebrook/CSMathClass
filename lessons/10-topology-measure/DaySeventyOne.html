@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Reductions
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -138,6 +138,17 @@
                     <p>Example for `E_{TM}`: Construct a machine `M'` that ignores its input and simulates `M` on `w`.
                         If `M` accepts, `M'` accepts everything (non-empty). If `M` rejects, `M'` accepts nothing
                         (empty). A solver for Empty would solve Halting.</p>
+
+                    <div class="info">
+                        <span class="info-icon">📦</span>
+                        <div>
+                            <strong>The Paradox Box Analogy:</strong> A Reduction is like a box that claims to solve a
+                            difficult problem (like "Is this program empty?") by secretly calling a known impossible
+                            machine (like the "Halting Problem Solver") inside it. If you could build such a box, you
+                            would have solved the impossible. Since we know the internal machine is impossible to build,
+                            the outer box must also be impossible to build.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -268,27 +279,21 @@ def M_prime(x):
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "uncountable" },
-                    { title: "Video 7", channel: "Course Reference", vid: "Non-trivial" },
-                    { title: "Video 9", channel: "Course Reference", vid: "undecidable" },
-                    { title: "Video 10", channel: "Course Reference", vid: "non-trivial" }
+                "title": "Decidability & Reductions",
+                "items": [
+                    { "title": "Countability & Diagonalization", "channel": "Neso Academy", "vid": "dO_5XF_56kU" },
+                    { "title": "Introduction to Reductions", "channel": "Neso Academy", "vid": "A5_mI-F1HqA" },
+                    { "title": "Rice's Theorem", "channel": "Neso Academy", "vid": "p_g-Y-HlE7A" },
+                    { "title": "Post Correspondence Problem (PCP)", "channel": "Neso Academy", "vid": "mndYmJ7939M" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Countability", prompt: "The set of TMs is countable, but the set of languages is ___.", answer: "uncountable" },
-            { topic: "Method", prompt: "To prove undecidability, we typically use a ___ from a known undecidable problem.", answer: "reduction" },
-            { topic: "Rice", prompt: "Rice's Theorem applies to any ___ property of the language.", answer: "non-trivial", altAnswers: ["nontrivial"] },
-            { topic: "PCP", prompt: "The Post Correspondence Problem involves matching strings on ___.", answer: "dominos", altAnswers: ["tiles"] },
-            { topic: "ATM", prompt: "A_TM is the problem of determining if a TM ___ a given string.", answer: "accepts" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day71_complexity_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day71'], storageKey: 'day71_complexity_v1' });
     </script>
 </body>
 

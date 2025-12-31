@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Y Combinator
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -107,6 +107,17 @@
                         <li><strong>Application:</strong> `(M N)` (Invoke M with N)</li>
                     </ul>
                     <p>That's it. No numbers, no booleans, no loops. We build them all.</p>
+
+                    <div class="info">
+                        <span class="info-icon">📦</span>
+                        <div>
+                            <strong>The Magic Box Factory Analogy:</strong> Lambda Calculus is like a factory that makes
+                            magic boxes (functions). These boxes don't hold things; they only take other boxes as input
+                            and spit out a new box as output. Even a "number" in this factory is just a box that takes a
+                            box and applies it a certain number of times. It's the ultimate "minimalist" programming
+                            language where "doing" is the only data type.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -258,28 +269,20 @@ print(f"5! using Z: {FACT(5)}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "combinators" },
-                    { title: "Video 3", channel: "Course Reference", vid: "computation" },
-                    { title: "Video 6", channel: "Course Reference", vid: "Computation" },
-                    { title: "Video 7", channel: "Course Reference", vid: "Equivalence" },
-                    { title: "Video 10", channel: "Course Reference", vid: "application" }
+                "title": "Lambda Calculus",
+                "items": [
+                    { "title": "Lambda Calculus Introduction", "channel": "Computerphile", "vid": "eis11j_iGMs" },
+                    { "title": "The Y Combinator", "channel": "Computerphile", "vid": "9ZeTjXUiyfU" },
+                    { "title": "Functional Programming Basics", "channel": "Computerphile", "vid": "rlM79u9L3K8" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Functions", prompt: "In Lambda Calculus, everything is a ___.", answer: "function" },
-            { topic: "Computation", prompt: "Beta Reduction is the process of substitution and ___.", answer: "simplification", altAnswers: ["computation", "application"] },
-            { topic: "Recursion", prompt: "The ___ combinator allows for recursion.", answer: "Y" },
-            { topic: "Church", prompt: "Church numerals represent numbers as repeated function ___.", answer: "applications" },
-            { topic: "Equivalence", prompt: "Lambda Calculus is equivalent in power to ___ Machines.", answer: "Turing" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day76_lambda_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day76'], storageKey: 'day76_lambda_v1' });
     </script>
 </body>
 

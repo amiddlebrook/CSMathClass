@@ -62,10 +62,10 @@ Day,File,Lines,Sections,InfoBlocks,SimpleAnalogies,CodeBlocks,Videos,ValidVideos
 61,DaySixtyOne.html,303,8,1,1,1,0,0,0,"",50,25,20,true
 62,DaySixtyTwo.html,404,13,1,1,1,0,0,0,"",95,25,20,true
 63,DaySixtyThree.html,294,8,1,1,1,0,0,0,"",45,25,20,true
-64,DaySixtyFour.html,304,8,0,0,1,2,2,0,"",50,0,20,true
-65,DaySixtyFive.html,291,8,0,0,1,3,3,0,"",50,0,20,true
-66,DaySixtySix.html,326,6,1,0,1,5,5,0,"",50,10,20,true
-67,DaySixtySeven.html,298,6,0,0,0,5,5,0,"",45,10,20,true
+64,DaySixtyFour.html,306,8,1,1,1,0,0,0,"",50,25,20,true
+65,DaySixtyFive.html,294,8,1,2,1,0,0,0,"",50,25,20,true
+66,DaySixtySix.html,300,6,2,1,1,0,0,0,"",50,25,20,true
+67,DaySixtySeven.html,285,6,1,1,0,0,0,0,"",45,25,20,true
 68,DaySixtyEight.html,366,11,0,0,1,2,2,0,"",95,0,20,true
 69,DaySixtyNine.html,387,12,0,1,1,1,1,0,"",90,0,20,true
 70,DaySeventy.html,310,8,0,0,1,4,4,0,"",50,0,20,true

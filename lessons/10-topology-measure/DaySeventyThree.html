@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Cook-Levin
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -108,6 +108,17 @@
                     </ol>
                     <p>If you find a polynomial algorithm for `B`, you solve ALL problems in NP efficiently, proving
                         `P=NP`.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🔌</span>
+                        <div>
+                            <strong>The Universal Adapter Analogy:</strong> An NP-Complete problem is like a "Universal
+                            Power Adapter." If you have a machine that can plug into this one specific adapter (solve
+                            the NPC problem), you can power *every single* electronic device in the room (solve every
+                            single problem in NP). Every NP problem can be "plugged into" an NPC problem through a
+                            polynomial-time reduction.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -268,24 +279,21 @@ print(f"Solution: {sol}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "NP-Completeness",
+                "items": [
+                    { "title": "Introduction to NP-Completeness", "channel": "Neso Academy", "vid": "d0S4vY_2XCI" },
+                    { "title": "The Cook-Levin Theorem (SAT)", "channel": "Neso Academy", "vid": "z8ndNfI_m5k" },
+                    { "title": "SAT to 3-SAT Reduction", "channel": "Neso Academy", "vid": "Q_pXvU_uI_8" },
+                    { "title": "Traveling Salesperson Problem", "channel": "Computerphile", "vid": "GiDsjIBOVoA" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Hardest", prompt: "NP-Complete problems are the ___ problems in NP.", answer: "hardest" },
-            { topic: "Cook-Levin", prompt: "The Cook-Levin theorem proved that ___ is NP-Complete.", answer: "SAT", altAnswers: ["satisfiability"] },
-            { topic: "Time", prompt: "Reductions used for NP-Completeness must run in ___ time.", answer: "polynomial" },
-            { topic: "2-SAT", prompt: "Unlike 3-SAT, 2-SAT is solvable in ___ time.", answer: "polynomial", altAnswers: ["linear"] },
-            { topic: "Logic", prompt: "If P = NP, then every NP-Complete problem is solvable in ___ time.", answer: "polynomial" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day73_npc_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day73'], storageKey: 'day73_npc_v1' });
     </script>
 </body>
 

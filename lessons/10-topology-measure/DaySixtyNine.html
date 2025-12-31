@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Regular Languages
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -116,6 +116,17 @@
                     </ul>
                     <p>It accepts a string `w` if the sequence of states ends in `F`. The set of all strings accepted by
                         a DFA is a <strong>Regular Language</strong>.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🪙</span>
+                        <div>
+                            <strong>The Vending Machine Analogy:</strong> A DFA is just like a simple vending machine.
+                            It starts in an "Idle" state. You insert a coin (input symbol), and it transitions to the
+                            "Waiting for Selection" state. If you try to press a button without enough money, it might
+                            transition to a "Reject" state. There is no memory of *how* you got there, only *where* you
+                            are now.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -362,25 +373,28 @@ print(f"Parser 'aabbb': {SimpleParser('aabbb').parse()}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "Finite Automata",
+                "items": [
+                    { "title": "DFA Introduction", "channel": "Neso Academy", "vid": "40i4PKpM0HY" },
+                    { "title": "NFA vs DFA", "channel": "Neso Academy", "vid": "ehy0j0Skp-A" },
+                    { "title": "Regular Expressions", "channel": "Neso Academy", "vid": "pByS9p_6fT8" },
+                    { "title": "Pumping Lemma for Regular Languages", "channel": "Computerphile", "vid": "Ty9K_7ALFbg" }
+                ]
+            },
+            {
+                "title": "Context-Free Languages",
+                "items": [
+                    { "title": "Context Free Grammars", "channel": "Neso Academy", "vid": "5_tfVe7KZ3Q" },
+                    { "title": "Pushdown Automata (PDA)", "channel": "Neso Academy", "vid": "vX-S6m8F-S0" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "DFA", prompt: "A DFA is in exactly ___ state at a time.", answer: "one" },
-            { topic: "NFA", prompt: "Every NFA can be converted to an equivalent ___.", answer: "DFA" },
-            { topic: "Pumping Lemma", prompt: "If a language fails the pumping lemma, it is ___ regular.", answer: "not" },
-            { topic: "Cost", prompt: "Deterministic PDAs are ___ powerful than Nondeterministic PDAs.", answer: "less" },
-            { topic: "Parsing", prompt: "Recursive Descent is a ___ parser.", answer: "top-down", altAnswers: ["top down"] },
-            { topic: "Closure", prompt: "Regular languages are closed under union, intersection, and ___.", answer: "complement" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day69_automata_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day69'], storageKey: 'day69_automata_v1' });
     </script>
 </body>
 

@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -104,6 +104,18 @@
                         X_k = \sum_{n=0}^{N-1} x_n \cdot e^{-i 2\pi k n / N}
                     </div>
                     <p>Naively, this is a matrix-vector product, taking `O(N^2)` time.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🥤</span>
+                        <div>
+                            <strong>The Smoothie Analogy:</strong> Imagine a **Smoothie**. You know it contains
+                            strawberries, bananas, and yogurt, but you can't see the individual fruits anymore. The
+                            Fourier Transform is a machine that takes the smoothie and spits out the original
+                            **recipe**: exactly how many strawberries and bananas went into it. It changes your
+                            perspective from looking at the "time" (the blended taste) to the "frequency" (the
+                            individual ingredients).
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -239,30 +251,22 @@ print(f"Result Size: {conv_fft.shape}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "Convolution" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Fourier Transform Foundations",
+                "items": [
+                    { "title": "But what is the Fourier Transform? A visual introduction.", "channel": "3Blue1Brown", "vid": "spUNpyF58BY" },
+                    { "title": "The Fast Fourier Transform (FFT)", "channel": "Socratica", "vid": "n07W9pY_M4M" },
+                    { "title": "The most important algorithm in history?", "channel": "Veritasium", "vid": "nmgFG7PUHfo" },
+                    { "title": "Cooley-Tukey FFT Algorithm", "channel": "Numerical Methods", "vid": "E8HeXG69a6U" },
+                    { "title": "Convolution & Filtering with FFT", "channel": "Steve Brunton", "vid": "mB7Iun7_iX4" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Complexity", prompt: "Naive DFT is O(N^2), FFT is O(___).", answer: "N log N", altAnswers: ["NlogN", "n log n"] },
-            { topic: "Strategy", prompt: "FFT uses a ___ and conquer strategy.", answer: "divide" },
-            { topic: "Recursion", prompt: "The FFT splits the problem into ___ and odd indices.", answer: "even" },
-            { topic: "Convolution", prompt: "Convolution in time is ___ in frequency.", answer: "multiplication" },
-            { topic: "Roots", prompt: "FFT relies on symmetries of the Roots of ___.", answer: "unity" },
-            { topic: "Inverse", prompt: "The Inverse FFT is almost identical, but with a sign change in the ___.", answer: "exponent" },
-            { topic: "Polynomial", prompt: "FFT is equivalent to fast ___ multiplication.", answer: "polynomial" },
-            { topic: "Physics", prompt: "In Physics, frequency domain is often called ___ space (k-space).", answer: "reciprocal" },
-            { topic: "Aliasing", prompt: "Sampling below the Nyquist rate causes ___.", answer: "aliasing" },
-            { topic: "Windowing", prompt: "To reduce spectral leakage, we apply a ___ function.", answer: "window" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day85_fft_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day85'], storageKey: 'day85_fft_v1' });
     </script>
 </body>
 

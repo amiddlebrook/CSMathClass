@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Public Key
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -117,6 +117,17 @@
                     <p>Uses two keys: Public `PK` (Encryption) and Private `SK` (Decryption).</p>
                     <p>Anyone can lock the box (Pub), only you can open it (Priv).</p>
                     <p>Relies on One-Way Functions: Easy to compute `f(x)`, hard to find `x` given `y=f(x)`.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🔐</span>
+                        <div>
+                            <strong>The Padlock Analogy:</strong> Public key cryptography is like a **padlock**. Alice
+                            sends anyone who wants to talk to her an <em>open</em> padlock (Public Key). Anyone can put
+                            a message in a box and snap it shut with that lock (Encrypt). But once it's locked, even the
+                            person who snapped it shut can't open it again! Only Alice, who holds the physical **key**
+                            (Private Key), can actually see what's inside.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -260,25 +271,22 @@ assert m == m_dec</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "information" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Cryptography Foundations",
+                "items": [
+                    { "title": "Public Key Cryptography (RSA)", "channel": "Computerphile", "vid": "JD7227yxncA" },
+                    { "title": "Diffie-Hellman Key Exchange", "channel": "Art of the Problem", "vid": "YEBfamv-_do" },
+                    { "title": "Zero Knowledge Proofs", "channel": "Computerphile", "vid": "HCPwdwa8-yI" },
+                    { "title": "The One Time Pad", "channel": "Computerphile", "vid": "f4idjM3Gz80" },
+                    { "title": "Hashing Algorithms", "channel": "Computerphile", "vid": "2B5L-SsvmsQ" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Symmetric", prompt: "Symmetric encryption uses the ___ key for encryption and decryption.", answer: "same" },
-            { topic: "RSA", prompt: "RSA security relies on the difficulty of ___ large numbers.", answer: "factoring" },
-            { topic: "Diffie-Hellman", prompt: "Diffie-Hellman relies on the ___ Logarithm problem.", answer: "discrete" },
-            { topic: "Keys", prompt: "In public key crypto, the ___ key is shared with everyone.", answer: "public" },
-            { topic: "ZK", prompt: "Zero-Knowledge proofs prove knowledge without revealing the ___.", answer: "secret", altAnswers: ["concept", "information"] },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day79_crypto_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day79'], storageKey: 'day79_crypto_v1' });
     </script>
 </body>
 

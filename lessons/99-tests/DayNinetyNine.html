@@ -26,8 +26,37 @@
     </nav>
 
     <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 99 · Practice
+        </div>
         <h1>Final Practice Test</h1>
-        <p class="hero-desc">A comprehensive test covering 5% of the curriculum questions.</p>
+        <p class="hero-desc">A comprehensive test covering 5% of the curriculum questions. Use this to gauge your
+            readiness.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~90 min test
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                125+ questions
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Simulation
+            </div>
+        </div>
     </header>
 
     <div class="main-layout">
@@ -35,7 +64,8 @@
             <nav class="toc">
                 <div class="toc-title">Test Status</div>
                 <ul class="toc-list">
-                    <li><a href="#test" class="toc-link active">Questions</a></li>
+                    <li><a href="#test" class="toc-link active">1. Practice Test</a></li>
+                    <li><a href="#mindset" class="toc-link">2. Deep Testing</a></li>
                 </ul>
             </nav>
         </aside>
@@ -45,11 +75,60 @@
             <div style="text-align:center; margin-top:32px;">
                 <button class="btn btn-primary" id="btnCheckAll">Submit Test</button>
             </div>
+
+            <!-- Mindset -->
+            <section class="section" id="mindset">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Deep Testing</h2>
+                </div>
+                <div class="section-body">
+                    <p>Testing is not a hurdle; it is a <strong>diagnostic tool</strong>. Knowing where you are weak
+                        today ensures you are strong tomorrow.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🏗️</span>
+                        <div>
+                            <strong>The Stress Test Analogy:</strong> Civil engineers don't build a bridge and just
+                            "hope" it holds. They perform stress tests—applying loads far beyond what the bridge will
+                            actually face in production. Day 99 is your stress test. We want to find the crack in the
+                            foundation **now**, while it's still a practice run, not during the final exam.
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">✈️</span>
+                        <div>
+                            <strong>The Flight Simulator Analogy:</strong> Pilots spend hundreds of hours in a simulator
+                            before they touch a real cockpit. In the simulator, they practice for engine failures,
+                            storms, and crosswinds. This practice test is your flight simulator. If you "crash" here,
+                            you just reset and learn. It builds the **muscle memory** needed for the real thing.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Staging vs Production:</strong> You never deploy code directly to billions of users
+                            (The Final Exam) without first running it in a <strong>Staging Environment</strong>. Day 99
+                            is Staging. We check for regressions, verify that the integrated components (from Calculus
+                            to TCS) play well together, and ensure the "environment" (your mental state) is stable.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
     <script>
-        initLesson({}); // Just init toggles
+        const VIDEO_GROUPS = [
+            {
+                "title": "Preparation",
+                "items": [
+                    { "title": "The Mindset for Finals", "channel": "Thomas Frank", "vid": "G_KzX_N4-RE" },
+                    { "title": "How to handle exam stress", "channel": "Ali Abdaal", "vid": "K-ssUVyfn_w" }
+                ]
+            }
+        ];
+        initLesson({ videos: VIDEO_GROUPS, storageKey: 'day99_discipline_v1' });
 
         // Custom Test Logic
         const questions = window.EXAM_LOGIC.getTest();

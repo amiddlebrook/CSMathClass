@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Holomorphy
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -107,6 +107,14 @@
                         exists:
                         <br>
                         `\lim_{h \to 0} \frac{f(z_0+h) - f(z_0)}{h}`
+                    </div>
+                    <div class="info">
+                        <strong>💿 Simple:</strong> The "Hologram" Analogy.
+                        <br>• In Complex Analysis, functions are incredibly rigid.
+                        <br>• If you know the values of a holomorphic function on the <em>boundary</em> of a region
+                        (like the surface of a hologram), you know everything about the <em>inside</em> (Cauchy Integral
+                        Formula).
+                        <br>• It's like reconstruction: The detailed 3D interior is fully encoded on the 2D surface.
                     </div>
                 </div>
             </section>
@@ -278,26 +286,22 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 4", channel: "Course Reference", vid: "holomorphic" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Complex Analysis",
+                "items": [
+                    { "title": "Complex Analysis Overview", "channel": "The Bright Side of Mathematics", "vid": "_5p0EP8zOe4" },
+                    { "title": "Holomorphic Functions", "channel": "The Bright Side of Mathematics", "vid": "s_t2hQ_g2_Y" },
+                    { "title": "Cauchy Integral Formula", "channel": "The Bright Side of Mathematics", "vid": "R6G6Ua2GZgE" },
+                    { "title": "Winding Numbers and Contour Integrals", "channel": "3Blue1Brown", "vid": "b7FxPsqfkOY" },
+                    { "title": "Complex Functions (Domain Coloring)", "channel": "Mathemaniac", "vid": "NtoIXhUgqSk" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Differentiation", prompt: "A complex differentiable function is called ___.", answer: "holomorphic" },
-            { topic: "CR Equations", prompt: "The real and imaginary parts of f(z) must satisfy the ___ equations.", answer: "Cauchy Riemann", altAnswers: ["Cauchy-Riemann"] },
-            { topic: "Analytic", prompt: "Every holomorphic function is ___ (has a power series).", answer: "analytic" },
-            { topic: "Integral", prompt: "The integral of a holomorphic function over a closed loop in a simply connected domain is ___.", answer: "0" },
-            { topic: "Construction", prompt: "Cauchy's Integral Formula relates values inside a loop to values ___ the loop.", answer: "on" },
-            { topic: "Geometry", prompt: "Holomorphic maps preserve ___ locally (conformal).", answer: "angles" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day64_complex1_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day64'], storageKey: 'day64_complex1_v1' });
     </script>
 </body>
 

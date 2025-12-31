@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -106,6 +106,16 @@
                     <p>This means any mathematical proof (of length `L`) can be rewritten in a format where a verifier
                         can check it with 99% confidence by looking at only a <strong>constant</strong> number of bits!
                     </p>
+
+                    <div class="info">
+                        <span class="info-icon">🔍</span>
+                        <div>
+                            <strong>The Spot-Check Analogy:</strong> Imagine a massive dictionary where you're told
+                            every single word is spelled correctly. You don't have time to read the whole thing! A PCP
+                            is a way of writing that dictionary so that if even **one** word is wrong, you'll find it
+                            99% of the time by picking just **three random pages** to spot-check.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -137,6 +147,17 @@
                     </div>
                     <p>This means interactive proofs are incredibly powerful—able to prove things like "this Chess
                         position is a win" (in principle).</p>
+
+                    <div class="info">
+                        <span class="info-icon">🌽</span>
+                        <div>
+                            <strong>The Hidden Prize Analogy:</strong> Imagine you claim there is a prize hidden in a
+                            massive corn maze (PSPACE). A standard proof is giving someone a map. An **interactive
+                            proof** is the someone shouting questions to you while they walk ("Which way at the fork?")
+                            and you answering. If you can lead them to the prize every time, you've proved you know the
+                            maze without ever giving them the map.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -151,6 +172,25 @@
                     </p>
                     <p>Example: Proving you know a graph coloring without revealing the colors. Crucial for crypto
                         (Z-Cash, Authentication).</p>
+
+                    <div class="info">
+                        <span class="info-icon">🕵️</span>
+                        <div>
+                            <strong>The Color-Blind Friend Analogy:</strong> Imagine you have two identical balls, but
+                            you say one is red and one is green. Your color-blind friend doesn't believe you. You let
+                            them put the balls behind their back, switch them (or not), and show them to you. If you can
+                            tell every single time if they switched, you've proved you can see the color **without**
+                            explaining what "red" or "green" actually means.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>zk-SNARKs and Blockchains:</strong> Zero-Knowledge Succinct Non-interactive Arguments
+                            of Knowledge (zk-SNARKs) allow users to prove they have enough money for a transaction or
+                            have followed protocol rules **without** revealing their balance, identity, or transaction
+                            history. This is the cornerstone of privacy-focused blockchains like Zcash.</p>
+                    </div>
                 </div>
             </section>
 
@@ -238,32 +278,26 @@ print("Satisfied?", is_satisfied(clauses, sol))</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "Numberphile" },
-                    { title: "Video 7", channel: "Course Reference", vid: "approximate" },
-                    { title: "Video 9", channel: "Course Reference", vid: "interactive" },
-                    { title: "Video 10", channel: "Course Reference", vid: "video-title" }
+                "title": "PCP & Hardness",
+                "items": [
+                    { "title": "The PCP Theorem Explained", "channel": "Simons Institute", "vid": "7pP1_e_S6nE" },
+                    { "title": "Interactive Proofs", "channel": "MIT OCW", "vid": "k9W5m8X_I2s" }
+                ]
+            },
+            {
+                "title": "Zero Knowledge",
+                "items": [
+                    { "title": "Zero Knowledge Proofs", "channel": "Computerphile", "vid": "H5mJ1n_m_LQ" },
+                    { "title": "Ali Baba's Cave", "channel": "Explained", "vid": "5ovdoxnfFVc" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "PCP", prompt: "PCP(log n, 1) equals ___.", answer: "NP" },
-            { topic: "Verifier", prompt: "A PCP verifier reads only a ___ number of bits.", answer: "constant" },
-            { topic: "Approx", prompt: "PCP implies that ___ solutions are hard to find.", answer: "approximate" },
-            { topic: "IP", prompt: "IP equals ___.", answer: "PSPACE" },
-            { topic: "ZK", prompt: "Zero Knowledge Proofs reveal ___.", answer: "nothing", altAnswers: ["zero knowledge", "no info"] },
-            { topic: "Gap", prompt: "PCP creates a ___ in the objective value between satisfiable and unsatisfiable instances.", answer: "gap" },
-            { topic: "Graph", prompt: "Graph Non-Isomorphism has an ___ proof.", answer: "interactive" },
-            { topic: "SAT", prompt: "If PCP holds, then max-3SAT is hard to approximate within a factor of ___.", answer: "constant" },
-            { topic: "Randomness", prompt: "The verifier must use ___ to check the proof.", answer: "randomness" },
-            { topic: "Length", prompt: "The PCP proof is polynomially ___ than the original proof.", answer: "longer" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day90_tcs2_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day90'], storageKey: 'day90_tcs2_v1' });
     </script>
 </body>
 

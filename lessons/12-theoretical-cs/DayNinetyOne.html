@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Reflective Exercises
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,6 +105,15 @@
                         <strong>Why?</strong> Real insights come from depth. You cannot contribute to the boundary of
                         knowledge without going deep.
                     </div>
+
+                    <div class="info">
+                        <span class="info-icon">🛢️</span>
+                        <div>
+                            <strong>The Oil Well Analogy (Depth):</strong> Broad knowledge is like scanning the ground
+                            for oil. You find many interesting spots. But to actually get the "energy" (insights), you
+                            have to stop moving and **drill a deep well** in one specific spot.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -123,6 +132,16 @@
                     </ul>
                     <p>Also consider <strong>Personal Fit</strong>: What problems do you think about in the shower? What
                         feels like play to you but work to others?</p>
+
+                    <div class="info">
+                        <span class="info-icon">🗺️</span>
+                        <div>
+                            <strong>The Map and the Territory (Breadth):</strong> Broad knowledge gives you a **map** of
+                            the entire world. But to actually live and survive, you need to know the **territory** of
+                            your own backyard perfectly. You need the map to know where to go, but you need the
+                            territory knowledge to build anything.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -169,6 +188,25 @@
                 <div class="section-body">
                     <p>Science is social. Attend seminars (even if you don't understand). Talk to people. The "invisible
                         college" is where the real knowledge transfer happens.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🍷</span>
+                        <div>
+                            <strong>The Dinner Party Analogy:</strong> Being a researcher is like arriving late to a
+                            massive dinner party. Everyone has been talking for hours. You can't just start shouting;
+                            you have to **listen quietly** for a while, understand the context of the conversation, and
+                            then make a meaningful contribution.
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Career Growth (Junior to Senior):</strong> A Junior Engineer is often a broad
+                            generalist who can do many tasks but needs constant guidance. A Senior Engineer or Principal
+                            Architect is someone who has "drilled deep" into specific systems (Distributed Systems,
+                            Compilers, Crypto) and uses that deep foundation to make high-level decisions that affect
+                            the whole company.</p>
+                    </div>
                 </div>
             </section>
 
@@ -213,26 +251,27 @@
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 6", channel: "Course Reference", vid: "video-title" }
+                "title": "Success Strategies",
+                "items": [
+                    { "title": "You and Your Research", "channel": "Richard Hamming", "vid": "a1zDuOPkMSw" },
+                    { "title": "The Feynman Technique", "channel": "Scott Young", "vid": "tkm0TNFzIeg" },
+                    { "title": "How to learn math", "channel": "3Blue1Brown", "vid": "9L_U80EshvY" }
+                ]
+            },
+            {
+                "title": "Active Learning",
+                "items": [
+                    { "title": "Deep Work", "channel": "Cal Newport", "vid": "itK73R8t-Uo" },
+                    { "title": "Reading a Research Paper", "channel": "Stanford", "vid": "Gv6_HuCYExM" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "T-Shaped", prompt: "The vertical bar of the T represents ___.", answer: "depth" },
-            { topic: "Hamming", prompt: "Hamming asks: What are the most ___ problems in your field?", answer: "important" },
-            { topic: "Reading", prompt: "The first pass of reading a paper involves checking the ___.", answer: "abstract" },
-            { topic: "Notebook", prompt: "Keep a research ___ to track ideas.", answer: "notebook" },
-            { topic: "Social", prompt: "Science is a ___ activity.", answer: "social" },
-            { topic: "Flow", prompt: "Deep Work requires minimizing ___.", answer: "distractions" },
-            { topic: "Fit", prompt: "Choose problems that feel like ___ to you.", answer: "play" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day91_deep_dive_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day91'], storageKey: 'day91_deep_dive_v1' });
     </script>
 </body>
 

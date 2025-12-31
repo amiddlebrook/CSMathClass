@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Computability
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -108,6 +108,16 @@
                     </ol>
                     <div class="math-block">
                         \delta: Q \times \Gamma \to Q \times \Gamma \times \{L, R\}
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">⌨️</span>
+                        <div>
+                            <strong>The Infinite Typewriter Analogy:</strong> Think of a Turing Machine as an old
+                            mechanical typewriter, but with an infinitely long roll of paper that can move both ways.
+                            The "state" is the mode of the typewriter, and the "rules" tell it what letter to type and
+                            which way to roll the paper after each keypress.
+                        </div>
                     </div>
                 </div>
             </section>
@@ -283,27 +293,21 @@ print(f"Tape: {''.join(tm.tape[:5])}") # Should be 0001 (8)</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "computation" },
-                    { title: "Video 7", channel: "Course Reference", vid: "day70_tm_v1" },
-                    { title: "Video 9", channel: "Course Reference", vid: "undecidable" },
-                    { title: "Video 10", channel: "Course Reference", vid: "video-title" }
+                "title": "Turing Machines",
+                "items": [
+                    { "title": "Turing Machines Introduction", "channel": "Neso Academy", "vid": "dNRDvKALPnM" },
+                    { "title": "Church-Turing Thesis", "channel": "Neso Academy", "vid": "d6iTeH_m30k" },
+                    { "title": "Halting Problem", "channel": "Computerphile", "vid": "92WHN-pAFCs" },
+                    { "title": "Decidable vs Recognizable Languages", "channel": "Neso Academy", "vid": "L2UreG8ST84" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Tape", prompt: "A Turing Machine has a tape that is infinite in ___ direction(s) (typically).", answer: "both", altAnswers: ["one"] },
-            { topic: "CT Thesis", prompt: "The Church-Turing Thesis states that TMs capture the intuitive notion of ___.", answer: "algorithms", altAnswers: ["computation"] },
-            { topic: "Decidable", prompt: "A language is decidable if the TM always ___.", answer: "halts" },
-            { topic: "Halting", prompt: "The Halting Problem is ___.", answer: "undecidable" },
-            { topic: "Universal", prompt: "A ___ TM can simulate any other TM.", answer: "universal" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day70_tm_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day70'], storageKey: 'day70_tm_v1' });
     </script>
 </body>
 

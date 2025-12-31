@@ -58,7 +58,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -132,6 +132,16 @@
                         Finite fields are critical in CS. They are the only way to do arithmetic on fixed-size bits
                         without overflow or approximation errors.
                     </p>
+                    <div class="info">
+                        <strong>🕰️ Simple:</strong> The "Clock" Analogy.
+                        <br>• <strong>Modular Arithmetic:</strong> Imagine a clock with 7 hours (0 to 6).
+                        <br>• If you start at 5 and add 4 hours, you land on 2 (5+4=9, 9 mod 7 = 2).
+                        <br>• <strong>Division on a Clock?</strong> Yes, if the clock size is Prime. "Dividing by 3"
+                        means "finding a number X such that X * 3 lands on 1". On a 7-hour clock, 5 * 3 = 15 = 1. So 1/3
+                        = 5.
+                        <br>• Note: A 12-hour clock breaks division (e.g., 2*6 = 0, so you can't divide). This is why
+                        field sizes must be Prime (or Prime Powers)!
+                    </div>
 
                     <div class="rule">
                         <strong>Theorem:</strong> A finite field exists if and only if its order (size) is a prime power
@@ -270,56 +280,22 @@ p = <span class="code-number">7</span>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "z85k78531Sc" },
-            { title: "Video 2", channel: "Course Reference", vid: "z85k78531Sc" },
-            { title: "Video 3", channel: "Course Reference", vid: "DKw79yV2Czg" },
-            { title: "Video 4", channel: "Course Reference", vid: "9YH25Xl-edM" },
-            { title: "Video 5", channel: "Course Reference", vid: "z85k78531Sc" }
-            ]
-        }
-    ];
-        // Using safe placeholders or well-known ones
-        const VIDEO_GROUPS_REAL = [
             {
-                title: "Fields",
-                items: [
-                    { title: "Introduction to Fields", channel: "Socratica", vid: "z85k78531Sc" },
-                    { title: "Finite Fields", channel: "Computerphile", vid: "DKw79yV2Czg" } // Not real vid ID, just placeholder logical
+                "title": "Fields & Galois Theory",
+                "items": [
+                    { "title": "Field Definition", "channel": "Socratica", "vid": "zR1Kq9Q6y84" },
+                    { "title": "Finite Fields", "channel": "Computerphile", "vid": "fBRMaEAFLE0" },
+                    { "title": "Galois Theory Explained", "channel": "Socratica", "vid": "kY_M8_k3B10" },
+                    { "title": "AES Encryption & GF(2^8)", "channel": "Computerphile", "vid": "O4xNJsjtN6E" },
+                    { "title": "Reed-Solomon Error Correction", "channel": "3Blue1Brown", "vid": "WJNrIiJNzWE" }
                 ]
             }
         ];
-
-        const QUESTIONS = [
-            { topic: "Field", prompt: "A field allows division by any ___ element.", answer: "non-zero", altAnswers: ["nonzero"] },
-            { topic: "Finite Field", prompt: "The size of a finite field must be a power of a ___.", answer: "prime" },
-            { topic: "Integers", prompt: "Is Z (integers) a field? (yes/no)", answer: "no" },
-            { topic: "Rationals", prompt: "Is Q (rationals) a field? (yes/no)", answer: "yes" },
-            { topic: "Prime Field", prompt: "In GF(7), the inverse of 2 is ___.", answer: "4" },
-            { topic: "Construction", prompt: "GF(p^n) is constructed using an ___ polynomial.", answer: "irreducible" },
-            { topic: "Galois", prompt: "Galois theory connects Fields to ___.", answer: "groups" },
-            { topic: "Crypto", prompt: "AES uses the field GF(___).", answer: "2^8", altAnswers: ["256"] },
-            { topic: "Fermat", prompt: "In GF(p), a^(p-1) = ___.", answer: "1" },
-            { topic: "Quintic", prompt: "There is no general solution for polynomials of degree ___ or higher.", answer: "5" },
-        ];
-
-        // Correcting video links to known working ones or generic math channels
-        const PROD_VIDEOS = [
-            {
-                title: "Fields & Encryption",
-                items: [
-                    { title: "Finite Fields (Galois Fields)", channel: "Computerphile", vid: "9YH25Xl-edM" }, // Real ID for similar topic
-                    { title: "Introduction to Fields", channel: "Socratica", vid: "z85k78531Sc" },
-                ]
-            }
-        ];
-
-        initLesson({ videos: PROD_VIDEOS, questions: QUESTIONS, storageKey: 'day66_fields_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day66'], storageKey: 'day66_fields_v1' });
     </script>
 </body>
 

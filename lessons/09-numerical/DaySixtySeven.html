@@ -58,7 +58,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -126,6 +126,17 @@
                     <div class="rule">
                         <strong>Definition:</strong> An R-module $M$ is an abelian group (under addition) equipped with
                         an action $R \times M \to M$.
+                    </div>
+                    <div class="info">
+                        <strong>🔌 Simple:</strong> The "Wobbly Lego" Analogy.
+                        <br>• <strong>Vector Space:</strong> Like rigid Legos. If you have 3 blocks, you have exactly 3
+                        blocks. You can always "divide" by a scalar (if you scale by 2, you can scale back by 1/2). It's
+                        structurally perfect.
+                        <br>• <strong>Module:</strong> Like wobbly Legos or clay. Since "scalars" (from a Ring) might
+                        not have inverses (you can't divide by 2 in Integers), you can get "Torsion".
+                        <br>• <strong>Torsion:</strong> Imagine taking a non-zero vector, scaling it by a non-zero
+                        number, and it collapses to ZERO. That's weird! It happens in modules (e.g., modular
+                        arithmetic). Modules are "Vector Spaces with structural defects."
                     </div>
 
                     <div class="subsection">
@@ -254,44 +265,22 @@
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "T7K6JtXhQ1U" },
-            { title: "Video 2", channel: "Course Reference", vid: "gJgM2w3Jg3s" },
-            { title: "Video 3", channel: "Course Reference", vid: "fNk_zzaMoSs" },
-            { title: "Video 4", channel: "Course Reference", vid: "yHie68rE024" },
-            { title: "Video 5", channel: "Course Reference", vid: "HZGCoVF3YvM" }
-            ]
-        }
-    ];
-        // Correcting to Socratica Abstract Algebra playlist items
-        const VIDEOS_REAL = [
             {
-                title: "Abstract Algebra",
-                items: [
-                    { title: "Vector Spaces", channel: "3Blue1Brown", vid: "fNk_zzaMoSs" },
-                    { title: "Rings and Modules", channel: "Socratica", vid: "yHie68rE024" } // Actually, Socratica might not have module specific vid, but checking reliable sources
+                "title": "Modules & Vector Spaces",
+                "items": [
+                    { "title": "Rings and Modules (Introduction)", "channel": "Richard Borcherds", "vid": "B85XNI6dGgI" },
+                    { "title": "The Kernel of a Group Homomorphism", "channel": "Socratica", "vid": "yYk9m1bJvWc" },
+                    { "title": "Free Modules", "channel": "Richard Borcherds", "vid": "T7K6JtXhQ1U" },
+                    { "title": "Vector Spaces", "channel": "3Blue1Brown", "vid": "k7RM-ot2NWY" },
+                    { "title": "Abstract Linear Algebra", "channel": "The Bright Side of Mathematics", "vid": "yDdxFBcvSGw" }
                 ]
             }
         ];
-
-        const QUESTIONS = [
-            { topic: "Definition", prompt: "A module is a vector space over a ___.", answer: "ring" },
-            { topic: "Vector Space", prompt: "A vector space is a module over a ___.", answer: "field" },
-            { topic: "Basis", prompt: "Do all modules have a basis? (yes/no)", answer: "no" },
-            { topic: "Torsion", prompt: "Element v where r*v = 0 for non-zero r is called a ___ element.", answer: "torsion" },
-            { topic: "Free Module", prompt: "A module that has a basis is called ___.", answer: "free" },
-            { topic: "Example", prompt: "Every Abelian ___ is a Z-module.", answer: "group" },
-            { topic: "Dimension", prompt: "For vector spaces, the size of the basis is the ___.", answer: "dimension" },
-            { topic: "Scalars", prompt: "In a vector space, scalars must have multiplicative ___.", answer: "inverses" },
-            { topic: "Topology", prompt: "Homology groups are examples of ___.", answer: "modules" },
-            { topic: "Structure", prompt: "Modules allow us to do linear algebra with ___ numbers.", answer: "integer", altAnswers: ["discrete"] },
-        ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day67_mod_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day67'], storageKey: 'day67_mod_v1' });
     </script>
 </body>
 

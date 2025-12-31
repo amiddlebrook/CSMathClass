@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -153,6 +153,18 @@
                         </div>
                         <p>Geometrically, the chord connecting `(x, f(x))` and `(y, f(y))` lies <strong>above</strong>
                             the graph of `f`.</p>
+
+                        <div class="info">
+                            <span class="info-icon">⛰️</span>
+                            <div>
+                                <strong>The Valley Analogy:</strong> A convex function is like a deep **valley**. No
+                                matter where you start, if you follow the slope downwards, you are guaranteed to reach
+                                the exact same lowest point (the **Global Minimum**). There are no "hidden valleys"
+                                (Local Minima) to get trapped in. This is what makes convex optimization the "Gold
+                                Standard" of machine learning: if you can prove your problem is convex, you can always
+                                find the absolute best answer efficiently.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="subsection">
@@ -508,31 +520,22 @@ print("Expected x*:", [0.5, 0.5])</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "formulation" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Convex Optimization Foundations",
+                "items": [
+                    { "title": "Lecture 1 | Convex Optimization", "channel": "Stanford / Stephen Boyd", "vid": "McLqMh649RE" },
+                    { "title": "Lagrange Multipliers", "channel": "3Blue1Brown", "vid": "hQ4UNu1P2kw" },
+                    { "title": "KKT Conditions Introduction", "channel": "Mathematical Optimization", "vid": "F_YnE8qW3_o" },
+                    { "title": "Duality & The Lagrangian", "channel": "Stephen Boyd", "vid": "fO-3E1G1B0M" },
+                    { "title": "Karush-Kuhn-Tucker Conditions", "channel": "The Bright Side of Mathematics", "vid": "4A_z58V9XkY" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Sets", prompt: "A set is convex if the line segment between any two points is ___ the set.", answer: "in" },
-            { topic: "Ops", prompt: "The intersection of convex sets is always ___.", answer: "convex" },
-            { topic: "Hessian", prompt: "A twice-differentiable function is convex iff its Hessian is ___.", answer: "positive semidefinite", altAnswers: ["psd", "semi-definite"] },
-            { topic: "Jensen", prompt: "f(E[X]) <= E[f(X)]. This is ___ Inequality.", answer: "Jensen's", altAnswers: ["Jensen"] },
-            { topic: "Sep", prompt: "Disjoint convex sets can be separated by a ___.", answer: "hyperplane" },
-            { topic: "Standard Form", prompt: "In standard form, inequality constraints are f_i(x) <= ___.", answer: "0" },
-            { topic: "Lagrangian", prompt: "The dual variable λ (lambda) corresponds to ___ constraints.", answer: "inequality" },
-            { topic: "KKT", prompt: "Stationarity requires the ___ of the Lagrangian to vanish.", answer: "gradient" },
-            { topic: "KKT", prompt: "Complementary Slackness: λ_i * f_i(x) = ___.", answer: "0" },
-            { topic: "Duality", prompt: "If d* = p*, we have ___ duality.", answer: "strong" },
-            { topic: "Slater", prompt: "Slater's condition requires strictly ___ points.", answer: "feasible" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day81_convex_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day81'], storageKey: 'day81_convex_v1' });
     </script>
 </body>
 

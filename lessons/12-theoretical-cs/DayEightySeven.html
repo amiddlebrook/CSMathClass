@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -144,114 +144,153 @@
                         \sigma_t \cdot \sigma_f \ge \frac{1}{4\pi}
                     </div>
                     <p>If you squeeze a signal in time (short pulse), its spectrum spreads out (broadband).</p>
-                </div>
-            </section>
 
-            <!-- Wavelets -->
-            <section class="section" id="wavelets">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Wavelets</h2>
-                </div>
-                <div class="section-body">
-                    <p>Fourier uses sines (infinite duration). Wavelets use localized packets.</p>
-                    <p>Multiresolution analysis decomposes a signal into detail at different scales. Key for compression
-                        (JPEG 2000).</p>
-                </div>
-            </section>
-
-            <!-- Heat -->
-            <section class="section" id="heat">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">The Heat Equation</h2>
-                </div>
-                <div class="section-body">
-                    <p>The prototype parabolic PDE:</p>
-                    <div class="math-block">
-                        \frac{\partial u}{\partial t} = \Delta u
-                    </div>
-                    <p>It describes diffusion. In 1D: `u_t = u_{xx}`.</p>
-                </div>
-            </section>
-
-            <!-- Smoothing -->
-            <section class="section" id="smoothing">
-                <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Smoothing</h2>
-                </div>
-                <div class="section-body">
-                    <p>The heat equation instantly smooths rough initial data. If `u(x, 0)` is merely `L^2`, then `u(x,
-                        t)` is `C^\infty` for all `t > 0`.</p>
                     <div class="info">
-                        <strong>Geometric Insight:</strong> Heat flow tries to minimize "energy" (gradient) by
-                        flattening the curve.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Ricci -->
-            <section class="section" id="ricci">
-                <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Ricci Flow</h2>
-                </div>
-                <div class="section-body">
-                    <p>Heat equation for the metric tensor `g_{ij}` of a manifold.</p>
-                    <div class="math-block">
-                        \frac{\partial g_{ij}}{\partial t} = -2 R_{ij}
-                    </div>
-                    <p>Here `R_{ij}` is the Ricci curvature. Positive curvature areas shrink; negative areas expand. It
-                        tries to make the curvature constant.</p>
-                </div>
-            </section>
-
-            <!-- Poincare -->
-            <section class="section" id="poincare">
-                <div class="section-header">
-                    <div class="section-number">Section 8</div>
-                    <h2 class="section-title">Poincaré Conjecture</h2>
-                </div>
-                <div class="section-body">
-                    <p>"Every simply connected, closed 3-manifold is homeomorphic to the 3-sphere."</p>
-                    <p>Perelman proved this by running Ricci Flow. He showed that any 3-manifold evolves into a set of
-                        recognizable pieces (Geometrization). He famously dealt with <strong>singularities</strong>
-                        (pinched necks) by surgery.</p>
-                </div>
-            </section>
-
-            <!-- Analysis -->
-            <section class="section" id="analysis">
-                <div class="section-header">
-                    <div class="section-number">Section 9</div>
-                    <h2 class="section-title">Analysis on Manifolds</h2>
-                </div>
-                <div class="section-body">
-                    <p>Extending calculus to curved spaces. The Laplacian `\Delta` becomes the Laplace-Beltrami
-                        operator.</p>
-                    <div class="math-block">
-                        \Delta u = \frac{1}{\sqrt{|g|}} \partial_i (\sqrt{|g|} g^{ij} \partial_j u)
-                    </div>
-                    <p>Spectra of the Laplacian relate to the shape of the drum (Kac's question: "Can you hear the shape
-                        of a drum?").</p>
-                </div>
-            </section>
-
-            <!-- Code -->
-            <section class="section" id="code">
-                <div class="section-header">
-                    <div class="section-number">Section 10</div>
-                    <h2 class="section-title">Python: Spectra & Heat</h2>
-                </div>
-                <div class="section-body">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Spectrogram</span>
+                        <span class="info-icon">🎈</span>
+                        <div>
+                            <strong>The Balloon Analogy:</strong> Imagine a balloon. If you squeeze it at the top
+                            (time), it bulges out at the sides (frequency). You can't squeeze it everywhere at once—it
+                            has a fixed "volume" of information that has to go somewhere.
                         </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">import numpy as np
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Wavelets -->
+    <section class="section" id="wavelets">
+        <div class="section-header">
+            <div class="section-number">Section 4</div>
+            <h2 class="section-title">Wavelets</h2>
+        </div>
+        <div class="section-body">
+            <p>Fourier uses sines (infinite duration). Wavelets use localized packets.</p>
+            <p>Multiresolution analysis decomposes a signal into detail at different scales. Key for compression
+                (JPEG 2000).</p>
+        </div>
+    </section>
+
+    <!-- Heat -->
+    <section class="section" id="heat">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <h2 class="section-title">The Heat Equation</h2>
+        </div>
+        <div class="section-body">
+            <p>The prototype parabolic PDE:</p>
+            <div class="math-block">
+                \frac{\partial u}{\partial t} = \Delta u
+            </div>
+            <p>It describes diffusion. In 1D: `u_t = u_{xx}`.</p>
+        </div>
+    </section>
+
+    <!-- Smoothing -->
+    <section class="section" id="smoothing">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <h2 class="section-title">Smoothing</h2>
+        </div>
+        <div class="section-body">
+            <p>The heat equation instantly smooths rough initial data. If `u(x, 0)` is merely `L^2`, then `u(x,
+                t)` is `C^\infty` for all `t > 0`.</p>
+            <div class="info">
+                <span class="info-icon">🪵</span>
+                <div>
+                    <strong>The Smooth Wood Analogy:</strong> Imagine a rough piece of wood with splinters. Heat flow is
+                    like a master carpenter's **sandpaper**. It instantly grinds down the sharp edges (high frequencies)
+                    to make the surface perfectly smooth.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ricci -->
+    <section class="section" id="ricci">
+        <div class="section-header">
+            <div class="section-number">Section 7</div>
+            <h2 class="section-title">Ricci Flow</h2>
+        </div>
+        <div class="section-body">
+            <p>Heat equation for the metric tensor `g_{ij}` of a manifold.</p>
+            <div class="math-block">
+                \frac{\partial g_{ij}}{\partial t} = -2 R_{ij}
+            </div>
+            <p>Here `R_{ij}` is the Ricci curvature. Positive curvature areas shrink; negative areas expand. It
+                tries to make the curvature constant.</p>
+
+            <div class="info">
+                <span class="info-icon">🥨</span>
+                <div>
+                    <strong>The Rubber Band Analogy:</strong> Imagine a lumpy, tangled rubber band. Ricci Flow is like
+                    slowly pulling it from all sides; it tries to smooth out the lumps and make it into a perfect,
+                    uniform circle.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Poincare -->
+    <section class="section" id="poincare">
+        <div class="section-header">
+            <div class="section-number">Section 8</div>
+            <h2 class="section-title">Poincaré Conjecture</h2>
+        </div>
+        <div class="section-body">
+            <p>"Every simply connected, closed 3-manifold is homeomorphic to the 3-sphere."</p>
+            <p>Perelman proved this by running Ricci Flow. He showed that any 3-manifold evolves into a set of
+                recognizable pieces (Geometrization). He famously dealt with <strong>singularities</strong>
+                (pinched necks) by surgery.</p>
+        </div>
+    </section>
+
+    <!-- Analysis -->
+    <section class="section" id="analysis">
+        <div class="section-header">
+            <div class="section-number">Section 9</div>
+            <h2 class="section-title">Analysis on Manifolds</h2>
+        </div>
+        <div class="section-body">
+            <p>Extending calculus to curved spaces. The Laplacian `\Delta` becomes the Laplace-Beltrami
+                operator.</p>
+            <div class="math-block">
+                \Delta u = \frac{1}{\sqrt{|g|}} \partial_i (\sqrt{|g|} g^{ij} \partial_j u)
+            </div>
+            <p>Spectra of the Laplacian relate to the shape of the drum (Kac's question: "Can you hear the shape
+                of a drum?").</p>
+
+            <div class="info">
+                <span class="info-icon">🎼</span>
+                <div>
+                    <strong>The Sheet Music Analogy:</strong> A standard Fourier transform is like the final sound of a
+                    whole song. A **Spectrogram** is the sheet music: it tells you which notes (frequencies) are played
+                    at exactly which moment (time).
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Why This Matters in CS</h3>
+                <p><strong>Edge Detection:</strong> In Computer Vision, we use the discrete Laplacian to find edges in
+                    images. Just as heat flow smooths out gradients, looking for "sudden" changes in light (high
+                    curvature) tells the computer where one object ends and another begins.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code -->
+    <section class="section" id="code">
+        <div class="section-header">
+            <div class="section-number">Section 10</div>
+            <h2 class="section-title">Python: Spectra & Heat</h2>
+        </div>
+        <div class="section-body">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-label">Spectrogram</span>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 import scipy.signal
 
@@ -272,83 +311,73 @@ plt.title('Spectrogram: Seeing Time and Frequency')
 plt.colorbar(label='Intensity')
 plt.ylim(0, 250)
 plt.show()</code></pre>
-                        </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Videos -->
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 11</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
+    <!-- Videos -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <div class="section-number">Section 11</div>
+            <h2 class="section-title">Video Lessons</h2>
+        </div>
+        <div class="section-body">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe id="ytPlayer" src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="video-info">
+                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                        <div class="video-meta" id="videoMeta"></div>
                     </div>
                 </div>
-            </section>
+                <div class="video-list" id="videoList"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Practice -->
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 12</div>
-                    <h2 class="section-title">Practice Problems</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
-        </main>
+    <!-- Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <div class="section-number">Section 12</div>
+            <h2 class="section-title">Practice Problems</h2>
+        </div>
+        <div class="section-body">
+            <div class="quiz-controls">
+                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                <button class="btn" id="btnRevealAll">Reveal All</button>
+                <button class="btn" id="btnClear">Clear Inputs</button>
+                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </section>
+    </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "Numberphile" },
-                    { title: "Video 9", channel: "Course Reference", vid: "Uncertainty" },
-                    { title: "Video 10", channel: "Course Reference", vid: "Spectrogram" }
+                "title": "Fourier & Harmonic Analysis",
+                "items": [
+                    { "title": "The Uncertainty Principle", "channel": "3Blue1Brown", "vid": "MBnnXAK4pJQ" },
+                    { "title": "The Heat Equation", "channel": "3Blue1Brown", "vid": "ToIXSwZ1pJU" },
+                    { "title": "Wavelets: A Mathematical Overview", "channel": "Steve Brunton", "vid": "K6YI_iT9oRE" }
+                ]
+            },
+            {
+                "title": "Geometry & Ricci Flow",
+                "items": [
+                    { "title": "Ricci Flow & Poincaré Conjecture", "channel": "Numberphile", "vid": "S_X7YfL9Xpw" },
+                    { "title": "The Riemann Hypothesis & Fourier", "channel": "Visual Math", "vid": "r6sGWTCMz2k" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Domains", prompt: "Fourier Series map the Circle to the ___.", answer: "Integers" },
-            { topic: "Uncertainty", prompt: "We cannot simultaneously localize time and ___.", answer: "frequency" },
-            { topic: "Dual", prompt: "The dual of the Reals is the ___.", answer: "Reals" },
-            { topic: "Dual", prompt: "The dual of the Integers is the ___.", answer: "Circle" },
-            { topic: "Wavelets", prompt: "Wavelets are localized in both time and frequency, unlike ___ waves.", answer: "sine" },
-            { topic: "LCA", prompt: "Pontryagin duality applies to Locally Compact ___ Groups.", answer: "Abelian" },
-            { topic: "Spectrogram", prompt: "A spectrogram uses the ___ Fourier Transform.", answer: "Short-Time", altAnswers: ["Short Time", "STFT"] },
-            { topic: "Gaussian", prompt: "Minimizing the uncertainty principle is achieved by ___ functions.", answer: "Gaussian" },
-            { topic: "Heat", prompt: "The Heat Equation is u_t = ___ u.", answer: "laplacian", altAnswers: ["Del^2", "Delta"] },
-            { topic: "Parabolic", prompt: "Heat equation is an example of a ___ PDE.", answer: "parabolic" },
-            { topic: "Smoothing", prompt: "Infinite propagation speed leads to instant ___ of data.", answer: "smoothing" },
-            { topic: "Ricci", prompt: "Ricci Flow evolves the ___ tensor.", answer: "metric" },
-            { topic: "Curvature", prompt: "Ricci flow tries to make curvature ___.", answer: "uniform", altAnswers: ["constant"] },
-            { topic: "Poincare", prompt: "Poincare conjecture states every simply connected closed 3-manifold is a ___.", answer: "sphere", altAnswers: ["3-sphere"] },
-            { topic: "Perelman", prompt: "Perelman solved Poincare by handling ___ in Ricci Flow.", answer: "singularities" },
-            { topic: "Surgery", prompt: "Removing singularities is done via manifold ___.", answer: "surgery" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day87_harmpde_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day87'], storageKey: 'day87_harmpde_v1' });
     </script>
 </body>
 

@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Hoare Triples
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -106,6 +106,18 @@
                     </div>
                     <p>Meaning: If precondition `P` is true, and command `C` executes, then postcondition `Q` will be
                         true.</p>
+
+                    <div class="info">
+                        <span class="info-icon">💂</span>
+                        <div>
+                            <strong>The Guardhouse Analogy:</strong> Think of a secure facility. The **Precondition** is
+                            the guard at the entrance checking your ID—you can't even enter unless you're authorized.
+                            The **Postcondition** is the guard at the exit checking your briefcase—you can't leave
+                            unless you have the right items. The **Invariant** is the security patrol that circles the
+                            perimeter; no matter what happens inside, they must always be present and everything must
+                            always be secure.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -254,26 +266,20 @@ print(gcd(48, 18))</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 6", channel: "Course Reference", vid: "Termination" },
-                    { title: "Video 8", channel: "Course Reference", vid: "termination" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Program Verification",
+                "items": [
+                    { "title": "Hoare Logic Introduction", "channel": "Papers We Love", "vid": "GQi-6-d5ooQ" },
+                    { "title": "Formal Verification", "channel": "Computerphile", "vid": "iXRe_OToB0M" },
+                    { "title": "Reasoning about Programs", "channel": "Edsger W. Dijkstra", "vid": "GX3URhx6i2E" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Hoare Triple", prompt: "{P} C {Q}. P is the ___.", answer: "precondition" },
-            { topic: "Loops", prompt: "To verify a loop, we need a loop ___.", answer: "invariant" },
-            { topic: "Termination", prompt: "Total correctness requires valid output and ___.", answer: "termination", altAnswers: ["halting"] },
-            { topic: "Assignment", prompt: "The assignment rule involves ___ substitution.", answer: "backward", altAnswers: ["backwards"] },
-            { topic: "Checking", prompt: "Model Checking explores ___ reachable states.", answer: "all" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day77_verify_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day77'], storageKey: 'day77_verify_v1' });
     </script>
 </body>
 

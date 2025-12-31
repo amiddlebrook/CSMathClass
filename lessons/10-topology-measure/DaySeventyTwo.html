@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Complexity
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -151,6 +151,17 @@
                     </div>
                     <p>If you give me a path (certificate), I can quickly check if it visits every city once. Finding
                         that path might be hard, but checking it is easy. That is NP.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🧩</span>
+                        <div>
+                            <strong>The Sudoku Analogy:</strong> Imagine a giant Sudoku puzzle. Solving it from scratch
+                            is hard (it might take you hours or days). But if someone hands you a completed grid and
+                            asks "Is this correct?", you can check it very quickly by just looking at rows and columns.
+                            Solving is "NP-hard" (potentially), but checking is "in P". A problem where checking is easy
+                            is in the class NP.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -257,27 +268,21 @@ print(f"Verified: {verify_subset_sum(nums, t, cert)}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 6", channel: "Course Reference", vid: "intractable" },
-                    { title: "Video 8", channel: "Course Reference", vid: "Exponential" },
-                    { title: "Video 9", channel: "Course Reference", vid: "exponential" },
-                    { title: "Video 10", channel: "Course Reference", vid: "video-title" }
+                "title": "P vs NP & Complexity",
+                "items": [
+                    { "title": "P vs. NP and the Computational Complexity Zoo", "channel": "Hackers' Guide", "vid": "moPTwQ_fI9w" },
+                    { "title": "P vs NP", "channel": "Computerphile", "vid": "YX40hbAHx3s" },
+                    { "title": "P vs. NP", "channel": "Hackers' Guide", "vid": "iL09_g8pM4" },
+                    { "title": "Big O Notation (Quick Recall)", "channel": "Computerphile", "vid": "V6mKVRU1evE" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "NP", prompt: "NP stands for ___ polynomial time.", answer: "nondeterministic" },
-            { topic: "Verifier", prompt: "A problem is in NP if a solution can be ___ in polynomial time.", answer: "verified" },
-            { topic: "P", prompt: "P is the class of problems ___ in polynomial time.", answer: "solvable" },
-            { topic: "Relation", prompt: "We know P is a ___ of NP.", answer: "subset" },
-            { topic: "Exponential", prompt: "O(2^n) is an ___ time complexity.", answer: "exponential" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day72_randomness_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day72'], storageKey: 'day72_randomness_v1' });
     </script>
 </body>
 

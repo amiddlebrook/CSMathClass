@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                PSPACE
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,8 +105,18 @@
                 <div class="section-body">
                     <p><strong>SPACE(f(n))</strong>: Maximum number of tape cells used by a TM on input size `n`.</p>
                     <p><strong>PSPACE</strong>: Problems solvable using polynomial space.</p>
-                    <p>We know `P \subseteq NP \subseteq PSPACE`.</p>
-                    <p>Surprisingly, `PSPACE = NPSPACE` (Savitch's Theorem).</p>
+                    <p>Surprisingly, `PSPACE = NPSPACE` (Savitch's Theorem). </p>
+
+                    <div class="info">
+                        <span class="info-icon">⬜</span>
+                        <div>
+                            <strong>The Whiteboard Analogy:</strong> Space complexity is like working on a whiteboard.
+                            Time complexity is like how many marks you make. But because you have an eraser, you can
+                            reuse the same area of the whiteboard (space) as many times as you want! Even if the
+                            calculation takes a billion years (time), if you only ever need to write down 10 numbers at
+                            once, you only need a tiny whiteboard.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -329,30 +339,21 @@ def breadth_first_search(start, target):
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 2", channel: "Course Reference", vid: "competition" },
-                    { title: "Video 8", channel: "Course Reference", vid: "generalized" },
-                    { title: "Video 9", channel: "Course Reference", vid: "video-title" }
+                "title": "Space Complexity",
+                "items": [
+                    { "title": "Introduction to Space Complexity", "channel": "Neso Academy", "vid": "4R1L6fX4e-M" },
+                    { "title": "Savitch's Theorem", "channel": "Neso Academy", "vid": "LAn9N_3D8mE" },
+                    { "title": "PSPACE Completeness & TQBF", "channel": "Easy Theory", "vid": "7c_Xv7H5f1Q" },
+                    { "title": "L and NL Classes", "channel": "Neso Academy", "vid": "vX-S6m8F-S0" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "PSPACE", prompt: "PSPACE is the class of problems solvable in polynomial ___.", answer: "space", altAnswers: ["memory"] },
-            { topic: "Savitch", prompt: "Savitch's Theorem relates Nondeterministic Space to ___ Space.", answer: "deterministic" },
-            { topic: "Relationship", prompt: "NP is a subset of ___.", answer: "PSPACE" },
-            { topic: "Games", prompt: "Winning strategies for generalized games are often ___ complete.", answer: "PSPACE" },
-            { topic: "DFS", prompt: "DFS is space-efficient because it uses ___.", answer: "recursion", altAnswers: ["backtracking"] },
-            { topic: "TQBF", prompt: "TQBF includes both existential and ___ quantifiers.", answer: "universal" },
-            { topic: "Game", prompt: "TQBF can be viewed as a ___ between two players.", answer: "game", altAnswers: ["competition"] },
-            { topic: "Geography", prompt: "Generalized Geography is played on a ___.", answer: "graph" },
-            { topic: "Sokoban", prompt: "Puzzle games like Sokoban are often ___ complete.", answer: "PSPACE" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day74_space_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day74'], storageKey: 'day74_space_v1' });
     </script>
 </body>
 

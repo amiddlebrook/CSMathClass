@@ -56,7 +56,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Qubits
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -113,6 +113,17 @@
                     <p>Where `\alpha, \beta \in \mathbb{C}` and `|\alpha|^2 + |\beta|^2 = 1`.</p>
                     <p>Measurement forces the qubit to collapse: to `0` with prob `|\alpha|^2` and `1` with prob
                         `|\beta|^2`.</p>
+
+                    <div class="info">
+                        <span class="info-icon">🪙</span>
+                        <div>
+                            <strong>The Spinning Coin Analogy:</strong> A classical bit is like a coin lying on a
+                            table—it is definitively <strong>Heads</strong> or <strong>Tails</strong>. A qubit in
+                            <strong>Superposition</strong> is like a coin spinning rapidly on its edge—it is effectively
+                            both Heads and Tails at the same time. You only Force it to "pick a side" when you slap your
+                            hand down on it to stop the spin (<strong>Measurement</strong>).
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -375,28 +386,22 @@ print(f"Factors of 15: {shors_factorization_toy(15)}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "Quantum Foundations",
+                "items": [
+                    { "title": "Quantum Computers Explained", "channel": "Kurzgesagt", "vid": "JhHMJCUmq28" },
+                    { "title": "Quantum Computing in 5 Levels", "channel": "WIRED", "vid": "OWJCfOvochA" },
+                    { "title": "Quantum Computing for CS", "channel": "Microsoft Research", "vid": "F_Riqjdh2oM" },
+                    { "title": "Shor's Algorithm", "channel": "Computerphile", "vid": "lvTqbM5Dq4Q" },
+                    { "title": "Bell's Theorem", "channel": "Veritasium", "vid": "z-s3q9AsLyM" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Qubit", prompt: "A qubit exists in a linear combination of states called ___.", answer: "superposition" },
-            { topic: "Collapse", prompt: "When measured, a qubit ___ to a single state.", answer: "collapses" },
-            { topic: "Entanglement", prompt: "___ links the state of multiple qubits instantaneously.", answer: "entanglement" },
-            { topic: "Math", prompt: "Quantum gates are represented by ___ matrices.", answer: "unitary" },
-            { topic: "Dimension", prompt: "3 qubits live in a vector space of dimension ___.", answer: "8" },
-            { topic: "Deutsch", prompt: "The Deutsch-Jozsa algorithm determines if a function is constant or ___.", answer: "balanced" },
-            { topic: "Grover", prompt: "Grover's algorithm provides a ___ speedup for search.", answer: "quadratic", altAnswers: ["sqrt", "square root"] },
-            { topic: "Shor", prompt: "Shor's algorithm can break ___ encryption.", answer: "RSA" },
-            { topic: "BQP", prompt: "___ is the complexity class for efficient quantum algorithms.", answer: "BQP" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day80_quantum_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day80'], storageKey: 'day80_quantum_v1' });
     </script>
 </body>
 

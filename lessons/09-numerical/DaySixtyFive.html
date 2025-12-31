@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Contour Integration
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -154,6 +154,16 @@
                     <p>It preserves angles. These maps are used in engineering (fluid flow, electrostatics) to transform
                         complex geometries into simple ones (like a disk).</p>
                     <p>Solving Laplace's equation `\Delta u = 0` is invariant under conformal maps!</p>
+                    <div class="info">
+                        <strong>🗺️ Simple:</strong> The "Rubber Sheet" Analogy.
+                        <br>• Imagine drawing a grid on a rubber sheet. A <strong>Conformal Map</strong> stretches and
+                        twists the sheet, but <em>locally</em>, every tiny grid square stays a square (it doesn't shear
+                        into a diamond).
+                        <br>• This means if two lines cross at 90° on the original sheet, they still cross at 90° on the
+                        stretched sheet.
+                        <br>• Engineers love this: You can solve air flow around a simple cylinder, then "map" it to an
+                        airplane wing shape, and the physics (angles of flow) stays correct!
+                    </div>
                 </div>
             </section>
 
@@ -265,26 +275,22 @@ plt.show()</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "application" },
-                    { title: "Video 8", channel: "Course Reference", vid: "Integration" },
-                    { title: "Video 10", channel: "Course Reference", vid: "video-title" }
+                "title": "Residues & Conformal Maps",
+                "items": [
+                    { "title": "Calculus of Residues", "channel": "The Bright Side of Mathematics", "vid": "UXMy5zEEEaU" },
+                    { "title": "Laurent Series", "channel": "The Bright Side of Mathematics", "vid": "kL3FPK91F-U" },
+                    { "title": "Conformal Maps", "channel": "3Blue1Brown", "vid": "LQRkxZn0mJs" },
+                    { "title": "Residue Theorem", "channel": "Michael Penn", "vid": "RYs6Nb-iQyg" },
+                    { "title": "Joukowsky Airfoil", "channel": "Numberphile", "vid": "nhbLF1M3GG4" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Series", prompt: "A series with negative powers of (z-a) is called a ___ series.", answer: "Laurent" },
-            { topic: "Residue", prompt: "The residue is the coefficient ___ in the Laurent expansion.", answer: "c_{-1}", altAnswers: ["c-1", "inverse power"] },
-            { topic: "Integration", prompt: "The integral around a loop equals 2 pi i times the sum of ___.", answer: "residues" },
-            { topic: "Conformal", prompt: "Conformal maps preserve ___.", answer: "angles" },
-            { topic: "Mapping Thm", prompt: "The Riemann Mapping Theorem says any simply connected domain is equivalent to the ___.", answer: "unit disk", altAnswers: ["disk"] },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day65_complex2_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day65'], storageKey: 'day65_complex2_v1' });
     </script>
 </body>
 

@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Strategy
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -108,6 +108,16 @@
                         2. <strong>Pass 2 (The Engineer):</strong> Build the road. Go deep. Derive proofs. Solve hard
                         problems. (Slow)
                     </div>
+
+                    <div class="info">
+                        <span class="info-icon">🖼️</span>
+                        <div>
+                            <strong>The Mosaic Analogy:</strong> Learning a new field is like assembling a giant mosaic.
+                            If you pick up one tile and stare at it for an hour, you'll never see the picture. Pass 1 is
+                            standing back and seeing the **outline** of the face. Pass 2 is getting close and carefully
+                            gluing down each individual tile.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -126,50 +136,79 @@
                         <li>Look at the diagrams.</li>
                     </ul>
                     <p>If you see a wall of math, skip it. Ask: "What is this TRYING to do?"</p>
-                </div>
-            </section>
 
-            <!-- Keywords -->
-            <section class="section" id="keywords">
-                <div class="section-header">
-                    <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Identifying Keywords</h2>
-                </div>
-                <div class="section-body">
-                    <p>In Pass 1, collect "Black Boxes".</p>
-                    <p>Example: You read "The kernel trick allows SVMs to classify non-linear data."</p>
-                    <p><strong>Do not</strong> stop to learn RKHS. Just Note: "Kernel Trick = magic for non-linear."</p>
-                </div>
-            </section>
-
-            <!-- Map -->
-            <section class="section" id="map">
-                <div class="section-header">
-                    <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Building the Map</h2>
-                </div>
-                <div class="section-body">
-                    <p>At the end of Pass 1, draw a dependency graph.</p>
-                    <p>"A depends on B." "C is a type of D."</p>
-                    <p>This contextual knowledge makes Pass 2 10x faster because you know <strong>WHY</strong> you are
-                        learning each piece.</p>
-                </div>
-            </section>
-
-            <!-- Code -->
-            <section class="section" id="code">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: TF-IDF for Keywords</h2>
-                </div>
-                <div class="section-body">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Basic Extractor</span>
+                    <div class="info">
+                        <span class="info-icon">🍿</span>
+                        <div>
+                            <strong>The Movie Spoiler Analogy:</strong> Most people hate spoilers, but in math, you
+                            **want** them. Reading the conclusion first is like knowing how the movie ends. It allows
+                            you to watch the "plot" (the proof) and see how all the clues (the lemmas) lead to that
+                            inevitable ending.
                         </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Keywords -->
+    <section class="section" id="keywords">
+        <div class="section-header">
+            <div class="section-number">Section 3</div>
+            <h2 class="section-title">Identifying Keywords</h2>
+        </div>
+        <div class="section-body">
+            <p>In Pass 1, collect "Black Boxes".</p>
+            <p>Example: You read "The kernel trick allows SVMs to classify non-linear data."</p>
+            <p><strong>Do not</strong> stop to learn RKHS. Just Note: "Kernel Trick = magic for non-linear."</p>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section class="section" id="map">
+        <div class="section-header">
+            <div class="section-number">Section 4</div>
+            <h2 class="section-title">Building the Map</h2>
+        </div>
+        <div class="section-body">
+            <p>At the end of Pass 1, draw a dependency graph.</p>
+            <p>"A depends on B." "C is a type of D."</p>
+            <p>This contextual knowledge makes Pass 2 10x faster because you know <strong>WHY</strong> you are
+                learning each piece.</p>
+
+            <div class="info">
+                <span class="info-icon">🛰️</span>
+                <div>
+                    <strong>The GPS Analogy:</strong> Pass 1 is the Google Maps Satellite View. You see the mountains,
+                    the rivers, and the cities. You know where you're going. Pass 2 is the Turn-by-Turn Directions. It's
+                    useful, but if you get confused, you'll be lost without the **Satellite View** you gained in Pass 1.
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Why This Matters in CS</h3>
+                <p><strong>Iterative Development:</strong> In software, we don't write the entire system in one pass. We
+                    write a **Minimum Viable Product (MVP)** first. The MVP is Pass 1—it's buggy and missing features,
+                    but it proves the concept. Then we iterate (Pass 2) to refactor, optimize, and add edge cases.
+                    Learning is iterative; perfectionism on a first read is a stall tactic.</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Code -->
+    <section class="section" id="code">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <h2 class="section-title">Python: TF-IDF for Keywords</h2>
+        </div>
+        <div class="section-body">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-label">Basic Extractor</span>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
 
 documents = [
     "Machine learning uses the kernel trick for non-linear classification.",
@@ -190,73 +229,72 @@ for i in range(len(documents)):
     row = dense[i].tolist()[0]
     top_indices = sorted(range(len(row)), key=lambda i: row[i], reverse=True)[:3]
     print(f"Doc {i}: {[feature_names[j] for j in top_indices]}")</code></pre>
-                        </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Videos -->
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
+    <!-- Videos -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <h2 class="section-title">Video Lessons</h2>
+        </div>
+        <div class="section-body">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe id="ytPlayer" src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="video-info">
+                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                        <div class="video-meta" id="videoMeta"></div>
                     </div>
                 </div>
-            </section>
+                <div class="video-list" id="videoList"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Practice -->
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Quiz</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
-        </main>
+    <!-- Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <div class="section-number">Section 7</div>
+            <h2 class="section-title">Quiz</h2>
+        </div>
+        <div class="section-body">
+            <div class="quiz-controls">
+                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                <button class="btn" id="btnRevealAll">Reveal All</button>
+                <button class="btn" id="btnClear">Clear Inputs</button>
+                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </section>
+    </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "familiarity" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Learning Strategies",
+                "items": [
+                    { "title": "The Two-Pass Method", "channel": "Justin Sung", "vid": "p66TshC_SUE" },
+                    { "title": "The Feynman Technique", "channel": "Sprouts", "vid": "tkvQ7iH_2uY" }
+                ]
+            },
+            {
+                "title": "Efficiency",
+                "items": [
+                    { "title": "Speed Reading Technical Books", "channel": "Ali Abdaal", "vid": "73T7mYwG60g" },
+                    { "title": "How to Study for Hard Exams", "channel": "Ali Abdaal", "vid": "5pG_m_t-zG8" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Pass 1", prompt: "The goal of Pass 1 is ___.", answer: "familiarity", altAnswers: ["overview", "survey"] },
-            { topic: "Pass 2", prompt: "The goal of Pass 2 is ___.", answer: "mastery", altAnswers: ["depth"] },
-            { topic: "Black Box", prompt: "In Pass 1, treat unknown complex concepts as ___ boxes.", answer: "black" },
-            { topic: "Linear", prompt: "Avoid strictly ___ reading (Page 1 to N).", answer: "linear" },
-            { topic: "Map", prompt: "Build a dependency ___ to understand connections.", answer: "map", altAnswers: ["graph"] },
-            { topic: "Speed", prompt: "Pass 1 should be ___.", answer: "fast" },
-            { topic: "Context", prompt: "Context helps you understand ___ you are learning something.", answer: "why" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day95_discipline_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day95'], storageKey: 'day95_discipline_v1' });
     </script>
 </body>
 

@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -136,8 +136,22 @@
                     <p>The probability of two eigenvalues being distance `s` apart goes to 0 as `s \to 0`. This is
                         "Dyson repulsion".</p>
                     <div class="info">
-                        <strong>Connection:</strong> The zeros of the Riemann Zeta Function appear to have the same
-                        spacing distribution as GUE eigenvalues (Montgomery-Odlyzko Law).
+                        <span class="info-icon">📶</span>
+                        <div>
+                            <strong>Connection:</strong> The zeros of the Riemann Zeta Function appear to have the same
+                            spacing distribution as GUE eigenvalues (Montgomery-Odlyzko Law).
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">🛗</span>
+                        <div>
+                            <strong>The Crowded Elevator Analogy:</strong> Think of random numbers as people in a field;
+                            they might stand close or far apart randomly. But eigenvalues are like people in a **crowded
+                            elevator**. They want their personal space! As soon as one person moves, everyone else
+                            adjusts to maintain maximum distance. This "repulsion" creates a very structured,
+                            non-clustered spacing.
+                        </div>
                     </div>
                 </div>
             </section>
@@ -153,23 +167,51 @@
                             class</strong> (Real/Complex/Quaternion), not on the distribution of the entries (Gaussian
                         vs Bernoulli).</p>
                     <p>This explains why RMT appears in heavy nuclei physics, bus arrival times, and number theory.</p>
-                </div>
-            </section>
 
-            <!-- Code -->
-            <section class="section" id="code">
-                <div class="section-header">
-                    <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Python: Wigner Semicircle Law</h2>
-                </div>
-                <div class="section-body">
-                    <div class="code-block">
-                        <div class="code-header">
-                            <span class="code-lang">Python</span>
-                            <span class="code-label">Eigenvalue Distribution</span>
+                    <div class="info">
+                        <span class="info-icon">🥣</span>
+                        <div>
+                            <strong>The Bowl of Soup Analogy:</strong> Imagine pouring soup into a bowl. Even if you
+                            pour it in random blobs, gravity pulls it into a smooth, predictable curve. The Wigner
+                            Semicircle is that "shape of gravity" for eigenvalues in high dimensions.
                         </div>
-                        <div class="code-content">
-                            <pre><code class="language-python">import numpy as np
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">☝️</span>
+                        <div>
+                            <strong>The Fingerprint Analogy:</strong> No matter what individual entries (Gaussian, Coin
+                            flips, Dices) go into the matrix, the spacing statistics always look the same. It is a
+                            **universal fingerprint** of "matrix-ness."
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Why This Matters in CS</h3>
+                        <p><strong>Principal Component Analysis (PCA):</strong> In Data Science, we use PCA to find
+                            patterns in large datasets. But what if the data is just noise? Random Matrix Theory
+                            (specifically the Marchenko-Pastur distribution) tells us exactly what the "noise" spectrum
+                            should look like. By comparing our data to this RMT "noise signature," we can rigorously
+                            tell which components are real signals and which are just random artifacts.</p>
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Code -->
+    <section class="section" id="code">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <h2 class="section-title">Python: Wigner Semicircle Law</h2>
+        </div>
+        <div class="section-body">
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-label">Eigenvalue Distribution</span>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 N = 1000
@@ -191,76 +233,73 @@ plt.plot(x, density, 'r-', lw=3, label='Wigner Semicircle')
 plt.title(f"Eigenvalue Density (N={N})")
 plt.legend()
 plt.show()</code></pre>
-                        </div>
-                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <!-- Videos -->
-            <section class="section" id="videos">
-                <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Video Lessons</h2>
-                </div>
-                <div class="section-body">
-                    <div class="video-container">
-                        <div class="video-player">
-                            <iframe id="ytPlayer" src=""
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="video-info">
-                                <div class="video-title" id="videoTitle">Select a video to start</div>
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
+    <!-- Videos -->
+    <section class="section" id="videos">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <h2 class="section-title">Video Lessons</h2>
+        </div>
+        <div class="section-body">
+            <div class="video-container">
+                <div class="video-player">
+                    <iframe id="ytPlayer" src=""
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="video-info">
+                        <div class="video-title" id="videoTitle">Select a video to start</div>
+                        <div class="video-meta" id="videoMeta"></div>
                     </div>
                 </div>
-            </section>
+                <div class="video-list" id="videoList"></div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Practice -->
-            <section class="section" id="practice">
-                <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Practice Problems</h2>
-                </div>
-                <div class="section-body">
-                    <div class="quiz-controls">
-                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-                        <button class="btn" id="btnRevealAll">Reveal All</button>
-                        <button class="btn" id="btnClear">Clear Inputs</button>
-                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-                    </div>
-                    <div id="quizContainer"></div>
-                </div>
-            </section>
-        </main>
+    <!-- Practice -->
+    <section class="section" id="practice">
+        <div class="section-header">
+            <div class="section-number">Section 7</div>
+            <h2 class="section-title">Practice Problems</h2>
+        </div>
+        <div class="section-body">
+            <div class="quiz-controls">
+                <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                <button class="btn" id="btnRevealAll">Reveal All</button>
+                <button class="btn" id="btnClear">Clear Inputs</button>
+                <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+            </div>
+            <div id="quizContainer"></div>
+        </div>
+    </section>
+    </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "Numberphile" },
-                    { title: "Video 8", channel: "Course Reference", vid: "video-title" }
+                "title": "Random Matrix Theory Basics",
+                "items": [
+                    { "title": "The Semicircle Law", "channel": "Visual Math", "vid": "LscJscH2V1I" },
+                    { "title": "Why Random Matrices?", "channel": "Quanta Magazine", "vid": "h9eC0_f3V68" },
+                    { "title": "The Riemann Hypothesis & RMT", "channel": "Numberphile", "vid": "d6c6uIyieoo" }
+                ]
+            },
+            {
+                "title": "Advanced Topics",
+                "items": [
+                    { "title": "The Tracy-Widom Distribution", "channel": "IAS", "vid": "YmD9p9E9wHk" },
+                    { "title": "Moments of Random Matrices", "channel": "Mathematical Lectures", "vid": "LscJscH2V1I" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Wigner", prompt: "Eigenvalues of random symmetric matrices follow a ___ Law.", answer: "Semicircle" },
-            { topic: "GOE", prompt: "GOE stands for Gaussian ___ Ensemble (Real Symmetric).", answer: "Orthogonal" },
-            { topic: "GUE", prompt: "GUE stands for Gaussian ___ Ensemble (Complex Hermitian).", answer: "Unitary" },
-            { topic: "Repulsion", prompt: "Eigenvalues exhibit level ___, meaning they don't like to be close.", answer: "repulsion" },
-            { topic: "Scaling", prompt: "To get the semicircle law, we divide entries by sqrt(___).", answer: "N" },
-            { topic: "Universality", prompt: "Local statistics do not depend on the entry distribution. This is ___.", answer: "universality" },
-            { topic: "Zeta", prompt: "RMT models the zeros of the ___ Zeta function.", answer: "Riemann" },
-            { topic: "Trace", prompt: "The Method of Moments involves computing the Expected ___ of A^k.", answer: "Trace" },
-            { topic: "Physics", prompt: "Wigner invented RMT to model the energy levels of heavy ___.", answer: "nuclei" },
-            { topic: "Free Prob", prompt: "In Free Probability, random matrices behave like non-commuting ___ variables.", answer: "random" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day88_random_matrices_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day88'], storageKey: 'day88_random_matrices_v1' });
     </script>
 </body>
 

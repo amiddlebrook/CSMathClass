@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -121,6 +121,18 @@
                         \mathcal{K}_k(A, b) = \text{span}\{b, Ab, A^2b, \dots, A^{k-1}b\}
                     </div>
                     <p>Why? Because `A^k b` is easy to compute if `A` is sparse!</p>
+
+                    <div class="info">
+                        <span class="info-icon">🔦</span>
+                        <div>
+                            <strong>The Searchlight Analogy:</strong> Imagine you are looking for a lost object in a
+                            dark, infinite warehouse. You only have a single **searchlight** (the vector `b`). Each time
+                            you apply the matrix `A`, you broaden the beam or pivot it slightly (creating the Krylov
+                            Subspace). "Direct Methods" are like turning on all the lights at once (too expensive!).
+                            "Iterative Methods" are like sweeping your searchlight across the most likely spots,
+                            refining your search until you illuminate the target.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -255,29 +267,22 @@ print(f"Residual norm: {np.linalg.norm(b - A@x):.2e}")
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "video-title" }
+                "title": "Krylov Subspace Foundations",
+                "items": [
+                    { "title": "Large Sparse Systems", "channel": "MIT OpenCourseWare", "vid": "vP6_9OqisGk" },
+                    { "title": "Conjugate Gradient Method", "channel": "Mathematical Optimization", "vid": "h6_6Y8z8p20" },
+                    { "title": "Krylov Subspaces Intuitively", "channel": "Numerical Methods", "vid": "8H6L1kOQvD8" },
+                    { "title": "GMRES Explained", "channel": "Mathematical Optimization", "vid": "yJmF1Yp6eQE" },
+                    { "title": "Preconditioning Systems", "channel": "TUDelft", "vid": "TfO5R3dGv3E" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Iterative", prompt: "Iterative methods are preferred for large ___ matrices.", answer: "sparse" },
-            { topic: "Krylov", prompt: "Krylov subspace is span of {b, Ab, ..., ___}.", answer: "A^kb", altAnswers: ["A^k-1b"] },
-            { topic: "CG", prompt: "Conjugate Gradient requires the matrix to be symmetric and ___.", answer: "positive definite", altAnswers: ["spd", "positive-definite"] },
-            { topic: "GMRES", prompt: "GMRES works for ___ matrices.", answer: "non-symmetric", altAnswers: ["general", "nonsymmetric"] },
-            { topic: "Precond", prompt: "Preconditioning attempts to reduce the ___ number.", answer: "condition" },
-            { topic: "Memory", prompt: "Direct methods like Gaussian Elimination suffer from ___ (new non-zeros).", answer: "fill-in" },
-            { topic: "Complexity", prompt: "Iterative methods rely on fast Matrix-___ multiplication.", answer: "vector" },
-            { topic: "Arnoldi", prompt: "GMRES uses the ___ iteration to build an orthogonal basis.", answer: "arnoldi" },
-            { topic: "Lanczos", prompt: "CG uses the ___ iteration (symmetric Arnoldi).", answer: "lanczos" },
-            { topic: "Restart", prompt: "GMRES is often ___ to save memory.", answer: "restarted" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day84_iterative_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day84'], storageKey: 'day84_iterative_v1' });
     </script>
 </body>
 

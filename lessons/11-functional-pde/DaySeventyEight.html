@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Entropy
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,6 +105,18 @@
                     <p>If I tell you "I won the lottery", learning that is high information (low probability).</p>
                     <div class="math-block">
                         I(x) = -\log_2 P(x)
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">🎮</span>
+                        <div>
+                            <strong>The Guessing Game Analogy:</strong> Information is like playing "20 Questions".
+                            Every "Yes/No" answer is exactly 1 bit because it cuts your uncertainty in half. If you
+                            already know I'm thinking of a dog, and I say "It's an animal," you learned
+                            <strong>nothing</strong> (0 bits). But if I say "It's a neon-green robotic poodle," you
+                            learned a <strong>lot</strong> of bits because that outcome was extremely unlikely (high
+                            surprise).
+                        </div>
                     </div>
                 </div>
             </section>
@@ -258,27 +270,21 @@ print(f"Entropy s3: {calculate_entropy(s3):.2f} bits (High)")
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "compression" },
-                    { title: "Video 3", channel: "Course Reference", vid: "Probability" },
-                    { title: "Video 9", channel: "Course Reference", vid: "unimportant" },
-                    { title: "Video 10", channel: "Course Reference", vid: "information" }
+                "title": "Information Theory",
+                "items": [
+                    { "title": "Information Theory Introduction", "channel": "Computerphile", "vid": "v68zYyaEmEA" },
+                    { "title": "Entropy & Information", "channel": "Computerphile", "vid": "2s3aEfC6L8I" },
+                    { "title": "Huffman Coding", "channel": "Computerphile", "vid": "umTbIvGeonI" },
+                    { "title": "Claude Shannon - Father of the Info Age", "channel": "Short Circuit", "vid": "z2Whj_nL-x8" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Entropy", prompt: "Entropy measures the average ___ content.", answer: "information" },
-            { topic: "Probability", prompt: "Low probability events provide ___ information.", answer: "high" },
-            { topic: "Coding", prompt: "Huffman coding assigns shorter codes to ___ frequent symbols.", answer: "more" },
-            { topic: "Channel", prompt: "The Channel Coding theorem proves transmission can be reliable even with ___.", answer: "noise", altAnswers: ["errors"] },
-            { topic: "Unit", prompt: "Information is typically measured in ___.", answer: "bits" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day78_info_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day78'], storageKey: 'day78_info_v1' });
     </script>
 </body>
 
