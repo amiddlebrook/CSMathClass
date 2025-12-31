@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                18 practice problems
+                25 practice problems
             </div>
         </div>
     </header>
@@ -381,6 +381,7 @@ has_edge = matrix[<span class="code-number">1</span>][<span class="code-number">
     </div>
 
     <script src="../../lessons/shared-scripts.js"></script>
+    <script src="../../lessons/questions-data.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
@@ -393,27 +394,7 @@ has_edge = matrix[<span class="code-number">1</span>][<span class="code-number">
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Basics", prompt: "Tree with n nodes has ___-1 edges", answer: "n" },
-            { topic: "BST", prompt: "BST: left subtree values are ___ than parent", answer: "less", altAnswers: ["smaller", "lower"] },
-            { topic: "BST", prompt: "Balanced BST search is O(log ___)", answer: "n" },
-            { topic: "BST", prompt: "Unbalanced BST degrades to O(___)", answer: "n" },
-            { topic: "Heap", prompt: "Min-heap root contains the ___", answer: "minimum", altAnswers: ["min", "smallest"] },
-            { topic: "Heap", prompt: "Heap push is O(log ___)", answer: "n" },
-            { topic: "Heap", prompt: "Heap peek is O(___)", answer: "1" },
-            { topic: "Trie", prompt: "Trie is also called ___ tree", answer: "prefix" },
-            { topic: "Trie", prompt: "Trie search is O(___) where k = word length", answer: "k" },
-            { topic: "Balance", prompt: "AVL and Red-Black are ___-balancing trees", answer: "self" },
-            { topic: "Basics", prompt: "G = (V, ___)", answer: "e", altAnswers: ["edges"] },
-            { topic: "Space", prompt: "Adjacency list space is O(V + ___)", answer: "e", altAnswers: ["edges"] },
-            { topic: "Space", prompt: "Adjacency matrix space is O(V^___)", answer: "2" },
-            { topic: "Operations", prompt: "Check edge in matrix is O(___)", answer: "1" },
-            { topic: "Operations", prompt: "Get all neighbors in matrix is O(___)", answer: "v", altAnswers: ["n"] },
-            { topic: "Choice", prompt: "Use adjacency list for ___ graphs", answer: "sparse" },
-            { topic: "Choice", prompt: "Use adjacency matrix for ___ graphs", answer: "dense" },
-            { topic: "Types", prompt: "DAG = Directed ___ Graph", answer: "acyclic" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day33_trees_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day33'], storageKey: 'day33_trees_v2' });
     </script>
 </body>
 

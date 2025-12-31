@@ -56,7 +56,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                10 practice problems
+                25 practice problems
             </div>
         </div>
     </header>
@@ -257,6 +257,7 @@
     </div>
 
     <script src="../../lessons/shared-scripts.js"></script>
+    <script src="../../lessons/questions-data.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
@@ -269,19 +270,7 @@
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Sorting", prompt: "Merge sort time complexity is O(n log ___)", answer: "n" },
-            { topic: "Sorting", prompt: "Quick sort worst case is O(n^___)", answer: "2" },
-            { topic: "Sorting", prompt: "___ sort is stable and O(n log n)", answer: "merge" },
-            { topic: "Search", prompt: "Binary search is O(log ___)", answer: "n" },
-            { topic: "Search", prompt: "Binary search requires ___ data", answer: "sorted" },
-            { topic: "Greedy", prompt: "Greedy makes ___ optimal choices", answer: "locally", altAnswers: ["local"] },
-            { topic: "Greedy", prompt: "Dijkstra is a ___ algorithm", answer: "greedy" },
-            { topic: "D&C", prompt: "D&C = Divide and ___", answer: "conquer" },
-            { topic: "Bounds", prompt: "Comparison sort lower bound is Omega(n log ___)", answer: "n" },
-            { topic: "D&C", prompt: "Master ___ solves recurrences", answer: "theorem" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day34_sort_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day34'], storageKey: 'day34_sort_v2' });
     </script>
 </body>
 

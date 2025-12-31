@@ -30,9 +30,9 @@ Day,File,Lines,Sections,InfoBlocks,SimpleAnalogies,CodeBlocks,Videos,ValidVideos
 29,DayTwentyNine.html,300,7,3,3,1,0,0,0,"",45,12,20,true
 30,DayThirty.html,321,7,5,5,1,0,0,0,"",45,12,20,true
 31,DayThirtyOne.html,354,9,3,3,1,5,5,0,"",45,18,20,true
-32,DayThirtyTwo.html,604,11,4,3,7,0,0,0,"",75,20,20,false
-33,DayThirtyThree.html,420,10,4,3,4,4,4,0,"",75,18,20,true
-34,DayThirtyFour.html,288,6,3,3,2,4,4,0,"",45,10,20,true
+32,DayThirtyTwo.html,605,11,4,3,7,0,0,0,"",75,25,20,true
+33,DayThirtyThree.html,401,10,4,3,4,4,4,0,"",75,25,20,true
+34,DayThirtyFour.html,277,6,3,3,2,4,4,0,"",45,25,20,true
 35,DayThirtyFive.html,297,6,3,3,2,4,4,0,"",50,10,20,true
 36,DayThirtySix.html,367,9,4,3,1,0,0,0,"",90,20,20,false
 37,DayThirtySeven.html,463,6,5,3,3,0,0,0,"",35,10,20,true
