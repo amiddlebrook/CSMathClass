@@ -120,6 +120,13 @@
                         <div class="info">
                             This was formalized by Weierstrass in the 19th century to put calculus on solid ground.
                         </div>
+                        <div class="info">
+                            <strong>🎮 Simple:</strong> Think of it as a game. Your friend picks how close (ε) the
+                            output must be to L.
+                            <br>You win if you can pick a range (δ) around c where the function stays within their
+                            bounds.
+                            <br>The limit exists if you can ALWAYS win, no matter how small they choose ε.
+                        </div>
                     </div>
             </section>
 
@@ -172,6 +179,12 @@
                     <p>
                         In $\epsilon-\delta$ terms: $\forall \epsilon > 0, \exists \delta > 0$ such that $|x - c| <
                             \delta \implies |f(x) - f(c)| < \epsilon$. </p>
+                            <div class="info">
+                                <strong>✏️ Simple:</strong> A function is continuous if you can draw it without lifting
+                                your pencil.
+                                <br>No jumps, no holes, no teleporting. The function value at c equals the value you'd
+                                expect from approaching c.
+                            </div>
                 </div>
             </section>
 
@@ -219,6 +232,12 @@
                                 <br>
                                 This is useful for finding roots.
                             </p>
+                            <div class="info">
+                                <strong>🚗 Simple:</strong> If you drive from sea level to 5,000 feet elevation...
+                                <br>At some point you MUST have been at exactly 1,000 feet, 2,000 feet, etc.
+                                <br>You can't teleport! That's IVT—continuous functions hit every value between
+                                endpoints.
+                            </div>
                     </div>
             </section>
 
@@ -342,23 +361,17 @@ root = solve_ivt(f, <span class="code-number">0</span>, <span class="code-number
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "3Blue1Brown" },
-            { title: "Video 6", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 7", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 8", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 9", channel: "Course Reference", vid: "h58msdeqf7k" },
-            { title: "Video 10", channel: "Course Reference", vid: "kfF40MiS7zA" }
-            ]
-        }
-    ];
-
+            {
+                title: "Limits & Continuity",
+                items: [
+                    { title: "Epsilon-Delta Definition", channel: "3Blue1Brown", vid: "kfF40MiS7zA" },
+                    { title: "Limits Intuition", channel: "3Blue1Brown", vid: "h58msdeqf7k" },
+                    { title: "Squeeze Theorem", channel: "Khan Academy", vid: "rlGm9fxb9Z8" },
+                    { title: "Continuity Definition", channel: "Khan Academy", vid: "joewRl1CTL8" },
+                    { title: "Intermediate Value Theorem", channel: "Khan Academy", vid: "vuflWXYMVms" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Def", prompt: "For every epsilon > 0 there exists a ___ > 0.", answer: "delta" },
             { topic: "Limit", prompt: "Limit of sin(x)/x as x -> 0 is ___.", answer: "1" },
@@ -369,7 +382,7 @@ root = solve_ivt(f, <span class="code-number">0</span>, <span class="code-number
             { topic: "Topology", prompt: "A set [0, 1] including endpoints is ___.", answer: "closed" },
             { topic: "IVT", prompt: "IVT guarantees a value exists if the function is ___.", answer: "continuous" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day44_analysis_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day44_analysis_v2' });
     </script>
 </body>
 

@@ -129,6 +129,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="info">
+                        <strong>🎯 Simple:</strong> An estimator is like an archer aiming at a bullseye.
+                        <br>• <strong>Unbiased</strong> = arrows cluster around the bullseye (not systematically off)
+                        <br>• <strong>Consistent</strong> = more shots get closer to center
+                        <br>• <strong>Efficient</strong> = arrows have smallest spread
+                    </div>
                 </div>
             </section>
 
@@ -164,6 +170,12 @@
                             k = pn \implies \hat{p}_{MLE} = \frac{k}{n}</div>
                         <p>Result: The intuitive "sample proportion" is exactly the MLE!</p>
                     </div>
+                    <div class="info">
+                        <strong>🔍 Simple:</strong> MLE is like a detective solving "who did it?"
+                        <br>"Given the evidence (data), which suspect (parameter) makes the evidence MOST LIKELY?"
+                        <br>You're not asking "what's the probability of the suspect?" but "which suspect best explains
+                        what we saw?"
+                    </div>
 
                     <div class="info">
                         <strong>MAP Estimation:</strong> If we have a <em>Prior</em> distribution on $\theta$, we
@@ -198,6 +210,12 @@
                     <div class="math-block">High Bias: Model is too simple (misses signal)
                         High Variance: Model is too complex (fits noise)
                         Total Error is convex; we want the sweet spot.</div>
+                    <div class="info">
+                        <strong>🎯 Simple (Dartboard Analogy):</strong>
+                        <br>• <strong>High Bias:</strong> All darts land in the same wrong spot (consistent but wrong)
+                        <br>• <strong>High Variance:</strong> Darts scatter everywhere (sometimes right, often wrong)
+                        <br>• <strong>Sweet Spot:</strong> Darts cluster around the bullseye
+                    </div>
                 </div>
             </section>
 
@@ -521,40 +539,40 @@ model.fit(X, y)
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-    {
-        "title": "Lesson Videos",
-        "items": [
             {
-                "title": "Maximum Likelihood Estimation",
-                "vid": "Xcn85Dn10zs"
-            },
-            {
-                "title": "Bias-Variance Tradeoff",
-                "vid": "EuBBz3bI-aA"
-            },
-            {
-                "title": "p-values",
-                "vid": "vemZtEM63GY"
-            },
-            {
-                "title": "Linear Regression \u2014 StatQuest",
-                "vid": "zPG4NjIkCjc"
-            },
-            {
-                "title": "R-squared Explained",
-                "vid": "2AQKmw14mHM"
-            },
-            {
-                "title": "Multiple Regression",
-                "vid": "EkAQAi3a4js"
-            },
-            {
-                "title": "Gradient Descent for Regression",
-                "vid": "IHZwWFHWa-w"
+                "title": "Lesson Videos",
+                "items": [
+                    {
+                        "title": "Maximum Likelihood Estimation",
+                        "vid": "Xcn85Dn10zs"
+                    },
+                    {
+                        "title": "Bias-Variance Tradeoff",
+                        "vid": "EuBBz3bI-aA"
+                    },
+                    {
+                        "title": "p-values",
+                        "vid": "vemZtEM63GY"
+                    },
+                    {
+                        "title": "Linear Regression \u2014 StatQuest",
+                        "vid": "zPG4NjIkCjc"
+                    },
+                    {
+                        "title": "R-squared Explained",
+                        "vid": "2AQKmw14mHM"
+                    },
+                    {
+                        "title": "Multiple Regression",
+                        "vid": "EkAQAi3a4js"
+                    },
+                    {
+                        "title": "Gradient Descent for Regression",
+                        "vid": "IHZwWFHWa-w"
+                    }
+                ]
             }
-        ]
-    }
-];
+        ];
         const QUESTIONS = [
             { topic: "MLE", prompt: "MLE maximizes the ___ function.", answer: "likelihood" },
             { topic: "Log-Likelihood", prompt: "We use log-likelihood because it turns products into ___.", answer: "sums" },
