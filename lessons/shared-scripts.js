@@ -1,5 +1,12 @@
 // Shared JavaScript for CSMathClass Lessons - DayOne Standard
 
+// ==================== IMMEDIATE THEME INITIALIZATION ====================
+// This runs BEFORE the page renders to prevent flash of wrong theme
+(function initThemeImmediate() {
+    const saved = localStorage.getItem('math_cs_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+})();
+
 // ==================== THEME TOGGLE ====================
 const sunIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
 const moonIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
@@ -65,10 +72,13 @@ function initVideoPlayer(videoGroups) {
             btn.className = "video-item";
             btn.dataset.vid = item.vid;
             btn.innerHTML = `
-        <span class="video-num">${idx}</span>
-        <div>
+        <div class="video-thumbnail-wrapper">
+          <img class="video-thumbnail" src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="${item.title}">
+          <span class="video-num">${idx}</span>
+        </div>
+        <div class="video-item-info">
           <div class="video-item-title">${item.title}</div>
-          <div class="video-item-desc">${item.channel}</div>
+          <div class="video-item-desc">${item.channel || "YouTube Lesson"}</div>
         </div>
       `;
             btn.addEventListener("click", () => setVideo(item, btn));
@@ -99,7 +109,7 @@ function setVideo(item, btn) {
 
     let meta = document.getElementById("videoMeta");
     if (!meta) meta = document.querySelector(".video-meta");
-    if (meta) meta.textContent = item.channel;
+    if (meta) meta.textContent = item.channel || "YouTube Lesson";
 }
 
 // ==================== QUIZ SYSTEM ====================
@@ -232,63 +242,10 @@ function updateQuizUI(totalQuestions) {
     if (progressFill) progressFill.style.width = `${pct}%`;
 }
 
-// ==================== SIMPLE MODE ====================
-function initSimpleMode() {
-    if (document.getElementById('simpleModeToggle')) return;
-
-    const navInner = document.querySelector('.nav-inner');
-    if (!navInner) return;
-
-    const btn = document.createElement('button');
-    btn.id = 'simpleModeToggle';
-    btn.className = 'theme-toggle';
-    btn.style.marginLeft = '8px';
-    btn.style.width = 'auto';
-    btn.style.padding = '0 12px';
-    btn.style.fontSize = '13px';
-    btn.style.fontWeight = '600';
-    btn.innerHTML = 'Simple';
-    btn.type = 'button';
-
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle && themeToggle.parentNode === navInner) {
-        navInner.insertBefore(btn, themeToggle);
-    } else {
-        navInner.appendChild(btn);
-    }
-
-    function updateSimpleMode() {
-        const isSimple = localStorage.getItem('math_cs_simple_mode') === 'true';
-        if (isSimple) {
-            document.body.classList.add('simple-mode');
-            btn.style.background = 'var(--accent-light)';
-            btn.style.color = 'var(--accent-dark)';
-            btn.style.borderColor = 'var(--accent)';
-            document.querySelectorAll('.complex-only').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.simple-only').forEach(el => el.style.display = 'block');
-        } else {
-            document.body.classList.remove('simple-mode');
-            btn.style.background = '';
-            btn.style.color = '';
-            btn.style.borderColor = '';
-            document.querySelectorAll('.complex-only').forEach(el => el.style.display = '');
-            document.querySelectorAll('.simple-only').forEach(el => el.style.display = 'none');
-        }
-    }
-
-    btn.addEventListener('click', () => {
-        const current = localStorage.getItem('math_cs_simple_mode') === 'true';
-        localStorage.setItem('math_cs_simple_mode', !current);
-        updateSimpleMode();
-    });
-
-    updateSimpleMode();
-}
 
 // ==================== INIT ====================
 function initLesson(config) {
     initThemeToggle();
-    initSimpleMode();
     initTocHighlight();
     if (config.videos) initVideoPlayer(config.videos);
     if (config.questions) initQuiz(config.questions, config.storageKey || 'lesson_quiz');

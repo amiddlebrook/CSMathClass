@@ -2,22 +2,25 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Day 3: Functions and Relations</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-  <link rel="stylesheet" href="../../lessons/shared-styles.css">
-  <script src="../../lessons/questions-data.js"></script>
-  <script src="../../lessons/shared-scripts.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 3: Functions and Relations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <link rel="stylesheet" href="../../lessons/shared-styles.css">
+    <script src="../../lessons/questions-data.js"></script>
+    <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+    <nav class="nav">
         <div class="nav-inner">
             <a href="../../index.html" class="nav-back">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -46,7 +49,7 @@
             </svg>
             Day 3 · Mathematical Maturity
         </div>
-        
+
         <p class="hero-desc">
             Functions map inputs to outputs. Relations link objects together. These two structures form the backbone of
             everything from database schemas to functional programming.
@@ -91,33 +94,40 @@
                     <h2 class="section-title">Function Anatomy</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        A <strong>function</strong> $f: A \to B$ assigns exactly one element of $B$ to each element of
-                        $A$.
-                    </p>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Components</h3>
-                        <ul>
-                            <li><strong>Domain ($A$):</strong> The set of valid inputs.</li>
-                            <li><strong>Codomain ($B$):</strong> The set of possible outputs.</li>
-                            <li><strong>Range (Image):</strong> The set of actual outputs produced. Rules: Range
-                                $\subseteq$ Codomain.</li>
-                        </ul>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span class="code-label">Type
-                                    hints reveal function structure</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment"># f: int -> str</span>
-<span class="code-keyword">def</span> <span class="code-function">int_to_binary</span>(x: <span class="code-type">int</span>) -> <span class="code-type">str</span>:
-    <span class="code-keyword">return</span> <span class="code-function">bin</span>(x)
-
-<span class="code-comment"># Domain: Set of all integers (int)</span>
-<span class="code-comment"># Codomain: Set of all strings (str)</span>
-<span class="code-comment"># Range: Set of strings starting with "0b" followed by 0s and 1s</span></pre>
+                    <div class="complex-only">
+                        <p>
+                            A <strong>function</strong> $f: A \to B$ assigns exactly one element of $B$ to each element
+                            of $A$.
+                        </p>
+                        <div class="section-body">
+                            <p>
+                                Think of a <strong>function</strong> like a machine: you put something in, and you get
+                                exactly one thing out. It is the mathematical version of a programming function that has
+                                no side effects.
+                            </p>
+                            <div class="subsection">
+                                <h3 class="subsection-title">The Three Parts</h3>
+                                <div class="info">
+                                    <strong>Analogy:</strong> A vending machine. The <strong>Domain</strong> is the
+                                    coins/codes you enter. The <strong>Codomain</strong> is the category "Snacks". The
+                                    <strong>Range</strong> is the specific chips and sodas actually available inside.
+                                </div>
+                                <ul>
+                                    <li><strong>Domain ($A$):</strong> The set of all valid inputs.</li>
+                                    <li><strong>Codomain ($B$):</strong> The set of potential output types.</li>
+                                    <li><strong>Range:</strong> The set of actual outputs produced ($f(A)$).</li>
+                                </ul>
+                                <div class="code-block">
+                                    <div class="code-header"><span class="code-lang">Python</span><span
+                                            class="code-label">Functions map types</span></div>
+                                    <div class="code-content">
+                                        <pre><span class="code-comment"># f: int -> str</span>
+<span class="code-keyword">def</span> <span class="code-function">to_string</span>(n: <span class="code-type">int</span>) -> <span class="code-type">str</span>:
+    <span class="code-keyword">return</span> <span class="code-function">str</span>(n)</pre>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </section>
 
             <!-- Function Types -->
@@ -127,26 +137,26 @@
                     <h2 class="section-title">Types of Functions</h2>
                 </div>
                 <div class="section-body">
+                    <p>Functions can behave in specific ways depending on how they map inputs to outputs.</p>
                     <div class="subsection">
-                        <h3 class="subsection-title">1. Injective (One-to-One)</h3>
-                        <p>Every input maps to a <strong>unique</strong> output. No collisions.</p>
-                        <div class="math-block">Definition: f(x) = f(y) ⇒ x = y
-                            Test: Horizontal Line Test (graph hits at most once).
-                            CS Context: Hash functions (ideally), unique IDs.</div>
+                        <h3 class="subsection-title">1. Injective (Unique mapping)</h3>
+                        <p>No two different inputs map to the same output. No collisions.</p>
+                        <div class="info"><strong>Analogy:</strong> A fingerprint scanner. Every unique finger maps to a
+                            unique ID.</div>
+                        <div class="math-block">f(a) = f(b) \implies a = b</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">2. Surjective (Onto)</h3>
-                        <p>Every element in the Codomain is covered. Logic: The Range equals the Codomain.</p>
-                        <div class="math-block">Definition: ∀y ∈ B, ∃x ∈ A such that f(x) = y.
-                            CS Context: A compression algorithm that can generate any possible file is surjective? No,
-                            usually not.</div>
+                        <h3 class="subsection-title">2. Surjective (onto)</h3>
+                        <p>Every element in the Codomain is "hit" by at least one input. The Range is the entire
+                            Codomain.</p>
+                        <div class="info"><strong>Analogy:</strong> A bus where every single seat is taken. (The seats
+                            are the codomain).</div>
+                        <div class="math-block">\forall y \in B, \exists x \in A \text{ s.t. } f(x) = y</div>
                     </div>
                     <div class="subsection">
-                        <h3 class="subsection-title">3. Bijective (One-to-One AND Onto)</h3>
-                        <p>Perfect pairing. Invertible.</p>
-                        <div class="rule">
-                            <strong>Theorem:</strong> A function is invertible if and only if it is Bijective.
-                        </div>
+                        <h3 class="subsection-title">3. Bijective (Perfect pairs)</h3>
+                        <p>Both Injective and Surjective. Every input has exactly one partner, and vice versa. These
+                            functions are <strong>invertible</strong>.</p>
                     </div>
                 </div>
             </section>
@@ -158,18 +168,15 @@
                     <h2 class="section-title">Composition & Inverse</h2>
                 </div>
                 <div class="section-body">
+                    <p>Functions can be chained together or reversed if they are bijections.</p>
                     <div class="subsection">
                         <h3 class="subsection-title">Composition</h3>
-                        <p>$(f \circ g)(x) = f(g(x))$. Output of g becomes input of f.</p>
+                        <p>$(f \circ g)(x) = f(g(x))$. The output of the inner function becomes the input of the outer
+                            function.</p>
                         <div class="warning">
-                            <strong>Order Matters:</strong> $f \circ g \neq g \circ f$ usually.
+                            <strong>Order Matters:</strong> Doing your socks then your shoes is not the same as shoes
+                            then socks! $f(g(x)) \neq g(f(x))$.
                         </div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Inverse Functions</h3>
-                        <p>If $f: A \to B$ is bijective, $f^{-1}: B \to A$ reverses the mapping.</p>
-                        <div class="math-block">f(f^{-1}(y)) = y
-                            f^{-1}(f(x)) = x</div>
                     </div>
                 </div>
             </section>
@@ -181,28 +188,27 @@
                     <h2 class="section-title">Relations</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        Start with set $A$. A connection between elements is a statement $xRy$ (x is related to y).
-                        Formally, a relation $R$ is a subset of $A \times A$.
-                    </p>
+                    <p>A <strong>Relation</strong> is a general way to link two things together (e.g. "is friend of",
+                        "is taller than", or "is divisible by").</p>
                     <div class="subsection">
-                        <h3 class="subsection-title">Properties</h3>
+                        <h3 class="subsection-title">The Three Pillar Properties</h3>
+                        <p>For a relation to behave like "Equality", it needs three specific traits:</p>
                         <div class="table-wrap">
                             <table>
                                 <tr>
                                     <td><strong>Reflexive</strong></td>
                                     <td>$\forall x, xRx$</td>
-                                    <td>Everyone relates to themselves (e.g. $\leq$, $=$)</td>
+                                    <td>You relate to yourself. (\(x = x\))</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Symmetric</strong></td>
                                     <td>$xRy \implies yRx$</td>
-                                    <td>Two-way street (e.g. "is sibling of")</td>
+                                    <td>A two-way street. (If I'm your sibling, you're mine).</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Transitive</strong></td>
                                     <td>$xRy \land yRz \implies xRz$</td>
-                                    <td>Chain rule (e.g. $<$, $\leq$, "ancestor of" )</td>
+                                    <td>The chain rule. (If \(A < B\) and \(B < C\), then \(A < C\)).</td>
                                 </tr>
                             </table>
                         </div>
@@ -217,30 +223,15 @@
                     <h2 class="section-title">Equivalence Relations</h2>
                 </div>
                 <div class="section-body">
-                    <p>
-                        A relation that is <strong>Reflexive, Symmetric, and Transitive</strong> is an Equivalence
-                        Relation.
-                        It behaves like "equality".
-                    </p>
+                    <p>If a relation is <strong>Reflexive, Symmetric, and Transitive</strong>, it is an Equivalence
+                        Relation. It slices the world into buckets where everything in a bucket is "the same" under that
+                        relation.</p>
                     <div class="subsection">
-                        <h3 class="subsection-title">Modular Arithmetic</h3>
-                        <p>The relation $a \equiv b \pmod n$ is an equivalence relation on $\mathbb{Z}$.</p>
-                        <ul>
-                            <li><strong>Reflexive:</strong> $a \equiv a \pmod n$ (Since $n | 0$).</li>
-                            <li><strong>Symmetric:</strong> If $a \equiv b$, then $b \equiv a$.</li>
-                            <li><strong>Transitive:</strong> If $a \equiv b$ and $b \equiv c$, then $a \equiv c$.</li>
-                        </ul>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Partitions</h3>
-                        <p>
-                            An equivalence relation slices the set $A$ into disjoint <strong>Equivalence
-                                Classes</strong>.
-                            For modulo 3, the integers are sliced into:
-                        </p>
-                        <div class="math-block">[0] = {..., -3, 0, 3, 6, ...}
-                            [1] = {..., -2, 1, 4, 7, ...}
-                            [2] = {..., -1, 2, 5, 8, ...}</div>
+                        <h3 class="subsection-title">Equivalence Classes</h3>
+                        <p>In <strong>Modulo 3</strong>, every number has a "remainder bucket":</p>
+                        <div class="math-block">[0] = \{0, 3, 6, 9, ...\} \text{ (Divisible by 3)}
+                            [1] = \{1, 4, 7, 10, ...\} \text{ (Remainder 1)}
+                            [2] = \{2, 5, 8, 11, ...\} \text{ (Remainder 2)}</div>
                     </div>
                 </div>
             </section>
@@ -252,17 +243,17 @@
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-          <div class="video-container">
-            <div class="video-player">
-              <iframe id="ytPlayer" src="" allowfullscreen></iframe>
-              <div class="video-info">
-                <div class="video-title" id="videoTitle">Select a video</div>
-                <div class="video-meta" id="videoMeta"></div>
-              </div>
-            </div>
-            <div class="video-list" id="videoList"></div>
-          </div>
-        </div>
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src="" allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
             </section>
 
             <!-- Practice -->
@@ -283,17 +274,37 @@
             </section>
         </main>
     </div>
-<script>
-      const VIDEO_GROUPS = [
-        {
-          title: "Lesson Videos",
-          items: [
-            { title: "Video 1", channel: "Course Reference", vid: "video_placeholder_3_1" }
-          ]
-        }
-      ];
-      initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day3'], storageKey: 'day3_v1' });
+    <script>
+        const VIDEO_GROUPS = [
+            {
+                title: "Functions Basics",
+                items: [
+                    { title: "Introduction to Functions", channel: "Khan Academy", vid: "m6vS9LAsCxs" },
+                    { title: "Terminology: Domain & Range", channel: "TheTrevTutor", vid: "6Yv_uR96jHE" },
+                    { title: "Functions vs Relations", channel: "TheTrevTutor", vid: "h_fM2eDq6Xk" }
+                ]
+            },
+            {
+                title: "Mapping & Inverses",
+                items: [
+                    { title: "Injective, Surjective, Bijective", channel: "TheTrevTutor", vid: "Pz5o6XvT-iM" },
+                    { title: "Function Composition", channel: "Organic Chemistry Tutor", vid: "E8it8oI8zOQ" },
+                    { title: "Inverse Functions", channel: "Math Sorcerer", vid: "qB1u7D9P-vQ" }
+                ]
+            },
+            {
+                title: "Relations Deep Dive",
+                items: [
+                    { title: "Properties of Relations", channel: "TheTrevTutor", vid: "_Y8r-G_P0H4" },
+                    { title: "Equivalence Relations", channel: "TheTrevTutor", vid: "8_p5M0wAs7E" },
+                    { title: "Equivalence Classes", channel: "TheTrevTutor", vid: "ecODhVfsZwk" },
+                    { title: "Partial Orders (Intro)", channel: "TheTrevTutor", vid: "5c8Nl7cMjgU" }
+                ]
+            }
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day3'], storageKey: 'day3_v1' });
     </script>
 </body>
 </body>
+
 </html>

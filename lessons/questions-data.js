@@ -391,6 +391,392 @@ window.QUESTIONS_DATA = {
       "display": "Theorem / Proposition"
     }
   ],
+  "day7": [
+    {
+      "id": 1,
+      "topic": "Polynomials",
+      "prompt": "The highest power of x in a polynomial is called its ___.",
+      "answer": [
+        "degree"
+      ],
+      "display": "Degree"
+    },
+    {
+      "id": 2,
+      "topic": "Polynomials",
+      "prompt": "What is the degree of P(x) = 5x³ + 2x² + 7?",
+      "answer": [
+        "3"
+      ],
+      "display": "3"
+    },
+    {
+      "id": 3,
+      "topic": "Polynomials",
+      "prompt": "True or False: The leading term (highest power) determines the end behavior of the graph.",
+      "answer": [
+        "true",
+        "t"
+      ],
+      "display": "True"
+    },
+    {
+      "id": 4,
+      "topic": "Piecewise",
+      "prompt": "A function that uses different rules for different parts of its domain is called a ___ function.",
+      "answer": [
+        "piecewise"
+      ],
+      "display": "Piecewise"
+    },
+    {
+      "id": 5,
+      "topic": "Piecewise",
+      "prompt": "Evaluation: If f(x) = { x+1 if x≥0, x-1 if x<0 }, what is f(0)?",
+      "answer": [
+        "1"
+      ],
+      "display": "1"
+    },
+    {
+      "id": 6,
+      "topic": "Rational",
+      "prompt": "A function that is a fraction of two polynomials is called a ___ function.",
+      "answer": [
+        "rational"
+      ],
+      "display": "Rational"
+    },
+    {
+      "id": 7,
+      "topic": "Rational",
+      "prompt": "Values of x that make the denominator of a rational function zero lead to vertical ___.",
+      "answer": [
+        "asymptotes",
+        "asymptote"
+      ],
+      "display": "Asymptotes"
+    },
+    {
+      "id": 8,
+      "topic": "Rational",
+      "prompt": "What is the domain restriction for f(x) = 1 / (x - 5)? (x ≠ ?)",
+      "answer": [
+        "5"
+      ],
+      "display": "5"
+    },
+    {
+      "id": 9,
+      "topic": "Complexity",
+      "prompt": "Which grows faster for very large n: n² or 2ⁿ?",
+      "answer": [
+        "2^n",
+        "2ⁿ",
+        "exponential"
+      ],
+      "display": "2ⁿ (Exponential)"
+    },
+    {
+      "id": 10,
+      "topic": "Complexity",
+      "prompt": "Growth rate O(n) is called ___ growth.",
+      "answer": [
+        "linear"
+      ],
+      "display": "Linear"
+    },
+    {
+      "id": 11,
+      "topic": "Complexity",
+      "prompt": "Growth rate O(n²) is called ___ growth.",
+      "answer": [
+        "quadratic"
+      ],
+      "display": "Quadratic"
+    },
+    {
+      "id": 12,
+      "topic": "Complexity",
+      "prompt": "True or False: Every polynomial eventually grows slower than any exponential function.",
+      "answer": [
+        "true",
+        "t"
+      ],
+      "display": "True"
+    },
+    {
+      "id": 13,
+      "topic": "Logarithms",
+      "prompt": "What is log₂(8)?",
+      "answer": [
+        "3"
+      ],
+      "display": "3"
+    },
+    {
+      "id": 14,
+      "topic": "Logarithms",
+      "prompt": "Logarithmic growth O(log n) is ___ (faster/slower) than linear growth O(n).",
+      "answer": [
+        "slower"
+      ],
+      "display": "Slower"
+    },
+    {
+      "id": 15,
+      "topic": "Analogies",
+      "prompt": "In the Simple Mode analogy, Piecewise functions are compared to which coding structure?",
+      "answer": [
+        "if/else",
+        "if-else",
+        "if else",
+        "conditional"
+      ],
+      "display": "If/Else (Conditional)"
+    },
+    {
+      "id": 16,
+      "topic": "Analogies",
+      "prompt": "The 'Power Level' rule refers to which characteristic of a polynomial?",
+      "answer": [
+        "degree",
+        "highest power"
+      ],
+      "display": "Degree / Highest Power"
+    },
+    {
+      "id": 17,
+      "topic": "Rational",
+      "prompt": "The 'Invisible Fence' refers to what graphical feature of rational functions?",
+      "answer": [
+        "asymptote",
+        "asymptotes"
+      ],
+      "display": "Asymptotes"
+    },
+    {
+      "id": 18,
+      "topic": "Complexity",
+      "prompt": "Binary search is an example of O(___) complexity.",
+      "answer": [
+        "log n",
+        "logn"
+      ],
+      "display": "log n"
+    },
+    {
+      "id": 19,
+      "topic": "Polynomials",
+      "prompt": "Degree of P(x) = (x+1)(x+2)?",
+      "answer": [
+        "2"
+      ],
+      "display": "2"
+    },
+    {
+      "id": 20,
+      "topic": "Concept",
+      "prompt": "Which 'speed tier' in the curriculum means 'Game Over' for large scale data?",
+      "answer": [
+        "exponential",
+        "2^n",
+        "2ⁿ",
+        "o(2^n)"
+      ],
+      "display": "Exponential"
+    }
+  ],
+  "day8": [
+    {
+      "id": 1,
+      "topic": "Transformations",
+      "prompt": "Comparing f(x) and f(x-3), the graph of f(x-3) is shifted 3 units to the ___.",
+      "answer": [
+        "right"
+      ],
+      "display": "Right"
+    },
+    {
+      "id": 2,
+      "topic": "Transformations",
+      "prompt": "Comparing f(x) and f(x)+4, the graph of f(x)+4 is shifted 4 units ___.",
+      "answer": [
+        "up"
+      ],
+      "display": "Up"
+    },
+    {
+      "id": 3,
+      "topic": "Transformations",
+      "prompt": "The transformation -f(x) reflects the graph across the ___ axis.",
+      "answer": [
+        "x",
+        "x-axis"
+      ],
+      "display": "x-axis"
+    },
+    {
+      "id": 4,
+      "topic": "Transformations",
+      "prompt": "The transformation f(-x) reflects the graph across the ___ axis.",
+      "answer": [
+        "y",
+        "y-axis"
+      ],
+      "display": "y-axis"
+    },
+    {
+      "id": 5,
+      "topic": "Symmetry",
+      "prompt": "A function is ___ if f(-x) = f(x) for all x in its domain.",
+      "answer": [
+        "even"
+      ],
+      "display": "Even"
+    },
+    {
+      "id": 6,
+      "topic": "Symmetry",
+      "prompt": "A function is ___ if f(-x) = -f(x) for all x in its domain.",
+      "answer": [
+        "odd"
+      ],
+      "display": "Odd"
+    },
+    {
+      "id": 7,
+      "topic": "Symmetry",
+      "prompt": "Even functions are symmetric across the ___ axis.",
+      "answer": [
+        "y",
+        "y-axis"
+      ],
+      "display": "y-axis"
+    },
+    {
+      "id": 8,
+      "topic": "Symmetry",
+      "prompt": "Odd functions are symmetric about the ___.",
+      "answer": [
+        "origin"
+      ],
+      "display": "Origin"
+    },
+    {
+      "id": 9,
+      "topic": "Asymptotes",
+      "prompt": "For f(x) = 1/(x-5), the vertical asymptote is x = ___.",
+      "answer": [
+        "5"
+      ],
+      "display": "5"
+    },
+    {
+      "id": 10,
+      "topic": "Asymptotes",
+      "prompt": "If the degree of the denominator is greater than the degree of the numerator, the horizontal asymptote is y = ___.",
+      "answer": [
+        "0"
+      ],
+      "display": "0"
+    },
+    {
+      "id": 11,
+      "topic": "Asymptotes",
+      "prompt": "For f(x) = (3x+1)/(x-2), the horizontal asymptote is y = ___.",
+      "answer": [
+        "3"
+      ],
+      "display": "3"
+    },
+    {
+      "id": 12,
+      "topic": "Asymptotes",
+      "prompt": "True or False: A graph can never cross its vertical asymptote.",
+      "answer": [
+        "true",
+        "t"
+      ],
+      "display": "True"
+    },
+    {
+      "id": 13,
+      "topic": "Growth",
+      "prompt": "As x approaches infinity, which grows faster: x^3 or 100x^2?",
+      "answer": [
+        "x^3",
+        "x³"
+      ],
+      "display": "x³"
+    },
+    {
+      "id": 14,
+      "topic": "Growth",
+      "prompt": "As x approaches infinity, which grows faster: x^100 or 2^x?",
+      "answer": [
+        "2^x",
+        "2ⁿ",
+        "exponential"
+      ],
+      "display": "2ⁿ (Exponential)"
+    },
+    {
+      "id": 15,
+      "topic": "Transformations",
+      "prompt": "The transformation 5f(x) results in a vertical ___ (stretch/compression).",
+      "answer": [
+        "stretch"
+      ],
+      "display": "Stretch"
+    },
+    {
+      "id": 16,
+      "topic": "Transformations",
+      "prompt": "The transformation f(5x) results in a horizontal ___ (stretch/compression).",
+      "answer": [
+        "compression"
+      ],
+      "display": "Compression"
+    },
+    {
+      "id": 17,
+      "topic": "Symmetry",
+      "prompt": "Is f(x) = x^2 - 4 even, odd, or neither?",
+      "answer": [
+        "even"
+      ],
+      "display": "Even"
+    },
+    {
+      "id": 18,
+      "topic": "Symmetry",
+      "prompt": "Is f(x) = x^3 + x even, odd, or neither?",
+      "answer": [
+        "odd"
+      ],
+      "display": "Odd"
+    },
+    {
+      "id": 19,
+      "topic": "Asymptotes",
+      "prompt": "A 'hole' in a rational function occurs when a factor is present in both the numerator AND ___.",
+      "answer": [
+        "denominator"
+      ],
+      "display": "Denominator"
+    },
+    {
+      "id": 20,
+      "topic": "Growth",
+      "prompt": "End behavior of f(x) = -x^2 as x approaches infinity is ___ infinity.",
+      "answer": [
+        "negative",
+        "-"
+      ],
+      "display": "Negative"
+    }
+  ],
   "day4": [
     {
       "id": 1,
@@ -594,146 +980,355 @@ window.QUESTIONS_DATA = {
   "day1": [
     {
       "id": 1,
-      "topic": "Sets",
-      "prompt": "If A = {1, 2} and B = {2, 3}, what is A ∪ B? (comma separated)",
-      "answer": "1,2,3",
-      "display": "{1, 2, 3}"
+      "topic": "Fractions",
+      "prompt": "Simplify 24/36 to lowest terms (format: a/b)",
+      "answer": ["2/3"],
+      "display": "2/3"
     },
     {
       "id": 2,
-      "topic": "Sets",
-      "prompt": "What is A ∩ B?",
-      "answer": "2",
-      "display": "{2}"
+      "topic": "Fractions",
+      "prompt": "What is 2/3 + 1/6? (simplified fraction)",
+      "answer": ["5/6"],
+      "display": "5/6"
     },
     {
       "id": 3,
-      "topic": "Symbols",
-      "prompt": "Is it true or false: ℕ ⊆ ℤ?",
-      "answer": "true",
-      "display": "True"
+      "topic": "Fractions",
+      "prompt": "What is (3/4) × (2/5)?",
+      "answer": ["3/10", "6/20"],
+      "display": "3/10"
     },
     {
       "id": 4,
-      "topic": "Logic",
-      "prompt": "If x ∈ ∅, does x exist? (yes/no)",
-      "answer": "no",
-      "display": "No"
+      "topic": "Fractions",
+      "prompt": "What is (2/3) ÷ (4/5)?",
+      "answer": ["5/6", "10/12"],
+      "display": "5/6"
     },
     {
       "id": 5,
-      "topic": "Arithmetic",
-      "prompt": "What is 17 mod 5?",
-      "answer": "2",
-      "display": "2"
+      "topic": "Fractions",
+      "prompt": "Convert 2 3/5 to improper fraction",
+      "answer": ["13/5"],
+      "display": "13/5"
     },
     {
       "id": 6,
-      "topic": "Arithmetic",
-      "prompt": "Does 3 | 100? (yes/no)",
-      "answer": "no",
-      "display": "No"
+      "topic": "Negatives",
+      "prompt": "What is (-7) + (-5)?",
+      "answer": ["-12"],
+      "display": "-12"
     },
     {
       "id": 7,
-      "topic": "Algebra",
-      "prompt": "Is ℤ a Field or a Ring?",
-      "answer": "ring",
-      "display": "Ring"
+      "topic": "Negatives",
+      "prompt": "What is 5 - (-3)?",
+      "answer": ["8"],
+      "display": "8"
     },
     {
       "id": 8,
-      "topic": "Algebra",
-      "prompt": "Is ℚ a Field or a Ring?",
-      "answer": "field",
-      "display": "Field"
+      "topic": "Negatives",
+      "prompt": "What is (-3)²?",
+      "answer": ["9"],
+      "display": "9"
     },
     {
       "id": 9,
-      "topic": "Quantifiers",
-      "prompt": "Rewrite 'Every integer is real' using symbols (use A for 'for all', Z for ints, R for reals, E for 'in'). E.g., 'A x E Z, x E R'",
-      "answer": "a x e z, x e r",
-      "display": "∀x ∈ ℤ, x ∈ ℝ"
+      "topic": "Negatives",
+      "prompt": "What is -3² (without parentheses)?",
+      "answer": ["-9"],
+      "display": "-9"
     },
     {
       "id": 10,
-      "topic": "Arithmetic",
-      "prompt": "What is -1 mod 5? (computer science modulo)",
-      "answer": "4",
-      "display": "4"
+      "topic": "Exponents",
+      "prompt": "Simplify: 2³ × 2⁴",
+      "answer": ["128", "2^7"],
+      "display": "2⁷ = 128"
     },
     {
       "id": 11,
-      "topic": "Symbols",
-      "prompt": "What is the symbol for 'there exists'?",
-      "answer": "∃",
-      "display": "∃"
+      "topic": "Exponents",
+      "prompt": "Simplify: (2³)²",
+      "answer": ["64", "2^6"],
+      "display": "2⁶ = 64"
     },
     {
       "id": 12,
-      "topic": "Symbols",
-      "prompt": "What does ∀ stand for?",
-      "answer": [
-        "for all",
-        "for every"
-      ],
-      "display": "For all / For every"
+      "topic": "Exponents",
+      "prompt": "What is 5⁰?",
+      "answer": ["1"],
+      "display": "1"
     },
     {
       "id": 13,
-      "topic": "Sets",
-      "prompt": "If S = {1, 2, 3}, what is |S| (the size)?",
-      "answer": "3",
-      "display": "3"
+      "topic": "Exponents",
+      "prompt": "What is 2⁻³ as a fraction?",
+      "answer": ["1/8"],
+      "display": "1/8"
     },
     {
       "id": 14,
-      "topic": "Sets",
-      "prompt": "Is {1} ⊆ {1, 2}? (yes/no)",
-      "answer": "yes",
-      "display": "Yes"
+      "topic": "Exponents",
+      "prompt": "What is 16^(1/2)?",
+      "answer": ["4"],
+      "display": "4"
     },
     {
       "id": 15,
-      "topic": "Logic",
-      "prompt": "If P is true, what is ¬P?",
-      "answer": "false",
-      "display": "False"
+      "topic": "Exponents",
+      "prompt": "What is 27^(2/3)?",
+      "answer": ["9"],
+      "display": "9 (cube root of 27 is 3, then 3²=9)"
     },
     {
       "id": 16,
-      "topic": "Logic",
-      "prompt": "True or False: x ∈ A ∪ B means x is in A AND x is in B.",
-      "answer": "false",
-      "display": "False (That's intersection)"
+      "topic": "Scientific Notation",
+      "prompt": "Write 0.0051 in scientific notation (format: a×10^n)",
+      "answer": ["5.1e-3", "5.1×10^-3", "5.1*10^-3"],
+      "display": "5.1 × 10⁻³"
     },
     {
       "id": 17,
-      "topic": "Arithmetic",
-      "prompt": "What is 10 | 100? (yes/no)",
-      "answer": "yes",
-      "display": "Yes (10 * 10 = 100)"
+      "topic": "Scientific Notation",
+      "prompt": "Write 12,300 in scientific notation",
+      "answer": ["1.23e4", "1.23×10^4", "1.23*10^4"],
+      "display": "1.23 × 10⁴"
     },
     {
       "id": 18,
-      "topic": "Arithmetic",
-      "prompt": "What is 20 mod 6?",
-      "answer": "2",
-      "display": "2"
+      "topic": "Ratios",
+      "prompt": "Simplify 1920:1080 to lowest terms (format a:b)",
+      "answer": ["16:9"],
+      "display": "16:9"
     },
     {
       "id": 19,
-      "topic": "Algebra",
-      "prompt": "Can you always divide in a Field? (yes/no)",
-      "answer": "yes",
-      "display": "Yes (except by 0)"
+      "topic": "Rates",
+      "prompt": "100 Mbps = ? MB/s",
+      "answer": ["12.5"],
+      "display": "12.5 MB/s"
     },
     {
       "id": 20,
-      "topic": "Algebra",
-      "prompt": "Is the set of even integers {..., -2, 0, 2, ...} a Ring or a Field?",
-      "answer": "ring",
-      "display": "Ring"
+      "topic": "Percentages",
+      "prompt": "What is 20% of 150?",
+      "answer": ["30"],
+      "display": "30"
+    },
+    {
+      "id": 21,
+      "topic": "Percentages",
+      "prompt": "If price goes from $80 to $100, percent increase is?",
+      "answer": ["25", "25%"],
+      "display": "25%"
+    },
+    {
+      "id": 22,
+      "topic": "Percentages",
+      "prompt": "Conversion rate 2%→3%: Is this 1 percentage point or 50% increase?",
+      "answer": ["both"],
+      "display": "Both (1pp AND 50%)"
+    },
+    {
+      "id": 23,
+      "topic": "Rates",
+      "prompt": "3 parallel workers at 100, 150, 120 ops/sec. Total throughput?",
+      "answer": ["370"],
+      "display": "370 ops/sec"
+    },
+    {
+      "id": 24,
+      "topic": "Rates",
+      "prompt": "Pipeline with stages 200, 80, 150 ops/sec. Bottleneck rate?",
+      "answer": ["80"],
+      "display": "80 ops/sec"
+    },
+    {
+      "id": 25,
+      "topic": "Common Gotchas",
+      "prompt": "1 TB = 10^? bytes",
+      "answer": ["12"],
+      "display": "12 (1 TB = 10¹² bytes)"
+    },
+    {
+      "id": 26,
+      "topic": "Common Gotchas",
+      "prompt": "10% growth for 5 years = 1.10^5 = ?% total (round to nearest %)",
+      "answer": ["61", "61%"],
+      "display": "61%"
+    },
+    {
+      "id": 27,
+      "topic": "Fractions",
+      "prompt": "GCD of 24 and 36 is?",
+      "answer": ["12"],
+      "display": "12"
+    },
+    {
+      "id": 28,
+      "topic": "Scientific Notation",
+      "prompt": "(2×10³) × (3×10⁵) = ? (scientific notation)",
+      "answer": ["6e8", "6×10^8", "6*10^8"],
+      "display": "6 × 10⁸"
+    },
+    {
+      "id": 29,
+      "topic": "Exponents",
+      "prompt": "log₂(8) = ?",
+      "answer": ["3"],
+      "display": "3"
+    },
+    {
+      "id": 30,
+      "topic": "Rates",
+      "prompt": "100 ops/sec = ? ms per operation",
+      "answer": ["10"],
+      "display": "10 ms/op"
+    }
+  ],
+  "day2": [
+    {
+      "id": 1,
+      "topic": "Linear Equations",
+      "prompt": "Solve for x: 2x + 5 = 13",
+      "answer": ["4"],
+      "display": "x = 4"
+    },
+    {
+      "id": 2,
+      "topic": "Linear Equations",
+      "prompt": "Solve for x: x/3 + x/4 = 7",
+      "answer": ["12"],
+      "display": "x = 12"
+    },
+    {
+      "id": 3,
+      "topic": "Systems",
+      "prompt": "Solve: 2x + y = 7, x - y = 2. What is x?",
+      "answer": ["3"],
+      "display": "x = 3"
+    },
+    {
+      "id": 4,
+      "topic": "Systems",
+      "prompt": "From problem above, what is y?",
+      "answer": ["1"],
+      "display": "y = 1"
+    },
+    {
+      "id": 5,
+      "topic": "Quadratics",
+      "prompt": "Factor: x² + 5x + 6",
+      "answer": ["(x+2)(x+3)", "(x + 2)(x + 3)"],
+      "display": "(x + 2)(x + 3)"
+    },
+    {
+      "id": 6,
+      "topic": "Quadratics",
+      "prompt": "Solve x² + 5x + 6 = 0. Roots are x = -2 and x = ?",
+      "answer": ["-3"],
+      "display": "-3"
+    },
+    {
+      "id": 7,
+      "topic": "Quadratics",
+      "prompt": "In the quadratic formula, the discriminant is b² - ?",
+      "answer": ["4ac"],
+      "display": "4ac"
+    },
+    {
+      "id": 8,
+      "topic": "Quadratics",
+      "prompt": "If discriminant < 0, how many real roots?",
+      "answer": ["0", "zero", "none"],
+      "display": "0 (complex roots only)"
+    },
+    {
+      "id": 9,
+      "topic": "Factoring",
+      "prompt": "Factor: x² - 9",
+      "answer": ["(x+3)(x-3)", "(x-3)(x+3)", "(x + 3)(x - 3)"],
+      "display": "(x + 3)(x - 3)"
+    },
+    {
+      "id": 10,
+      "topic": "Factoring",
+      "prompt": "GCF of 6x² + 9x is?",
+      "answer": ["3x"],
+      "display": "3x"
+    },
+    {
+      "id": 11,
+      "topic": "Expanding",
+      "prompt": "Expand: (x + 2)(x + 3) = x² + 5x + ?",
+      "answer": ["6"],
+      "display": "6"
+    },
+    {
+      "id": 12,
+      "topic": "Expanding",
+      "prompt": "(x + 3)² = x² + 6x + ?",
+      "answer": ["9"],
+      "display": "9"
+    },
+    {
+      "id": 13,
+      "topic": "Simplifying",
+      "prompt": "Simplify: (x² - 4)/(x + 2)",
+      "answer": ["x-2", "x - 2"],
+      "display": "x - 2 (for x ≠ -2)"
+    },
+    {
+      "id": 14,
+      "topic": "Systems",
+      "prompt": "If det(A) = 0, does the system have a unique solution? (yes/no)",
+      "answer": ["no"],
+      "display": "No"
+    },
+    {
+      "id": 15,
+      "topic": "Quadratics",
+      "prompt": "Complete the square: x² + 6x + ? = (x + 3)²",
+      "answer": ["9"],
+      "display": "9"
+    },
+    {
+      "id": 16,
+      "topic": "Special Forms",
+      "prompt": "a³ - b³ = (a - b)(a² + ab + ?)",
+      "answer": ["b²", "b^2"],
+      "display": "b²"
+    },
+    {
+      "id": 17,
+      "topic": "Special Forms",
+      "prompt": "(a + b)² = a² + 2ab + ?",
+      "answer": ["b²", "b^2"],
+      "display": "b²"
+    },
+    {
+      "id": 18,
+      "topic": "Gotchas",
+      "prompt": "Can you cancel (x+2) in (x+2)/(x+2)? (yes/no)",
+      "answer": ["yes"],
+      "display": "Yes (= 1, but only if x ≠ -2)"
+    },
+    {
+      "id": 19,
+      "topic": "Gotchas",
+      "prompt": "Is (x + 2)/2 = x + 1? (yes/no)",
+      "answer": ["no"],
+      "display": "No (can't cancel terms)"
+    },
+    {
+      "id": 20,
+      "topic": "Systems",
+      "prompt": "Two parallel lines have ___ solutions (one word)",
+      "answer": ["no", "zero", "none"],
+      "display": "No solutions"
     }
   ],
   "day6": [

@@ -7,17 +7,20 @@
   <title>Day 2: Algebra Fluency</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="../../lessons/shared-styles.css">
   <script src="../../lessons/questions-data.js"></script>
   <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <a href="../../index.html" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -46,15 +49,15 @@
       </svg>
       Day 2 · Foundation
     </div>
-    
+
     <p class="hero-desc">
       Master solving systems of equations AND manipulating algebraic expressions. These two skills together
       unlock graphics, optimization, algorithm analysis, and code refactoring.
     </p>
     <div class="hero-meta">
       <div class="meta-item">~95 min read</div>
-      <div class="meta-item">40 practice problems</div>
-      <div class="meta-item">18 video lessons</div>
+      <div class="meta-item">20 practice problems</div>
+      <div class="meta-item">8 video lessons</div>
     </div>
   </header>
 
@@ -979,28 +982,30 @@ x = <span class="code-function">symbols</span>(<span class="code-string">'x'</sp
       </section>
     </main>
   </div>
-<script>
-      const VIDEO_GROUPS = [
-        {
-                "title": "Lesson Videos",
-                "items": [
-                        {
-                                "title": "Substitution Method",
-                                "vid": "ULxR49bhrkY"
-                        },
-                        {
-                                "title": "Elimination Method",
-                                "vid": "nok99JOhcjo"
-                        },
-                        {
-                                "title": "Quadratic Formula",
-                                "vid": "i7WvG4s9q_Q"
-                        }
-                ]
-        }
-];
-      initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day2'], storageKey: 'day2_v1' });
-    </script>
+  <script>
+    const VIDEO_GROUPS = [
+      {
+        title: "Systems of Equations",
+        items: [
+          { title: "Substitution Method", channel: "Khan Academy", vid: "ULxR49bhrkY" },
+          { title: "Elimination Method", channel: "Organic Chemistry Tutor", vid: "nok99JOhcjo" },
+          { title: "Systems with Matrices", channel: "3Blue1Brown", vid: "uQhTuRlWMxw" }
+        ]
+      },
+      {
+        title: "Quadratics & Factoring",
+        items: [
+          { title: "Quadratic Formula", channel: "Math Antics", vid: "i7WvG4s9q_Q" },
+          { title: "Factoring Trinomials", channel: "Organic Chemistry Tutor", vid: "AMEaPvOGfGA" },
+          { title: "Completing the Square", channel: "Khan Academy", vid: "xGOQYTo9AKY" },
+          { title: "Difference of Squares", channel: "Khan Academy", vid: "jQ-fS2lsslU" },
+          { title: "FOIL Method", channel: "Math Antics", vid: "Axv6zWiK5EU" }
+        ]
+      }
+    ];
+    initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day2'], storageKey: 'day2_v1' });
+  </script>
 </body>
 </body>
+
 </html>

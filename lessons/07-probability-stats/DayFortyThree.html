@@ -521,25 +521,40 @@ model.fit(X, y)
     <script src="../shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
+    {
+        "title": "Lesson Videos",
+        "items": [
             {
-                title: "Inference & MLE",
-                items: [
-                    { title: "Maximum Likelihood Estimation", channel: "StatQuest", vid: "Xcn85Dn10zs" },
-                    { title: "Bias-Variance Tradeoff", channel: "StatQuest", vid: "EuBBz3bI-aA" },
-                    { title: "Confidence Intervals", channel: "3Blue1Brown", vid: "None" }, // 3b1b no CI video, maybe Khan
-                    { title: "p-values", channel: "StatQuest", vid: "vemZtEM63GY" }
-                ]
+                "title": "Maximum Likelihood Estimation",
+                "vid": "Xcn85Dn10zs"
             },
             {
-                title: "Regression",
-                items: [
-                    { title: "Linear Regression — StatQuest", channel: "StatQuest", vid: "zPG4NjIkCjc" },
-                    { title: "R-squared Explained", channel: "StatQuest", vid: "2AQKmw14mHM" },
-                    { title: "Multiple Regression", channel: "StatQuest", vid: "EkAQAi3a4js" },
-                    { title: "Gradient Descent for Regression", channel: "3Blue1Brown", vid: "IHZwWFHWa-w" },
-                ]
+                "title": "Bias-Variance Tradeoff",
+                "vid": "EuBBz3bI-aA"
+            },
+            {
+                "title": "p-values",
+                "vid": "vemZtEM63GY"
+            },
+            {
+                "title": "Linear Regression \u2014 StatQuest",
+                "vid": "zPG4NjIkCjc"
+            },
+            {
+                "title": "R-squared Explained",
+                "vid": "2AQKmw14mHM"
+            },
+            {
+                "title": "Multiple Regression",
+                "vid": "EkAQAi3a4js"
+            },
+            {
+                "title": "Gradient Descent for Regression",
+                "vid": "IHZwWFHWa-w"
             }
-        ];
+        ]
+    }
+];
         const QUESTIONS = [
             { topic: "MLE", prompt: "MLE maximizes the ___ function.", answer: "likelihood" },
             { topic: "Log-Likelihood", prompt: "We use log-likelihood because it turns products into ___.", answer: "sums" },

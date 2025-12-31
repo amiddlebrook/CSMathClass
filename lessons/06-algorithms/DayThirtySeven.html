@@ -407,15 +407,24 @@ total_flips = <span class="code-function">sum</span>(increment(bits) <span class
     <script src="../shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
+    {
+        "title": "Lesson Videos",
+        "items": [
             {
-                title: "Amortized Analysis",
-                items: [
-                    { title: "Amortized Analysis — MIT OCW", channel: "MIT OpenCourseWare", vid: "B3SpQZaAZP4" },
-                    { title: "Dynamic Arrays Explained", channel: "Back To Back SWE", vid: "5AllG-i_yto" },
-                    { title: "Accounting & Potential Methods", channel: "Abdul Bari", vid: "T7W5E-5mljc" },
-                ]
+                "title": "Amortized Analysis \u2014 MIT OCW",
+                "vid": "B3SpQZaAZP4"
+            },
+            {
+                "title": "Dynamic Arrays Explained",
+                "vid": "5AllG-i_yto"
+            },
+            {
+                "title": "Accounting & Potential Methods",
+                "vid": "T7W5E-5mljc"
             }
-        ];
+        ]
+    }
+];
         const QUESTIONS = [
             { topic: "Definition", prompt: "Amortized = average over ___ of operations", answer: "sequence", altAnswers: ["sequences", "worst-case sequence"] },
             { topic: "Distinction", prompt: "Amortized is deterministic, not ___ case", answer: "average" },

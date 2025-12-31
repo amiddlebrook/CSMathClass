@@ -95,50 +95,51 @@
         </div>
         <div class="section-body">
           <p>
-            A <strong>proposition</strong> is a statement that is either True or False.
+            A <strong>proposition</strong> is a statement that is either True or False. In programming, these are the
+            conditions inside your <code>if</code> statements.
           </p>
           <div class="subsection">
-            <h3 class="subsection-title">Logical Operators</h3>
+            <h3 class="subsection-title">Logical Operators (The Connectors)</h3>
             <div class="table-wrap" style="overflow-x: auto;">
               <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                 <thead>
                   <tr style="background: var(--surface-alt);">
-                    <th>Name</th>
-                    <th>Symbol</th>
-                    <th>Logic Gate</th>
-                    <th>Python</th>
+                    <th style="padding: 12px; text-align: left;">Name</th>
+                    <th style="padding: 12px; text-align: left;">Symbol</th>
+                    <th style="padding: 12px; text-align: left;">Code (\( \approx \))</th>
+                    <th style="padding: 12px; text-align: left;">Meaning</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Negation</td>
                     <td>¬p</td>
-                    <td>NOT</td>
-                    <td><code class="math-inline">not p</code></td>
+                    <td><code>not p</code></td>
+                    <td>The opposite of p.</td>
                   </tr>
                   <tr>
                     <td>Conjunction</td>
                     <td>p ∧ q</td>
-                    <td>AND</td>
-                    <td><code class="math-inline">p and q</code></td>
+                    <td><code>p and q</code></td>
+                    <td>Both must be true.</td>
                   </tr>
                   <tr>
                     <td>Disjunction</td>
                     <td>p ∨ q</td>
-                    <td>OR</td>
-                    <td><code class="math-inline">p or q</code></td>
+                    <td><code>p or q</code></td>
+                    <td>At least one must be true.</td>
                   </tr>
                   <tr>
                     <td>Implication</td>
                     <td>p ⇒ q</td>
-                    <td>IMPLIES</td>
-                    <td><code class="math-inline">not p or q</code></td>
+                    <td><code>p -> q</code></td>
+                    <td>If p, then q.</td>
                   </tr>
                   <tr>
                     <td>Biconditional</td>
                     <td>p ⇔ q</td>
-                    <td>XNOR</td>
-                    <td><code class="math-inline">p == q</code></td>
+                    <td><code>p == q</code></td>
+                    <td>True only if both match.</td>
                   </tr>
                 </tbody>
               </table>
@@ -154,22 +155,23 @@
           <h2 class="section-title">Truth Tables</h2>
         </div>
         <div class="section-body">
-          <p>
-            Truth tables are the brute-force method of logic. They list every possible input combination.
-            They are identical to checking every case in a switch statement.
-          </p>
+          <p>Truth tables are the brute-force method of logic. They list every possible input combination to guarantee a
+            result.</p>
           <div class="subsection">
             <h3 class="subsection-title">The Implication Table (p ⇒ q)</h3>
             <div class="rule">
-              <strong>Crucial:</strong> "If p then q" is only False when p is True and q is False.
-              If p is False, the statement is vacuously True.
+              <strong>The Room Cleaning Analogy:</strong> "If you clean your room (p), I'll give you $5 (q)." The only
+              time I lied is if you <em>did</em> clean your room, but I <em>didn't</em> give you the money. If you
+              didn't clean it, I'm off the hook!
             </div>
             <div class="math-block">p | q | p ⇒ q
               --+---+-------
               T | T | T
-              T | F | F <-- The only false case F | T | T F | F | T</div>
-            </div>
+              T | F | F ← The only lie
+              F | T | T ← Vacuously true
+              F | F | T ← Vacuously true</div>
           </div>
+        </div>
       </section>
 
       <!-- Predicates & Quantifiers -->
@@ -180,18 +182,16 @@
         </div>
         <div class="section-body">
           <p>
-            Propositional logic is limited. "x > 3" is not a proposition until we know x.
-            A <strong>predicate</strong> P(x) is a function that returns a proposition.
+            Propositional logic is limited. We need <strong>Quantifiers</strong> to talk about whole groups.
           </p>
           <div class="subsection">
-            <h3 class="subsection-title">Negating Quantifiers (De Morgan's Laws for Logic)</h3>
+            <h3 class="subsection-title">Negating Claims</h3>
             <div class="rule">
-              ¬(∀x, P(x)) ≡ ∃x, ¬P(x)<br>
-              ¬(∃x, P(x)) ≡ ∀x, ¬P(x)
+              <strong>The Pizza Analogy:</strong> To disprove "Everyone likes pizza," you don't have to show
+              <em>none</em> of us like pizza. You just need to find <strong>one person</strong> who doesn't.
             </div>
-            <p>
-              To disprove "All integers are odd", you only need to show "There exists one integer that is even".
-            </p>
+            <div class="math-block">¬(∀x, P(x)) ≡ ∃x, ¬P(x)
+              ¬(∃x, P(x)) ≡ ∀x, ¬P(x)</div>
           </div>
         </div>
       </section>
@@ -203,35 +203,38 @@
           <h2 class="section-title">Logical Equivalence</h2>
         </div>
         <div class="section-body">
+          <p>When you say "If A, then B," it doesn't always work backwards! Only one variation is truly equivalent.</p>
           <div class="subsection">
-            <h3 class="subsection-title">Variations of p ⇒ q</h3>
+            <h3 class="subsection-title">The Sunglasses Analogy</h3>
+            <div class="info">
+              <strong>What you said:</strong> "If I'm at the beach (p), I'm wearing sunglasses (q)."<br>
+              <strong>You DID NOT say:</strong> "If I'm wearing sunglasses, I'm at the beach." (Converse).<br>
+              <strong>What you know for sure:</strong> "If I'm NOT wearing sunglasses, I'm definitely NOT at the beach."
+              (Contrapositive).
+            </div>
             <div class="table-wrap">
               <table>
                 <tr>
-                  <td><strong>Original</strong></td>
                   <td>p ⇒ q</td>
-                  <td>"If it rains, ground is wet"</td>
+                  <td>Original</td>
+                  <td>Equivalent</td>
                 </tr>
                 <tr>
-                  <td><strong>Inverse</strong></td>
-                  <td>¬p ⇒ ¬q</td>
-                  <td>"If it doesn't rain, ground isn't wet" (Not equivalent!)</td>
-                </tr>
-                <tr>
-                  <td><strong>Converse</strong></td>
-                  <td>q ⇒ p</td>
-                  <td>"If ground is wet, it rained" (Not equivalent!)</td>
-                </tr>
-                <tr>
-                  <td><strong>Contrapositive</strong></td>
                   <td>¬q ⇒ ¬p</td>
-                  <td>"If ground isn't wet, it didn't rain" (<strong>Equivalent</strong>)</td>
+                  <td>Contrapositive</td>
+                  <td><strong>YES</strong></td>
+                </tr>
+                <tr>
+                  <td>q ⇒ p</td>
+                  <td>Converse</td>
+                  <td>NO</td>
+                </tr>
+                <tr>
+                  <td>¬p ⇒ ¬q</td>
+                  <td>Inverse</td>
+                  <td>NO</td>
                 </tr>
               </table>
-            </div>
-            <div class="warning">
-              <strong>Common Error:</strong> Assuming the converse is true. Only the contrapositive is logically
-              equivalent to the original statement.
             </div>
           </div>
         </div>
@@ -244,41 +247,24 @@
           <h2 class="section-title">Proof Techniques</h2>
         </div>
         <div class="section-body">
+          <p>A "Proof" is just an airtight recipe for the truth. Here are the two most common "flavors".</p>
           <div class="subsection">
-            <h3 class="subsection-title">1. Direct Proof</h3>
-            <p>Assume p is true, use algebra/logic to show q is true.</p>
+            <h3 class="subsection-title">1. Direct Proof (The Recipe)</h3>
+            <p>Start with what you know and take logical steps until you reach the goal.</p>
             <div class="math-block">Theorem: If n is odd, n² is odd.
               Proof:
               Let n be odd. Then n = 2k + 1 for some k ∈ ℤ.
-              n² = (2k + 1)²
-              = 4k² + 4k + 1
-              = 2(2k² + 2k) + 1
-              This is of the form 2m + 1, so n² is odd. □</div>
+              n² = (2k + 1)² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.
+              This is clearly odd. □</div>
           </div>
           <div class="subsection">
-            <h3 class="subsection-title">2. Proof by Contrapositive</h3>
-            <p>Instead of p ⇒ q, prove ¬q ⇒ ¬p.</p>
-            <div class="math-block">Theorem: If n² is linear, then n is linear (Wait, bad example).
-              Theorem: If n² is even, then n is even.
-              Proof (Contrapositive):
-              Assuming ¬q: Let n be odd.
-              We showed above that if n is odd, n² is odd.
-              Thus ¬q ⇒ ¬p.
-              Therefore, p ⇒ q. □</div>
-          </div>
-          <div class="subsection">
-            <h3 class="subsection-title">3. Proof by Contradiction</h3>
-            <p>Assume p is true AND q is False. Show this leads to nonsense (e.g., 0 = 1).</p>
-            <div class="math-block">Theorem: √2 is irrational.
-              Proof:
-              Assume √2 is rational.
-              Then √2 = a/b (simplified fraction).
-              2 = a²/b² ⇒ a² = 2b².
-              So a² is even ⇒ a is even (a = 2k).
-              (2k)² = 2b² ⇒ 4k² = 2b² ⇒ 2k² = b².
-              So b² is even ⇒ b is even.
-              If both a and b are even, the fraction wasn't simplified. Contradiction.
-              Therefore, √2 is irrational. □</div>
+            <h3 class="subsection-title">2. Proof by Contradiction (The Nonsense Filter)</h3>
+            <p>Assume the thing you want to prove is <em>false</em>, follow it until you get something impossible (like
+              1 = 0), then conclude the original thing must be true.</p>
+            <div class="info">
+              <strong>Example:</strong> Proving \(\sqrt{2}\) is irrational by assuming it is rational and finding a
+              contradiction.
+            </div>
           </div>
         </div>
       </section>
@@ -323,24 +309,32 @@
   </div>
   <script>
     const VIDEO_GROUPS = [
-        {
-                "title": "Lesson Videos",
-                "items": [
-                        {
-                                "title": "Substitution Method",
-                                "vid": "ULxR49bhrkY"
-                        },
-                        {
-                                "title": "Elimination Method",
-                                "vid": "nok99JOhcjo"
-                        },
-                        {
-                                "title": "Quadratic Formula",
-                                "vid": "i7WvG4s9q_Q"
-                        }
-                ]
-        }
-];
+      {
+        title: "Propositional Logic",
+        items: [
+          { title: "Introduction to Logic", channel: "Organic Chemistry Tutor", vid: "BgdV_shVInM" },
+          { title: "Truth Tables Explained", channel: "TheTrevTutor", vid: "8C_v-m_6pMc" },
+          { title: "Negation and Connectives", channel: "Kimberly Brehm", vid: "hB6S-f0_4C0" }
+        ]
+      },
+      {
+        title: "Qualifiers & Equivalence",
+        items: [
+          { title: "Quantifiers (∀ and ∃)", channel: "Kimberly Brehm", vid: "MTvP7S-u_yI" },
+          { title: "Converse, Inverse, Contrapositive", channel: "TheTrevTutor", vid: "nok99JOhcjo" },
+          { title: "De Morgan's Laws (Logic)", channel: "Organic Chemistry Tutor", vid: "yT5fP_E-M30" }
+        ]
+      },
+      {
+        title: "Proof Techniques",
+        items: [
+          { title: "Direct Proofs", channel: "Trefor Bazett", vid: "lm5ePH15hMo" },
+          { title: "Proof by Contradiction", channel: "Trefor Bazett", vid: "sRDwsfNDXak" },
+          { title: "Proof by Counter-Example", channel: "Kimberly Brehm", vid: "D2xYjiL8yyE" },
+          { title: "Logic Gates & CS", channel: "Computerphile", vid: "gI-qXJKMdc0" }
+        ]
+      }
+    ];
     initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day2'], storageKey: 'day2_logic_v1' });
   </script>
 </body>

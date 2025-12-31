@@ -7,17 +7,20 @@
   <title>Day 1: Complete Arithmetic Fluency for CS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="../../lessons/shared-styles.css">
   <script src="../../lessons/questions-data.js"></script>
   <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <a href="../../index.html" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -46,7 +49,7 @@
       </svg>
       Day 1 · Foundation
     </div>
-    
+
     <p class="hero-desc">
       Master all numerical operations that underpin algorithms, graphics, cryptography, and machine learning—fractions,
       exponents, ratios, rates, percentages, and unit conversions. This is your mathematical foundation.
@@ -64,13 +67,13 @@
           <path
             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
         </svg>
-        40 practice problems
+        30 practice problems
       </div>
       <div class="meta-item">
         <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polygon points="5 3 19 12 5 21 5 3" />
         </svg>
-        22 video lessons
+        10 video lessons
       </div>
     </div>
   </header>
@@ -1023,24 +1026,32 @@ needed_visitors = <span class="code-number">1000</span> / <span class="code-numb
       </section>
     </main>
   </div>
-<script>
-      const VIDEO_GROUPS = [
-        {
-                "title": "Lesson Videos",
-                "items": [
-                        {
-                                "title": "Intersection and Union",
-                                "vid": "pX2nfjf7a-8"
-                        },
-                        {
-                                "title": "Logic & Equivalence",
-                                "vid": "5kojy1CHuyI"
-                        }
-                ]
-        }
-];
-      initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day1'], storageKey: 'day1_v1' });
-    </script>
+  <script>
+    const VIDEO_GROUPS = [
+      {
+        title: "Fractions & Exponents",
+        items: [
+          { title: "Fractions Basics", channel: "Khan Academy", vid: "Zq7t0vpGLUY" },
+          { title: "Adding & Subtracting Fractions", channel: "Math Antics", vid: "52ZlXsFJULI" },
+          { title: "Exponent Rules", channel: "Organic Chemistry Tutor", vid: "kITJ6qH7jS0" },
+          { title: "Fractional Exponents", channel: "Math Antics", vid: "6bYGnVRr-hw" }
+        ]
+      },
+      {
+        title: "Rates, Percentages & CS Applications",
+        items: [
+          { title: "Scientific Notation Intro", channel: "Khan Academy", vid: "i6lfVUp5RW8" },
+          { title: "Understanding Ratios", channel: "Math Antics", vid: "vU4ICclKd_E" },
+          { title: "Percent Basics", channel: "Math Antics", vid: "JeVSmq1Nrpw" },
+          { title: "Percent Change", channel: "Khan Academy", vid: "Jb7cB2oy2h4" },
+          { title: "Floating Point in Computers", channel: "Computerphile", vid: "PZRI1IfStY0" },
+          { title: "Bits vs Bytes Explained", channel: "PowerCert", vid: "Dnd28lQHquU" }
+        ]
+      }
+    ];
+    initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day1'], storageKey: 'day1_v1' });
+  </script>
 </body>
 </body>
+
 </html>

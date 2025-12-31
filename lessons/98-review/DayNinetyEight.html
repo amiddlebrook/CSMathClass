@@ -176,7 +176,7 @@
         keys.forEach(k => {
             const opt = document.createElement('option');
             opt.value = k;
-            opt.textContent = k; // Pretty print later?
+            opt.textContent = window.SECTION_LABELS?.[k] || k;
             select.appendChild(opt);
         });
 
@@ -231,16 +231,16 @@
             counterEl.textContent = `${currentIdx + 1} / ${cards.length}`;
         }
     </script>
-<script>
-      const VIDEO_GROUPS = [
-        {
-          title: "Lesson Videos",
-          items: [
-            { title: "Video 1", channel: "Course Reference", vid: "video_placeholder_98_1" }
-          ]
-        }
-      ];
-      initLesson({ videos: VIDEO_GROUPS, storageKey: 'day98_v1' });
+    <script>
+        const VIDEO_GROUPS = [
+            {
+                title: "Lesson Videos",
+                items: [
+                    { title: "Video 1", channel: "Course Reference", vid: "video_placeholder_98_1" }
+                ]
+            }
+        ];
+        initLesson({ videos: VIDEO_GROUPS, storageKey: 'day98_v1' });
     </script>
 </body>
 </body>

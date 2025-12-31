@@ -1,6 +1,31 @@
 
 // Logic for Review, Tests, and Exams
 
+// Human-readable labels for sections (used in flashcard dropdown)
+const SECTION_LABELS = {
+    "01-mathematical-maturity": "Mathematical Maturity (Days 1-6)",
+    "01-operating-system": "Operating System (Days 1-6)",
+    "02-calculus": "Calculus Extended (Days 7-20)",
+    "02-precalculus": "Precalculus Foundation (Days 7-11)",
+    "03-calculus": "Calculus Sequence (Days 12-18)",
+    "04-linear-algebra": "Linear Algebra (Days 19-23)",
+    "05-discrete-math": "Discrete Math Core (Days 24-31)",
+    "06-algorithms": "Algorithms + Data Structures (Days 32-38)",
+    "07-probability-stats": "Probability + Statistics (Days 39-43)",
+    "08-analysis": "Analysis + Rigor (Days 44-50)",
+    "09-abstract-algebra": "Abstract Algebra (Days 52-54)",
+    "09-numerical": "Numerical Methods (Days 51, 65-67)",
+    "10-topology-measure": "Topology + Measure (Days 55-61)",
+    "11-functional-pde": "Functional Analysis + PDE (Days 62-68, 80)",
+    "12-theoretical-cs": "Theoretical CS (Days 69-80)",
+    "13-optimization": "Convex Optimization (Days 81-85)",
+    "14-specialize": "Specialize (Days 86-91)",
+    "15-discipline": "Always-On Discipline (Days 92-97)",
+    "16-lightning-round": "Lightning Round (Day 100)",
+    "98-review": "Comprehensive Review (Day 98)"
+};
+window.SECTION_LABELS = SECTION_LABELS;
+
 // Mapping of Days to Sections (Simplified for now - will be updated by script)
 const SECTION_MAP = {
     "01-mathematical-maturity": [
