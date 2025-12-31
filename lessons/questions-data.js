@@ -201,6 +201,196 @@ window.QUESTIONS_DATA = {
       "display": "Conditional / Implication"
     }
   ],
+  "day6": [
+    {
+      "id": 1,
+      "topic": "Justification",
+      "prompt": "What is the justification for 'a + b = 2m + 2n' when you know a=2m and b=2n?",
+      "answer": [
+        "substitution"
+      ],
+      "display": "Substitution"
+    },
+    {
+      "id": 2,
+      "topic": "Strategy",
+      "prompt": "To prove P\u2192Q, you prove \u00acQ\u2192\u00acP. This is proof by ___.",
+      "answer": [
+        "contrapositive"
+      ],
+      "display": "Contrapositive"
+    },
+    {
+      "id": 3,
+      "topic": "Closure",
+      "prompt": "If adding two integers always results in an integer, the set of integers is ___ under addition.",
+      "answer": [
+        "closed"
+      ],
+      "display": "Closed"
+    },
+    {
+      "id": 4,
+      "topic": "Induction",
+      "prompt": "In induction, the assumption that P(k) is true is the Inductive ___.",
+      "answer": [
+        "hypothesis"
+      ],
+      "display": "Hypothesis"
+    },
+    {
+      "id": 5,
+      "topic": "Structure",
+      "prompt": "A small helper theorem used to prove a larger theorem is called a ___.",
+      "answer": [
+        "lemma"
+      ],
+      "display": "Lemma"
+    },
+    {
+      "id": 6,
+      "topic": "Terminology",
+      "prompt": "What does Q.E.D. stand for? (Latin)",
+      "answer": [
+        "quod erat demonstrandum"
+      ],
+      "display": "Quod Erat Demonstrandum"
+    },
+    {
+      "id": 7,
+      "topic": "Terminology",
+      "prompt": "What symbol (\u220e) often replaces Q.E.D.? (named after a person)",
+      "answer": [
+        "halmos",
+        "halmos's square",
+        "halmos square"
+      ],
+      "display": "Halmos square"
+    },
+    {
+      "id": 8,
+      "topic": "Contradiction",
+      "prompt": "In proof by contradiction, we assume the ___ of the claim.",
+      "answer": [
+        "negation",
+        "opposite"
+      ],
+      "display": "Negation"
+    },
+    {
+      "id": 9,
+      "topic": "Style",
+      "prompt": "What does 'WLOG' stand for?",
+      "answer": [
+        "without loss of generality"
+      ],
+      "display": "Without Loss of Generality"
+    },
+    {
+      "id": 10,
+      "topic": "Direct Proof",
+      "prompt": "A proof that follows a logical chain from A to B to C is a ___ proof.",
+      "answer": [
+        "direct"
+      ],
+      "display": "Direct"
+    },
+    {
+      "id": 11,
+      "topic": "Justification",
+      "prompt": "Is 'by algebra' a valid justification for simplification in this course? (yes/no)",
+      "answer": [
+        "yes",
+        "y"
+      ],
+      "display": "Yes"
+    },
+    {
+      "id": 12,
+      "topic": "Invariants",
+      "prompt": "Showing a loop invariant holds after an iteration is called loop ___.",
+      "answer": [
+        "maintenance"
+      ],
+      "display": "Maintenance"
+    },
+    {
+      "id": 13,
+      "topic": "Invariants",
+      "prompt": "Showing a loop invariant holds BEFORE the first iteration is called ___.",
+      "answer": [
+        "initialization"
+      ],
+      "display": "Initialization"
+    },
+    {
+      "id": 14,
+      "topic": "Logic Errors",
+      "prompt": "Assuming what you're trying to prove is called '___ the question'.",
+      "answer": [
+        "begging"
+      ],
+      "display": "Begging"
+    },
+    {
+      "id": 15,
+      "topic": "Proof Types",
+      "prompt": "Proof by exhaustion is checking every possible ___.",
+      "answer": [
+        "case",
+        "cases"
+      ],
+      "display": "Case"
+    },
+    {
+      "id": 16,
+      "topic": "Vacuous",
+      "prompt": "If 'If P, then Q' is true because P is false, the statement is ___ true.",
+      "answer": [
+        "vacuously"
+      ],
+      "display": "Vacuously"
+    },
+    {
+      "id": 17,
+      "topic": "Paradoxes",
+      "prompt": "The 'All horses are same color' induction fails at the transition from n=1 to n=?.",
+      "answer": [
+        "2"
+      ],
+      "display": "2"
+    },
+    {
+      "id": 18,
+      "topic": "XOR",
+      "prompt": "To prove 'Exactly one of A or B is true', you must prove (A or B) AND NOT (___).",
+      "answer": [
+        "a and b"
+      ],
+      "display": "A and B"
+    },
+    {
+      "id": 19,
+      "topic": "Justification",
+      "prompt": "Justifying 'x = 2k' because x is even uses the ___ of even numbers.",
+      "answer": [
+        "definition"
+      ],
+      "display": "Definition"
+    },
+    {
+      "id": 20,
+      "topic": "Terminology",
+      "prompt": "A mathematical statement that HAS BEEN proven is a ___.",
+      "answer": [
+        "theorem",
+        "proposition",
+        "lemma",
+        "corollary"
+      ],
+      "display": "Theorem / Proposition"
+    }
+  ],
   "day4": [
     {
       "id": 1,
