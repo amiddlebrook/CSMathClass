@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 15: Fundamental Theorem of Calculus</title>
+    <title>Day 15: Expected Value & Linearity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -87,6 +87,13 @@
                 <div class="section-body">
                     <div class="rule"><strong>Expected value = average performance.</strong> For randomized algorithms,
                         we analyze expected running time. For systems, we measure expected latency.</div>
+                    <div class="info">
+                        <strong>🎰 Simple:</strong> Imagine a slot machine that pays $100 with 1% probability and $0
+                        otherwise.
+                        The expected value is: 0.01 × $100 + 0.99 × $0 = $1. Even though you never actually win $1,
+                        that's your "average" outcome per play. If the machine costs $2 to play, you're losing money
+                        on average—casino math in action!
+                    </div>
                     <div class="subsection">
                         <h3 class="subsection-title">Where you'll use this</h3>
                         <ul>
@@ -152,6 +159,12 @@
                         </div>
                         <div class="rule"><strong>Key insight:</strong> This works even when X and Y are NOT
                             independent! This is what makes linearity so powerful.</div>
+                        <div class="info">
+                            <strong>🍕 Simple:</strong> Imagine ordering 3 pizzas. Pizza A costs $10 on average,
+                            Pizza B costs $12, Pizza C costs $8. What's the expected total? Just add them:
+                            $10 + $12 + $8 = $30. It doesn't matter if the prices are correlated (same restaurant)
+                            or independent (different restaurants). Linearity always works!
+                        </div>
                     </div>
                     <div class="subsection">
                         <h3 class="subsection-title">Extended form</h3>
@@ -191,6 +204,12 @@
                         <div class="math-block">E[Iₐ] = 1·P(A) + 0·P(not A) = P(A)
 
                             This lets us count using expectations!</div>
+                        <div class="info">
+                            <strong>🎛️ Simple:</strong> An indicator variable is like a light switch: it's either
+                            ON (1) or OFF (0). The expected value is just the probability it's on. If there's a 30%
+                            chance of rain, the "rain indicator" has E[I] = 0.30. To count expected rainy days in a
+                            month, just add up 30 of these: 30 × 0.30 = 9 expected rainy days!
+                        </div>
                     </div>
                     <div class="subsection">
                         <h3 class="subsection-title">Counting technique</h3>
@@ -340,18 +359,17 @@
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
+                title: "Expected Value Fundamentals",
                 items: [
-                    { title: "Video 1", channel: "Course Reference", vid: "6Mz9HJvEbE8" },
-                    { title: "Video 2", channel: "Course Reference", vid: "61X8WXuTJco" },
-                    { title: "Video 3", channel: "Course Reference", vid: "lQ3lMvV8fGc" },
-                    { title: "Video 4", channel: "Course Reference", vid: "HZTv4zCgEnA" }
+                    { title: "Expected Value Explained", channel: "3Blue1Brown", vid: "6Mz9HJvEbE8" },
+                    { title: "Linearity of Expectation", channel: "Khan Academy", vid: "61X8WXuTJco" },
+                    { title: "Indicator Random Variables", channel: "MIT OCW", vid: "lQ3lMvV8fGc" },
+                    { title: "Expected Value in Algorithms", channel: "Jeff Erickson", vid: "HZTv4zCgEnA" }
                 ]
             }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day13'], storageKey: 'day13_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day15'], storageKey: 'day15_v1' });
     </script>
-</body>
 </body>
 
 </html>
