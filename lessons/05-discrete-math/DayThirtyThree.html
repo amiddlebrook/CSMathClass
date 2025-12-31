@@ -107,6 +107,11 @@
                         • Leaf: node with no children
                         • Height: longest path from root to leaf
                         • Depth: path length from root to node</div>
+                    <div class="info">
+                        <strong>Family Simple:</strong> A tree is like a family tree.
+                        <br>Root = great-grandparent. Leaves = youngest generation (no children yet).
+                        <br>Edges = parent-child relationships. Height = how many generations!
+                    </div>
                 </div>
             </section>
 
@@ -164,9 +169,14 @@
                         </div>
                         <div class="subsection">
                             <h3 class="subsection-title">Max-Heap</h3>
-                            <div class="math-block">Parent ≥ Children
+                            <div class="math-block">Parent >= Children
                                 Root = maximum
                                 Used in heapsort</div>
+                            <div class="info">
+                                <strong>VIP Simple:</strong> A heap is like a VIP line at a club.
+                                <br>Min-heap: lowest number (highest priority) gets served first.
+                                <br>When you add someone, they bubble up to their rightful place in line!
+                            </div>
                         </div>
                     </div>
 
@@ -211,6 +221,11 @@ heapq.heappush(h, <span class="code-number">8</span>)
 
                         Search/Insert: O(length of string)</div>
                     <p>Use cases: autocomplete, spell check, IP routing tables.</p>
+                    <div class="info">
+                        <strong>Autocomplete Simple:</strong> A trie is how your phone predicts words!
+                        <br>Type 'c' - shows cat, car, card. Type 'ca' - narrows to cat, car, card.
+                        <br>Each letter you type walks one step down the tree.
+                    </div>
                 </div>
             </section>
 
@@ -368,22 +383,16 @@ has_edge = matrix[<span class="code-number">1</span>][<span class="code-number">
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 3", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 4", channel: "Course Reference", vid: "pYT9F8_LFTM" },
-            { title: "Video 5", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 6", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 7", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 8", channel: "Course Reference", vid: "H5JubkIy_p8" },
-            { title: "Video 9", channel: "Course Reference", vid: "code-header" },
-            { title: "Video 10", channel: "Course Reference", vid: "t0Cq6tVNRBA" }
-            ]
-        }
-    ];
+            {
+                title: "Trees & Graphs",
+                items: [
+                    { title: "Binary Search Trees", channel: "Abdul Bari", vid: "pYT9F8_LFTM" },
+                    { title: "Heaps & Priority Queues", channel: "Abdul Bari", vid: "H5JubkIy_p8" },
+                    { title: "Tries Explained", channel: "NeetCode", vid: "t0Cq6tVNRBA" },
+                    { title: "Graph Representations", channel: "William Fiset", vid: "eQA-m22wjTQ" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Basics", prompt: "Tree with n nodes has ___-1 edges", answer: "n" },
             { topic: "BST", prompt: "BST: left subtree values are ___ than parent", answer: "less", altAnswers: ["smaller", "lower"] },
@@ -404,7 +413,7 @@ has_edge = matrix[<span class="code-number">1</span>][<span class="code-number">
             { topic: "Choice", prompt: "Use adjacency matrix for ___ graphs", answer: "dense" },
             { topic: "Types", prompt: "DAG = Directed ___ Graph", answer: "acyclic" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day33_trees_graphs_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day33_trees_v2' });
     </script>
 </body>
 

@@ -101,7 +101,12 @@
                         Quick Sort | O(n log n) | O(n²) | O(log n)| No
                         Heap Sort | O(n log n) | O(n log n) | O(1) | No</div>
 
-                    <div class="warning"><strong>Comparison-based sorting lower bound:</strong> Ω(n log n)</div>
+                    <div class="warning"><strong>Comparison-based sorting lower bound:</strong> Omega(n log n)</div>
+                    <div class="info">
+                        <strong>Cards Simple:</strong> Sorting is like organizing a hand of cards.
+                        <br>Insertion sort = how most people actually sort cards (insert each new card in place).
+                        <br>Merge sort = split the deck, sort halves, merge them back.
+                    </div>
 
                     <div class="code-block">
                         <div class="code-header">
@@ -138,6 +143,11 @@
                             <h3 class="subsection-title">Binary Search</h3>
                             <div class="math-block">O(log n) - halve search space
                                 Requires sorted data</div>
+                            <div class="info">
+                                <strong>Guessing Simple:</strong> Binary search is the number guessing game!
+                                <br>I'm thinking of 1-100. You guess 50. "Higher." You guess 75. "Lower." Etc.
+                                <br>Each guess eliminates HALF the possibilities. Log2(100) approx 7 guesses max!
+                            </div>
                         </div>
                     </div>
 
@@ -178,8 +188,13 @@
                         • Minimum Spanning Tree (Prim, Kruskal)
                         • Dijkstra's Shortest Path</div>
 
-                    <div class="warning"><strong>Greedy doesn't always work!</strong> Must prove greedy choice property
+                    <div class="warning"><strong>Greedy doesnt always work!</strong> Must prove greedy choice property
                         and optimal substructure.</div>
+                    <div class="info">
+                        <strong>Short-sighted Simple:</strong> Greedy is being short-sighted on purpose.
+                        <br>At each step, take what looks best RIGHT NOW without thinking ahead.
+                        <br>Sometimes this works great (making change). Sometimes it fails (some coin systems).
+                    </div>
                 </div>
             </section>
 
@@ -244,22 +259,16 @@
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "TzeBrDU-JaY" },
-            { title: "Video 2", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "7h1s2SojIRw" },
-            { title: "Video 6", channel: "Course Reference", vid: "ARvQcqJ_-NY" },
-            { title: "Video 7", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 8", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 9", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 10", channel: "Course Reference", vid: "P3YID7liBug" }
-            ]
-        }
-    ];
+            {
+                title: "Sorting & Algorithms",
+                items: [
+                    { title: "Quick Sort", channel: "Abdul Bari", vid: "7h1s2SojIRw" },
+                    { title: "Merge Sort", channel: "Abdul Bari", vid: "TzeBrDU-JaY" },
+                    { title: "Binary Search", channel: "NeetCode", vid: "P3YID7liBug" },
+                    { title: "Greedy Algorithms", channel: "Abdul Bari", vid: "ARvQcqJ_-NY" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Sorting", prompt: "Merge sort time complexity is O(n log ___)", answer: "n" },
             { topic: "Sorting", prompt: "Quick sort worst case is O(n^___)", answer: "2" },
@@ -269,10 +278,10 @@
             { topic: "Greedy", prompt: "Greedy makes ___ optimal choices", answer: "locally", altAnswers: ["local"] },
             { topic: "Greedy", prompt: "Dijkstra is a ___ algorithm", answer: "greedy" },
             { topic: "D&C", prompt: "D&C = Divide and ___", answer: "conquer" },
-            { topic: "Bounds", prompt: "Comparison sort lower bound is Ω(n log ___)", answer: "n" },
+            { topic: "Bounds", prompt: "Comparison sort lower bound is Omega(n log ___)", answer: "n" },
             { topic: "D&C", prompt: "Master ___ solves recurrences", answer: "theorem" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day42_sort_search_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day34_sort_v2' });
     </script>
 </body>
 
