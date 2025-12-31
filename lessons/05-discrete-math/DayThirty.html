@@ -117,6 +117,13 @@
                             <strong>Hamiltonian Path:</strong> Visits every VERTEX exactly once. (Hard problem!)
                         </div>
                     </div>
+                    <div class="info">
+                        <strong>🚶 Simple:</strong> Think of paths like walking routes:
+                        <br>• <strong>Path</strong>: Walking from your house to the store without retracing steps.
+                        <br>• <strong>Cycle</strong>: A loop walk that ends back at home.
+                        <br>• <strong>Eulerian</strong>: Walking every street in town exactly once (mailman's route).
+                        <br>• <strong>Hamiltonian</strong>: Visiting every house exactly once (salesman's route).
+                    </div>
                 </div>
             </section>
 
@@ -137,6 +144,12 @@
                         <li>Removing any edge disconnects the graph.</li>
                         <li>Adding any edge creates a cycle.</li>
                     </ul>
+                    <div class="info">
+                        <strong>🌳 Simple:</strong> A tree is like a family tree—everyone is connected, but there are no
+                        "loops"
+                        (you can't be your own ancestor!). There's exactly one way to get from any person
+                        to any other person by following parent-child relationships.
+                    </div>
                 </div>
             </section>
 
@@ -162,6 +175,12 @@
                         <strong>Kuratowski's Theorem:</strong> A graph is non-planar iff it contains a subgraph
                         homeomorphic to $K_5$ or $K_{3,3}$.
                     </div>
+                    <div class="info">
+                        <strong>🗺️ Simple:</strong> Can you draw it on paper without crossing lines?
+                        <br>Think of circuit boards—engineers try to route wires without crossings (cheaper to
+                        manufacture!).
+                        <br>Maps are always planar: countries share borders but their regions don't "overlap."
+                    </div>
                 </div>
             </section>
 
@@ -180,6 +199,12 @@
                         <strong>Four Color Theorem:</strong> Every planar graph can be colored with at most 4 colors.
                     </div>
                     <p>Applications: Register allocation in compilers, scheduling.</p>
+                    <div class="info">
+                        <strong>🎨 Simple:</strong> Imagine a university scheduling exams. Students taking multiple
+                        courses
+                        can't have those exams at the same time (conflict = edge). Colors = time slots.
+                        The Four Color Theorem says any map only needs 4 colors so neighboring countries differ!
+                    </div>
                 </div>
             </section>
 
@@ -278,28 +303,17 @@ coloring = greedy_color(G)
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "T6350fDcd3I" },
-            { title: "Video 2", channel: "Course Reference", vid: "C_W7xXm-ZqM" },
-            { title: "Video 3", channel: "Course Reference", vid: "HZGCoVF3YvM" },
-            { title: "Video 4", channel: "Course Reference", vid: "O2L2Uv9pdDA" },
-            { title: "Video 5", channel: "Course Reference", vid: "heNB3JZT680" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
                 title: "Graph Theory II",
                 items: [
-                    { title: "Euler vs Hamiltonian Paths", channel: "The Organic Chemistry Tutor", vid: "7s-cx9nOQm8" },
-                    { title: "Planar Graphs", channel: "TrevTutor", vid: "wnYQPqXk8Kk" },
-                    { title: "Graph Coloring", channel: "Numberphile", vid: "NgbK43jB4rQ" } // Four color theorem
+                    { title: "Euler vs Hamiltonian Paths", channel: "Organic Chemistry Tutor", vid: "7s-cx9nOQm8" },
+                    { title: "Planar Graphs & Euler's Formula", channel: "TrevTutor", vid: "wnYQPqXk8Kk" },
+                    { title: "Four Color Theorem", channel: "Numberphile", vid: "NgbK43jB4rQ" },
+                    { title: "Tree Properties", channel: "TheTrevTutor", vid: "T6350fDcd3I" },
+                    { title: "Graph Coloring Algorithms", channel: "MIT OCW", vid: "C_W7xXm-ZqM" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Cycle", prompt: "A path starting and ending at the same vertex is a ___.", answer: "cycle" },
             { topic: "Tree", prompt: "A tree with n vertices has ___ edges.", answer: "n-1", altAnswers: ["n - 1"] },
@@ -310,7 +324,7 @@ coloring = greedy_color(G)
             { topic: "Color", prompt: "Chromatic number of a triangle (K3) is ___.", answer: "3" },
             { topic: "Theorem", prompt: "Every planar graph can be colored with ___ colors.", answer: "4", altAnswers: ["four"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day35_graph2_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day30_trees_v1' });
     </script>
 </body>
 

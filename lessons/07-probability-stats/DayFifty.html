@@ -110,6 +110,11 @@
                             $\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$
                         </div>
                     </div>
+                    <div class="info">
+                        <strong>🏔️ Simple:</strong> Imagine standing on a mountain. A partial derivative asks:
+                        "If I walk only East (x-direction), how steep is the slope?" You ignore North/South.
+                        <br>For multiple variables, you take turns: move in one direction, freeze the others.
+                    </div>
                 </div>
             </section>
 
@@ -129,6 +134,12 @@
                         The gradient points in the direction of steepest <strong>ascent</strong>.
                         <br>
                         $-\nabla f$ is the direction of steepest <strong>descent</strong> (used in Machine Learning).
+                    </div>
+                    <div class="info">
+                        <strong>🧭 Simple:</strong> The gradient is like a compass that always points "uphill."
+                        <br>If you're a hiker trying to reach the peak, follow the gradient.
+                        <br>If you're optimizing a loss function and want to find the minimum, go the OPPOSITE
+                        direction!
                     </div>
                 </div>
             </section>
@@ -153,6 +164,11 @@
                             <br>
                             Used in change of variables (integration) and robotics.
                         </div>
+                    </div>
+                    <div class="info">
+                        <strong>🧪 Simple:</strong> If the gradient tells you "which way is up," the Hessian tells you
+                        "is it a peak, a valley, or a saddle?" Think of it as measuring the "curvature" of the terrain.
+                        <br>Positive definite Hessian = you're in a bowl (minimum). Negative = on a dome (maximum).
                     </div>
                 </div>
             </section>
@@ -242,39 +258,24 @@ current = start
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "S0_qX4VJhMQ" },
-            { title: "Video 2", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 3", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 4", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 5", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 6", channel: "Course Reference", vid: "3Blue1Brown" },
-            { title: "Video 7", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 8", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 9", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 10", channel: "Course Reference", vid: "code-header" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
-                title: "Multivariable",
+                title: "Multivariable Calculus",
                 items: [
-                    { title: "Gradient", channel: "Khan Academy", vid: "GkB4vW16QHI" },
-                    { title: "Partial Derivatives", channel: "3Blue1Brown", vid: "S0_qX4VJhMQ" },
+                    { title: "Partial Derivatives Visualized", channel: "3Blue1Brown", vid: "S0_qX4VJhMQ" },
+                    { title: "Gradient Explained", channel: "Khan Academy", vid: "GkB4vW16QHI" },
+                    { title: "The Hessian Matrix", channel: "Khan Academy", vid: "LbBcuZukCAw" },
+                    { title: "Jacobian Matrix", channel: "3Blue1Brown", vid: "wCZ1VEmVjVo" },
+                    { title: "Gradient Descent", channel: "StatQuest", vid: "sDv4f4s2SB8" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Gradient", prompt: "Gradient points in direction of steepest ___.", answer: "ascent", altAnswers: ["increase"] },
             { topic: "Hessian", prompt: "Hessian is a matrix of ___ derivatives.", answer: "second" },
             { topic: "Optimization", prompt: "Gradient Descent moves in the direction of ___ gradient.", answer: "negative", altAnswers: ["minus", "opposite"] },
             { topic: "Jacobian", prompt: "Matrix of first order partials is called ___.", answer: "jacobian" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day50_multi_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day50_multi_v2' });
     </script>
 </body>
 
