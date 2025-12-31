@@ -113,6 +113,12 @@
                         If this limit exists, $f$ is <strong>differentiable</strong> at $c$.
                         <br>Differentiability $\implies$ Continuity (but not the other way around, e.g., $|x|$ at 0).
                     </p>
+                    <div class="info">
+                        <strong>🚠 Simple:</strong> The derivative is your "instantaneous speedometer reading."
+                        <br>Your GPS shows average speed over the last mile. But your speedometer shows your speed RIGHT
+                        NOW.
+                        <br>The derivative is that speedometer—the limit as the time interval shrinks to zero.
+                    </div>
                 </div>
             </section>
 
@@ -149,6 +155,11 @@
                     <div class="info">
                         <strong>Corollary:</strong> If $f'(x) = 0$ for all $x$, then $f(x)$ is constant. This is crucial
                         for proving uniqueness of solutions.
+                    </div>
+                    <div class="info">
+                        <strong>🚗 Simple (Speeding Ticket Theorem):</strong> You drove 60 miles in 1 hour.
+                        <br>Your average speed was 60 mph. MVT says: at SOME point during that hour,
+                        <br>your speedometer MUST have shown exactly 60 mph. You can't deny it, officer!
                     </div>
                 </div>
             </section>
@@ -237,39 +248,23 @@ exact = <span class="code-number">3</span>*(c**<span class="code-number">2</span
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "spaced-list" },
-            { title: "Video 6", channel: "Course Reference", vid: "9vKqVkMQHKk" },
-            { title: "Video 7", channel: "Course Reference", vid: "3Blue1Brown" },
-            { title: "Video 8", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 9", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 10", channel: "Course Reference", vid: "code-number" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
-                title: "Derivatives",
+                title: "Derivatives & MVT",
                 items: [
                     { title: "Derivative Paradox", channel: "3Blue1Brown", vid: "9vKqVkMQHKk" },
-                    { title: "Chain Rule", channel: "Khan Academy", vid: "XIQ-KnsAsbg" },
+                    { title: "Chain Rule Intuition", channel: "3Blue1Brown", vid: "YG15m2VwSjA" },
+                    { title: "Mean Value Theorem", channel: "Khan Academy", vid: "vxVKqVnM6jM" },
+                    { title: "MVT Applications", channel: "Organic Chemistry Tutor", vid: "N2UF_Z9W1rc" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Deriv", prompt: "The derivative represents the ___ of the tangent line.", answer: "slope", altAnswers: ["gradient"] },
             { topic: "MVT", prompt: "MVT relates instantaneous rate to ___ rate.", answer: "average" },
             { topic: "Relation", prompt: "If f is differentiable, it must be ___.", answer: "continuous" },
             { topic: "Corner", prompt: "The function |x| is not differentiable at ___.", answer: "0", altAnswers: ["zero"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day45_seq_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day45_deriv_v2' });
     </script>
 </body>
 

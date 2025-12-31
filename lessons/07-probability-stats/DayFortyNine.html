@@ -110,6 +110,13 @@
                         3. d(x, y) = d(y, x) (Symmetry)
                         4. d(x, z) \le d(x, y) + d(y, z) (Triangle Inequality)
                     </div>
+                    <div class="info">
+                        <strong>🗺️ Simple:</strong> A metric is just a way to measure "distance" between things.
+                        <br>It could be distance between cities, similarity between documents, or how different two DNA
+                        strings are.
+                        <br>The four rules ensure it behaves like a reasonable "distance"—can't be negative, going A→B→C
+                        can't be shorter than A→C, etc.
+                    </div>
                 </div>
             </section>
 
@@ -133,6 +140,14 @@
                         <div class="list-item">
                             <strong>Discrete Metric:</strong> $d(x, y) = 1$ if $x \neq y$, else 0.
                         </div>
+                    </div>
+                    <div class="info">
+                        <strong>🚕 Simple:</strong>
+                        <br>• <strong>Euclidean:</strong> "As the crow flies" — straight-line distance.
+                        <br>• <strong>Manhattan:</strong> "As the taxi drives" — you can only go along streets (no
+                        diagonals).
+                        <br>• <strong>Chebyshev:</strong> "As the chess king moves" — the farthest you need to go in any
+                        ONE direction.
                     </div>
                 </div>
             </section>
@@ -260,39 +275,23 @@ d_ham = distance.hamming(v1, v2)
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 6", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 7", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 8", channel: "Course Reference", vid: "Contraction" },
-            { title: "Video 9", channel: "Course Reference", vid: "code-header" },
-            { title: "Video 10", channel: "Course Reference", vid: "video-title" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
-                title: "Topology",
+                title: "Metric Spaces",
                 items: [
-                    { title: "Metric Spaces", channel: "Khan Academy", vid: "None" },
-                    { title: "Contraction Mapping", channel: "Steve Brunton", vid: "None" },
+                    { title: "Metric Spaces Introduction", channel: "The Bright Side of Mathematics", vid: "9h6A3I2j8RU" },
+                    { title: "Open Balls and Topology", channel: "TheBrightSideOfMathematics", vid: "u2vWz4ymWmA" },
+                    { title: "Completeness and Cauchy Sequences", channel: "TheBrightSideOfMathematics", vid: "kYl1rZp1Pro" },
+                    { title: "Banach Fixed Point Theorem", channel: "Steve Brunton", vid: "YE4L5m2C7V4" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Inequality", prompt: "Triangle inequality: d(x,z) <= d(x,y) + ___.", answer: "d(y,z)" },
             { topic: "Identity", prompt: "d(x,y)=0 implies x = ___.", answer: "y" },
             { topic: "Complete", prompt: "A space where Cauchy sequences converge is ___.", answer: "complete" },
             { topic: "Contraction", prompt: "Contraction mappings have a unique ___ point.", answer: "fixed" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day49_metric_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day49_metric_v2' });
     </script>
 </body>
 
