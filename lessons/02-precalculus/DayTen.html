@@ -144,6 +144,12 @@
                 <div class="section-body">
                     <p>Also called the "Substitution Method" or "recursion tree method". You expand the T(n) definition
                         repeatedly until you see a pattern.</p>
+                    <div class="info">
+                        <strong>🪞 Simple:</strong> The Mirror Tunnel.
+                        <br>Stand between two mirrors. You see infinite reflections getting smaller and smaller.
+                        <br>Unrolling is just counting how many reflections you see before they become too small to
+                        distinguish (base case).
+                    </div>
                     <div class="math-block">
                         T(n) = T(n/2) + 1 \quad (\text{Binary Search})
                         \newline
@@ -187,6 +193,10 @@
                             <li><strong>Case 3 (Root Wins):</strong> The manager does the most work. The top level
                                 dominates. $T(n) = O(f(n))$.</li>
                         </ul>
+                        <br><strong>🏭 Simple:</strong> Imagine a factory.
+                        <br>Case 1: The workers (leaves) are so slow that adding more layers of management doesn't
+                        matter. Total time = Time of workers.
+                        <br>Case 3: The CEO (root) is so slow that the workers are waiting. Total time = Time of CEO.
                     </div>
                 </div>
             </section>
