@@ -7,17 +7,20 @@
   <title>Day 1: Sets, Symbols, and Arithmetic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="../../lessons/shared-styles.css">
   <script src="../../lessons/questions-data.js"></script>
   <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <a href="../../index.html" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -46,7 +49,7 @@
       </svg>
       Day 1 · Mathematical Maturity
     </div>
-    
+
     <p class="hero-desc">
       Mathematics is not just calculation; it is a language. To speak it fluently, you must master its grammar (logic),
       its nouns (sets), and its fundamental structures (numbers). Today we rebuild arithmetic from the ground up,
@@ -235,7 +238,8 @@
           <div class="subsection">
             <h3 class="subsection-title">Divisibility</h3>
             <p>We say <span class="math-inline">a | b</span> ("a divides b") if there exists an integer k such that
-              <span class="math-inline">b = ak</span>.</p>
+              <span class="math-inline">b = ak</span>.
+            </p>
             <div class="math-block">3 | 12 because 12 = 3 × 4
               3 ∤ 13 because no integer k satisfies 13 = 3k</div>
           </div>
@@ -327,5 +331,18 @@ size = <span class="code-number">5</span>
       </section>
     </main>
   </div>
+  <script>
+    const VIDEO_GROUPS = [
+      {
+        title: "Mathematical Maturity",
+        items: [
+          { title: "Sets & Symbols", channel: "Course Reference", vid: "video_placeholder_1" },
+          { title: "Arithmetic Foundations", channel: "Course Reference", vid: "video_placeholder_2" }
+        ]
+      }
+    ];
+    initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day1'], storageKey: 'day1_sets_v1' });
+  </script>
 </body>
+
 </html>

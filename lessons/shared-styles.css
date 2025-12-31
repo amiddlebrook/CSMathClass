@@ -61,6 +61,38 @@
   background: rgba(24, 24, 27, 0.92);
 }
 
+.simple-mode {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f3f4f6;
+  --border: #000000;
+  --border-strong: #000000;
+  --text: #000000;
+  --text-secondary: #000000;
+  --text-muted: #333333;
+  --accent: #000000;
+  --accent-light: #ffffff;
+  --accent-dark: #000000;
+  --code-bg: #f3f4f6;
+  --code-text: #000000;
+  --shadow: none;
+  --radius: 0;
+  --radius-lg: 0;
+}
+
+.simple-mode *:not(.fa) {
+  box-shadow: none !important;
+  transition: none !important;
+  border-radius: 0 !important;
+  background-image: none !important;
+}
+
+.simple-mode .hero-meta,
+.simple-mode .video-meta,
+.simple-mode .hero-label {
+  display: none;
+}
+
 [data-theme="dark"] .warning {
   color: #fef3c7;
   background: #451a03;

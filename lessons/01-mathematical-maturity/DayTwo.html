@@ -7,17 +7,20 @@
   <title>Day 2: Logic and Proofs</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="../../lessons/shared-styles.css">
   <script src="../../lessons/questions-data.js"></script>
   <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <a href="../../index.html" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -46,7 +49,7 @@
       </svg>
       Day 2 · Mathematical Maturity
     </div>
-    
+
     <p class="hero-desc">
       Logic is the operating system of mathematics. Proofs are the programs. Today we learn how to write bug-free
       logical arguments, a skill directly transferable to writing bug-free code.
@@ -318,5 +321,18 @@
       </section>
     </main>
   </div>
+  <script>
+    const VIDEO_GROUPS = [
+      {
+        title: "Logic & Proofs",
+        items: [
+          { title: "Propositional Logic", channel: "Course Reference", vid: "video_placeholder_3" },
+          { title: "Truth Tables", channel: "Course Reference", vid: "video_placeholder_4" }
+        ]
+      }
+    ];
+    initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day2'], storageKey: 'day2_logic_v1' });
+  </script>
 </body>
+
 </html>
