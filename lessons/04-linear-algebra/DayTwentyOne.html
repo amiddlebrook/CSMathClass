@@ -115,6 +115,14 @@
                                     $|AB| = |A||B|$ and $|A^{-1}| = 1/|A|$.
                                 </div>
                         </div>
+                        <div class="info">
+                            <strong>🍞 Simple:</strong> The determinant tells you how much a transformation "stretches"
+                            or "squishes" area.
+                            <br>• |det| = 2 means areas double.
+                            <br>• |det| = 0.5 means areas shrink by half.
+                            <br>• det = 0 means everything gets squashed flat (like squashing a loaf of bread into a
+                            pancake).
+                        </div>
                     </div>
             </section>
 
@@ -137,6 +145,13 @@
                         <br>
                         2. For each $\lambda$, solve $(A - \lambda I)v = 0$ for $v$.
                     </p>
+                    <div class="info">
+                        <strong>➡️ Simple:</strong> Most vectors get rotated and stretched by a matrix.
+                        <br>But SOME special vectors (eigenvectors) only get stretched—they stay pointing in the same
+                        direction!
+                        <br>The stretch factor is the eigenvalue. Like a door hinge: the hinge stays fixed while the
+                        door swings.
+                    </div>
                 </div>
             </section>
 
@@ -261,32 +276,16 @@ lambda_v = lambda_1 * v_1
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "spaced-list" },
-            { title: "Video 6", channel: "Course Reference", vid: "Eigenvalues" },
-            { title: "Video 7", channel: "Course Reference", vid: "3Blue1Brown" },
-            { title: "Video 8", channel: "Course Reference", vid: "Ip3X9LOh2dk" },
-            { title: "Video 9", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 10", channel: "Course Reference", vid: "themeToggle" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
                 title: "Eigen-Theory",
                 items: [
-                    { title: "The Determinant", channel: "3Blue1Brown", vid: "Ip3X9LOh2dk" },
+                    { title: "Determinant Meaning", channel: "3Blue1Brown", vid: "Ip3X9LOh2dk" },
                     { title: "Eigenvectors and Eigenvalues", channel: "3Blue1Brown", vid: "PFDu9oVAE-g" },
+                    { title: "Eigenvalue Computation", channel: "Khan Academy", vid: "PhfbEr2btGQ" },
+                    { title: "Diagonalization Explained", channel: "MIT OCW", vid: "13r9QY6cmjc" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Det", prompt: "The determinant measures the scaling factor of the ___.", answer: "area", altAnswers: ["volume"] },
             { topic: "Singular", prompt: "If det(A) = 0, the matrix is ___.", answer: "singular", altAnswers: ["not invertible"] },
@@ -294,7 +293,7 @@ lambda_v = lambda_1 * v_1
             { topic: "Eigen", prompt: "Av = λv. Here λ is the ___.", answer: "eigenvalue" },
             { topic: "Diag", prompt: "Diagonalization: A = S Λ ___.", answer: "S^-1", altAnswers: ["S inverse"] },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day25_eig_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day21_eig_v2' });
     </script>
 </body>
 
