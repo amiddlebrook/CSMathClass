@@ -119,8 +119,14 @@
                     </p>
 
                     <div class="rule">
-                        <strong>Key Insight:</strong> The right data structure can transform an O(n²) algorithm
+                        <strong>Key Insight:</strong> The right data structure can transform an O(n2) algorithm
                         into O(n log n) or even O(n). Always choose based on your access patterns.
+                    </div>
+                    <div class="info">
+                        <strong>Library Simple:</strong> Think library vs. pile of books.
+                        <br>Array = numbered shelves (instant access by position, slow to reorganize)
+                        <br>Linked list = books with next book notes (easy to insert, slow to find book 50)
+                        <br>Hash table = catalog system (instant lookup by name!)
                     </div>
 
                     <div class="subsection">
@@ -164,7 +170,13 @@
                     <div class="subsection">
                         <h3 class="subsection-title">Fixed-size Arrays</h3>
                         <p>Contiguous memory block. O(1) access by index, but O(n) insert/delete.</p>
-                        <div class="math-block">Array[i] address = base + (i × element_size)</div>
+                        <div class="math-block">Array[i] address = base + (i x element_size)</div>
+                        <div class="info">
+                            <strong>Train Simple:</strong> Arrays are like train cars on a fixed track.
+                            <br>Linked lists are like a treasure hunt: each node says next clue is at address X.
+                            <br>Adding a car in the middle of a train = nightmare. Adding a clue in a treasure hunt =
+                            easy!
+                        </div>
                     </div>
 
                     <div class="subsection">
@@ -341,6 +353,11 @@ head.next.next = ListNode(<span class="code-number">3</span>)</pre>
                                 peek(): View top
                                 All O(1)</div>
                             <p>Use cases: function calls, undo, parsing parentheses</p>
+                            <div class="info">
+                                <strong>Plates Simple:</strong> Stack = pile of plates.
+                                <br>You can only add to or remove from the TOP.
+                                <br>Last plate on goes first off (LIFO).
+                            </div>
                         </div>
                         <div class="subsection">
                             <h3 class="subsection-title">Queue (FIFO)</h3>
@@ -509,48 +526,48 @@ seen = {<span class="code-number">1</span>, <span class="code-number">2</span>, 
     <script>
         // Lesson-specific configuration
         const VIDEO_GROUPS = [
-    {
-        "title": "Lesson Videos",
-        "items": [
             {
-                "title": "CS50 \u2014 Data Structures",
-                "vid": "X8h4dq9Hzq8"
-            },
-            {
-                "title": "Data Structures Easy to Advanced",
-                "vid": "RBSGKlAvoiM"
-            },
-            {
-                "title": "Arrays vs Linked Lists",
-                "vid": "DyG9S9nAlUM"
-            },
-            {
-                "title": "Dynamic Arrays",
-                "vid": "tvw4v7FEF1w"
-            },
-            {
-                "title": "Hash Tables Explained",
-                "vid": "shs0KM3wKv8"
-            },
-            {
-                "title": "Hash Tables in Python",
-                "vid": "ea8BRGxGmlA"
-            },
-            {
-                "title": "Linked Lists for Beginners",
-                "vid": "WwfhLC16bis"
-            },
-            {
-                "title": "Linked Lists in Detail",
-                "vid": "NobHlGUjV3g"
-            },
-            {
-                "title": "Doubly Linked Lists",
-                "vid": "JdQeNxWCguQ"
+                "title": "Lesson Videos",
+                "items": [
+                    {
+                        "title": "CS50 \u2014 Data Structures",
+                        "vid": "X8h4dq9Hzq8"
+                    },
+                    {
+                        "title": "Data Structures Easy to Advanced",
+                        "vid": "RBSGKlAvoiM"
+                    },
+                    {
+                        "title": "Arrays vs Linked Lists",
+                        "vid": "DyG9S9nAlUM"
+                    },
+                    {
+                        "title": "Dynamic Arrays",
+                        "vid": "tvw4v7FEF1w"
+                    },
+                    {
+                        "title": "Hash Tables Explained",
+                        "vid": "shs0KM3wKv8"
+                    },
+                    {
+                        "title": "Hash Tables in Python",
+                        "vid": "ea8BRGxGmlA"
+                    },
+                    {
+                        "title": "Linked Lists for Beginners",
+                        "vid": "WwfhLC16bis"
+                    },
+                    {
+                        "title": "Linked Lists in Detail",
+                        "vid": "NobHlGUjV3g"
+                    },
+                    {
+                        "title": "Doubly Linked Lists",
+                        "vid": "JdQeNxWCguQ"
+                    }
+                ]
             }
-        ]
-    }
-];
+        ];
 
         const QUESTIONS = [
             { topic: "Arrays", prompt: "Array access by index is O(___)", answer: "1" },

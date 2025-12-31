@@ -111,6 +111,11 @@
                     <h4>Computing Terms</h4>
                     <p>To find the 100th term, we can iterate forward (Dynamic Programming) or find a "Closed Form"
                         (formula based only on $n$).</p>
+                    <div class="info">
+                        <strong>🐇 Simple:</strong> Fibonacci is "rabbit breeding math."
+                        <br>Month 1: 1 pair. Month 2: 1 pair. Then each month, every mature pair produces a new pair.
+                        <br>Today's rabbits = last month's + newborns from month before. That's F(n) = F(n-1) + F(n-2)!
+                    </div>
                 </div>
             </section>
 
@@ -133,6 +138,11 @@
                         Roots: (1 ± √5)/2
                         Closed Form: a_n = (φ^n - (1-φ)^n) / √5
                         (Binet's Formula)</div>
+                    <div class="info">
+                        <strong>📝 Simple:</strong> A closed form is a "recipe" instead of "follow the chain."
+                        <br>Instead of: "To know Day 100's rabbits, first compute Days 1-99..."
+                        <br>Closed form: "Just plug in n=100 into this formula. Done!"
+                    </div>
                 </div>
             </section>
 
@@ -163,6 +173,11 @@
                         <p>
                             <em>Example: Merge Sort ($a=2, b=2, f(n)=n$).</em> Case 2 applies. $T(n) = n \log n$.
                         </p>
+                        <div class="info">
+                            <strong>📖 Simple:</strong> Master Theorem is a "cheat sheet" for Divide & Conquer.
+                            <br>Instead of solving the recurrence from scratch, just look up which case applies!
+                            <br>It's like knowing the answer key to common algorithm patterns.
+                        </div>
                     </div>
                 </div>
             </section>
@@ -253,27 +268,16 @@
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "f5oFz2O5tQM" },
-            { title: "Video 2", channel: "Course Reference", vid: "JrdfCRV2tKE" },
-            { title: "Video 3", channel: "Course Reference", vid: "GJmXHL-lqFk" },
-            { title: "Video 4", channel: "Course Reference", vid: "HZGCoVF3YvM" },
-            { title: "Video 5", channel: "Course Reference", vid: "O2L2Uv9pdDA" }
-            ]
-        }
-    ];
-        const VIDEOS_REAL = [
             {
                 title: "Recurrences",
                 items: [
-                    { title: "Linear Recurrence Relations", channel: "The Organic Chemistry Tutor", vid: "upTO78o7zI0" },
-                    { title: "Master Theorem for Algorithms", channel: "Abdul Bari", vid: "OdynsEtGTrg" }
+                    { title: "Linear Recurrence Relations", channel: "Organic Chemistry Tutor", vid: "upTO78o7zI0" },
+                    { title: "Master Theorem", channel: "Abdul Bari", vid: "OdynsEtGTrg" },
+                    { title: "Solving Recurrences", channel: "MIT OCW", vid: "f5oFz2O5tQM" },
+                    { title: "Fibonacci Closed Form", channel: "Mathologer", vid: "GJmXHL-lqFk" }
                 ]
             }
         ];
-
         const QUESTIONS = [
             { topic: "Fibonacci", prompt: "F_n = F_{n-1} + ___.", answer: "f_{n-2}", altAnswers: ["f_n-2", "f(n-2)"] },
             { topic: "Linear", prompt: "To solve linear recurrences, we find roots of the ___ equation.", answer: "characteristic" },
@@ -282,7 +286,7 @@
             { topic: "Complexity", prompt: "Recursive Fibonacci is O(___).", answer: "2^n" },
             { topic: "Closed Form", prompt: "A formula for a_n that does not use previous terms is called ___ form.", answer: "closed" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day33_rec_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day28_rec_v2' });
     </script>
 </body>
 
