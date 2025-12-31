@@ -272,25 +272,24 @@ transformed_points = Shear @ points
 
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
-        <script>
-            const VIDEO_GROUPS = [
+        const VIDEO_GROUPS = [
             {
                 title: "Visualizing Matrices",
-            items: [
-            {title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
-            {title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
-            {title: "Matrices as Transforms", channel: "Khan Academy", vid: "TnV5a1c3rHg" }
-            ]
+                items: [
+                    { title: "Linear Transformations", channel: "3Blue1Brown", vid: "kYB8IZa5AuE" },
+                    { title: "Change of Basis", channel: "3Blue1Brown", vid: "P2LTAUO1TdA" },
+                    { title: "Matrices as Transforms", channel: "Khan Academy", vid: "TnV5a1c3rHg" }
+                ]
             }
-            ];
-            const QUESTIONS = [
-            {topic: "Linearity", prompt: "T(u+v) must equal ___.", answer: "t(u)+t(v)", altAnswers: ["t(u) + t(v)"] },
-            {topic: "Origin", prompt: "A linear transformation must map the origin to the ___.", answer: "origin", altAnswers: ["zero vector"] },
-            {topic: "ColSpace", prompt: "Columns of the matrix A are the images of the ___ vectors.", answer: "basis" },
-            {topic: "Similar", prompt: "Similar matrices represent the same ___ in different bases.", answer: "transformation", altAnswers: ["map", "operator"] },
-            {topic: "Det", prompt: "The determinant of a rotation matrix is ___.", answer: "1" },
-            ];
-            initLesson({videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day23_trans_v2' });
+        ];
+        const QUESTIONS = [
+            { topic: "Linearity", prompt: "T(u+v) must equal ___.", answer: "t(u)+t(v)", altAnswers: ["t(u) + t(v)"] },
+            { topic: "Origin", prompt: "A linear transformation must map the origin to the ___.", answer: "origin", altAnswers: ["zero vector"] },
+            { topic: "ColSpace", prompt: "Columns of the matrix A are the images of the ___ vectors.", answer: "basis" },
+            { topic: "Similar", prompt: "Similar matrices represent the same ___ in different bases.", answer: "transformation", altAnswers: ["map", "operator"] },
+            { topic: "Det", prompt: "The determinant of a rotation matrix is ___.", answer: "1" },
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day23_trans_v2' });
     </script>
 </body>
 

@@ -117,6 +117,12 @@
                         This is conceptually identical to knocking down an infinite line of dominoes. You push the first
                         one, and you ensure every domino knocks down the next.
                     </p>
+                    <div class="info">
+                        <strong>🎲 Simple:</strong> The Domino Effect.
+                        <br>1. Base Case: Be able to knock over the first domino.
+                        <br>2. Inductive Step: Ensures that IF a domino falls, it hits the next one.
+                        <br>Result: The whole chain falls forever.
+                    </div>>
                 </div>
             </section>
 
@@ -249,8 +255,14 @@ hanoi(<span class="code-number">3</span>, <span class="code-string">'A'</span>, 
                                     are inevitable.</li>
                             <li><strong>Compression:</strong> Lossless compression cannot shrink every file.</li>
                             <li><strong>NYC Hair:</strong> Two people in NYC have the same number of hairs (Pop ~8M,
+                            <li><strong>NYC Hair:</strong> Two people in NYC have the same number of hairs (Pop ~8M,
                                 hairs ~150k).</li>
                         </ul>
+                        <div class="info">
+                            <strong>🧦 Simple:</strong> The Sock Drawer.
+                            <br>If you have red and blue socks (k=2 colors).
+                            <br>If you pick 3 socks (N=3), you MUST have a matching pair.
+                        </div>
                     </div>
                     <div class="info">
                         <strong>Generalized:</strong> If $N$ objects are placed into $k$ boxes, at least one box has
@@ -398,7 +410,7 @@ collisions = <span class="code-function">sum</span>(has_collision(<span class="c
             { topic: "PIE", prompt: "|AvB| = |A| + |B| - |A ___ B|.", answer: "intersect", altAnswers: ["intersection", "cap", "and"] },
             { topic: "Paradox", prompt: "Birthday paradox says we only need ___ people for 50% collision chance.", answer: "23" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day30_ind_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day30_ind_v2' });
     </script>
 </body>
 

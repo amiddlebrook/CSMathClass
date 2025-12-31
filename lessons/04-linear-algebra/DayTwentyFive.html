@@ -111,6 +111,13 @@
                         <strong>Functions</strong> are just special types of relations where every $a \in A$ appears
                         exactly once as a first element.
                     </p>
+                    <div class="info">
+                        <strong>🕸️ Simple:</strong> The Social Network.
+                        <br>A Relations on People: "Follows".
+                        <br>• (Alice, Bob) is in R if Alice follows Bob.
+                        <br>• Symmetric? Only if everyone follows back.
+                        <br>• Transitive? If A follows B, and B follows C, does A follow C? (Usually no).
+                    </div>>
                 </div>
             </section>
 
@@ -164,6 +171,11 @@
                         [0] = {..., -3, 0, 3, 6, ...}
                         [1] = {..., -2, 1, 4, 7, ...}
                         [2] = {..., -1, 2, 5, 8, ...}</div>
+                    <div class="info">
+                        <strong>🧙 Simple:</strong> The Sorting Hat.
+                        <br>An Equivalence Relation sorts every element into a specific "House" (Class).
+                        <br>Every student belongs to exactly one house.
+                    </div>
                 </div>
             </section>
 
@@ -180,6 +192,11 @@
                     <p>
                         We call the set a <strong>Poset</strong>. It captures the idea of "precedence" or "hierarchy".
                     </p>
+                    <div class="info">
+                        <strong>🪜 Simple:</strong> The Corporate Ladder.
+                        <br>"Is Boss Of" relation.
+                        <br>• Reflexive, Antisymmetric, Transitive.
+                    </div>>
                     <div class="subsection">
                         <h3 class="subsection-title">Hasse Diagrams</h3>
                         <p>A visual way to represent finite posets. We draw $b$ above $a$ if $a < b$, and connect them
@@ -320,7 +337,7 @@ R = {(<span class="code-number">1</span>,<span class="code-number">1</span>), (<
             { topic: "Example", prompt: "The relation 'is sibling of' is ___ (Symmetric/Antisymmetric).", answer: "symmetric" },
             { topic: "Total", prompt: "In a ___ order, every pair of elements is comparable.", answer: "total" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day29_rel_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day29_rel_v2' });
     </script>
 </body>
 

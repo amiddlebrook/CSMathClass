@@ -146,6 +146,12 @@
                     <p>
                         Choosing $k$ items from $n$, where order is irrelevant.
                     </p>
+                    <div class="info">
+                        <strong>🔒 vs 🥗 Simple:</strong>
+                        <br><strong>Permutation (Lock):</strong> 1-2-3 is a different code than 3-2-1. Order Matters!
+                        <br><strong>Combination (Salad):</strong> Lettuce-Tomato-Onion is the same salad as
+                        Onion-Tomato-Lettuce. Order doesn't matter.
+                    </div>>
                     <div class="formula-box">
                         <div class="formula-label">Binomial Coefficient</div>
                         <div class="formula-main">
@@ -177,6 +183,11 @@
                     <p>
                         <strong>Intuition:</strong> We arrange $k$ stars (items) and $n-1$ bars (separators) in a line.
                     </p>
+                    <div class="info">
+                        <strong>🍪 Simple:</strong> Cookies and Jars.
+                        <br>You have 10 identical cookies and 3 jars.
+                        <br>You need 2 "dividers" (bars) to separate the cookies into 3 groups.
+                    </div>>
                 </div>
             </section>
 
@@ -291,7 +302,7 @@ combs = <span class="code-function">list</span>(itertools.combinations(items, <s
             { topic: "Rule", prompt: "Counting disjoint events A OR B uses the ___ rule.", answer: "sum" },
             { topic: "Rule", prompt: "Counting independent events A AND B uses the ___ rule.", answer: "product" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day32_comb_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day32_comb_v2' });
     </script>
 </body>
 
