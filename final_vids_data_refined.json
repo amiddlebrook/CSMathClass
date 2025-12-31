@@ -1,0 +1,694 @@
+{
+  "lessons/01-operating-system/DaySeven.html": [
+    {
+      "title": "How to Write Proofs",
+      "vid": "brU5yLm9DZM"
+    },
+    {
+      "title": "Mathematical Writing Tips",
+      "vid": "L-bdLhx20Tk"
+    },
+    {
+      "title": "Mathematical Notation",
+      "vid": "M6xp4B9jqZg"
+    },
+    {
+      "title": "Reading & Writing Math",
+      "vid": "D2xYjiL8yyE"
+    },
+    {
+      "title": "First Proof Examples",
+      "vid": "KRLmjJyqGFM"
+    },
+    {
+      "title": "Common Proof Mistakes",
+      "vid": "YBbBbY4heGM"
+    }
+  ],
+  "lessons/01-operating-system/DaySix.html": [
+    {
+      "title": "MIT OpenCourseWare \u00e2\u20ac\u201d Intro to Proofs",
+      "vid": "L-bdLhx20Tk"
+    },
+    {
+      "title": "Trefor Bazett \u00e2\u20ac\u201d Proof Techniques",
+      "vid": "KRLmjJyqGFM"
+    },
+    {
+      "title": "Khan Academy \u00e2\u20ac\u201d Direct Proof",
+      "vid": "lm5ePH15hMo"
+    },
+    {
+      "title": "Trefor Bazett \u00e2\u20ac\u201d Contrapositive Proof",
+      "vid": "X-hJ_5qM7Ag"
+    },
+    {
+      "title": "Numberphile \u00e2\u20ac\u201d Sqrt(2) is Irrational",
+      "vid": "LmpAntNjPj0"
+    },
+    {
+      "title": "Trefor Bazett \u00e2\u20ac\u201d Proof by Contradiction",
+      "vid": "sRDwsfNDXak"
+    },
+    {
+      "title": "Khan Academy \u00e2\u20ac\u201d Proof by Induction",
+      "vid": "wblW_M_HVQ8"
+    },
+    {
+      "title": "Trefor Bazett \u00e2\u20ac\u201d Strong Induction",
+      "vid": "NuGDkmwEObM"
+    },
+    {
+      "title": "MIT OCW \u00e2\u20ac\u201d Induction",
+      "vid": "z8HKWUWS-lA"
+    },
+    {
+      "title": "mycodeschool \u00e2\u20ac\u201d Loop Invariants",
+      "vid": "Xk8Q4fAbpLs"
+    }
+  ],
+  "lessons/03-calculus/DayFourteen.html": [
+    {
+      "title": "3Blue1Brown \u00e2\u20ac\u201d Probability",
+      "vid": "HZGCoVF3YvM"
+    },
+    {
+      "title": "Khan Academy \u00e2\u20ac\u201d Probability Intro",
+      "vid": "uzkc-qNVoOk"
+    },
+    {
+      "title": "Khan Academy \u00e2\u20ac\u201d Conditional",
+      "vid": "_IgyaD7vOOA"
+    },
+    {
+      "title": "Stat Quest \u00e2\u20ac\u201d Independence",
+      "vid": "9wCnvr7Xw4E"
+    },
+    {
+      "title": "3Blue1Brown \u00e2\u20ac\u201d Bayes",
+      "vid": "HZGCoVF3YvM"
+    },
+    {
+      "title": "Veritasium \u00e2\u20ac\u201d Bayes Explained",
+      "vid": "R13BD8qKeTg"
+    },
+    {
+      "title": "Khan Academy \u00e2\u20ac\u201d Bayes",
+      "vid": "HaYbxQC61pw"
+    },
+    {
+      "title": "Computerphile \u00e2\u20ac\u201d Bayes Spam",
+      "vid": "O2L2Uv9pdDA"
+    },
+    {
+      "title": "MIT OCW \u00e2\u20ac\u201d Probability Intro",
+      "vid": "KbB0FjPg0mw"
+    },
+    {
+      "title": "Birthday Paradox",
+      "vid": "ofTb57aZHZs"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentyFive.html": [
+    {
+      "title": "The Determinant",
+      "vid": "Ip3X9LOh2dk"
+    },
+    {
+      "title": "Eigenvectors and Eigenvalues",
+      "vid": "PFDu9oVAE-g"
+    },
+    {
+      "title": "The Determinant",
+      "vid": "Ip3X9LOh2dk"
+    },
+    {
+      "title": "Eigenvectors and Eigenvalues",
+      "vid": "PFDu9oVAE-g"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentyFour.html": [
+    {
+      "title": "Dot Product & Duality",
+      "vid": "LyGKycYT2v0"
+    },
+    {
+      "title": "Projections & Least Squares",
+      "vid": "Y_Ac6KiQ1t0"
+    },
+    {
+      "title": "Dot Product & Duality",
+      "vid": "LyGKycYT2v0"
+    },
+    {
+      "title": "Cross Product",
+      "vid": "eu6i7WJeinw"
+    },
+    {
+      "title": "Projections",
+      "vid": "H9BWrYFzyqw"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentySeven.html": [
+    {
+      "title": "Linear Transformations",
+      "vid": "kYB8IZa5AuE"
+    },
+    {
+      "title": "Change of Basis",
+      "vid": "P2LTAUO1TdA"
+    },
+    {
+      "title": "Linear Transformations",
+      "vid": "kYB8IZa5AuE"
+    },
+    {
+      "title": "Change of Basis",
+      "vid": "P2LTAUO1TdA"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentySix.html": [
+    {
+      "title": "Singular Value Decomposition Intro",
+      "vid": "cOUTpqlX-Xs"
+    },
+    {
+      "title": "SVD Overview",
+      "vid": "gXbThCXjZFM"
+    },
+    {
+      "title": "Image Compression with SVD",
+      "vid": "H7qMMudh3f8"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentyThree.html": [
+    {
+      "title": "Linear Combinations & Span",
+      "vid": "k7RM-ot2NWY"
+    },
+    {
+      "title": "Linear Combinations",
+      "vid": "k7RM-ot2NWY"
+    },
+    {
+      "title": "Linear Independence",
+      "vid": "VJOiWdqlPpw"
+    },
+    {
+      "title": "Basis",
+      "vid": "uQhTuRlWMxw"
+    }
+  ],
+  "lessons/04-linear-algebra/DayTwentyTwo.html": [
+    {
+      "title": "Vectors and Spaces",
+      "vid": "fNk_zzaMoSs"
+    },
+    {
+      "title": "Matrix Multiplication as Composition",
+      "vid": "XkY2DOUCWMU"
+    },
+    {
+      "title": "Gaussian Elimination",
+      "vid": "2j5Ic2V7wq4"
+    },
+    {
+      "title": "Vectors | Chapter 1",
+      "vid": "fNk_zzaMoSs"
+    },
+    {
+      "title": "Matrix Multiplication",
+      "vid": "XkY2DOUCWMU"
+    },
+    {
+      "title": "Inverse Matrices",
+      "vid": "uQhTuRlWMxw"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirty.html": [
+    {
+      "title": "Mathematical Induction",
+      "vid": "T6350fDcd3I"
+    },
+    {
+      "title": "Strong Induction",
+      "vid": "C_W7xXm-ZqM"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtyFive.html": [
+    {
+      "title": "Euler vs Hamiltonian Paths",
+      "vid": "7s-cx9nOQm8"
+    },
+    {
+      "title": "Planar Graphs",
+      "vid": "wnYQPqXk8Kk"
+    },
+    {
+      "title": "Graph Coloring",
+      "vid": "NgbK43jB4rQ"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtyFour.html": [
+    {
+      "title": "Introduction to Graphs",
+      "vid": "gZnaP32k_cI"
+    },
+    {
+      "title": "Handshaking Lemma",
+      "vid": "5hP4D758wYQ"
+    },
+    {
+      "title": "Isomorphism",
+      "vid": "Uod17yOREoQ"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtyOne.html": [
+    {
+      "title": "The Pigeonhole Principle",
+      "vid": "3ZJD1tXQp6Q"
+    },
+    {
+      "title": "Inclusion-Exclusion Principle",
+      "vid": "-xJqW-O8pJA"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtySeven.html": [
+    {
+      "title": "Euclidean Algorithm",
+      "vid": "p5gn2hj51hs"
+    },
+    {
+      "title": "RSA Encryption",
+      "vid": "JD72Ry60eSA"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtySix.html": [
+    {
+      "title": "Divisibility",
+      "vid": "SRm6191R9Qo"
+    },
+    {
+      "title": "Modular Arithmetic",
+      "vid": "RcAb5vBz3Hg"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtyThree.html": [
+    {
+      "title": "Linear Recurrence Relations",
+      "vid": "upTO78o7zI0"
+    },
+    {
+      "title": "Master Theorem for Algorithms",
+      "vid": "OdynsEtGTrg"
+    }
+  ],
+  "lessons/05-discrete-math/DayThirtyTwo.html": [
+    {
+      "title": "Permutations and Combinations",
+      "vid": "2I6JqYt9e2Q"
+    },
+    {
+      "title": "Permutations and Combinations",
+      "vid": "X4s-c7omwLQ"
+    },
+    {
+      "title": "Stars and Bars",
+      "vid": "aF7S5Tf_uUE"
+    }
+  ],
+  "lessons/05-discrete-math/DayTwentyNine.html": [
+    {
+      "title": "Properties of Relations",
+      "vid": "wIqnJ8b6n0g"
+    },
+    {
+      "title": "Equivalence Relations",
+      "vid": "ecODhVfsZwk"
+    },
+    {
+      "title": "Partial Orders",
+      "vid": "5c8Nl7cMjgU"
+    }
+  ],
+  "lessons/06-algorithms/DayForty.html": [
+    {
+      "title": "Binary Trees",
+      "vid": "H5JubkIy_p8"
+    },
+    {
+      "title": "BST Explained",
+      "vid": "pYT9F8_LFTM"
+    },
+    {
+      "title": "Heaps & Priority Queues",
+      "vid": "t0Cq6tVNRBA"
+    },
+    {
+      "title": "Tries Explained",
+      "vid": "AXjmTQ8LEoI"
+    }
+  ],
+  "lessons/06-algorithms/DayFortyEight.html": [
+    {
+      "title": "P vs NP \u00e2\u20ac\u201d Computerphile",
+      "vid": "YX40hbAHx3s"
+    },
+    {
+      "title": "NP-Completeness \u00e2\u20ac\u201d MIT OCW",
+      "vid": "eHZifpgyH_4"
+    },
+    {
+      "title": "Reductions Explained",
+      "vid": "AynCrM6w-h8"
+    },
+    {
+      "title": "Cook-Levin Theorem",
+      "vid": "LSwgbbnQ-hU"
+    }
+  ],
+  "lessons/06-algorithms/DayFortyFour.html": [
+    {
+      "title": "BFS Algorithm",
+      "vid": "oDqjPvD54Ss"
+    },
+    {
+      "title": "DFS Algorithm",
+      "vid": "7fujbpJ0LB4"
+    },
+    {
+      "title": "Dijkstra",
+      "vid": "_lHSawdgXpI"
+    },
+    {
+      "title": "Prim",
+      "vid": "4ZlRH0eK-qQ"
+    }
+  ],
+  "lessons/06-algorithms/DayFortyOne.html": [
+    {
+      "title": "Graph Representation",
+      "vid": "09_LlHjoEiY"
+    },
+    {
+      "title": "Adjacency List vs Matrix",
+      "vid": "OQ5jsbhAv_M"
+    }
+  ],
+  "lessons/06-algorithms/DayFortySeven.html": [
+    {
+      "title": "Randomized Algorithms \u00e2\u20ac\u201d MIT OCW",
+      "vid": "cNB2lADK3_s"
+    },
+    {
+      "title": "Miller-Rabin Primality Test",
+      "vid": "RU1TFjCofMY"
+    },
+    {
+      "title": "Randomized QuickSort Analysis",
+      "vid": "COk73cpQbFQ"
+    }
+  ],
+  "lessons/06-algorithms/DayFortyThree.html": [
+    {
+      "title": "DP Introduction",
+      "vid": "OQ5jsbhAv_M"
+    },
+    {
+      "title": "DP Patterns",
+      "vid": "oBt53YbR9Kk"
+    },
+    {
+      "title": "Coin Change Problem",
+      "vid": "jgiZlGzXMBw"
+    },
+    {
+      "title": "LCS Problem",
+      "vid": "sSno9rV8Rhg"
+    }
+  ],
+  "lessons/06-algorithms/DayFortyTwo.html": [
+    {
+      "title": "Sorting Algorithms Explained",
+      "vid": "RfXt_qHDEPw"
+    },
+    {
+      "title": "Quick Sort",
+      "vid": "7h1s2SojIRw"
+    },
+    {
+      "title": "Merge Sort",
+      "vid": "TzeBrDU-JaY"
+    },
+    {
+      "title": "Binary Search",
+      "vid": "P3YID7liBug"
+    },
+    {
+      "title": "Greedy Algorithms",
+      "vid": "ARvQcqJ_-NY"
+    }
+  ],
+  "lessons/06-algorithms/DayThirtyEight.html": [
+    {
+      "title": "CS50 \u00e2\u20ac\u201d Data Structures",
+      "vid": "X8h4dq9Hzq8"
+    },
+    {
+      "title": "Data Structures Easy to Advanced",
+      "vid": "RBSGKlAvoiM"
+    },
+    {
+      "title": "Arrays vs Linked Lists",
+      "vid": "DyG9S9nAlUM"
+    },
+    {
+      "title": "Dynamic Arrays",
+      "vid": "tvw4v7FEF1w"
+    },
+    {
+      "title": "Hash Tables Explained",
+      "vid": "shs0KM3wKv8"
+    },
+    {
+      "title": "Hash Tables in Python",
+      "vid": "ea8BRGxGmlA"
+    }
+  ],
+  "lessons/07-probability-stats/DayFifty.html": [
+    {
+      "title": "Random Variables (Khan Academy)",
+      "vid": "3v9w79NhsfI"
+    },
+    {
+      "title": "Linearity of Expectation",
+      "vid": "INFoBQMoZcI"
+    },
+    {
+      "title": "Chebyshev",
+      "vid": "IIn1e0pHjX4"
+    },
+    {
+      "title": "Moment Generating Functions",
+      "vid": "vQ1Bf-wLAQA"
+    }
+  ],
+  "lessons/07-probability-stats/DayFiftyOne.html": [
+    {
+      "title": "Binomial Distribution",
+      "vid": "J9WO4uRsa7g"
+    },
+    {
+      "title": "Poisson Distribution",
+      "vid": "jmqZG6roVqU"
+    },
+    {
+      "title": "Normal Distribution",
+      "vid": "zeJD6dqJ5lo"
+    },
+    {
+      "title": "Exponential Distribution",
+      "vid": "4fJ_yLpxk-k"
+    }
+  ],
+  "lessons/07-probability-stats/DayFiftyThree.html": [
+    {
+      "title": "Maximum Likelihood Estimation",
+      "vid": "Xcn85Dn10zs"
+    },
+    {
+      "title": "Bias-Variance Tradeoff",
+      "vid": "EuBBz3bI-aA"
+    },
+    {
+      "title": "p-values",
+      "vid": "vemZtEM63GY"
+    }
+  ],
+  "lessons/07-probability-stats/DayFiftyTwo.html": [
+    {
+      "title": "Covariance and Correlation",
+      "vid": "xZ_z8KWkhXE"
+    },
+    {
+      "title": "Markov Inequality",
+      "vid": "vjYanZ1nsZg"
+    },
+    {
+      "title": "Chernoff Bounds",
+      "vid": "vbQBqKzEnZg"
+    }
+  ],
+  "lessons/07-probability-stats/DayFortyNine.html": [
+    {
+      "title": "Bayes Theorem Visualized",
+      "vid": "HZGCoVF3YvM"
+    },
+    {
+      "title": "Probability & Combinatorics",
+      "vid": "bN8aQf59_44"
+    },
+    {
+      "title": "Kolmogorov Axioms",
+      "vid": "1uW3qMFA9Hs"
+    }
+  ],
+  "lessons/08-analysis/DayFiftyEight.html": [
+    {
+      "title": "Integration and the Fundamental Theorem",
+      "vid": "rfG8ce4nNh0"
+    },
+    {
+      "title": "Integration",
+      "vid": "rfG8ce4nNh0"
+    },
+    {
+      "title": "Riemann Sums",
+      "vid": "dIy-tSjZyk0"
+    }
+  ],
+  "lessons/08-analysis/DayFiftyFive.html": [
+    {
+      "title": "Limits (Essence of Calculus)",
+      "vid": "kfF40MiS7zA"
+    }
+  ],
+  "lessons/08-analysis/DayFiftyNine.html": [
+    {
+      "title": "Taylor Series",
+      "vid": "3d6DsjIBzJ4"
+    },
+    {
+      "title": "Taylor Series",
+      "vid": "3d6DsjIBzJ4"
+    }
+  ],
+  "lessons/08-analysis/DayFiftySeven.html": [
+    {
+      "title": "Derivative Intuition",
+      "vid": "9vKqVkMQHKk"
+    },
+    {
+      "title": "Derivative Paradox",
+      "vid": "9vKqVkMQHKk"
+    },
+    {
+      "title": "Chain Rule",
+      "vid": "XIQ-KnsAsbg"
+    }
+  ],
+  "lessons/08-analysis/DayFiftySix.html": [
+    {
+      "title": "Continuity & Limits",
+      "vid": "7qJkdyh0w-s"
+    },
+    {
+      "title": "Continuity Intuition",
+      "vid": "h58msdeqf7k"
+    },
+    {
+      "title": "Intermediate Value Theorem",
+      "vid": "P8bJ9e2aW5g"
+    }
+  ],
+  "lessons/08-analysis/DaySixty.html": [
+    {
+      "title": "Taylor Series",
+      "vid": "3d6DsjIBzJ4"
+    },
+    {
+      "title": "Taylor Series",
+      "vid": "3d6DsjIBzJ4"
+    }
+  ],
+  "lessons/08-analysis/DaySixtyOne.html": [
+    {
+      "title": "Pointwise vs Uniform",
+      "vid": "F-cQ-F-K3z8"
+    }
+  ],
+  "lessons/08-analysis/DaySixtyThree.html": [
+    {
+      "title": "Gradient",
+      "vid": "GkB4vW16QHI"
+    },
+    {
+      "title": "Partial Derivatives",
+      "vid": "S0_qX4VJhMQ"
+    },
+    {
+      "title": "Gradient",
+      "vid": "GkB4vW16QHI"
+    },
+    {
+      "title": "Partial Derivatives",
+      "vid": "S0_qX4VJhMQ"
+    }
+  ],
+  "lessons/09-numerical/DaySixtyFive.html": [
+    {
+      "title": "Groups Intro",
+      "vid": "g7L_r6zw4-c"
+    },
+    {
+      "title": "Rings Intro",
+      "vid": "z85k78531Sc"
+    },
+    {
+      "title": "Lagrange",
+      "vid": "TCDSXw8eTeY"
+    }
+  ],
+  "lessons/09-numerical/DaySixtyFour.html": [
+    {
+      "title": "Floating Point Numbers - Computerphile",
+      "vid": "PZRI1IfStY0"
+    },
+    {
+      "title": "Binary Scientific Notation",
+      "vid": "dQhj5RGtag0"
+    },
+    {
+      "title": "Machine Epsilon",
+      "vid": "Ty7M4Wk2c8k"
+    }
+  ],
+  "lessons/09-numerical/DaySixtySeven.html": [
+    {
+      "title": "What is a Module?",
+      "vid": "T7K6JtXhQ1U"
+    },
+    {
+      "title": "Vector Spaces vs Modules",
+      "vid": "gJgM2w3Jg3s"
+    },
+    {
+      "title": "Vector Spaces",
+      "vid": "fNk_zzaMoSs"
+    },
+    {
+      "title": "Rings and Modules",
+      "vid": "yHie68rE024"
+    }
+  ]
+}

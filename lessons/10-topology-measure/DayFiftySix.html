@@ -246,14 +246,24 @@ print([next(gen) for _ in range(10)])
     <script src="../shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-            {
-                title: "Product Topology",
-                items: [
-                    { title: "Product Topology vs Box Topology", channel: "The Bright Side of Mathematics", vid: "video_id_placeholder" },
-                    { title: "Tychonoff Theorem", channel: "Wikipedia Audio", vid: "video_id_placeholder" },
+        {
+                "title": "Lesson Videos",
+                "items": [
+                        {
+                                "title": "Continuity & Limits",
+                                "vid": "7qJkdyh0w-s"
+                        },
+                        {
+                                "title": "Continuity Intuition",
+                                "vid": "h58msdeqf7k"
+                        },
+                        {
+                                "title": "Intermediate Value Theorem",
+                                "vid": "P8bJ9e2aW5g"
+                        }
                 ]
-            }
-        ];
+        }
+];
         const QUESTIONS = [
             { topic: "Finite Product", prompt: "For finite products, the product topology has a basis of u x ___.", answer: "v" },
             { topic: "Infinite Product", prompt: "In the product topology, all but ___ many coordinates are restricted.", answer: "finitely" },

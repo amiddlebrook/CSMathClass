@@ -1,0 +1,4 @@
+﻿  origin/HEAD -> origin/main
+  origin/copilot/fix-dayone-link-placement
+  origin/copilot/setup-navigation-and-fix-naming
+  origin/main

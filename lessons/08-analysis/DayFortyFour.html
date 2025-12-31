@@ -342,22 +342,24 @@ root = solve_ivt(f, <span class="code-number">0</span>, <span class="code-number
     <script src="../shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-            {
-                title: "Limits",
-                items: [
-                    { title: "Epsilon Delta Definition", channel: "3Blue1Brown", vid: "None" }, // 3b1b actually covers this in ch 7
-                    { title: "Formal Definition of Limit", channel: "The Organic Chemistry Tutor", vid: "None" },
-                    { title: "Limits (Essence of Calculus)", channel: "3Blue1Brown", vid: "kfF40MiS7zA" }
+        {
+                "title": "Lesson Videos",
+                "items": [
+                        {
+                                "title": "Limits (Essence of Calculus)",
+                                "vid": "kfF40MiS7zA"
+                        },
+                        {
+                                "title": "Continuity Intuition",
+                                "vid": "h58msdeqf7k"
+                        },
+                        {
+                                "title": "Intermediate Value Theorem",
+                                "vid": "P8bJ9e2aW5g"
+                        }
                 ]
-            },
-            {
-                title: "Continuity",
-                items: [
-                    { title: "Continuity Intuition", channel: "Khan Academy", vid: "h58msdeqf7k" },
-                    { title: "Intermediate Value Theorem", channel: "Khan Academy", vid: "P8bJ9e2aW5g" },
-                ]
-            }
-        ];
+        }
+];
 
         const QUESTIONS = [
             { topic: "Def", prompt: "For every epsilon > 0 there exists a ___ > 0.", answer: "delta" },
