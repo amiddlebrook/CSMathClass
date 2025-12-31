@@ -105,6 +105,12 @@
                         where `U \in \tau_X` and `V \in \tau_Y`.</p>
                     <p>This works perfectly for `\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}`. Open rectangles form a
                         basis.</p>
+                    <div class="info">
+                        <strong>🧱 Simple:</strong> Product spaces are like LEGO bricks.
+                        <br>• Each space X and Y is a "color" of LEGO.
+                        <br>• The product X × Y is all possible pairs (red brick, blue brick).
+                        <br>• The topology tells you which combinations are "close together."
+                    </div>
                 </div>
             </section>
 
@@ -138,6 +144,14 @@
                     <div class="warning">
                         The Box topology contains "too many" open sets. We almost always use the <strong>Product
                             Topology</strong> because it preserves convergence correctly.
+                    </div>
+                    <div class="info">
+                        <strong>🎯 Simple:</strong> Imagine a point in infinite-dimensional space (like a function on
+                        [0,1]).
+                        <br>• <strong>Box:</strong> "ALL coordinates must be close" — too restrictive, almost nothing
+                        converges.
+                        <br>• <strong>Product:</strong> "Only finitely many coordinates need to be close" — matches our
+                        intuition for sequences of functions.
                     </div>
                 </div>
             </section>
@@ -246,22 +260,15 @@ print([next(gen) for _ in range(10)])
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "Projections" },
-            { title: "Video 2", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 6", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 7", channel: "Course Reference", vid: "code-header" },
-            { title: "Video 8", channel: "Course Reference", vid: "projections" },
-            { title: "Video 9", channel: "Course Reference", vid: "video-title" },
-            { title: "Video 10", channel: "Course Reference", vid: "Convergence" }
-            ]
-        }
-    ];
+            {
+                title: "Product Spaces",
+                items: [
+                    { title: "Product Topology Intro", channel: "The Bright Side of Mathematics", vid: "9h6A3I2j8RU" },
+                    { title: "Tychonoff's Theorem", channel: "MathDoctorBob", vid: "N5_d7Kgc5rs" },
+                    { title: "Box vs Product Topology", channel: "TheBrightSideOfMathematics", vid: "u2vWz4ymWmA" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Finite Product", prompt: "For finite products, the product topology has a basis of u x ___.", answer: "v" },
             { topic: "Infinite Product", prompt: "In the product topology, all but ___ many coordinates are restricted.", answer: "finitely" },
@@ -270,7 +277,7 @@ print([next(gen) for _ in range(10)])
             { topic: "Projections", prompt: "The product topology is the coarsest topology making the ___ continuous.", answer: "projections", altAnswers: ["projection maps"] },
             { topic: "Convergence", prompt: "Convergence in the product topology is equivalent to ___ convergence.", answer: "pointwise" },
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day56_product_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day56_product_v2' });
     </script>
 </body>
 

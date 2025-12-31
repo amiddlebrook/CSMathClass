@@ -114,6 +114,11 @@
                         : X(\omega) \leq x \}$
                         is an event in $\mathcal{F}$ (i.e., it is measurable).
                     </div>
+                    <div class="info">
+                        <strong>🎲 Simple:</strong> A random variable is like a thermometer for randomness.
+                        <br>The "weather" is the random outcome (Ω). The thermometer (X) converts it to a number.
+                        <br>Example: Flip 3 coins (Ω = all outcomes). X = "number of heads." X converts HHT → 2.
+                    </div>
 
                     <div class="subsection">
                         <h3 class="subsection-title">The CDF</h3>
@@ -164,6 +169,11 @@
                     </p>
                     <div class="math-block">Discrete: E[X] = \sum x P(X=x)
                         Continuous: E[X] = \int_{-\infty}^{\infty} x f(x) dx</div>
+                    <div class="info">
+                        <strong>⚖️ Simple:</strong> Expected value is the "balance point" of the distribution.
+                        <br>If you made a see-saw with probabilities as weights, E[X] is where it balances.
+                        <br>It's NOT the most likely outcome—it's the weighted average.
+                    </div>
 
                     <div class="subsection">
                         <h3 class="subsection-title">Linearity of Expectation</h3>
@@ -392,22 +402,17 @@ verify_chebyshev(<span class="code-string">"Uniform"</span>, np.random.uniform(s
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "vQ1Bf-wLAQA" },
-            { title: "Video 2", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 3", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 4", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 5", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 6", channel: "Course Reference", vid: "day40_rv_v2" },
-            { title: "Video 7", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 8", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 9", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 10", channel: "Course Reference", vid: "code-header" }
-            ]
-        }
-    ];
+            {
+                title: "Random Variables & Expectation",
+                items: [
+                    { title: "Random Variables Intuition", channel: "3Blue1Brown", vid: "vQ1Bf-wLAQA" },
+                    { title: "Expected Value Explained", channel: "StatQuest", vid: "KLs_7b7SKi4" },
+                    { title: "Variance and Standard Deviation", channel: "Khan Academy", vid: "Vkrz0iQ2qaM" },
+                    { title: "Markov & Chebyshev Inequalities", channel: "MIT OCW", vid: "7c_qPJdVN4E" },
+                    { title: "Moment Generating Functions", channel: "Khan Academy", vid: "Y2khrpVo6qQ" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "RV Definition", prompt: "A Random Variable is a function from Ω to ___.", answer: "R", altAnswers: ["reals", "real numbers"] },
             { topic: "CDF", prompt: "F(x) = P(X ___ x).", answer: "<=", altAnswers: ["≤", "less than or equal"] },
@@ -420,7 +425,7 @@ verify_chebyshev(<span class="code-string">"Uniform"</span>, np.random.uniform(s
             { topic: "Moments", prompt: "The 4th standardized moment is called ___.", answer: "kurtosis" },
             { topic: "St. Petersburg", prompt: "The expected payoff of St. Petersburg game is ___.", answer: "infinite", altAnswers: ["infinity", "undefined"] }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day40_rv_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day40_rv_v3' });
     </script>
 </body>
 
