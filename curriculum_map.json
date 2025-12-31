@@ -55,6 +55,14 @@
         "title": "Day 8: Function Transformations & Asymptotes",
         "filename": "DayEight.html"
     },
+    "9": {
+        "day": 9,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\02-precalculus\\DayNine.html",
+        "relPath": "lessons/02-precalculus/DayNine.html",
+        "topic": "Summation Formulas \u2014 Arithmetic, Geometric & Telescoping",
+        "title": "Day 11: Summation Formulas \u2014 Arithmetic, Geometric & Telescoping",
+        "filename": "DayNine.html"
+    },
     "7": {
         "day": 7,
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\02-precalculus\\DaySeven.html",
@@ -62,6 +70,22 @@
         "topic": "Functions & Graphs \u2014 Polynomials, Rational, Piecewise",
         "title": "Day 7: Functions & Graphs \u2014 Polynomials, Rational, Piecewise",
         "filename": "DaySeven.html"
+    },
+    "10": {
+        "day": 10,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\02-precalculus\\DayTen.html",
+        "relPath": "lessons/02-precalculus/DayTen.html",
+        "topic": "Recurrences \u2014 Unrolling, Guess-and-Check & Master Theorem",
+        "title": "Day 12: Recurrences \u2014 Unrolling, Guess-and-Check & Master Theorem",
+        "filename": "DayTen.html"
+    },
+    "18": {
+        "day": 18,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayEighteen.html",
+        "relPath": "lessons/03-calculus/DayEighteen.html",
+        "topic": "Systems of ODEs \u2014 Ties to Linear Algebra",
+        "title": "Day 18: Systems of ODEs \u2014 Ties to Linear Algebra",
+        "filename": "DayEighteen.html"
     },
     "11": {
         "day": 11,
@@ -76,7 +100,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayFifteen.html",
         "relPath": "lessons/03-calculus/DayFifteen.html",
         "topic": "Fundamental Theorem of Calculus",
-        "title": "Day 13: Fundamental Theorem of Calculus",
+        "title": "Day 15: Fundamental Theorem of Calculus",
         "filename": "DayFifteen.html"
     },
     "14": {
@@ -84,7 +108,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayFourteen.html",
         "relPath": "lessons/03-calculus/DayFourteen.html",
         "topic": "Limits, Derivatives & Integrals",
-        "title": "Day 12: Limits, Derivatives & Integrals",
+        "title": "Day 14: Limits, Derivatives & Integrals",
         "filename": "DayFourteen.html"
     },
     "17": {
@@ -92,7 +116,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DaySeventeen.html",
         "relPath": "lessons/03-calculus/DaySeventeen.html",
         "topic": "Partial Derivatives & Gradients",
-        "title": "Day 15: Partial Derivatives & Gradients",
+        "title": "Day 17: Partial Derivatives & Gradients",
         "filename": "DaySeventeen.html"
     },
     "16": {
@@ -100,7 +124,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DaySixteen.html",
         "relPath": "lessons/03-calculus/DaySixteen.html",
         "topic": "Multiple Integrals & Change of Variables",
-        "title": "Day 18: Multiple Integrals & Change of Variables",
+        "title": "Day 16: Multiple Integrals & Change of Variables",
         "filename": "DaySixteen.html"
     },
     "13": {
@@ -148,7 +172,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyFour.html",
         "relPath": "lessons/04-linear-algebra/DayTwentyFour.html",
         "topic": "Logic & Sets \u2014 Propositional & First-Order Logic",
-        "title": "Day 28: Logic & Sets \u2014 Propositional & First-Order Logic",
+        "title": "Day 24: Logic & Sets \u2014 Propositional & First-Order Logic",
         "filename": "DayTwentyFour.html"
     },
     "21": {
@@ -220,7 +244,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyOne.html",
         "relPath": "lessons/05-discrete-math/DayThirtyOne.html",
         "topic": "Number Theory Basics",
-        "title": "Day 36: Number Theory Basics",
+        "title": "Day 31: Number Theory Basics",
         "filename": "DayThirtyOne.html"
     },
     "37": {
@@ -492,7 +516,7 @@
         "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\09-numerical\\DaySixtyFour.html",
         "relPath": "lessons/09-numerical/DaySixtyFour.html",
         "topic": "Complex Analysis Basics",
-        "title": "Day 80: Complex Analysis Basics",
+        "title": "Day 64: Complex Analysis Basics",
         "filename": "DaySixtyFour.html"
     },
     "67": {
@@ -582,6 +606,14 @@
         "topic": "Finite Automata & CFLs",
         "title": "Day 69: Finite Automata & CFLs",
         "filename": "DaySixtyNine.html"
+    },
+    "100": {
+        "day": 100,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\100-exam\\DayOneHundred.html",
+        "relPath": "lessons/100-exam/DayOneHundred.html",
+        "topic": "The Final Exam",
+        "title": "Day 100: The Final Exam",
+        "filename": "DayOneHundred.html"
     },
     "80": {
         "day": 80,
@@ -750,5 +782,21 @@
         "topic": "Daily Problem Solving",
         "title": "Day 92: Daily Problem Solving",
         "filename": "DayNinetyTwo.html"
+    },
+    "98": {
+        "day": 98,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\98-review\\DayNinetyEight.html",
+        "relPath": "lessons/98-review/DayNinetyEight.html",
+        "topic": "Flashcard Review",
+        "title": "Day 98: Flashcard Review",
+        "filename": "DayNinetyEight.html"
+    },
+    "99": {
+        "day": 99,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\99-tests\\DayNinetyNine.html",
+        "relPath": "lessons/99-tests/DayNinetyNine.html",
+        "topic": "Final Practice Test",
+        "title": "Day 99: Final Practice Test",
+        "filename": "DayNinetyNine.html"
     }
 }
