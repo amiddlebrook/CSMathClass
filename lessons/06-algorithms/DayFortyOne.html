@@ -118,6 +118,11 @@
                             P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
                             E[X] = E[\sum I_i] = \sum E[I_i] = np \quad (\text{Linearity})
                             Var(X) = \sum Var(I_i) = np(1-p) \quad (\text{Independence})</div>
+                        <div class="info">
+                            <strong>🪙 Simple:</strong> The Binomial is "the coin flip distribution."
+                            <br>You flip n coins, each with probability p of heads. Binomial counts the total heads.
+                            <br>The math? Just add up n independent Bernoulli trials!
+                        </div>
                     </div>
 
                     <div class="subsection">
@@ -196,6 +201,12 @@
                             E[X] = 1/\lambda, \quad Var(X) = 1/\lambda^2</div>
                         <p><strong>Memoryless:</strong> $P(X > s+t | X > s) = P(X > t)$. Used for component lifetime
                             modeling (assuming no aging).</p>
+                        <div class="info">
+                            <strong>🚌 Simple:</strong> Waiting for the bus is Exponential!
+                            <br>If the bus hasn't come in 10 minutes, your expected wait is STILL the same—no credit for
+                            time served.
+                            <br>"The bus doesn't remember how long you've waited."
+                        </div>
                     </div>
 
                     <div class="subsection">
@@ -334,22 +345,16 @@ top_1_percent = norm.ppf(<span class="code-number">0.99</span>)
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "J9WO4uRsa7g" },
-            { title: "Video 2", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 3", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 4", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 5", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 6", channel: "Course Reference", vid: "jmqZG6roVqU" },
-            { title: "Video 7", channel: "Course Reference", vid: "3Blue1Brown" },
-            { title: "Video 8", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 9", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 10", channel: "Course Reference", vid: "code-number" }
-            ]
-        }
-    ];
+            {
+                title: "Probability Distributions",
+                items: [
+                    { title: "Binomial Distribution", channel: "StatQuest", vid: "J9WO4uRsa7g" },
+                    { title: "Poisson Distribution", channel: "StatQuest", vid: "jmqZG6roVqU" },
+                    { title: "Normal Distribution", channel: "3Blue1Brown", vid: "zeJD6dqJ5lo" },
+                    { title: "Exponential Distribution", channel: "Khan Academy", vid: "2kg1O3j58lU" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Binomial", prompt: "Mean of Binomial(n,p) is ___.", answer: "np" },
             { topic: "Poisson", prompt: "For Poisson, Mean = ___.", answer: "variance", altAnswers: ["var", "lambda"] },
@@ -362,7 +367,7 @@ top_1_percent = norm.ppf(<span class="code-number">0.99</span>)
             { topic: "CLT", prompt: "Sum of independent RVs converges to ___.", answer: "normal", altAnswers: ["gaussian"] },
             { topic: "Hypergeometric", prompt: "Used for sampling ___ replacement.", answer: "without", altAnswers: ["w/o"] }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day41_dist_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day41_dist_v3' });
     </script>
 </body>
 

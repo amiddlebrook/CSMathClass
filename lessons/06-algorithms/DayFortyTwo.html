@@ -115,6 +115,11 @@
                             <div class="math-block">Discrete: p_{XY}(x,y) = P(X=x, Y=y)
                                 Continuous: f_{XY}(x,y)</div>
                             <p>Sum/Integral over all $x,y$ must equal 1.</p>
+                            <div class="info">
+                                <strong>🗺️ Simple:</strong> A joint distribution is like a heatmap.
+                                <br>X is one axis, Y is the other. The "heat" shows how likely each (x,y) combo is.
+                                <br>Example: Height vs. Weight—tall+heavy is bright, short+heavy is dim.
+                            </div>
                         </div>
                         <div class="subsection">
                             <h3 class="subsection-title">Marginal Distribution</h3>
@@ -167,6 +172,12 @@
                             <li>$\rho = -1$: Perfect negative linear relationship.</li>
                             <li>$\rho = 0$: Uncorrelated.</li>
                         </ul>
+                        <div class="info">
+                            <strong>💃 Simple:</strong> Correlation is "how well do X and Y dance together?"
+                            <br>ρ = 1: Perfect sync (both move the same way)
+                            <br>ρ = -1: Mirror image (one zigs, the other zags)
+                            <br>ρ = 0: Dancing alone (no relationship)
+                        </div>
                     </div>
 
                     <div class="subsection">
@@ -337,22 +348,16 @@ hoeff = <span class="code-number">2</span> * np.exp(-<span class="code-number">2
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
-            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
-            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
-            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
-            { title: "Video 5", channel: "Course Reference", vid: "vjYanZ1nsZg" },
-            { title: "Video 6", channel: "Course Reference", vid: "stats-value" },
-            { title: "Video 7", channel: "Course Reference", vid: "themeToggle" },
-            { title: "Video 8", channel: "Course Reference", vid: "code-number" },
-            { title: "Video 9", channel: "Course Reference", vid: "Correlation" },
-            { title: "Video 10", channel: "Course Reference", vid: "code-header" }
-            ]
-        }
-    ];
+            {
+                title: "Joint Distributions & Bounds",
+                items: [
+                    { title: "Joint Distributions", channel: "Khan Academy", vid: "vjYanZ1nsZg" },
+                    { title: "Covariance & Correlation", channel: "StatQuest", vid: "xZ_z8KWkhXE" },
+                    { title: "Markov & Chebyshev", channel: "MIT OCW", vid: "poKRG0L4FT0" },
+                    { title: "Chernoff Bounds", channel: "MIT OCW", vid: "o5vR6e1jQ6E" }
+                ]
+            }
+        ];
         const QUESTIONS = [
             { topic: "Marginal", prompt: "To get f(x) from f(x,y), you ___ out y.", answer: "integrate", altAnswers: ["sum"] },
             { topic: "Independence", prompt: "If X, Y indep, P(X,Y) = P(X)___.", answer: "P(Y)", altAnswers: ["*P(Y)", "times P(Y)"] },
@@ -365,7 +370,7 @@ hoeff = <span class="code-number">2</span> * np.exp(-<span class="code-number">2
             { topic: "Chernoff", prompt: "Chernoff requires the variables to be ___.", answer: "independent" },
             { topic: "Hoeffding", prompt: "Hoeffding bound decay is ___ (mathematical term).", answer: "exponential" }
         ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day42_joint_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day42_joint_v2' });
     </script>
 </body>
 
