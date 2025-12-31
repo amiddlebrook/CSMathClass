@@ -1,0 +1,754 @@
+{
+    "5": {
+        "day": 5,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DayFive.html",
+        "relPath": "lessons/01-operating-system/DayFive.html",
+        "topic": "Writing Proofs \u2014 Definitions, Claims, and Structure",
+        "title": "Day 5: Writing Proofs \u2014 Definitions, Claims, and Structure",
+        "filename": "DayFive.html"
+    },
+    "4": {
+        "day": 4,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DayFour.html",
+        "relPath": "lessons/01-operating-system/DayFour.html",
+        "topic": "Direct Proof & Induction",
+        "title": "Day 4: Direct Proof & Induction",
+        "filename": "DayFour.html"
+    },
+    "1": {
+        "day": 1,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DayOne.html",
+        "relPath": "lessons/01-operating-system/DayOne.html",
+        "topic": "Complete Arithmetic Fluency for CS",
+        "title": "Day 1: Complete Arithmetic Fluency for CS",
+        "filename": "DayOne.html"
+    },
+    "6": {
+        "day": 6,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DaySix.html",
+        "relPath": "lessons/01-operating-system/DaySix.html",
+        "topic": "Checkpoint 1",
+        "title": "Day 6: Checkpoint 1",
+        "filename": "DaySix.html"
+    },
+    "3": {
+        "day": 3,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DayThree.html",
+        "relPath": "lessons/01-operating-system/DayThree.html",
+        "topic": "Functions & Inverses",
+        "title": "Day 3: Functions & Inverses",
+        "filename": "DayThree.html"
+    },
+    "2": {
+        "day": 2,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\01-operating-system\\DayTwo.html",
+        "relPath": "lessons/01-operating-system/DayTwo.html",
+        "topic": "Algebra Fluency",
+        "title": "Day 2: Algebra Fluency",
+        "filename": "DayTwo.html"
+    },
+    "8": {
+        "day": 8,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\02-precalculus\\DayEight.html",
+        "relPath": "lessons/02-precalculus/DayEight.html",
+        "topic": "Function Transformations & Asymptotes",
+        "title": "Day 8: Function Transformations & Asymptotes",
+        "filename": "DayEight.html"
+    },
+    "7": {
+        "day": 7,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\02-precalculus\\DaySeven.html",
+        "relPath": "lessons/02-precalculus/DaySeven.html",
+        "topic": "Functions & Graphs \u2014 Polynomials, Rational, Piecewise",
+        "title": "Day 7: Functions & Graphs \u2014 Polynomials, Rational, Piecewise",
+        "filename": "DaySeven.html"
+    },
+    "11": {
+        "day": 11,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayEleven.html",
+        "relPath": "lessons/03-calculus/DayEleven.html",
+        "topic": "Summation Formulas \u2014 Arithmetic, Geometric & Telescoping",
+        "title": "Day 11: Summation Formulas \u2014 Arithmetic, Geometric & Telescoping",
+        "filename": "DayEleven.html"
+    },
+    "15": {
+        "day": 15,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayFifteen.html",
+        "relPath": "lessons/03-calculus/DayFifteen.html",
+        "topic": "Fundamental Theorem of Calculus",
+        "title": "Day 13: Fundamental Theorem of Calculus",
+        "filename": "DayFifteen.html"
+    },
+    "14": {
+        "day": 14,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayFourteen.html",
+        "relPath": "lessons/03-calculus/DayFourteen.html",
+        "topic": "Limits, Derivatives & Integrals",
+        "title": "Day 12: Limits, Derivatives & Integrals",
+        "filename": "DayFourteen.html"
+    },
+    "17": {
+        "day": 17,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DaySeventeen.html",
+        "relPath": "lessons/03-calculus/DaySeventeen.html",
+        "topic": "Partial Derivatives & Gradients",
+        "title": "Day 15: Partial Derivatives & Gradients",
+        "filename": "DaySeventeen.html"
+    },
+    "16": {
+        "day": 16,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DaySixteen.html",
+        "relPath": "lessons/03-calculus/DaySixteen.html",
+        "topic": "Multiple Integrals & Change of Variables",
+        "title": "Day 18: Multiple Integrals & Change of Variables",
+        "filename": "DaySixteen.html"
+    },
+    "13": {
+        "day": 13,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayThirteen.html",
+        "relPath": "lessons/03-calculus/DayThirteen.html",
+        "topic": "Counting Basics \u2014 Rule of Sum/Product, P(n,k), C(n,k)",
+        "title": "Day 13: Counting Basics \u2014 Rule of Sum/Product, P(n,k), C(n,k)",
+        "filename": "DayThirteen.html"
+    },
+    "12": {
+        "day": 12,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\03-calculus\\DayTwelve.html",
+        "relPath": "lessons/03-calculus/DayTwelve.html",
+        "topic": "Recurrences \u2014 Unrolling, Guess-and-Check & Master Theorem",
+        "title": "Day 12: Recurrences \u2014 Unrolling, Guess-and-Check & Master Theorem",
+        "filename": "DayTwelve.html"
+    },
+    "19": {
+        "day": 19,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayNineteen.html",
+        "relPath": "lessons/04-linear-algebra/DayNineteen.html",
+        "topic": "Matrix Operations & Determinants",
+        "title": "Day 19: Matrix Operations & Determinants",
+        "filename": "DayNineteen.html"
+    },
+    "20": {
+        "day": 20,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwenty.html",
+        "relPath": "lessons/04-linear-algebra/DayTwenty.html",
+        "topic": "Orthogonality & Least Squares",
+        "title": "Day 20: Orthogonality & Least Squares",
+        "filename": "DayTwenty.html"
+    },
+    "25": {
+        "day": 25,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyFive.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentyFive.html",
+        "topic": "Sets & Relations",
+        "title": "Day 25: Sets & Relations",
+        "filename": "DayTwentyFive.html"
+    },
+    "24": {
+        "day": 24,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyFour.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentyFour.html",
+        "topic": "Logic & Sets \u2014 Propositional & First-Order Logic",
+        "title": "Day 28: Logic & Sets \u2014 Propositional & First-Order Logic",
+        "filename": "DayTwentyFour.html"
+    },
+    "21": {
+        "day": 21,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyOne.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentyOne.html",
+        "topic": "Vector Spaces & Linear Maps",
+        "title": "Day 21: Vector Spaces & Linear Maps",
+        "filename": "DayTwentyOne.html"
+    },
+    "27": {
+        "day": 27,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentySeven.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentySeven.html",
+        "topic": "Permutations & Combinations",
+        "title": "Day 27: Permutations & Combinations",
+        "filename": "DayTwentySeven.html"
+    },
+    "26": {
+        "day": 26,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentySix.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentySix.html",
+        "topic": "Induction & Counting Principles",
+        "title": "Day 26: Induction & Counting Principles",
+        "filename": "DayTwentySix.html"
+    },
+    "23": {
+        "day": 23,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyThree.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentyThree.html",
+        "topic": "Checkpoint \u2014 Abstract Vectors",
+        "title": "Day 23: Checkpoint \u2014 Abstract Vectors",
+        "filename": "DayTwentyThree.html"
+    },
+    "22": {
+        "day": 22,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\04-linear-algebra\\DayTwentyTwo.html",
+        "relPath": "lessons/04-linear-algebra/DayTwentyTwo.html",
+        "topic": "Inner Product Spaces & Spectral Theorem",
+        "title": "Day 22: Inner Product Spaces & Spectral Theorem",
+        "filename": "DayTwentyTwo.html"
+    },
+    "30": {
+        "day": 30,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirty.html",
+        "relPath": "lessons/05-discrete-math/DayThirty.html",
+        "topic": "Graph Traversal & Correctness",
+        "title": "Day 30: Graph Traversal & Correctness",
+        "filename": "DayThirty.html"
+    },
+    "35": {
+        "day": 35,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyFive.html",
+        "relPath": "lessons/05-discrete-math/DayThirtyFive.html",
+        "topic": "Dynamic Programming",
+        "title": "Day 35: Dynamic Programming",
+        "filename": "DayThirtyFive.html"
+    },
+    "34": {
+        "day": 34,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyFour.html",
+        "relPath": "lessons/05-discrete-math/DayThirtyFour.html",
+        "topic": "Sorting, Searching & Greedy",
+        "title": "Day 34: Sorting, Searching & Greedy",
+        "filename": "DayThirtyFour.html"
+    },
+    "31": {
+        "day": 31,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyOne.html",
+        "relPath": "lessons/05-discrete-math/DayThirtyOne.html",
+        "topic": "Number Theory Basics",
+        "title": "Day 36: Number Theory Basics",
+        "filename": "DayThirtyOne.html"
+    },
+    "37": {
+        "day": 37,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtySeven.html",
+        "relPath": "lessons/05-discrete-math/DayThirtySeven.html",
+        "topic": "Amortized Analysis",
+        "title": "Day 37: Amortized Analysis",
+        "filename": "DayThirtySeven.html"
+    },
+    "36": {
+        "day": 36,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtySix.html",
+        "relPath": "lessons/05-discrete-math/DayThirtySix.html",
+        "topic": "Graph Algorithms & Correctness",
+        "title": "Day 36: Graph Algorithms & Correctness",
+        "filename": "DayThirtySix.html"
+    },
+    "33": {
+        "day": 33,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyThree.html",
+        "relPath": "lessons/05-discrete-math/DayThirtyThree.html",
+        "topic": "Trees, Tries & Graphs",
+        "title": "Day 33: Trees, Tries & Graphs",
+        "filename": "DayThirtyThree.html"
+    },
+    "32": {
+        "day": 32,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayThirtyTwo.html",
+        "relPath": "lessons/05-discrete-math/DayThirtyTwo.html",
+        "topic": "Data Structures & Linked Lists",
+        "title": "Day 32: Data Structures & Linked Lists",
+        "filename": "DayThirtyTwo.html"
+    },
+    "28": {
+        "day": 28,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayTwentyEight.html",
+        "relPath": "lessons/05-discrete-math/DayTwentyEight.html",
+        "topic": "Recurrences & Generating Functions",
+        "title": "Day 28: Recurrences & Generating Functions",
+        "filename": "DayTwentyEight.html"
+    },
+    "29": {
+        "day": 29,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\05-discrete-math\\DayTwentyNine.html",
+        "relPath": "lessons/05-discrete-math/DayTwentyNine.html",
+        "topic": "Trees & Flows",
+        "title": "Day 29: Trees & Flows",
+        "filename": "DayTwentyNine.html"
+    },
+    "40": {
+        "day": 40,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayForty.html",
+        "relPath": "lessons/06-algorithms/DayForty.html",
+        "topic": "Random Variables, Expectation & Moments",
+        "title": "Day 40: Random Variables, Expectation & Moments",
+        "filename": "DayForty.html"
+    },
+    "48": {
+        "day": 48,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyEight.html",
+        "relPath": "lessons/06-algorithms/DayFortyEight.html",
+        "topic": "Series & Uniform Convergence",
+        "title": "Day 48: Series & Uniform Convergence",
+        "filename": "DayFortyEight.html"
+    },
+    "45": {
+        "day": 45,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyFive.html",
+        "relPath": "lessons/06-algorithms/DayFortyFive.html",
+        "topic": "Sequences & Series Rigor",
+        "title": "Day 45: Sequences & Series Rigor",
+        "filename": "DayFortyFive.html"
+    },
+    "44": {
+        "day": 44,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyFour.html",
+        "relPath": "lessons/06-algorithms/DayFortyFour.html",
+        "topic": "Analysis (Limits & Connectivity)",
+        "title": "Day 44: Analysis (Limits & Connectivity)",
+        "filename": "DayFortyFour.html"
+    },
+    "41": {
+        "day": 41,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyOne.html",
+        "relPath": "lessons/06-algorithms/DayFortyOne.html",
+        "topic": "Common Distributions & their Properties",
+        "title": "Day 41: Common Distributions & their Properties",
+        "filename": "DayFortyOne.html"
+    },
+    "47": {
+        "day": 47,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortySeven.html",
+        "relPath": "lessons/06-algorithms/DayFortySeven.html",
+        "topic": "Differentiation & Integration Theorems",
+        "title": "Day 47: Differentiation & Integration Theorems",
+        "filename": "DayFortySeven.html"
+    },
+    "46": {
+        "day": 46,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortySix.html",
+        "relPath": "lessons/06-algorithms/DayFortySix.html",
+        "topic": "Completeness & Compactness",
+        "title": "Day 46: Completeness & Compactness",
+        "filename": "DayFortySix.html"
+    },
+    "43": {
+        "day": 43,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyThree.html",
+        "relPath": "lessons/06-algorithms/DayFortyThree.html",
+        "topic": "Statistics (Estimation & Regression)",
+        "title": "Day 43: Statistics (Estimation & Regression)",
+        "filename": "DayFortyThree.html"
+    },
+    "42": {
+        "day": 42,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayFortyTwo.html",
+        "relPath": "lessons/06-algorithms/DayFortyTwo.html",
+        "topic": "Joint Distributions & Concentration",
+        "title": "Day 42: Joint Distributions & Concentration",
+        "filename": "DayFortyTwo.html"
+    },
+    "38": {
+        "day": 38,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayThirtyEight.html",
+        "relPath": "lessons/06-algorithms/DayThirtyEight.html",
+        "topic": "Randomized Algorithms & Hardness",
+        "title": "Day 38: Randomized Algorithms & Hardness",
+        "filename": "DayThirtyEight.html"
+    },
+    "39": {
+        "day": 39,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\06-algorithms\\DayThirtyNine.html",
+        "relPath": "lessons/06-algorithms/DayThirtyNine.html",
+        "topic": "Conditional Probability & Bayes",
+        "title": "Day 39: Conditional Probability & Bayes",
+        "filename": "DayThirtyNine.html"
+    },
+    "50": {
+        "day": 50,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFifty.html",
+        "relPath": "lessons/07-probability-stats/DayFifty.html",
+        "topic": "Multivariable Calculus",
+        "title": "Day 50: Multivariable Calculus",
+        "filename": "DayFifty.html"
+    },
+    "54": {
+        "day": 54,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFiftyFour.html",
+        "relPath": "lessons/07-probability-stats/DayFiftyFour.html",
+        "topic": "Modules & Vector Spaces",
+        "title": "Day 54: Modules & Vector Spaces",
+        "filename": "DayFiftyFour.html"
+    },
+    "51": {
+        "day": 51,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFiftyOne.html",
+        "relPath": "lessons/07-probability-stats/DayFiftyOne.html",
+        "topic": "Numerical Foundations",
+        "title": "Day 51: Numerical Foundations",
+        "filename": "DayFiftyOne.html"
+    },
+    "53": {
+        "day": 53,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFiftyThree.html",
+        "relPath": "lessons/07-probability-stats/DayFiftyThree.html",
+        "topic": "Fields & Galois Theory",
+        "title": "Day 53: Fields & Galois Theory",
+        "filename": "DayFiftyThree.html"
+    },
+    "52": {
+        "day": 52,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFiftyTwo.html",
+        "relPath": "lessons/07-probability-stats/DayFiftyTwo.html",
+        "topic": "Groups & Rings",
+        "title": "Day 52: Groups & Rings",
+        "filename": "DayFiftyTwo.html"
+    },
+    "49": {
+        "day": 49,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\07-probability-stats\\DayFortyNine.html",
+        "relPath": "lessons/07-probability-stats/DayFortyNine.html",
+        "topic": "Metric Spaces",
+        "title": "Day 49: Metric Spaces",
+        "filename": "DayFortyNine.html"
+    },
+    "58": {
+        "day": 58,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DayFiftyEight.html",
+        "relPath": "lessons/08-analysis/DayFiftyEight.html",
+        "topic": "Measurable Functions",
+        "title": "Day 58: Measurable Functions",
+        "filename": "DayFiftyEight.html"
+    },
+    "55": {
+        "day": 55,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DayFiftyFive.html",
+        "relPath": "lessons/08-analysis/DayFiftyFive.html",
+        "topic": "Topology: Open/Closed & Compactness",
+        "title": "Day 55: Topology: Open/Closed & Compactness",
+        "filename": "DayFiftyFive.html"
+    },
+    "59": {
+        "day": 59,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DayFiftyNine.html",
+        "relPath": "lessons/08-analysis/DayFiftyNine.html",
+        "topic": "Convergence Theorems",
+        "title": "Day 59: Convergence Theorems",
+        "filename": "DayFiftyNine.html"
+    },
+    "57": {
+        "day": 57,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DayFiftySeven.html",
+        "relPath": "lessons/08-analysis/DayFiftySeven.html",
+        "topic": "Sigma Algebras & Measures",
+        "title": "Day 57: Sigma Algebras & Measures",
+        "filename": "DayFiftySeven.html"
+    },
+    "56": {
+        "day": 56,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DayFiftySix.html",
+        "relPath": "lessons/08-analysis/DayFiftySix.html",
+        "topic": "Product Spaces",
+        "title": "Day 56: Product Spaces",
+        "filename": "DayFiftySix.html"
+    },
+    "60": {
+        "day": 60,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DaySixty.html",
+        "relPath": "lessons/08-analysis/DaySixty.html",
+        "topic": "Probability with Measure",
+        "title": "Day 60: Probability with Measure",
+        "filename": "DaySixty.html"
+    },
+    "61": {
+        "day": 61,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DaySixtyOne.html",
+        "relPath": "lessons/08-analysis/DaySixtyOne.html",
+        "topic": "LLN & CLT",
+        "title": "Day 61: LLN & CLT",
+        "filename": "DaySixtyOne.html"
+    },
+    "63": {
+        "day": 63,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DaySixtyThree.html",
+        "relPath": "lessons/08-analysis/DaySixtyThree.html",
+        "topic": "Weak Convergence",
+        "title": "Day 63: Weak Convergence",
+        "filename": "DaySixtyThree.html"
+    },
+    "62": {
+        "day": 62,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\08-analysis\\DaySixtyTwo.html",
+        "relPath": "lessons/08-analysis/DaySixtyTwo.html",
+        "topic": "Banach/Hilbert Spaces & Operators",
+        "title": "Day 62: Banach/Hilbert Spaces & Operators",
+        "filename": "DaySixtyTwo.html"
+    },
+    "65": {
+        "day": 65,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\09-numerical\\DaySixtyFive.html",
+        "relPath": "lessons/09-numerical/DaySixtyFive.html",
+        "topic": "Conformal Mapping",
+        "title": "Day 65: Conformal Mapping",
+        "filename": "DaySixtyFive.html"
+    },
+    "64": {
+        "day": 64,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\09-numerical\\DaySixtyFour.html",
+        "relPath": "lessons/09-numerical/DaySixtyFour.html",
+        "topic": "Complex Analysis Basics",
+        "title": "Day 80: Complex Analysis Basics",
+        "filename": "DaySixtyFour.html"
+    },
+    "67": {
+        "day": 67,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\09-numerical\\DaySixtySeven.html",
+        "relPath": "lessons/09-numerical/DaySixtySeven.html",
+        "topic": "Modules & Vector Spaces",
+        "title": "Day 67: Modules & Vector Spaces",
+        "filename": "DaySixtySeven.html"
+    },
+    "66": {
+        "day": 66,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\09-numerical\\DaySixtySix.html",
+        "relPath": "lessons/09-numerical/DaySixtySix.html",
+        "topic": "Fields & Galois Theory",
+        "title": "Day 66: Fields & Galois Theory",
+        "filename": "DaySixtySix.html"
+    },
+    "70": {
+        "day": 70,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventy.html",
+        "relPath": "lessons/10-topology-measure/DaySeventy.html",
+        "topic": "Turing Machines & Decidability",
+        "title": "Day 70: Turing Machines & Decidability",
+        "filename": "DaySeventy.html"
+    },
+    "75": {
+        "day": 75,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventyFive.html",
+        "relPath": "lessons/10-topology-measure/DaySeventyFive.html",
+        "topic": "Mathematical Logic",
+        "title": "Day 75: Mathematical Logic",
+        "filename": "DaySeventyFive.html"
+    },
+    "74": {
+        "day": 74,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventyFour.html",
+        "relPath": "lessons/10-topology-measure/DaySeventyFour.html",
+        "topic": "Space Complexity & PSPACE",
+        "title": "Day 74: Space Complexity & PSPACE",
+        "filename": "DaySeventyFour.html"
+    },
+    "71": {
+        "day": 71,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventyOne.html",
+        "relPath": "lessons/10-topology-measure/DaySeventyOne.html",
+        "topic": "Decidability & Reducibility",
+        "title": "Day 71: Decidability & Reducibility",
+        "filename": "DaySeventyOne.html"
+    },
+    "76": {
+        "day": 76,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventySix.html",
+        "relPath": "lessons/10-topology-measure/DaySeventySix.html",
+        "topic": "Lambda Calculus",
+        "title": "Day 76: Lambda Calculus",
+        "filename": "DaySeventySix.html"
+    },
+    "73": {
+        "day": 73,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventyThree.html",
+        "relPath": "lessons/10-topology-measure/DaySeventyThree.html",
+        "topic": "NP-Completeness",
+        "title": "Day 73: NP-Completeness",
+        "filename": "DaySeventyThree.html"
+    },
+    "72": {
+        "day": 72,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySeventyTwo.html",
+        "relPath": "lessons/10-topology-measure/DaySeventyTwo.html",
+        "topic": "P vs NP & Complexity",
+        "title": "Day 72: P vs NP & Complexity",
+        "filename": "DaySeventyTwo.html"
+    },
+    "68": {
+        "day": 68,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySixtyEight.html",
+        "relPath": "lessons/10-topology-measure/DaySixtyEight.html",
+        "topic": "Partial Differential Equations",
+        "title": "Day 68: Partial Differential Equations",
+        "filename": "DaySixtyEight.html"
+    },
+    "69": {
+        "day": 69,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\10-topology-measure\\DaySixtyNine.html",
+        "relPath": "lessons/10-topology-measure/DaySixtyNine.html",
+        "topic": "Finite Automata & CFLs",
+        "title": "Day 69: Finite Automata & CFLs",
+        "filename": "DaySixtyNine.html"
+    },
+    "80": {
+        "day": 80,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEighty.html",
+        "relPath": "lessons/11-functional-pde/DayEighty.html",
+        "topic": "Quantum Computing",
+        "title": "Day 80: Quantum Computing",
+        "filename": "DayEighty.html"
+    },
+    "85": {
+        "day": 85,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEightyFive.html",
+        "relPath": "lessons/11-functional-pde/DayEightyFive.html",
+        "topic": "Fast Transforms (FFT)",
+        "title": "Day 85: Fast Transforms (FFT)",
+        "filename": "DayEightyFive.html"
+    },
+    "84": {
+        "day": 84,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEightyFour.html",
+        "relPath": "lessons/11-functional-pde/DayEightyFour.html",
+        "topic": "Iterative Methods (Krylov)",
+        "title": "Day 84: Iterative Methods (Krylov)",
+        "filename": "DayEightyFour.html"
+    },
+    "81": {
+        "day": 81,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEightyOne.html",
+        "relPath": "lessons/11-functional-pde/DayEightyOne.html",
+        "topic": "Convex Optimization & KKT",
+        "title": "Day 81: Convex Optimization & KKT",
+        "filename": "DayEightyOne.html"
+    },
+    "83": {
+        "day": 83,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEightyThree.html",
+        "relPath": "lessons/11-functional-pde/DayEightyThree.html",
+        "topic": "Numerical Conditioning",
+        "title": "Day 83: Numerical Conditioning",
+        "filename": "DayEightyThree.html"
+    },
+    "82": {
+        "day": 82,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DayEightyTwo.html",
+        "relPath": "lessons/11-functional-pde/DayEightyTwo.html",
+        "topic": "Gradient & Proximal Methods",
+        "title": "Day 82: Gradient & Proximal Methods",
+        "filename": "DayEightyTwo.html"
+    },
+    "78": {
+        "day": 78,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DaySeventyEight.html",
+        "relPath": "lessons/11-functional-pde/DaySeventyEight.html",
+        "topic": "Information Theory",
+        "title": "Day 78: Information Theory",
+        "filename": "DaySeventyEight.html"
+    },
+    "79": {
+        "day": 79,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DaySeventyNine.html",
+        "relPath": "lessons/11-functional-pde/DaySeventyNine.html",
+        "topic": "Cryptography",
+        "title": "Day 79: Cryptography",
+        "filename": "DaySeventyNine.html"
+    },
+    "77": {
+        "day": 77,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\11-functional-pde\\DaySeventySeven.html",
+        "relPath": "lessons/11-functional-pde/DaySeventySeven.html",
+        "topic": "Program Verification",
+        "title": "Day 77: Program Verification",
+        "filename": "DaySeventySeven.html"
+    },
+    "88": {
+        "day": 88,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayEightyEight.html",
+        "relPath": "lessons/12-theoretical-cs/DayEightyEight.html",
+        "topic": "Probability: Random Matrices",
+        "title": "Day 88: Probability: Random Matrices",
+        "filename": "DayEightyEight.html"
+    },
+    "89": {
+        "day": 89,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayEightyNine.html",
+        "relPath": "lessons/12-theoretical-cs/DayEightyNine.html",
+        "topic": "Algebraic Geometry",
+        "title": "Day 89: Algebraic Geometry",
+        "filename": "DayEightyNine.html"
+    },
+    "87": {
+        "day": 87,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayEightySeven.html",
+        "relPath": "lessons/12-theoretical-cs/DayEightySeven.html",
+        "topic": "Harmonic Analysis & PDE",
+        "title": "Day 87: Harmonic Analysis & PDE",
+        "filename": "DayEightySeven.html"
+    },
+    "86": {
+        "day": 86,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayEightySix.html",
+        "relPath": "lessons/12-theoretical-cs/DayEightySix.html",
+        "topic": "Additive Combinatorics & Analytic NT",
+        "title": "Day 86: Additive Combinatorics & Analytic NT",
+        "filename": "DayEightySix.html"
+    },
+    "90": {
+        "day": 90,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayNinety.html",
+        "relPath": "lessons/12-theoretical-cs/DayNinety.html",
+        "topic": "Theoretical CS II",
+        "title": "Day 90: Theoretical CS II",
+        "filename": "DayNinety.html"
+    },
+    "91": {
+        "day": 91,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\12-theoretical-cs\\DayNinetyOne.html",
+        "relPath": "lessons/12-theoretical-cs/DayNinetyOne.html",
+        "topic": "Deep Dive",
+        "title": "Day 91: Deep Dive",
+        "filename": "DayNinetyOne.html"
+    },
+    "95": {
+        "day": 95,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetyFive.html",
+        "relPath": "lessons/13-optimization/DayNinetyFive.html",
+        "topic": "Two-Pass Technique I",
+        "title": "Day 95: Two-Pass Technique I",
+        "filename": "DayNinetyFive.html"
+    },
+    "94": {
+        "day": 94,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetyFour.html",
+        "relPath": "lessons/13-optimization/DayNinetyFour.html",
+        "topic": "The Lemma Notebook",
+        "title": "Day 94: The Lemma Notebook",
+        "filename": "DayNinetyFour.html"
+    },
+    "97": {
+        "day": 97,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetySeven.html",
+        "relPath": "lessons/13-optimization/DayNinetySeven.html",
+        "topic": "Feynman Method",
+        "title": "Day 97: Feynman Method",
+        "filename": "DayNinetySeven.html"
+    },
+    "96": {
+        "day": 96,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetySix.html",
+        "relPath": "lessons/13-optimization/DayNinetySix.html",
+        "topic": "Two-Pass Technique II",
+        "title": "Day 96: Two-Pass Technique II",
+        "filename": "DayNinetySix.html"
+    },
+    "93": {
+        "day": 93,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetyThree.html",
+        "relPath": "lessons/13-optimization/DayNinetyThree.html",
+        "topic": "Writing Proofs",
+        "title": "Day 93: Writing Proofs",
+        "filename": "DayNinetyThree.html"
+    },
+    "92": {
+        "day": 92,
+        "path": "c:\\Users\\avery\\Desktop\\Free CS Math\\CSMathClass\\lessons\\13-optimization\\DayNinetyTwo.html",
+        "relPath": "lessons/13-optimization/DayNinetyTwo.html",
+        "topic": "Daily Problem Solving",
+        "title": "Day 92: Daily Problem Solving",
+        "filename": "DayNinetyTwo.html"
+    }
+}

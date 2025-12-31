@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 81: Convex Optimization & KKT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 6 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 81 · Optimization
+        </div>
+        <h1>Convex Optimization & KKT</h1>
+        <p class="hero-desc">Convex Sets, Fenchel Duality, and the Karush-Kuhn-Tucker conditions.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~90 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#sets" class="toc-link">1. Convex Sets</a></li>
+                    <li><a href="#functions" class="toc-link">2. Convex Functions</a></li>
+                    <li><a href="#jensen" class="toc-link">3. Jensen's Inequality</a></li>
+                    <li><a href="#sep" class="toc-link">4. Separating Hyperplane</a></li>
+                    <li><a href="#fenchel" class="toc-link">5. Fenchel Conjugate</a></li>
+                    <li><a href="#dual" class="toc-link">6. Deriving the Dual (LP)</a></li>
+                    <li><a href="#formulation" class="toc-link">7. Standard Form</a></li>
+                    <li><a href="#lagrangian" class="toc-link">8. The Lagrangian</a></li>
+                    <li><a href="#kkt" class="toc-link">9. KKT Conditions</a></li>
+                    <li><a href="#strong" class="toc-link">10. Strong Duality</a></li>
+                    <li><a href="#slater" class="toc-link">11. Slater's Condition</a></li>
+                    <li><a href="#code" class="toc-link">12. Python: Convex & SLSQP</a></li>
+                    <li><a href="#videos" class="toc-link">13. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">14. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Sets -->
+            <section class="section" id="sets">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">Convex Sets</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3>Definition</h3>
+                        <p>A set `C \subseteq \mathbb{R}^n` is <strong>convex</strong> if the line segment between any
+                            two points in `C` lies lies entirely in `C`.</p>
+                        <div class="math-block">
+                            \forall x, y \in C, \theta \in [0, 1] \implies \theta x + (1-\theta)y \in C
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="ops">
+                <div class="section-header">
+                    <div class="section-number">Section 1.1</div>
+                    <h2 class="section-title">Operations Preserving Convexity</h2>
+                </div>
+                <div class="section-body">
+                    <p>How do we construct complex convex sets from simple ones?</p>
+                    <div class="rule">
+                        <ul>
+                            <li><strong>Intersection:</strong> The intersection of ANY number (even infinite) of convex
+                                sets is convex.</li>
+                            <li><strong>Affine Map:</strong> `f(x) = Ax + b` maps convex sets to convex sets.
+                                `f^{-1}(C)` is also convex.</li>
+                            <li><strong>Perspective Function:</strong> `P(x, t) = x/t` (for `t > 0`) preserves
+                                convexity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Functions -->
+            <section class="section" id="functions">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Convex Functions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3>Definition</h3>
+                        <p>A function `f: \mathbb{R}^n \to \mathbb{R}` is convex if its domain is a convex set and for
+                            all `x, y` in the domain and `\theta \in [0, 1]`:</p>
+                        <div class="math-block">
+                            f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y)
+                        </div>
+                        <p>Geometrically, the chord connecting `(x, f(x))` and `(y, f(y))` lies <strong>above</strong>
+                            the graph of `f`.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>First-Order Condition</h3>
+                        <p>If `f` is differentiable, it is convex if and only if its graph lies above its tangent
+                            hyperplanes:</p>
+                        <div class="math-block">
+                            f(y) \ge f(x) + \nabla f(x)^T (y-x)
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>Second-Order Condition</h3>
+                        <p>If `f` is twice differentiable, it is convex if and only if its Hessian is Positive
+                            Semidefinite (PSD):</p>
+                        <div class="math-block">
+                            \nabla^2 f(x) \succeq 0 \quad (\forall z, z^T \nabla^2 f(x) z \ge 0)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jensen -->
+            <section class="section" id="jensen">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Jensen's Inequality</h2>
+                </div>
+                <div class="section-body">
+                    <p>This is arguably the most important inequality in analysis and probability.</p>
+                    <div class="info">
+                        <strong>Theorem:</strong> If `f` is convex, then for any random variable `X`:
+                        <div class="math-block">
+                            f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]
+                        </div>
+                    </div>
+                    <p><strong>Example:</strong> `f(x) = x^2` is convex. Thus `(\mathbb{E}[X])^2 \le \mathbb{E}[X^2]`.
+                        This implies `\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 \ge 0`, which makes sense!</p>
+                </div>
+            </section>
+
+            <!-- Sep -->
+            <section class="section" id="sep">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Separating Hyperplane Theorem</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3>Theorem Statement</h3>
+                        <p>If `C` and `D` are disjoint nonempty convex sets, there exists a nonzero vector `a` and a
+                            scalar `b` such that:</p>
+                        <div class="math-block">
+                            a^T x \le b \quad \forall x \in C \\
+                            a^T x \ge b \quad \forall x \in D
+                        </div>
+                        <p>This defines a hyperplane `H = \{x | a^T x = b\}` that separates the sets.</p>
+                    </div>
+                    <div class="info">
+                        This is the geometric engine behind <strong>duality</strong> and Support Vector Machines (SVM).
+                        It guarantees that if a point `y` is not in a convex set `C`, we can separate it from `C`.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fenchel -->
+            <section class="section" id="fenchel">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Fenchel Conjugate</h2>
+                </div>
+                <div class="section-body">
+                    <p>The conjugate `f^*(y)` of a function `f(x)` is defined as:</p>
+                    <div class="math-block">
+                        f^*(y) = \sup_{x \in \text{dom } f} (y^T x - f(x))
+                    </div>
+                    <p>Visually, `f^*(y)` is the maximum gap between the linear function `y^T x` and `f(x)`. It encodes
+                        the optimal intercept of a supporting hyperplane with slope `y`.</p>
+                    <div class="warning">
+                        <strong>Crucial Property:</strong> `f^*` is <strong>always convex</strong>, even if `f` is not!
+                        This is because it is the pointwise supremum of a family of affine functions (of `y`).
+                    </div>
+                    <p>Also, if `f` is convex and closed, then `f^{**} = f` (Fenchel-Moreau Theorem).</p>
+                </div>
+            </section>
+
+            <!-- Dual -->
+            <section class="section" id="dual">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Deriving the Dual (LP Example)</h2>
+                </div>
+                <div class="section-body">
+                    <p>Let's derive the dual of a Linear Program (LP) from first principles (Lagrangian).</p>
+                    <div class="math-block">
+                        \text{Primal: } \min c^T x \quad \text{s.t.} \quad Ax = b, x \ge 0
+                    </div>
+                    <p><strong>Step 1: The Lagrangian.</strong> Introduce dual variables `\nu` (for `Ax=b`) and `\lambda
+                        \ge 0` (for `-x \le 0`).</p>
+                    <div class="math-block">
+                        L(x, \lambda, \nu) = c^T x + \nu^T (Ax - b) - \lambda^T x \\
+                        = (c + A^T \nu - \lambda)^T x - b^T \nu
+                    </div>
+                    <p><strong>Step 2: The Dual Function.</strong> `g(\lambda, \nu) = \inf_x L(x, \lambda, \nu)`.</p>
+                    <p>The term is linear in `x`. If the coefficient `(c + A^T \nu - \lambda)` is nonzero, the infimum
+                        is `-\infty`. If it is zero, the infimum is `-b^T \nu`.</p>
+                    <p><strong>Step 3: The Dual Problem.</strong> Maximize `g(\lambda, \nu)` subject to `\lambda \ge 0`.
+                    </p>
+                    <div class="math-block">
+                        \text{Dual: } \max -b^T \nu \quad \text{s.t.} \quad A^T \nu + c - \lambda = 0, \lambda \ge 0
+                    </div>
+                    <p>Eliminating `\lambda` (which just means `A^T \nu + c \ge 0`):</p>
+                    <div class="math-block">
+                        \max -b^T \nu \quad \text{s.t.} \quad A^T \nu + c \ge 0
+                    </div>
+                    <p><strong>Weak Duality:</strong> `d^* \le p^*`. The dual always provides a lower bound.</p>
+                </div>
+            </section>
+
+            <!-- Formulation -->
+            <section class="section" id="formulation">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Standard Form Problem</h2>
+                </div>
+                <div class="section-body">
+                    <p>We consider the standard optimization problem:</p>
+                    <div class="math-block">
+                        \begin{aligned}
+                        \min_{x} \quad & f_0(x) \\
+                        \text{subject to} \quad & f_i(x) \le 0, \quad i = 1, \dots, m \\
+                        & h_i(x) = 0, \quad i = 1, \dots, p
+                        \end{aligned}
+                    </div>
+                    <p>The domain of the problem is `D = \bigcap \text{dom } f_i \cap \bigcap \text{dom } h_i`.</p>
+                </div>
+            </section>
+
+            <!-- Lagrangian -->
+            <section class="section" id="lagrangian">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">The Lagrangian</h2>
+                </div>
+                <div class="section-body">
+                    <p>The Lagrangian function `L: \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p \to \mathbb{R}`
+                        augments the objective with weighted constraint violations.</p>
+                    <div class="math-block">
+                        L(x, \lambda, \nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{i=1}^p \nu_i h_i(x)
+                    </div>
+                    <p>Here `\lambda` and `\nu` are called <strong>dual variables</strong> or Lagrange multipliers.
+                        <strong>Crucially:</strong> `\lambda_i` must be non-negative (`\lambda_i \ge 0`).
+                    </p>
+                </div>
+            </section>
+
+            <!-- KKT -->
+            <section class="section" id="kkt">
+                <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">The KKT Conditions</h2>
+                </div>
+                <div class="section-body">
+                    <div class="info">
+                        If Strong Duality holds (see below), any pair of primal and dual optimal points `(x^*,
+                        (\lambda^*, \nu^*))` <strong>must</strong> satisfy the KKT conditions.
+                    </div>
+                    <div class="subsection">
+                        <h3>1. Stationarity</h3>
+                        <p>The gradient of the Lagrangian with respect to `x` vanishes:</p>
+                        <div class="math-block">
+                            \nabla f_0(x^*) + \sum \lambda_i^* \nabla f_i(x^*) + \sum \nu_i^* \nabla h_i(x^*) = 0
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3>2. Primal Feasibility</h3>
+                        <p>The point `x^*` must satisfied the constraints:</p>
+                        <div class="math-block">
+                            f_i(x^*) \le 0, \quad h_i(x^*) = 0
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3>3. Dual Feasibility</h3>
+                        <p>The inequality multipliers must be non-negative:</p>
+                        <div class="math-block">
+                            \lambda_i^* \ge 0
+                        </div>
+                    </div>
+                    <div class="subsection">
+                        <h3>4. Complementary Slackness</h3>
+                        <p>Either the constraint is active (`f_i(x) = 0`) or the multiplier is zero (`\lambda_i = 0`).
+                        </p>
+                        <div class="math-block">
+                            \lambda_i^* f_i(x^*) = 0 \quad \forall i
+                        </div>
+                    </div>
+                    <p>For convex problems, the KKT conditions are also <strong>sufficient</strong> for optimality!</p>
+                </div>
+            </section>
+
+            <!-- Strong -->
+            <section class="section" id="strong">
+                <div class="section-header">
+                    <div class="section-number">Section 10</div>
+                    <h2 class="section-title">Strong Duality</h2>
+                </div>
+                <div class="section-body">
+                    <p>Let `p^*` be the primal optimal value and `d^*` be the dual optimal value.</p>
+                    <ul>
+                        <li><strong>Weak Duality:</strong> `d^* \le p^*` (Always true).</li>
+                        <li><strong>Strong Duality:</strong> `d^* = p^*` (The interesting case).</li>
+                    </ul>
+                    <p>Strong duality means we can solve the (often easier) dual problem to find the optimal value of
+                        the primal.</p>
+                </div>
+            </section>
+
+            <!-- Slater -->
+            <section class="section" id="slater">
+                <div class="section-header">
+                    <div class="section-number">Section 11</div>
+                    <h2 class="section-title">Slater's Condition</h2>
+                </div>
+                <div class="section-body">
+                    <p>When does Strong Duality hold? For convex problems, a sufficient condition is <strong>Slater's
+                            Condition</strong>.</p>
+                    <div class="rule">
+                        Strict Feasibility: There exists a point `x \in \text{relint}(D)` such that:
+                        <div class="math-block">
+                            f_i(x) < 0 \quad \forall i=1, \dots, m \quad \text{and} \quad h_i(x)=0 </div>
+                        </div>
+                        <p>Basically, if there is a point strictly inside the feasible set, strong duality holds.</p>
+                    </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 12</div>
+                    <h2 class="section-title">Python: Convex & SLSQP</h2>
+                </div>
+                <div class="section-body">
+                    <p>The Convex Hull is the smallest convex set containing a given set of points. We can compute it
+                        efficiently using `scipy.spatial`.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Convex Hull (SciPy)</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.spatial import ConvexHull
+
+# 1. Generate random points in 2D
+points = np.random.rand(30, 2)
+
+# 2. Compute Convex Hull
+hull = ConvexHull(points)
+
+# 3. Plotting
+plt.figure(figsize=(8, 6))
+
+# Plot all points
+plt.plot(points[:,0], points[:,1], 'o', color='blue')
+
+# Plot hull edges
+for simplex in hull.simplices:
+    # simplex is an array of indices forming an edge
+    plt.plot(points[simplex, 0], points[simplex, 1], 'r-', lw=2)
+
+# Highlight hull vertices
+plt.plot(points[hull.vertices,0], points[hull.vertices,1], 'ro')
+
+plt.title('Convex Hull of 30 Random Points')
+plt.grid(True)
+plt.show()
+
+# Verification of Convexity Definition:
+# Pick any two points inside the hull (e.g., averages of vertices)
+p_avg = np.mean(points[hull.vertices], axis=0) # Centroid is definitely inside
+print(f"Centroid: {p_avg}") # This point is a convex combination!</code></pre>
+                        </div>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Minimize with Constraints (SLSQP)</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">import numpy as np
+from scipy.optimize import minimize
+
+# 1. Objective Function: x^2 + y^2
+def objective(x):
+    return x[0]**2 + x[1]**2
+
+# 2. Constraints
+# Constraint: x + y - 1 = 0
+cons = ({'type': 'eq', 'fun': lambda x: x[0] + x[1] - 1})
+
+# 3. Solve
+x0 = [2.0, 2.0]
+res = minimize(objective, x0, method='SLSQP', constraints=cons)
+
+print("Status:", res.message)
+print("Optimal Solution x*:", res.x)
+print("Optimal Value p*:", res.fun)
+print("Expected x*:", [0.5, 0.5])</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 13</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 14</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+        {
+            title: "Lesson Videos",
+            items: [
+            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
+            { title: "Video 2", channel: "Course Reference", vid: "stats-label" },
+            { title: "Video 3", channel: "Course Reference", vid: "main-layout" },
+            { title: "Video 4", channel: "Course Reference", vid: "stats-value" },
+            { title: "Video 5", channel: "Course Reference", vid: "themeToggle" },
+            { title: "Video 6", channel: "Course Reference", vid: "code-header" },
+            { title: "Video 7", channel: "Course Reference", vid: "formulation" },
+            { title: "Video 8", channel: "Course Reference", vid: "video-title" },
+            { title: "Video 9", channel: "Course Reference", vid: "statCorrect" }
+            ]
+        }
+    ];
+        const QUESTIONS = [
+            { topic: "Sets", prompt: "A set is convex if the line segment between any two points is ___ the set.", answer: "in" },
+            { topic: "Ops", prompt: "The intersection of convex sets is always ___.", answer: "convex" },
+            { topic: "Hessian", prompt: "A twice-differentiable function is convex iff its Hessian is ___.", answer: "positive semidefinite", altAnswers: ["psd", "semi-definite"] },
+            { topic: "Jensen", prompt: "f(E[X]) <= E[f(X)]. This is ___ Inequality.", answer: "Jensen's", altAnswers: ["Jensen"] },
+            { topic: "Sep", prompt: "Disjoint convex sets can be separated by a ___.", answer: "hyperplane" },
+            { topic: "Standard Form", prompt: "In standard form, inequality constraints are f_i(x) <= ___.", answer: "0" },
+            { topic: "Lagrangian", prompt: "The dual variable λ (lambda) corresponds to ___ constraints.", answer: "inequality" },
+            { topic: "KKT", prompt: "Stationarity requires the ___ of the Lagrangian to vanish.", answer: "gradient" },
+            { topic: "KKT", prompt: "Complementary Slackness: λ_i * f_i(x) = ___.", answer: "0" },
+            { topic: "Duality", prompt: "If d* = p*, we have ___ duality.", answer: "strong" },
+            { topic: "Slater", prompt: "Slater's condition requires strictly ___ points.", answer: "feasible" },
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day81_convex_v1' });
+    </script>
+</body>
+
+</html>

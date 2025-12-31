@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 95: Two-Pass Technique I</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 6 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 95 · Discipline
+        </div>
+        <h1>Two-Pass Learning I</h1>
+        <p class="hero-desc">The Breadth Pass. How to survey a field quickly.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~45 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Strategy
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#concept" class="toc-link">1. The Two-Pass Concept</a></li>
+                    <li><a href="#pass1" class="toc-link">2. Pass 1: The Scout</a></li>
+                    <li><a href="#keywords" class="toc-link">3. Identifying Keywords</a></li>
+                    <li><a href="#map" class="toc-link">4. Building the Map</a></li>
+                    <li><a href="#code" class="toc-link">5. Python: Keyword Extraction</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Concept -->
+            <section class="section" id="concept">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">The Two-Pass Model</h2>
+                </div>
+                <div class="section-body">
+                    <p>Learning strictly linearly (Page 1 to 500) is inefficient. You get stuck on details before
+                        understanding the context.</p>
+                    <div class="rule">
+                        Algorithm:
+                        1. <strong>Pass 1 (The Scout):</strong> Survey the terrain. Gain vocabulary. Build a mental map.
+                        Ignore hard proofs. (Fast)
+                        2. <strong>Pass 2 (The Engineer):</strong> Build the road. Go deep. Derive proofs. Solve hard
+                        problems. (Slow)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pass 1 -->
+            <section class="section" id="pass1">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Pass 1: The Scout</h2>
+                </div>
+                <div class="section-body">
+                    <p>Your goal is <strong>familiarity</strong>, not mastery.</p>
+                    <ul>
+                        <li>Read the Table of Contents.</li>
+                        <li>Read Introductions and Conclusions.</li>
+                        <li>Scan for bolded terms.</li>
+                        <li>Look at the diagrams.</li>
+                    </ul>
+                    <p>If you see a wall of math, skip it. Ask: "What is this TRYING to do?"</p>
+                </div>
+            </section>
+
+            <!-- Keywords -->
+            <section class="section" id="keywords">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Identifying Keywords</h2>
+                </div>
+                <div class="section-body">
+                    <p>In Pass 1, collect "Black Boxes".</p>
+                    <p>Example: You read "The kernel trick allows SVMs to classify non-linear data."</p>
+                    <p><strong>Do not</strong> stop to learn RKHS. Just Note: "Kernel Trick = magic for non-linear."</p>
+                </div>
+            </section>
+
+            <!-- Map -->
+            <section class="section" id="map">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Building the Map</h2>
+                </div>
+                <div class="section-body">
+                    <p>At the end of Pass 1, draw a dependency graph.</p>
+                    <p>"A depends on B." "C is a type of D."</p>
+                    <p>This contextual knowledge makes Pass 2 10x faster because you know <strong>WHY</strong> you are
+                        learning each piece.</p>
+                </div>
+            </section>
+
+            <!-- Code -->
+            <section class="section" id="code">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Python: TF-IDF for Keywords</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Basic Extractor</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+
+documents = [
+    "Machine learning uses the kernel trick for non-linear classification.",
+    "The kernel trick maps data to high dimensional space.",
+    "Linear algebra is the foundation of machine learning."
+]
+
+# TF-IDF highlights unique important words
+vectorizer = TfidfVectorizer(stop_words='english')
+X = vectorizer.fit_transform(documents)
+
+feature_names = vectorizer.get_feature_names_out()
+dense = X.todense()
+
+print("Top keywords per document:")
+for i in range(len(documents)):
+    # Get indices of top 3 words
+    row = dense[i].tolist()[0]
+    top_indices = sorted(range(len(row)), key=lambda i: row[i], reverse=True)[:3]
+    print(f"Doc {i}: {[feature_names[j] for j in top_indices]}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Quiz</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+        {
+            title: "Lesson Videos",
+            items: [
+            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
+            { title: "Video 2", channel: "Course Reference", vid: "stats-label" },
+            { title: "Video 3", channel: "Course Reference", vid: "main-layout" },
+            { title: "Video 4", channel: "Course Reference", vid: "stats-value" },
+            { title: "Video 5", channel: "Course Reference", vid: "themeToggle" },
+            { title: "Video 6", channel: "Course Reference", vid: "code-header" },
+            { title: "Video 7", channel: "Course Reference", vid: "familiarity" },
+            { title: "Video 8", channel: "Course Reference", vid: "video-title" },
+            { title: "Video 9", channel: "Course Reference", vid: "statCorrect" }
+            ]
+        }
+    ];
+        const QUESTIONS = [
+            { topic: "Pass 1", prompt: "The goal of Pass 1 is ___.", answer: "familiarity", altAnswers: ["overview", "survey"] },
+            { topic: "Pass 2", prompt: "The goal of Pass 2 is ___.", answer: "mastery", altAnswers: ["depth"] },
+            { topic: "Black Box", prompt: "In Pass 1, treat unknown complex concepts as ___ boxes.", answer: "black" },
+            { topic: "Linear", prompt: "Avoid strictly ___ reading (Page 1 to N).", answer: "linear" },
+            { topic: "Map", prompt: "Build a dependency ___ to understand connections.", answer: "map", altAnswers: ["graph"] },
+            { topic: "Speed", prompt: "Pass 1 should be ___.", answer: "fast" },
+            { topic: "Context", prompt: "Context helps you understand ___ you are learning something.", answer: "why" },
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day95_discipline_v1' });
+    </script>
+</body>
+
+</html>

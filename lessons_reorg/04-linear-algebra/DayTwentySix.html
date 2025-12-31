@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 26: Induction & Counting Principles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 10 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 26 · Discrete Math
+        </div>
+        <h1>Induction & Counting Principles</h1>
+        <p class="hero-desc">
+            Mathematical induction proves infinite statements; counting principles (Pigeonhole, PIE) reveal surprising
+            constraints.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~45 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                20 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#concept" class="toc-link">1. The Principle</a></li>
+                    <li><a href="#examples" class="toc-link">2. Standard Induction</a></li>
+                    <li><a href="#strong" class="toc-link">3. Strong Induction</a></li>
+                    <li><a href="#structural" class="toc-link">4. Structural Induction</a></li>
+                    <li><a href="#python" class="toc-link">5. Recursion is Induction</a></li>
+                    <li><a href="#pigeon" class="toc-link">6. Pigeonhole Principle</a></li>
+                    <li><a href="#pie" class="toc-link">7. Inclusion-Exclusion</a></li>
+                    <li><a href="#birthday" class="toc-link">8. Birthday Paradox</a></li>
+                    <li><a href="#videos" class="toc-link">9. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">10. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Principle -->
+            <section class="section" id="concept">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">The Domino Effect</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        To prove a statement $P(n)$ is true for all integers $n \geq k$:
+                        <ol>
+                            <li><strong>Base Case:</strong> Prove $P(k)$ is true.</li>
+                            <li><strong>Inductive Step:</strong> Prove that if $P(n)$ is true (the hypothesis), then
+                                $P(n+1)$ is true.</li>
+                        </ol>
+                    </div>
+                    <p>
+                        This is conceptually identical to knocking down an infinite line of dominoes. You push the first
+                        one, and you ensure every domino knocks down the next.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Examples -->
+            <section class="section" id="examples">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Standard Induction</h2>
+                </div>
+                <div class="section-body">
+                    <div class="subsection">
+                        <h3 class="subsection-title">Example: Sum of Integers</h3>
+                        <p>Prove $\sum_{i=1}^n i = \frac{n(n+1)}{2}$.</p>
+                        <div class="math-block">1. Base Case (n=1):
+                            LHS = 1. RHS = 1(2)/2 = 1. Checked.
+
+                            2. Inductive Step:
+                            Assume 1 + ... + k = k(k+1)/2.
+                            Goal: Show 1 + ... + k + (k+1) = (k+1)(k+2)/2.
+
+                            LHS = [1 + ... + k] + (k+1)
+                            = k(k+1)/2 + (k+1) (by Hypothesis)
+                            = (k+1) [ k/2 + 1 ]
+                            = (k+1) [ (k+2)/2 ]
+                            = (k+1)(k+2)/2.
+                            QED.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strong -->
+            <section class="section" id="strong">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Strong Induction</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Sometimes knowing $P(k)$ isn't enough to prove $P(k+1)$, but knowing $P(1), P(2), ..., P(k)$
+                        <strong>all</strong> are true helps.
+                    </p>
+                    <div class="rule">
+                        <strong>Strong Induction:</strong> Assume $P(i)$ is true for ALL $1 \leq i \leq k$. Prove
+                        $P(k+1)$.
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Example: Fundamental Theorem of Arithmetic</h3>
+                        <p>
+                            Prove every integer $n > 1$ can be written as a product of primes.
+                            <br>
+                            If $n+1$ is prime, done.
+                            If composite, $n+1 = a \cdot b$.
+                            By Strong Induction, $a$ and $b$ (being smaller than $n+1$) have prime factorizations.
+                            Thus their product $a \cdot b$ is a product of primes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Structural -->
+            <section class="section" id="structural">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Structural Induction</h2>
+                </div>
+                <div class="section-body">
+                    <p>CS often deals with recursively defined structures (Trees, Lists, Formulas). Structural Induction
+                        is induction on the <em>structure</em> rather than integers.</p>
+                    <div class="math-block">For a Binary Tree T:
+                        1. Base Case: T is empty (or a single leaf). Prove P(T).
+                        2. Inductive Step: Assume P(L) and P(R) for subtrees. Prove P(Tree(L, R)).</div>
+                </div>
+            </section>
+
+            <!-- Python -->
+            <section class="section" id="python">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Recursion is Induction</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Every recursive function relies on inductive logic for correctness.
+                        You handle the base case (stopping condition) and the recursive step (reducing the problem).
+                    </p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Towers of Hanoi</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">def</span> <span class="code-function">hanoi</span>(n, source, target, auxiliary):
+    <span class="code-comment"># Base Case</span>
+    <span class="code-keyword">if</span> n == <span class="code-number">1</span>:
+        <span class="code-function">print</span>(<span class="code-string">f"Move disk 1 from {source} to {target}"</span>)
+        <span class="code-keyword">return</span>
+    
+    <span class="code-comment"># Inductive Step (Recursive Case)</span>
+    <span class="code-comment"># Move n-1 disks from Source to Aux (Inductive Hypothesis)</span>
+    hanoi(n-<span class="code-number">1</span>, source, auxiliary, target)
+    
+    <span class="code-comment"># Move nth disk from Source to Target</span>
+    <span class="code-function">print</span>(<span class="code-string">f"Move disk {n} from {source} to {target}"</span>)
+    
+    <span class="code-comment"># Move n-1 disks from Aux to Target (Inductive Hypothesis)</span>
+    hanoi(n-<span class="code-number">1</span>, auxiliary, target, source)
+
+<span class="code-function">print</span>(<span class="code-string">"Solving for 3 disks:"</span>)
+hanoi(<span class="code-number">3</span>, <span class="code-string">'A'</span>, <span class="code-string">'C'</span>, <span class="code-string">'B'</span>)</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pigeonhole (from Day 31) -->
+            <section class="section" id="pigeon">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">The Pigeonhole Principle</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        If $n$ pigeons fly into $k$ holes, and $n > k$, then at least one hole contains <strong>at least
+                            two</strong> pigeons.
+                    </div>
+                    <div class="subsection">
+                        <h3 class="subsection-title">Applications</h3>
+                        <ul>
+                            <li><strong>Hashing:</strong> If you hash $N$ keys into a table of size $M < N$, collisions
+                                    are inevitable.</li>
+                            <li><strong>Compression:</strong> Lossless compression cannot shrink every file.</li>
+                            <li><strong>NYC Hair:</strong> Two people in NYC have the same number of hairs (Pop ~8M,
+                                hairs ~150k).</li>
+                        </ul>
+                    </div>
+                    <div class="info">
+                        <strong>Generalized:</strong> If $N$ objects are placed into $k$ boxes, at least one box has
+                        $\lceil N/k \rceil$ objects.
+                    </div>
+                </div>
+            </section>
+
+            <!-- PIE (from Day 31) -->
+            <section class="section" id="pie">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Inclusion-Exclusion (PIE)</h2>
+                </div>
+                <div class="section-body">
+                    <p>How to count the size of a union of sets?</p>
+                    <div class="rule">
+                        <strong>Two Sets:</strong> $|A \cup B| = |A| + |B| - |A \cap B|$
+                    </div>
+                    <div class="math-block">Three Sets:
+                        |A ∪ B ∪ C| = |A| + |B| + |C|
+                        - (|A∩B| + |A∩C| + |B∩C|)
+                        + |A∩B∩C|</div>
+                    <p><strong>Pattern:</strong> Add singles, subtract pairs, add triples, subtract quads...</p>
+                </div>
+            </section>
+
+            <!-- Birthday (from Day 31) -->
+            <section class="section" id="birthday">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Birthday Paradox</h2>
+                </div>
+                <div class="section-body">
+                    <p>With just 23 people, there's a >50% chance of a shared birthday. This is a probabilistic version
+                        of Pigeonhole.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Birthday Simulation</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> random
+
+<span class="code-keyword">def</span> <span class="code-function">has_collision</span>(num_people):
+    birthdays = []
+    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(num_people):
+        day = random.randint(<span class="code-number">1</span>, <span class="code-number">365</span>)
+        <span class="code-keyword">if</span> day <span class="code-keyword">in</span> birthdays:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+        birthdays.append(day)
+    <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+
+<span class="code-comment"># Run 10000 trials for 23 people</span>
+collisions = <span class="code-function">sum</span>(has_collision(<span class="code-number">23</span>) <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10000</span>))
+<span class="code-function">print</span>(<span class="code-string">f"Probability: {collisions/10000:.1%}"</span>)  <span class="code-comment"># ~50%</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 10</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+        {
+            title: "Lesson Videos",
+            items: [
+            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
+            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
+            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
+            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
+            { title: "Video 5", channel: "Course Reference", vid: "3ZJD1tXQp6Q" },
+            { title: "Video 6", channel: "Course Reference", vid: "T6350fDcd3I" },
+            { title: "Video 7", channel: "Course Reference", vid: "stats-value" },
+            { title: "Video 8", channel: "Course Reference", vid: "themeToggle" },
+            { title: "Video 9", channel: "Course Reference", vid: "code-number" },
+            { title: "Video 10", channel: "Course Reference", vid: "-xJqW-O8pJA" }
+            ]
+        }
+    ];
+        const VIDEOS_REAL = [
+            {
+                title: "Induction",
+                items: [
+                    { title: "Mathematical Induction", channel: "The Organic Chemistry Tutor", vid: "T6350fDcd3I" },
+                    { title: "Strong Induction", channel: "TrevTutor", vid: "C_W7xXm-ZqM" }
+                ]
+            },
+            {
+                title: "Counting Principles",
+                items: [
+                    { title: "The Pigeonhole Principle", channel: "TrevTutor", vid: "3ZJD1tXQp6Q" },
+                    { title: "Inclusion-Exclusion Principle", channel: "TrevTutor", vid: "-xJqW-O8pJA" }
+                ]
+            }
+        ];
+
+        const QUESTIONS = [
+            { topic: "Base Case", prompt: "The first step of induction is the ___ case.", answer: "base" },
+            { topic: "Hypothesis", prompt: "Assuming P(k) is true is called the Inductive ___.", answer: "hypothesis" },
+            { topic: "Domino", prompt: "Induction is often compared to falling ___.", answer: "dominoes" },
+            { topic: "Strong", prompt: "In Strong Induction, we assume P(i) is true for ___ i <= k.", answer: "all" },
+            { topic: "Structure", prompt: "To prove properties of Trees, we use ___ induction.", answer: "structural" },
+            { topic: "WOP", prompt: "The Well-Ordering Principle states every non-empty set of positive integers has a ___ element.", answer: "least", altAnswers: ["smallest", "minimum"] },
+            { topic: "CS", prompt: "Recursion in programming is equivalent to ___ in math.", answer: "induction" },
+            { topic: "Invariant", prompt: "Loop invariants are proved using ___.", answer: "induction" },
+            // Day 31: Pigeonhole & PIE
+            { topic: "PHP", prompt: "If N objects > k boxes, one box has at least ___ objects.", answer: "2" },
+            { topic: "Generalized", prompt: "If N objects in k boxes, worst case box has ceiling(N / ___).", answer: "k" },
+            { topic: "Hashing", prompt: "If input space > hash table size, ___ MUST occur.", answer: "collisions", altAnswers: ["collision"] },
+            { topic: "PIE", prompt: "|AvB| = |A| + |B| - |A ___ B|.", answer: "intersect", altAnswers: ["intersection", "cap", "and"] },
+            { topic: "Paradox", prompt: "Birthday paradox says we only need ___ people for 50% collision chance.", answer: "23" },
+        ];
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day30_ind_v1' });
+    </script>
+</body>
+
+</html>

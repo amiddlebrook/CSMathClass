@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 36: Graph Algorithms & Correctness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 10 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 36 · Algorithms
+        </div>
+        <h1>Graph Algorithms & Correctness</h1>
+        <p class="hero-desc">BFS, DFS, shortest paths, and minimum spanning trees.</p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~90 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                20 practice problems
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#traversal" class="toc-link">1. BFS & DFS</a></li>
+                    <li><a href="#shortest" class="toc-link">2. Shortest Paths</a></li>
+                    <li><a href="#mst" class="toc-link">3. MST</a></li>
+                    <li><a href="#invariants" class="toc-link">4. Loop Invariants</a></li>
+                    <li><a href="#induction" class="toc-link">5. Induction</a></li>
+                    <li><a href="#complexity" class="toc-link">6. Big-O Analysis</a></li>
+                    <li><a href="#recurrences" class="toc-link">7. Recurrences</a></li>
+                    <li><a href="#videos" class="toc-link">8. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">9. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <section class="section" id="traversal">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">BFS & DFS</h2>
+                </div>
+                <div class="section-body">
+                    <div class="two-col">
+                        <div class="subsection">
+                            <h3 class="subsection-title">BFS (Breadth-First)</h3>
+                            <div class="math-block">• Uses Queue
+                                • Level by level
+                                • Finds shortest path (unweighted)
+                                • O(V + E)</div>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">DFS (Depth-First)</h3>
+                            <div class="math-block">• Uses Stack/Recursion
+                                • Go deep before wide
+                                • Cycle detection, topological sort
+                                • O(V + E)</div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">BFS and DFS</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">from</span> collections <span class="code-keyword">import</span> deque
+
+<span class="code-keyword">def</span> <span class="code-function">bfs</span>(graph, start):
+    visited = {start}
+    queue = deque([start])
+    <span class="code-keyword">while</span> queue:
+        node = queue.popleft()
+        <span class="code-keyword">for</span> neighbor <span class="code-keyword">in</span> graph[node]:
+            <span class="code-keyword">if</span> neighbor <span class="code-keyword">not in</span> visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+<span class="code-keyword">def</span> <span class="code-function">dfs</span>(graph, node, visited=<span class="code-keyword">None</span>):
+    <span class="code-keyword">if</span> visited <span class="code-keyword">is</span> <span class="code-keyword">None</span>: visited = set()
+    visited.add(node)
+    <span class="code-keyword">for</span> neighbor <span class="code-keyword">in</span> graph[node]:
+        <span class="code-keyword">if</span> neighbor <span class="code-keyword">not in</span> visited:
+            dfs(graph, neighbor, visited)</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="shortest">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Shortest Paths</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">ALGORITHM | TIME | WEIGHTS | NEGATIVE
+                        -----------------|--------------|------------|----------
+                        BFS | O(V + E) | Unweighted | N/A
+                        Dijkstra | O((V+E)logV) | Non-neg | No
+                        Bellman-Ford | O(VE) | Any | Yes
+                        Floyd-Warshall | O(V³) | Any | Yes (all-pairs)</div>
+
+                    <div class="warning"><strong>Dijkstra fails with negative weights!</strong> Use Bellman-Ford
+                        instead.</div>
+                </div>
+            </section>
+
+            <section class="section" id="mst">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Minimum Spanning Tree</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule"><strong>MST:</strong> Connect all vertices with minimum total edge weight.</div>
+                    <div class="math-block">Prim's: Grow tree one vertex at a time (greedy)
+                        O((V+E) log V) with binary heap
+
+                        Kruskal's: Sort edges, add if no cycle (greedy)
+                        O(E log E) with Union-Find</div>
+                </div>
+            </section>
+
+            <!-- Correctness Content (From Day 45) -->
+            <section class="section" id="invariants">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Loop Invariants</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule"><strong>Loop Invariant:</strong> Property that's true before/after each iteration.
+                    </div>
+                    <div class="math-block">PROVING CORRECTNESS:
+                        1. Initialization: Invariant true before first iteration
+                        2. Maintenance: If true before iteration, true after
+                        3. Termination: When loop ends, invariant implies correctness</div>
+                </div>
+            </section>
+
+            <section class="section" id="induction">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Mathematical Induction</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">INDUCTION STEPS:
+                        1. Base case: Prove P(1) or P(0)
+                        2. Inductive step: Assume P(k), prove P(k+1)
+                        3. Conclusion: P(n) holds for all n ≥ base
+
+                        STRONG INDUCTION:
+                        Assume P(1), P(2), ..., P(k) to prove P(k+1)</div>
+                </div>
+            </section>
+
+            <section class="section" id="complexity">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Big-O Analysis</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">NOTATION | MEANING
+                        ------------|------------------
+                        O(f) | Upper bound (at most)
+                        Ω(f) | Lower bound (at least)
+                        Θ(f) | Tight bound (exactly)
+                        o(f) | Strictly less than
+                        ω(f) | Strictly greater than
+
+                        COMMON COMPLEXITIES:
+                        O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)</div>
+
+                            <div class="info"><strong>Drop constants and lower terms:</strong> 3n² + 2n + 5 = O(n²)
+                            </div>
+                    </div>
+            </section>
+
+            <section class="section" id="recurrences">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Solving Recurrences</h2>
+                </div>
+                <div class="section-body">
+                    <div class="math-block">MASTER THEOREM for T(n) = aT(n/b) + f(n):
+
+                        Case 1: f(n) = O(n^(log_b(a) - ε)) → T(n) = Θ(n^log_b(a))
+                        Case 2: f(n) = Θ(n^log_b(a)) → T(n) = Θ(n^log_b(a) · log n)
+                        Case 3: f(n) = Ω(n^(log_b(a) + ε)) → T(n) = Θ(f(n))
+
+                        Examples:
+                        • Merge sort: T(n) = 2T(n/2) + n → Θ(n log n)
+                        • Binary search: T(n) = T(n/2) + 1 → Θ(log n)</div>
+                </div>
+            </section>
+
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+    {
+        "title": "Lesson Videos",
+        "items": [
+            {
+                "title": "BFS Algorithm",
+                "vid": "oDqjPvD54Ss"
+            },
+            {
+                "title": "DFS Algorithm",
+                "vid": "7fujbpJ0LB4"
+            },
+            {
+                "title": "Dijkstra",
+                "vid": "_lHSawdgXpI"
+            },
+            {
+                "title": "Prim",
+                "vid": "4ZlRH0eK-qQ"
+            },
+            {
+                "title": "Big-O Notation",
+                "vid": "D6xkbGLQesk"
+            },
+            {
+                "title": "Loop Invariants",
+                "vid": "0JUN9aDxVmI"
+            },
+            {
+                "title": "Master Theorem",
+                "vid": "4l8fBKzWgXw"
+            }
+        ]
+    }
+];
+        const QUESTIONS = [
+            { topic: "BFS", prompt: "BFS uses a ___", answer: "queue" },
+            { topic: "DFS", prompt: "DFS uses a ___ or recursion", answer: "stack" },
+            { topic: "Complexity", prompt: "BFS/DFS time is O(V + ___)", answer: "e", altAnswers: ["edges"] },
+            { topic: "BFS", prompt: "BFS finds ___ path in unweighted graphs", answer: "shortest" },
+            { topic: "Dijkstra", prompt: "Dijkstra fails with ___ weights", answer: "negative" },
+            { topic: "Bellman", prompt: "___-Ford handles negative weights", answer: "bellman" },
+            { topic: "MST", prompt: "MST = Minimum ___ Tree", answer: "spanning" },
+            { topic: "MST", prompt: "Kruskal uses ___-Find data structure", answer: "union" },
+            { topic: "Floyd", prompt: "Floyd-Warshall is O(V^___)", answer: "3" },
+            { topic: "Greedy", prompt: "Dijkstra, Prim, Kruskal are all ___ algorithms", answer: "greedy" },
+            { topic: "Invariant", prompt: "Loop ___ is a property true each iteration", answer: "invariant" },
+            { topic: "Induction", prompt: "Induction: base case + ___ step", answer: "inductive" },
+            { topic: "Big-O", prompt: "O(f) is an ___ bound", answer: "upper" },
+            { topic: "Big-O", prompt: "Ω(f) is a ___ bound", answer: "lower" },
+            { topic: "Big-O", prompt: "Θ(f) is a ___ bound", answer: "tight" },
+            { topic: "Simplify", prompt: "5n³ + 2n² + n = O(n^___)", answer: "3" },
+            { topic: "Master", prompt: "Master ___ solves T(n) = aT(n/b) + f(n)", answer: "theorem" },
+            { topic: "Merge", prompt: "Merge sort recurrence: T(n) = 2T(n/___) + n", answer: "2" },
+            { topic: "Merge", prompt: "Merge sort complexity is Θ(n log ___)", answer: "n" },
+            { topic: "BinSearch", prompt: "Binary search is Θ(log ___)", answer: "n" },
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day36_graph_alg_v1' });
+    </script>
+</body>
+
+</html>

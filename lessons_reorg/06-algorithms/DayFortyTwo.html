@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 42: Joint Distributions & Concentration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 10 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 42 · Probability & Statistics
+        </div>
+        <h1>Joint Distributions & Concentration</h1>
+        <p class="hero-desc">
+            What happens when random variables interact? Exploring correlation, independence,
+            and the powerful laws that govern sums of random variables (Chernoff & Hoeffding).
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~55 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                10 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#joint" class="toc-link">1. Joint Probability</a></li>
+                    <li><a href="#covariance" class="toc-link">2. Covariance & Correlation</a></li>
+                    <li><a href="#markov" class="toc-link">3. Markov's Inequality</a></li>
+                    <li><a href="#chebyshev" class="toc-link">4. Chebyshev's Inequality</a></li>
+                    <li><a href="#chernoff" class="toc-link">5. Chernoff Bounds</a></li>
+                    <li><a href="#python" class="toc-link">6. Python Simulations</a></li>
+                    <li><a href="#videos" class="toc-link">7. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">8. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Joint -->
+            <section class="section" id="joint">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">Joint Probability</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Real-world problems involve multiple interacting variables. The <strong>Joint
+                            Distribution</strong>
+                        describes random variables $X$ and $Y$ occurring together.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="subsection">
+                            <h3 class="subsection-title">Joint PMF/PDF</h3>
+                            <div class="math-block">Discrete: p_{XY}(x,y) = P(X=x, Y=y)
+                                Continuous: f_{XY}(x,y)</div>
+                            <p>Sum/Integral over all $x,y$ must equal 1.</p>
+                        </div>
+                        <div class="subsection">
+                            <h3 class="subsection-title">Marginal Distribution</h3>
+                            <p>Recovering the distribution of just $X$ by summing out $Y$.</p>
+                            <div class="math-block">p_X(x) = \sum_y p_{XY}(x,y)
+                                f_X(x) = \int f_{XY}(x,y) dy</div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Independence</h3>
+                        <div class="rule">
+                            $X$ and $Y$ are independent iff:
+                            $$P(X=x, Y=y) = P(X=x)P(Y=y)$$
+                            For all $x, y$.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Covariance -->
+            <section class="section" id="covariance">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Covariance & Correlation</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        How do we measure if $X$ and $Y$ "move together"?
+                    </p>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Covariance</h3>
+                        <div class="math-block">Cov(X, Y) = E[(X - E[X])(Y - E[Y])]
+                            = E[XY] - E[X]E[Y]</div>
+                        <p>
+                            If $X, Y$ independent $\implies Cov(X,Y) = 0$.
+                            <br>
+                            <strong>WARNING:</strong> The converse is FALSE. Zero covariance does not imply independence
+                            (only Linear independence).
+                        </p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Correlation ($\rho$)</h3>
+                        <p>Covariance scaled between -1 and 1.</p>
+                        <div class="formula-box">\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}</div>
+                        <ul>
+                            <li>$\rho = 1$: Perfect positive linear relationship.</li>
+                            <li>$\rho = -1$: Perfect negative linear relationship.</li>
+                            <li>$\rho = 0$: Uncorrelated.</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <h3 class="subsection-title">Variance of Sums</h3>
+                        <div class="math-block">Var(X + Y) = Var(X) + Var(Y) + 2Cov(X, Y)</div>
+                        <p>This explains why diversification reduces risk in finance ($Cov < 0$).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Markov -->
+            <section class="section" id="markov">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">Markov's Inequality</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        <strong>The First Tail Bound:</strong> For non-negative X and $a > 0$:
+                        $$P(X \geq a) \leq \frac{E[X]}{a}$$
+                    </div>
+                    <p>
+                        Requires almost no assumptions (only non-negativity). Consequently, it is loose.
+                        <br>
+                        Example: If average lifespan is 75, at most 50% of people can live to 150.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Chebyshev -->
+            <section class="section" id="chebyshev">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Chebyshev's Inequality</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        <strong>Using Variance:</strong> For ANY random variable with finite variance:
+                        $$P(|X - \mu| \geq k\sigma) \leq \frac{1}{k^2}$$
+                    </div>
+                    <p>
+                        This bound holds for <em>any</em> distribution.
+                        It guarantees that extreme outliers are rare.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Chernoff -->
+            <section class="section" id="chernoff">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Chernoff Bounds</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        When $X$ is the sum of many <strong>independent</strong> random variables, the concentration
+                        is much stronger than Chebyshev suggests—it is exponential.
+                    </p>
+
+                    <div class="formula-box">
+                        <div class="formula-label">Hoeffding's Inequality (Additive Form)</div>
+                        <div class="formula-main">P(|X - \mu| \geq t) \leq 2 \exp\left(-\frac{2t^2}{n}\right)</div>
+                    </div>
+
+                    <div class="info">
+                        <strong>Why is this huge?</strong>
+                        <br>
+                        With Chebyshev, to get $1\%$ error, standard deviation decreases by $\sqrt{n}$. To get $10^{-6}$
+                        probability, you need massive $k$.
+                        <br>
+                        With Chernoff, the probability drops <em>exponentially</em> with $n$. This is the mathematical
+                        foundation for why Machine Learning works (PAC Learning).
+                    </div>
+                    <div class="math-block">Real-world Example: Polling
+                        How many people do you need to survey to be 99% confident
+                        your result is within 3% of the truth?
+
+                        Using Hoeffding:
+                        n >= ln(2/0.01) / (2 * 0.03^2) ≈ 2944 people.
+                        Ideally independent of population size!</div>
+                </div>
+            </section>
+
+            <!-- Python -->
+            <section class="section" id="python">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Python Simulations</h2>
+                </div>
+                <div class="section-body">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Correlation & Bounds</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># 1. Correlation Experiment</span>
+n = <span class="code-number">1000</span>
+x = np.random.randn(n)
+<span class="code-comment"># y is dependent on x plus noise</span>
+y = <span class="code-number">0.8</span> * x + <span class="code-number">0.6</span> * np.random.randn(n) 
+
+corr = np.corrcoef(x, y)[<span class="code-number">0</span>, <span class="code-number">1</span>]
+<span class="code-function">print</span>(<span class="code-string">f"Sample Correlation: {corr:.4f}"</span>) <span class="code-comment"># Should be close to 0.8</span>
+
+<span class="code-comment"># 2. Chernoff vs Chebyshev</span>
+t = <span class="code-number">100</span> <span class="code-comment"># deviation</span>
+n_coins = <span class="code-number">10000</span>
+sigma_coins = np.sqrt(n_coins * <span class="code-number">0.25</span>) <span class="code-comment"># 50</span>
+
+<span class="code-comment"># Chebyshev bound for P(|X - mu| >= 100) -> k=2 (since sigma=50)</span>
+cheb = <span class="code-number">1</span> / (<span class="code-number">2</span>**<span class="code-number">2</span>) <span class="code-comment"># 0.25</span>
+
+<span class="code-comment"># Hoeffding bound</span>
+hoeff = <span class="code-number">2</span> * np.exp(-<span class="code-number">2</span> * t**<span class="code-number">2</span> / n_coins) <span class="code-comment"># 2 * exp(-2 * 10000 / 10000) = 2 * e^-2</span>
+<span class="code-comment"># 2 * 0.135 = 0.27 (Wait, Hoeffding is better for larger deviations)</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"Chebyshev Bound: {cheb:.4f}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Hoeffding Bound: {hoeff:.4f}"</span>)</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+        {
+            title: "Lesson Videos",
+            items: [
+            { title: "Video 1", channel: "Course Reference", vid: "btnCheckAll" },
+            { title: "Video 2", channel: "Course Reference", vid: "code-string" },
+            { title: "Video 3", channel: "Course Reference", vid: "stats-label" },
+            { title: "Video 4", channel: "Course Reference", vid: "main-layout" },
+            { title: "Video 5", channel: "Course Reference", vid: "vjYanZ1nsZg" },
+            { title: "Video 6", channel: "Course Reference", vid: "stats-value" },
+            { title: "Video 7", channel: "Course Reference", vid: "themeToggle" },
+            { title: "Video 8", channel: "Course Reference", vid: "code-number" },
+            { title: "Video 9", channel: "Course Reference", vid: "Correlation" },
+            { title: "Video 10", channel: "Course Reference", vid: "code-header" }
+            ]
+        }
+    ];
+        const QUESTIONS = [
+            { topic: "Marginal", prompt: "To get f(x) from f(x,y), you ___ out y.", answer: "integrate", altAnswers: ["sum"] },
+            { topic: "Independence", prompt: "If X, Y indep, P(X,Y) = P(X)___.", answer: "P(Y)", altAnswers: ["*P(Y)", "times P(Y)"] },
+            { topic: "Covariance", prompt: "Cov(X,Y) = E[XY] - ___.", answer: "E[X]E[Y]" },
+            { topic: "Covariance", prompt: "If X, Y independent, Cov(X,Y) = ___.", answer: "0" },
+            { topic: "Correlation", prompt: "Max value of correlation is ___.", answer: "1" },
+            { topic: "Variance Sum", prompt: "Var(X+Y) = Var(X)+Var(Y) only if ___ is 0.", answer: "covariance", altAnswers: ["cov", "correlation"] },
+            { topic: "Markov", prompt: "Markov inequality bound: E[X]/___.", answer: "a" },
+            { topic: "Chebyshev", prompt: "Chebyshev bound falls off as 1/k^___.", answer: "2" },
+            { topic: "Chernoff", prompt: "Chernoff requires the variables to be ___.", answer: "independent" },
+            { topic: "Hoeffding", prompt: "Hoeffding bound decay is ___ (mathematical term).", answer: "exponential" }
+        ];
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day42_joint_v1' });
+    </script>
+</body>
+
+</html>

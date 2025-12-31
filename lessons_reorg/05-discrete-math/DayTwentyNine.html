@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 29: Trees & Flows</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../shared-styles.css">
+    <script>(function () { const t = localStorage.getItem('math_cs_theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); document.documentElement.setAttribute('data-theme', t); })();</script>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../../index.html" class="nav-back">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 12L6 8L10 4" />
+                </svg>
+                Back to Curriculum
+            </a>
+            <div class="nav-progress">
+                <span id="progressText">0 / 10 complete</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-label">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
+            </svg>
+            Day 29 · Discrete Math
+        </div>
+        <h1>Graph Theory I</h1>
+        <p class="hero-desc">
+            Points and lines. The simple structure that models the internet, brain connections, and social networks.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                ~45 min read
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                12 practice problems
+            </div>
+            <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Video lessons
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#basics" class="toc-link">1. Definitions</a></li>
+                    <li><a href="#types" class="toc-link">2. Graph Types</a></li>
+                    <li><a href="#handshaking" class="toc-link">3. Handshaking Lemma</a></li>
+                    <li><a href="#isomorphism" class="toc-link">4. Isomorphism</a></li>
+                    <li><a href="#python" class="toc-link">5. NetworkX in Python</a></li>
+                    <li><a href="#videos" class="toc-link">6. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">7. Practice</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Your Progress</div>
+                <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value"
+                        id="statAttempted">0</span></div>
+                <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value"
+                        id="statCorrect">0</span></div>
+                <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value"
+                        id="statAccuracy">—</span></div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <!-- Basics -->
+            <section class="section" id="basics">
+                <div class="section-header">
+                    <div class="section-number">Section 1</div>
+                    <h2 class="section-title">What is a Graph?</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        A graph $G = (V, E)$ consists of a set of vertices $V$ and edges $E$.
+                    </p>
+                    <div class="math-block">V = {A, B, C, D}
+                        E = {(A,B), (B,C), (C,A)} (Triangle)</div>
+                </div>
+            </section>
+
+            <!-- Types -->
+            <section class="section" id="types">
+                <div class="section-header">
+                    <div class="section-number">Section 2</div>
+                    <h2 class="section-title">Types of Graphs</h2>
+                </div>
+                <div class="section-body">
+                    <div class="list-group">
+                        <div class="list-item">
+                            <strong>Simple Graph:</strong> Undirected, no loops, no multiple edges between same
+                            vertices.
+                        </div>
+                        <div class="list-item">
+                            <strong>Directed Graph (Digraph):</strong> Edges have direction (A -> B is different from B
+                            -> A).
+                        </div>
+                        <div class="list-item">
+                            <strong>Complete Graph ($K_n$):</strong> Every vertex is connected to every other vertex.
+                            Edges = $n(n-1)/2$.
+                        </div>
+                        <div class="list-item">
+                            <strong>Bipartite Graph:</strong> Vertices can be split into two sets $V_1, V_2$ where edges
+                            only go between $V_1$ and $V_2$ (no internal connections).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Handshaking -->
+            <section class="section" id="handshaking">
+                <div class="section-header">
+                    <div class="section-number">Section 3</div>
+                    <h2 class="section-title">The Handshaking Lemma</h2>
+                </div>
+                <div class="section-body">
+                    <div class="rule">
+                        In any undirected graph, the sum of degrees is equal to twice the number of edges.
+                        <br>
+                        $\sum_{v \in V} \deg(v) = 2|E|$
+                    </div>
+                    <p>
+                        <strong>Corollary:</strong> An undirected graph has an even number of vertices of odd degree.
+                        <br><em>Try shaking hands at a party; the number of people who shook an odd number of hands is
+                            even.</em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Isomorphism -->
+            <section class="section" id="isomorphism">
+                <div class="section-header">
+                    <div class="section-number">Section 4</div>
+                    <h2 class="section-title">Graph Isomorphism</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Two graphs $G_1$ and $G_2$ are isomorphic if there is a bijection between their vertices that
+                        preserves adjacency.
+                    </p>
+                    <div class="info">
+                        <strong>Hard Problem:</strong> Determining if two arbitrary graphs are isomorphic is
+                        computationally difficult (not known to be P or NP-complete).
+                    </div>
+                    <h4>Invariants (Quick Checks)</h4>
+                    <ul>
+                        <li>Same number of vertices?</li>
+                        <li>Same number of edges?</li>
+                        <li>Same degree sequence?</li>
+                    </ul>
+                    <p>If any of these fail, they are definitely NOT isomorphic.</p>
+                </div>
+            </section>
+
+            <!-- Python -->
+            <section class="section" id="python">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">Graphing in Python</h2>
+                </div>
+                <div class="section-body">
+                    <p>We use the <code>networkx</code> library for graph theory.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Python</span>
+                            <span class="code-label">Basic Graph Ops (Pseudocode/Concepts)</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> networkx <span class="code-keyword">as</span> nx
+<span class="code-keyword">import</span> matplotlib.pyplot <span class="code-keyword">as</span> plt
+
+<span class="code-comment"># Create a graph</span>
+G = nx.Graph()
+
+<span class="code-comment"># Add nodes</span>
+G.add_nodes_from([<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>])
+
+<span class="code-comment"># Add edges</span>
+G.add_edge(<span class="code-number">1</span>, <span class="code-number">2</span>)
+G.add_edge(<span class="code-number">2</span>, <span class="code-number">3</span>)
+G.add_edge(<span class="code-number">3</span>, <span class="code-number">1</span>)
+G.add_edge(<span class="code-number">3</span>, <span class="code-number">4</span>)
+
+<span class="code-function">print</span>(<span class="code-string">f"Nodes: {G.number_of_nodes()}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Edges: {G.number_of_edges()}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Degrees: {G.degree()}"</span>)
+
+<span class="code-comment"># Check Isomorphism against another graph</span>
+H = nx.Graph()
+H.add_edges_from([(<span class="code-string">'A'</span>,<span class="code-string">'B'</span>), (<span class="code-string">'B'</span>,<span class="code-string">'C'</span>), (<span class="code-string">'C'</span>,<span class="code-string">'A'</span>), (<span class="code-string">'C'</span>,<span class="code-string">'D'</span>)])
+
+is_iso = nx.is_isomorphic(G, H)
+<span class="code-function">print</span>(<span class="code-string">f"Isomorphic? {is_iso}"</span>) <span class="code-comment"># True</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos -->
+            <section class="section" id="videos">
+                <div class="section-header">
+                    <div class="section-number">Section 6</div>
+                    <h2 class="section-title">Video Lessons</h2>
+                </div>
+                <div class="section-body">
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src=""
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video to start</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practice -->
+            <section class="section" id="practice">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">Practice Problems</h2>
+                </div>
+                <div class="section-body">
+                    <div class="quiz-controls">
+                        <button class="btn btn-primary" id="btnCheckAll">Check All</button>
+                        <button class="btn" id="btnRevealAll">Reveal All</button>
+                        <button class="btn" id="btnClear">Clear Inputs</button>
+                        <button class="btn btn-danger" id="btnReset">Reset Stats</button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../shared-scripts.js"></script>
+    <script>
+        const VIDEO_GROUPS = [
+        {
+            title: "Lesson Videos",
+            items: [
+            { title: "Video 1", channel: "Course Reference", vid: "wIqnJ8b6n0g" },
+            { title: "Video 2", channel: "Course Reference", vid: "ecODhVfsZwk" },
+            { title: "Video 3", channel: "Course Reference", vid: "5c8Nl7cMjgU" },
+            { title: "Video 4", channel: "Course Reference", vid: "HZGCoVF3YvM" },
+            { title: "Video 5", channel: "Course Reference", vid: "O2L2Uv9pdDA" }
+            ]
+        }
+    ];
+        const VIDEOS_REAL = [
+            {
+                title: "Graph Theory",
+                items: [
+                    { title: "Introduction to Graphs", channel: "TrevTutor", vid: "gZnaP32k_cI" },
+                    { title: "Handshaking Lemma", channel: "TrevTutor", vid: "5hP4D758wYQ" },
+                    { title: "Isomorphism", channel: "Sarada Herke", vid: "Uod17yOREoQ" } // Assuming
+                ]
+            }
+        ];
+
+        const QUESTIONS = [
+            { topic: "Edges", prompt: "A set of vertices V and edges E make a ___.", answer: "graph" },
+            { topic: "Degree", prompt: "Number of edges connected to a vertex is its ___.", answer: "degree" },
+            { topic: "Handshake", prompt: "Sum of degrees is ___ times the number of edges.", answer: "2", altAnswers: ["two"] },
+            { topic: "Complete", prompt: "A graph where all nodes connect to all others is ___.", answer: "complete" },
+            { topic: "Bipartite", prompt: "Graph with 2 sets of nodes only connecting to each other is ___.", answer: "bipartite" },
+            { topic: "Isomorphism", prompt: "Isomorphism requires preserving ___.", answer: "adjacency" },
+            { topic: "Digraph", prompt: "In a directed graph, edges have ___.", answer: "direction" },
+            { topic: "Loop", prompt: "An edge from a vertex to itself is a ___.", answer: "loop" },
+        ];
+        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day34_graph_v1' });
+    </script>
+</body>
+
+</html>
