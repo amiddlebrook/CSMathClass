@@ -2,28 +2,31 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Day 9: Summation Formulas — Arithmetic, Geometric & Telescoping</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-  <link rel="stylesheet" href="../../lessons/shared-styles.css">
-  <script src="../../lessons/questions-data.js"></script>
-  <script src="../../lessons/shared-scripts.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day 9: Trigonometry & The Unit Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <link rel="stylesheet" href="../../lessons/shared-styles.css">
+    <script src="../../lessons/questions-data.js"></script>
+    <script src="../../lessons/shared-scripts.js"></script>
 </head>
 
 <body>
-<nav class="nav">
+    <nav class="nav">
         <div class="nav-inner">
             <a href="../../index.html" class="nav-back"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                     stroke="currentColor" stroke-width="2">
                     <path d="M10 12L6 8L10 4" />
                 </svg>Back to Curriculum</a>
-            <div class="nav-progress"><span id="progressText">0 / 16 complete</span>
+            <div class="nav-progress"><span id="progressText">0 / 20 complete</span>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
@@ -38,14 +41,14 @@
     <header class="hero">
         <div class="hero-label"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M8 0L10 6H16L11 9.5L13 16L8 12L3 16L5 9.5L0 6H6L8 0Z" />
-            </svg>Day 11 · Discrete Math</div>
-        
-        <p class="hero-desc">Summations appear everywhere in algorithm analysis. Knowing these formulas lets you convert
-            nested loops into closed-form expressions and proves Big-O bounds.</p>
+            </svg>Day 9 · Precalculus Foundation</div>
+
+        <p class="hero-desc">Trigonometry is the study of cycles. From rotating a character in a game to processing
+            audio waves, understanding the Unit Circle is essential for anything that spins or oscillates.</p>
         <div class="hero-meta">
-            <div class="meta-item">~45 min read</div>
-            <div class="meta-item">16 practice problems</div>
-            <div class="meta-item">8 video lessons</div>
+            <div class="meta-item">~50 min read</div>
+            <div class="meta-item">20 practice problems</div>
+            <div class="meta-item">6 video lessons</div>
         </div>
     </header>
 
@@ -55,11 +58,11 @@
                 <div class="toc-title">On this page</div>
                 <ul class="toc-list">
                     <li><a href="#why" class="toc-link">Why This Matters</a></li>
-                    <li><a href="#notation" class="toc-link">1. Sigma Notation</a></li>
-                    <li><a href="#arithmetic" class="toc-link">2. Arithmetic Series</a></li>
-                    <li><a href="#geometric" class="toc-link">3. Geometric Series</a></li>
-                    <li><a href="#telescoping" class="toc-link">4. Telescoping</a></li>
-                    <li><a href="#useful" class="toc-link">5. Useful Formulas</a></li>
+                    <li><a href="#radians" class="toc-link">1. Radians vs Degrees</a></li>
+                    <li><a href="#unitcircle" class="toc-link">2. The Unit Circle</a></li>
+                    <li><a href="#sincos" class="toc-link">3. Sin, Cos, Tan</a></li>
+                    <li><a href="#identities" class="toc-link">4. Pythagorean Identity</a></li>
+                    <li><a href="#code" class="toc-link">5. Trigonometry in Code</a></li>
                     <li><a href="#videos" class="toc-link">6. Videos</a></li>
                     <li><a href="#practice" class="toc-link">7. Practice</a></li>
                 </ul>
@@ -79,245 +82,158 @@
             <section class="section" id="why">
                 <div class="section-header">
                     <div class="section-number">Section 0</div>
-                    <h2 class="section-title">Why Summations Matter</h2>
+                    <h2 class="section-title">Why Trigonometry Matters</h2>
                 </div>
                 <div class="section-body">
-                    <div class="rule"><strong>The connection:</strong> Loops = Summations. Every for-loop that does
-                        constant work n times is Σ₁ⁿ 1 = n operations.</div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Loops as summations</h3>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span class="code-label">Loops
-                                    → Σ</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment"># Simple loop: Σᵢ₌₁ⁿ 1 = n</span>
-<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
-    work()  <span class="code-comment"># O(1)</span>
-
-<span class="code-comment"># Nested loop: Σᵢ₌₁ⁿ Σⱼ₌₁ⁿ 1 = n²</span>
-<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
-    <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
-        work()
-
-<span class="code-comment"># Triangular: Σᵢ₌₁ⁿ i = n(n+1)/2</span>
-<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
-    <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(i):  <span class="code-comment"># j goes up to i</span>
-        work()</pre>
-                            </div>
-                        </div>
+                    <p>It's not just about triangles. In Computer Science, Trigonometry is the math of
+                        <strong>rotation</strong> and <strong>waves</strong>.</p>
+                    <div class="rule">
+                        <strong>Key Applications:</strong>
+                        <ul>
+                            <li><strong>Graphics:</strong> Calculating coordinates for 3D rotations, lighting, and
+                                cameras.</li>
+                            <li><strong>Game Dev:</strong> Determining the angle to a target (atan2) or moving an object
+                                in a direction.</li>
+                            <li><strong>Signal Processing:</strong> All audio and image compression (JPEG, MP3) relies
+                                on decomposing signals into Sine waves (Fourier Transform).</li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="notation">
+            <section class="section" id="radians">
                 <div class="section-header">
                     <div class="section-number">Section 1</div>
-                    <h2 class="section-title">Sigma Notation</h2>
+                    <h2 class="section-title">Radians vs Degrees</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">Reading the notation</h3>
-                        <div class="math-block"> n
-                            Σ f(i) = f(1) + f(2) + ... + f(n)
-                            i=1
-
-                            Parts:
-                            • Σ — "sum"
-                            • i=1 — start index
-                            • n — end index
-                            • f(i) — the expression to sum</div>
+                    <p>Degrees (360°) are arbitrary. Radians are natural.</p>
+                    <div class="info">
+                        <strong>🍕 Simple:</strong> Degrees are like cutting a pizza into 360 tiny slices because "that
+                        sounds nice." Radians are measuring the crust. 1 Radian is when the length of the crust (arc)
+                        equals the length of your slice (radius).
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Properties of summation</h3>
-                        <div class="math-block">1. Σ (aᵢ + bᵢ) = Σ aᵢ + Σ bᵢ (distribute)
-
-                            2. Σ c·aᵢ = c · Σ aᵢ (factor out constant)
-
-                            3. Σᵢ₌₁ⁿ c = n·c (sum of constants)
-
-                            4. Σᵢ₌ₘⁿ aᵢ = Σᵢ₌₁ⁿ aᵢ - Σᵢ₌₁ᵐ⁻¹ aᵢ (splitting)</div>
+                    <div class="math-block">
+                        360^\circ = 2\pi \text{ radians} \approx 6.28 \text{ radians}
+                    </div>
+                    <div class="warning">
+                        <strong>Coder's Note:</strong> All standard math libraries (`Math.sin()`, `numpy.sin()`) take
+                        input in <strong>Radians</strong>, not degrees. Keep this in mind or your character will spin
+                        wildly!
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="arithmetic">
+            <section class="section" id="unitcircle">
                 <div class="section-header">
                     <div class="section-number">Section 2</div>
-                    <h2 class="section-title">Arithmetic Series</h2>
+                    <h2 class="section-title">The Unit Circle</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">The fundamental formula</h3>
-                        <div class="formula-box">
-                            <div class="formula-label">Sum of First n Integers</div>
-                            <div class="formula-main">Σᵢ₌₁ⁿ i = 1 + 2 + ... + n = n(n+1)/2</div>
-                        </div>
-                        <p>This is O(n²) — the triangular numbers.</p>
+                    <p>The Unit Circle is a circle with radius 1 centered at (0,0). It is the "Master Map" for all
+                        trigonometry.</p>
+                    <div class="rule">
+                        <strong>The Coordinates:</strong> Any point $(x, y)$ on the circle corresponds to an angle
+                        $\theta$:
+                        <ul>
+                            <li>$x = \cos(\theta)$</li>
+                            <li>$y = \sin(\theta)$</li>
+                        </ul>
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Gauss's insight</h3>
-                        <div class="math-block">Write the sum forwards and backwards:
-
-                            S = 1 + 2 + 3 + ... + n
-                            S = n + n-1 + n-2 + ... + 1
-                            ─────────────────────────────────
-                            2S = (n+1) + (n+1) + (n+1) + ... + (n+1)
-                            = n × (n+1)
-
-                            S = n(n+1)/2</div>
+                    <div class="info">
+                        <strong>🎡 Simple:</strong> Imagine a Ferris Wheel with radius 1.
+                        <ul>
+                            <li><strong>Cosine</strong> is how far *left or right* you are from the center.</li>
+                            <li><strong>Sine</strong> is how *high or low* you are from the center.</li>
+                        </ul>
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">General arithmetic series</h3>
-                        <div class="math-block">For any arithmetic sequence a, a+d, a+2d, ..., a+(n-1)d:
-
-                            Sum = n × (first + last) / 2
-                            = n × (2a + (n-1)d) / 2
-
-                            Example: 3 + 5 + 7 + 9 + 11 (a=3, d=2, n=5)
-                            = 5 × (3 + 11) / 2 = 5 × 7 = 35</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">CS application</h3>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span
-                                    class="code-label">Bubble sort analysis</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment"># Bubble sort: inner loop shrinks each pass</span>
-<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n):
-    <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(n - <span class="code-number">1</span> - i):  <span class="code-comment"># shrinks!</span>
-        <span class="code-keyword">if</span> arr[j] > arr[j+<span class="code-number">1</span>]:
-            arr[j], arr[j+<span class="code-number">1</span>] = arr[j+<span class="code-number">1</span>], arr[j]
-
-<span class="code-comment"># Comparisons: (n-1) + (n-2) + ... + 1 + 0</span>
-<span class="code-comment">#            = Σᵢ₌₀ⁿ⁻¹ (n-1-i) = n(n-1)/2 = O(n²)</span></pre>
-                            </div>
-                        </div>
+                    <div class="math-block">
+                        \text{At } 0^\circ (0 \text{ rad}): (1, 0) \implies \cos(0)=1, \sin(0)=0
+                        \newline
+                        \text{At } 90^\circ (\pi/2 \text{ rad}): (0, 1) \implies \cos(\pi/2)=0, \sin(\pi/2)=1
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="geometric">
+            <section class="section" id="sincos">
                 <div class="section-header">
                     <div class="section-number">Section 3</div>
-                    <h2 class="section-title">Geometric Series</h2>
+                    <h2 class="section-title">Sin, Cos, Tan</h2>
                 </div>
                 <div class="section-body">
+                    <p>These functions map an angle (input) to a ratio (output).</p>
                     <div class="subsection">
-                        <h3 class="subsection-title">The formula</h3>
-                        <div class="formula-box">
-                            <div class="formula-label">Geometric Series (r ≠ 1)</div>
-                            <div class="formula-main">Σᵢ₌₀ⁿ rⁱ = 1 + r + r² + ... + rⁿ = (rⁿ⁺¹ - 1)/(r - 1)</div>
+                        <h3 class="subsection-title">SOH CAH TOA</h3>
+                        <ul>
+                            <li><strong>Sin</strong>e = <strong>O</strong>pposite / <strong>H</strong>ypotenuse (On Unit
+                                Circle: $y$)</li>
+                            <li><strong>Cos</strong>ine = <strong>A</strong>djacent / <strong>H</strong>ypotenuse (On
+                                Unit Circle: $x$)</li>
+                            <li><strong>Tan</strong>gent = <strong>O</strong>pposite / <strong>A</strong>djacent (Slope:
+                                $y/x$)</li>
+                        </ul>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">Python</span><span
+                                class="code-label">Calculating Position</span></div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">import</span> math
+
+<span class="code-comment"># Want to move 5 units at a 45 degree angle</span>
+radius = <span class="code-number">5</span>
+angle_deg = <span class="code-number">45</span>
+angle_rad = math.radians(angle_deg) <span class="code-comment"># Convert first!</span>
+
+x_pos = radius * math.cos(angle_rad)
+y_pos = radius * math.sin(angle_rad)
+
+<span class="code-comment"># This gives us the exact vector to move!</span></pre>
                         </div>
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Special case: r = 2</h3>
-                        <div class="math-block">1 + 2 + 4 + 8 + ... + 2ⁿ = 2ⁿ⁺¹ - 1
-
-                            Example: 1 + 2 + 4 + 8 = 2⁴ - 1 = 15
-
-                            Key insight: The last term dominates!
-                            Sum ≈ 2 × (largest term)</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Infinite geometric series</h3>
-                        <div class="math-block">When |r| < 1, the infinite series converges: Σᵢ₌₀^∞ rⁱ=1/(1-r) Examples:
-                                1 + 1/2 + 1/4 + 1/8 + ...=1/(1-0.5)=2 1 + 1/3 + 1/9 + 1/27 + ...=1/(1-1/3)=3/2</div>
-                        </div>
-                        <div class="subsection">
-                            <h3 class="subsection-title">CS application: Binary tree nodes</h3>
-                            <div class="math-block">Full binary tree of height h:
-                                Level 0: 1 node
-                                Level 1: 2 nodes
-                                Level 2: 4 nodes
-                                ...
-                                Level h: 2ʰ nodes
-
-                                Total = 1 + 2 + 4 + ... + 2ʰ = 2ʰ⁺¹ - 1
-
-                                A tree with height h has about 2ʰ nodes.</div>
-                        </div>
-                    </div>
+                </div>
             </section>
 
-            <section class="section" id="telescoping">
+            <section class="section" id="identities">
                 <div class="section-header">
                     <div class="section-number">Section 4</div>
-                    <h2 class="section-title">Telescoping Sums</h2>
+                    <h2 class="section-title">Pythagorean Identity</h2>
                 </div>
                 <div class="section-body">
-                    <div class="subsection">
-                        <h3 class="subsection-title">The idea</h3>
-                        <div class="rule"><strong>Telescoping:</strong> Most terms cancel, leaving only the first and
-                            last. Like a collapsing telescope!</div>
-                        <div class="math-block">Σᵢ₌₁ⁿ (aᵢ - aᵢ₊₁) = a₁ - aₙ₊₁
-
-                            Example: Σᵢ₌₁ⁿ (1/i - 1/(i+1))
-
-                            = (1/1 - 1/2) + (1/2 - 1/3) + (1/3 - 1/4) + ...
-
-                            = 1 - 1/(n+1) ← everything else cancels!</div>
+                    <p>Since the Unit Circle coordinates form a right triangle with the radius (hypotenuse) of 1, the
+                        Pythagorean Theorem ($a^2 + b^2 = c^2$) gives us the most important identity in Trig:</p>
+                    <div class="math-block">
+                        \sin^2(\theta) + \cos^2(\theta) = 1
                     </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">Useful trick: Partial fractions</h3>
-                        <div class="math-block">To sum 1/(i(i+1)), use partial fractions:
-
-                            1/(i(i+1)) = 1/i - 1/(i+1)
-
-                            Then:
-                            Σᵢ₌₁ⁿ 1/(i(i+1)) = Σᵢ₌₁ⁿ (1/i - 1/(i+1))
-                            = 1 - 1/(n+1)
-                            = n/(n+1)</div>
-                    </div>
-                    <div class="subsection">
-                        <h3 class="subsection-title">CS application: Amortized analysis</h3>
-                        <div class="code-block">
-                            <div class="code-header"><span class="code-lang">Python</span><span
-                                    class="code-label">Dynamic array resize</span></div>
-                            <div class="code-content">
-                                <pre><span class="code-comment"># Dynamic array doubles when full</span>
-<span class="code-comment"># Insertions: 1 + 1 + 1 + ... (cheap)</span>
-<span class="code-comment"># Resize costs: 1 + 2 + 4 + 8 + ... + n</span>
-
-<span class="code-comment"># Total resize = 2n - 1 (geometric sum)</span>
-<span class="code-comment"># Spread over n inserts = O(1) amortized per insert</span>
-
-<span class="code-comment"># Telescoping in action: each element copied</span>
-<span class="code-comment"># at most O(log n) times total</span></pre>
-                            </div>
-                        </div>
+                    <div class="info">
+                        <strong>What this means:</strong> No matter what angle you choose, the square of the
+                        x-coordinate plus the square of the y-coordinate always sums to 1. This "normalizes" vectors in
+                        graphics.
                     </div>
                 </div>
             </section>
 
-            <section class="section" id="useful">
+            <section class="section" id="code">
                 <div class="section-header">
                     <div class="section-number">Section 5</div>
-                    <h2 class="section-title">Essential Formulas Reference</h2>
+                    <h2 class="section-title">Trigonometry in Code</h2>
                 </div>
                 <div class="section-body">
-                    <div class="math-block"><strong>Constant:</strong>
-                        Σᵢ₌₁ⁿ c = nc
-
-                        <strong>Linear (Gauss):</strong>
-                        Σᵢ₌₁ⁿ i = n(n+1)/2 = O(n²)
-
-                        <strong>Squares:</strong>
-                        Σᵢ₌₁ⁿ i² = n(n+1)(2n+1)/6 = O(n³)
-
-                        <strong>Cubes:</strong>
-                        Σᵢ₌₁ⁿ i³ = [n(n+1)/2]² = O(n⁴)
-
-                        <strong>Geometric (r ≠ 1):</strong>
-                        Σᵢ₌₀ⁿ rⁱ = (rⁿ⁺¹ - 1)/(r - 1)
-
-                        <strong>Powers of 2:</strong>
-                        Σᵢ₌₀ⁿ 2ⁱ = 2ⁿ⁺¹ - 1
-
-                        <strong>Harmonic:</strong>
-                        Σᵢ₌₁ⁿ 1/i = Hₙ ≈ ln(n) + γ = O(log n)
-
-                        <strong>Log sum:</strong>
-                        Σᵢ₌₁ⁿ log(i) = log(n!) ≈ n log n = O(n log n)
+                    <p>Beyond triangles, we use standard functions to create smooth, oscillating motion.</p>
+                    <div class="code-block">
+                        <div class="code-header"><span class="code-lang">JavaScript</span><span
+                                class="code-label">Oscillation (Game Loop)</span></div>
+                        <div class="code-content">
+                            <pre><span class="code-keyword">function</span> <span class="code-function">update</span>(time) {
+    <span class="code-comment">// Create a smooth "breathing" effect</span>
+    <span class="code-comment">// sin() oscillates between -1 and 1</span>
+    <span class="code-keyword">let</span> scale = <span class="code-number">1.0</span> + <span class="code-number">0.1</span> * Math.sin(time);
+    
+    player.setScale(scale);
+    
+    <span class="code-comment">// Floating up and down</span>
+    player.y = baseHeight + <span class="code-number">10</span> * Math.sin(time * <span class="code-number">2</span>);
+}</pre>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -328,17 +244,17 @@
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-          <div class="video-container">
-            <div class="video-player">
-              <iframe id="ytPlayer" src="" allowfullscreen></iframe>
-              <div class="video-info">
-                <div class="video-title" id="videoTitle">Select a video</div>
-                <div class="video-meta" id="videoMeta"></div>
-              </div>
-            </div>
-            <div class="video-list" id="videoList"></div>
-          </div>
-        </div>
+                    <div class="video-container">
+                        <div class="video-player">
+                            <iframe id="ytPlayer" src="" allowfullscreen></iframe>
+                            <div class="video-info">
+                                <div class="video-title" id="videoTitle">Select a video</div>
+                                <div class="video-meta" id="videoMeta"></div>
+                            </div>
+                        </div>
+                        <div class="video-list" id="videoList"></div>
+                    </div>
+                </div>
             </section>
 
             <section class="section" id="practice">
@@ -358,24 +274,27 @@
             </section>
         </main>
     </div>
-<script>
-      const VIDEO_GROUPS = [
-        {
-            title: "Lesson Videos",
-            items: [
-            { title: "Video 1", channel: "Course Reference", vid: "Kas0tIxDvrg" },
-            { title: "Video 2", channel: "Course Reference", vid: "D2xYjiL8yyE" },
-            { title: "Video 3", channel: "Course Reference", vid: "cEvgcoyZvB4" },
-            { title: "Video 4", channel: "Course Reference", vid: "ntBWrcbAhaY" },
-            { title: "Video 5", channel: "Course Reference", vid: "D6xkbGLQesk" },
-            { title: "Video 6", channel: "Course Reference", vid: "V42FBiohc6c" },
-            { title: "Video 7", channel: "Course Reference", vid: "0YErxSShF0A" },
-            { title: "Video 8", channel: "Course Reference", vid: "VSl2JqIYV_s" }
-            ]
-        }
-    ];
-      initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day9'], storageKey: 'day9_v1' });
+    <script>
+        const VIDEO_GROUPS = [
+            {
+                title: "Core Concepts",
+                items: [
+                    { title: "Unit Circle Animation", channel: "ProjectMathematics", vid: "R0_w4Q1T67g" },
+                    { title: "Radians Explained", channel: "Maths Is Fun", vid: "SLSTS-EvOx4" },
+                    { title: "Basic Trig Functions", channel: "Organic Chemistry Tutor", vid: "zU02b72cv6E" }
+                ]
+            },
+            {
+                title: "Applications",
+                items: [
+                    { title: "Trigonometry for Game Dev", channel: "Dan Zaidan", vid: "N3bF_h5y6cQ" },
+                    { title: "Why Radians Matter", channel: "3Blue1Brown", vid: "CGd340o1yG0" }
+                ]
+            }
+        ];
+        // Note: 'day9' in questions-data.js needs to be updated to match Trig topics!
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day9'], storageKey: 'day9_trig_v1' });
     </script>
 </body>
-</body>
+
 </html>
