@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Day 46: Completeness & Compactness</title>
+    <title>Day 46: Riemann Integration</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -136,6 +136,13 @@
                         Continuous functions are always integrable. Monotonic functions are always integrable.
                         Dirichlet function (1 on rationals, 0 on irrationals) is NOT Riemann integrable.
                     </p>
+                    <div class="info">
+                        <strong>🍝 Simple:</strong> The Spaghetti Strainer.
+                        <br>A function is "Integrable" if it can hold water.
+                        <br>Continuous functions are like a solid bowl.
+                        <br>The Dirichlet function is like a strainer—it has so many holes (discontinuities) that all
+                        the area falls through!
+                    </div>
                 </div>
             </section>
 
@@ -272,7 +279,7 @@ res, err = quad(f, a, b)
             { topic: "Sum", prompt: "Riemann sums use ___ to approximate area.", answer: "rectangles" },
             { topic: "Condition", prompt: "Continuous functions are always ___.", answer: "integrable" },
         ];
-        initLesson({ videos: VIDEOS_REAL, questions: QUESTIONS, storageKey: 'day46_real1_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day46_real1_v1' });
     </script>
 </body>
 
