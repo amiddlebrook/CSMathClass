@@ -124,8 +124,14 @@
                     </div>
 
                     <div class="warning">
-                        <strong>Common Confusion:</strong> Amortized ≠ Average case! Average-case uses probability;
+                        <strong>Common Confusion:</strong> Amortized is not equal to Average case! Average-case uses
+                        probability;
                         amortized uses worst-case sequences. Amortized analysis is deterministic and guaranteed.
+                    </div>
+                    <div class="info">
+                        <strong>Gym Simple:</strong> Amortized analysis is like evaluating a gym membership.
+                        <br>Some days you go 3 times (expensive use), most days you skip (cheap).
+                        <br>Monthly cost / visits = true cost per visit. Spread expensive ops over many cheap ones!
                     </div>
                 </div>
             </section>
@@ -190,6 +196,12 @@
         self.capacity = new_cap</pre>
                         </div>
                     </div>
+                    <div class="info">
+                        <strong>Moving Simple:</strong> Think of dynamic array like moving apartments.
+                        <br>Each item you add = O(1) to place on shelf.
+                        <br>When apartment fills up, you move to one 2x bigger = O(n) to move everything.
+                        <br>But you only move every n operations, so average = O(1) per item!
+                    </div>
                 </div>
             </section>
 
@@ -231,8 +243,15 @@
                             • Resize costs $1 per element
                             • Credits exactly cover the cost!</div>
                         <div class="info">
-                            <strong>Invariant:</strong> Total credits ≥ 0 at all times. If you can maintain this,
+                            <strong>Invariant:</strong> Total credits is greater than or equal to 0 at all times. If you
+                            can maintain this,
                             the amortized cost equals the charge.
+                        </div>
+                        <div class="info">
+                            <strong>Savings Simple:</strong> Accounting method is like a savings account.
+                            <br>Each cheap operation deposits extra money.
+                            <br>When expensive operation happens, you withdraw to pay for it.
+                            <br>As long as you never overdraft, you've proven the amortized cost!
                         </div>
                     </div>
 
@@ -407,24 +426,24 @@ total_flips = <span class="code-function">sum</span>(increment(bits) <span class
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
-    {
-        "title": "Lesson Videos",
-        "items": [
             {
-                "title": "Amortized Analysis \u2014 MIT OCW",
-                "vid": "B3SpQZaAZP4"
-            },
-            {
-                "title": "Dynamic Arrays Explained",
-                "vid": "5AllG-i_yto"
-            },
-            {
-                "title": "Accounting & Potential Methods",
-                "vid": "T7W5E-5mljc"
+                "title": "Lesson Videos",
+                "items": [
+                    {
+                        "title": "Amortized Analysis \u2014 MIT OCW",
+                        "vid": "B3SpQZaAZP4"
+                    },
+                    {
+                        "title": "Dynamic Arrays Explained",
+                        "vid": "5AllG-i_yto"
+                    },
+                    {
+                        "title": "Accounting & Potential Methods",
+                        "vid": "T7W5E-5mljc"
+                    }
+                ]
             }
-        ]
-    }
-];
+        ];
         const QUESTIONS = [
             { topic: "Definition", prompt: "Amortized = average over ___ of operations", answer: "sequence", altAnswers: ["sequences", "worst-case sequence"] },
             { topic: "Distinction", prompt: "Amortized is deterministic, not ___ case", answer: "average" },
