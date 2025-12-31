@@ -55,7 +55,7 @@
                     <path
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Infinite Products
+                25 practice problems
             </div>
             <div class="meta-item">
                 <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -257,6 +257,7 @@ print([next(gen) for _ in range(10)])
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
@@ -269,15 +270,7 @@ print([next(gen) for _ in range(10)])
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Finite Product", prompt: "For finite products, the product topology has a basis of u x ___.", answer: "v" },
-            { topic: "Infinite Product", prompt: "In the product topology, all but ___ many coordinates are restricted.", answer: "finitely" },
-            { topic: "Box Topology", prompt: "The ___ topology allows arbitrary restrictions on all coordinates.", answer: "box" },
-            { topic: "Tychonoff", prompt: "Tychonoff's theorem states that the product of ___ spaces is compact.", answer: "compact" },
-            { topic: "Projections", prompt: "The product topology is the coarsest topology making the ___ continuous.", answer: "projections", altAnswers: ["projection maps"] },
-            { topic: "Convergence", prompt: "Convergence in the product topology is equivalent to ___ convergence.", answer: "pointwise" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day56_product_v2' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day56'], storageKey: 'day56_product_v2' });
     </script>
 </body>
 

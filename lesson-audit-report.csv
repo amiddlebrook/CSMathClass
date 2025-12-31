@@ -53,9 +53,9 @@ Day,File,Lines,Sections,InfoBlocks,SimpleAnalogies,CodeBlocks,Videos,ValidVideos
 52,DayFiftyTwo.html,278,5,1,0,1,0,0,0,"",45,25,20,true
 53,DayFiftyThree.html,279,6,2,1,1,0,0,0,"",45,25,20,true
 54,DayFiftyFour.html,249,5,1,0,1,0,0,0,"",50,25,20,true
-55,DayFiftyFive.html,373,11,2,0,1,3,3,0,"",90,14,20,true
-56,DayFiftySix.html,284,7,2,2,1,3,3,0,"",45,0,20,true
-57,DayFiftySeven.html,304,8,0,0,1,1,1,0,"",50,0,20,true
+55,DayFiftyFive.html,364,11,2,0,1,0,0,0,"",90,14,20,true
+56,DayFiftySix.html,277,7,2,2,1,3,3,0,"",45,25,20,true
+57,DayFiftySeven.html,308,8,1,1,1,0,0,0,"",50,25,20,true
 58,DayFiftyEight.html,313,8,0,1,1,2,2,0,"",50,0,20,true
 59,DayFiftyNine.html,316,8,0,0,1,1,1,0,"",45,0,20,true
 60,DaySixty.html,335,10,0,0,1,3,3,0,"",95,12,20,true

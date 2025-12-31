@@ -344,29 +344,20 @@ print(f"Good: {is_topology(X, tau_good)}")</code></pre>
         </main>
     </div>
 
+    <script src="../../lessons/questions-data.js"></script>
     <script src="../../lessons/shared-scripts.js"></script>
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Lesson Videos",
-                items: [
-                    { title: "Video 7", channel: "Course Reference", vid: "compactness" },
-                    { title: "Video 9", channel: "Course Reference", vid: "Heine-Borel" },
-                    { title: "Video 10", channel: "Course Reference", vid: "Compactness" }
+                "title": "Lesson Videos",
+                "items": [
+                    { "title": "Topology Definition", "channel": "The Bright Side of Mathematics", "vid": "Zw2t9p1Hnqw" },
+                    { "title": "Open and Closed Sets", "channel": "The Bright Side of Mathematics", "vid": "1W6rKj4Xy9I" },
+                    { "title": "Topological Spaces", "channel": "Numberphile", "vid": "Vv8y0y_ZG_U" }
                 ]
             }
         ];
-        const QUESTIONS = [
-            { topic: "Axioms", prompt: "A topology must be closed under arbitrary ___.", answer: "unions" },
-            { topic: "Axioms", prompt: "A topology must be closed under finite ___.", answer: "intersections" },
-            { topic: "Closed Sets", prompt: "A set is closed if its ___ is open.", answer: "complement" },
-            { topic: "Continuity", prompt: "A function is continuous if the preimage of every open set is ___.", answer: "open" },
-            { topic: "Compactness", prompt: "A space is compact if every open cover has a ___ subcover.", answer: "finite" },
-            { topic: "Heine-Borel", prompt: "In R^n, compact is equivalent to closed and ___.", answer: "bounded" },
-            { topic: "Connected", prompt: "A space is disconnected if it can be written as the union of two disjoint non-empty ___ sets.", answer: "open" },
-            { topic: "Path", prompt: "Path connectedness implies ___.", answer: "connectedness" },
-        ];
-        initLesson({ videos: VIDEO_GROUPS, questions: QUESTIONS, storageKey: 'day55_topology_v1' });
+        initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day55'], storageKey: 'day55_topology_v1' });
     </script>
 </body>
 
