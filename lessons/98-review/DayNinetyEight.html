@@ -117,39 +117,52 @@
         <p class="hero-desc">Spaced repetition is key to mastery. Select a section to review randomized concepts.</p>
     </header>
 
-    <main class="content">
-        <div class="section-select">
-            <select id="sectionSelect">
-                <!-- Dynamically populated by script if we enhance it later, or manually options -->
-                <option value="">Select a Section...</option>
-                <!-- We will rely on JS to populate if possible, or user can select from manually added ones -->
-                <!-- Ideally, we should populate this based on SECTION_MAP keys -->
-            </select>
-            <button class="btn btn-primary" id="btnStart" style="margin-left: 8px;">Start Review</button>
-        </div>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li><a href="#review" class="toc-link active">Flashcards</a></li>
+                </ul>
+            </nav>
+            <div class="stats-card">
+                <div class="toc-title">Session Stats</div>
+                <div class="stats-row"><span class="stats-label">Reviewed</span><span class="stats-value"
+                        id="statReviewed">0</span></div>
+            </div>
+        </aside>
 
-        <div id="gameArea" style="display:none;">
-            <div class="flashcard-container">
-                <div class="flashcard" id="flashcard">
-                    <div class="card-face card-front">
-                        <div class="card-topic" id="cardTopic">Topic</div>
-                        <div class="card-content" id="cardFront">Question?</div>
-                        <div class="card-hint">Click to flip</div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-topic">Answer</div>
-                        <div class="card-content" id="cardBack">Answer!</div>
+        <main class="content">
+            <div class="section-select" id="review">
+                <select id="sectionSelect">
+                    <option value="">Select a Section...</option>
+                </select>
+                <button class="btn btn-primary" id="btnStart" style="margin-left: 8px;">Start Review</button>
+            </div>
+
+            <div id="gameArea" style="display:none;">
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard">
+                        <div class="card-face card-front">
+                            <div class="card-topic" id="cardTopic">Topic</div>
+                            <div class="card-content" id="cardFront">Question?</div>
+                            <div class="card-hint">Click to flip</div>
+                        </div>
+                        <div class="card-face card-back">
+                            <div class="card-topic">Answer</div>
+                            <div class="card-content" id="cardBack">Answer!</div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="controls">
-                <button class="btn" id="btnPrev">Previous</button>
-                <button class="btn btn-primary" id="btnNext">Next Card</button>
+                <div class="controls">
+                    <button class="btn" id="btnPrev">Previous</button>
+                    <button class="btn btn-primary" id="btnNext">Next Card</button>
+                </div>
+                <p style="text-align: center; margin-top: 16px; color: var(--text-muted);" id="counter">0 / 0</p>
             </div>
-            <p style="text-align: center; margin-top: 16px; color: var(--text-muted);" id="counter">0 / 0</p>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         initThemeToggle();

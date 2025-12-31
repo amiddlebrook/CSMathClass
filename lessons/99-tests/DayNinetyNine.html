@@ -30,12 +30,23 @@
         <p class="hero-desc">A comprehensive test covering 30% of the curriculum questions.</p>
     </header>
 
-    <main class="content">
-        <div id="quizContainer"></div>
-        <div style="text-align:center; margin-top:32px;">
-            <button class="btn btn-primary" id="btnCheckAll">Submit Test</button>
-        </div>
-    </main>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="toc">
+                <div class="toc-title">Test Status</div>
+                <ul class="toc-list">
+                    <li><a href="#test" class="toc-link active">Questions</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content" id="test">
+            <div id="quizContainer"></div>
+            <div style="text-align:center; margin-top:32px;">
+                <button class="btn btn-primary" id="btnCheckAll">Submit Test</button>
+            </div>
+        </main>
+    </div>
 
     <script>
         initLesson({}); // Just init toggles

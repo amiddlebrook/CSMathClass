@@ -17,55 +17,7 @@
 </head>
 
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="../../index.html" class="nav-back">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M10 12L6 8L10 4" />
-        </svg>
-        Back to Curriculum
-      </a>
-      <div class="nav-progress">
-        <span id="progressText">Day 15</span>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-      </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="hero-label">Day 15</div>
-    <h1>Sequences & Series Basics</h1>
-  </header>
-
-  <div class="main-layout">
-    <aside class="sidebar">
-      <nav class="toc">
-        <div class="toc-title">On this page</div>
-        <ul class="toc-list">
-          <!-- TODO: Auto-generate items? For now we leave empty or simple link -->
-          <li><a href="#content" class="toc-link active">Lesson Content</a></li>
-          <li><a href="#videos" class="toc-link">Video Lessons</a></li>
-          <li><a href="#practice" class="toc-link">Practice Problems</a></li>
-        </ul>
-      </nav>
-      <div class="stats-card">
-        <div class="toc-title">Your Progress</div>
-        <div class="stats-row"><span class="stats-label">Attempted</span><span class="stats-value" id="statAttempted">0</span></div>
-        <div class="stats-row"><span class="stats-label">Correct</span><span class="stats-value" id="statCorrect">0</span></div>
-        <div class="stats-row"><span class="stats-label">Accuracy</span><span class="stats-value" id="statAccuracy">—</span></div>
-      </div>
-    </aside>
-
-    <main class="content" id="content">
-      <!-- MIGRATED CONTENT START -->
-      <nav class="nav">
+<nav class="nav">
         <div class="nav-inner">
             <a href="../../index.html" class="nav-back"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                     stroke="currentColor" stroke-width="2">
@@ -245,13 +197,17 @@ print(<span class="code-string">f"π²/6 = {np.pi**2/6:.6f}"</span>)  <span clas
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
-                    
-                                <div class="video-meta" id="videoMeta"></div>
-                            </div>
-                        </div>
-                        <div class="video-list" id="videoList"></div>
-                    </div>
-                </div>
+          <div class="video-container">
+            <div class="video-player">
+              <iframe id="ytPlayer" src="" allowfullscreen></iframe>
+              <div class="video-info">
+                <div class="video-title" id="videoTitle">Select a video</div>
+                <div class="video-meta" id="videoMeta"></div>
+              </div>
+            </div>
+            <div class="video-list" id="videoList"></div>
+          </div>
+        </div>
             </section>
 
             <!-- Practice -->
@@ -272,56 +228,5 @@ print(<span class="code-string">f"π²/6 = {np.pi**2/6:.6f}"</span>)  <span clas
             </section>
         </main>
     </div>
-      <!-- MIGRATED CONTENT END -->
-
-      <section class="section" id="videos">
-        <div class="section-header">
-          <div class="section-number">Videos</div>
-          <h2 class="section-title">Video Lessons</h2>
-        </div>
-        <div class="section-body">
-          <div class="video-container">
-            <div class="video-player">
-              <iframe id="ytPlayer" src="" allowfullscreen></iframe>
-              <div class="video-info">
-                <div class="video-title" id="videoTitle">Select a video</div>
-                <div class="video-meta" id="videoMeta"></div>
-              </div>
-            </div>
-            <div class="video-list" id="videoList"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="practice">
-        <div class="section-header">
-           <div class="section-number">Practice</div>
-           <h2 class="section-title">Practice Problems</h2>
-        </div>
-        <div class="section-body">
-           <div class="quiz-controls">
-             <button class="btn btn-primary" id="btnCheckAll">Check All</button>
-             <button class="btn" id="btnRevealAll">Reveal All</button>
-             <button class="btn" id="btnClear">Clear</button>
-             <button class="btn btn-danger" id="btnReset">Reset Stats</button>
-           </div>
-           <div id="quizContainer"></div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <script>
-    initLesson({
-      questions: window.QUESTIONS_DATA ? window.QUESTIONS_DATA['day15'] : [],
-      videos: [{ title: "Lesson Videos", items: [
-            { title: "Sequences and Series Introduction", channel: "3Blue1Brown", vid: "rfG8ce4nNh0" },
-            { title: "Convergence Tests", channel: "Professor Leonard", vid: "32-wd5TslQU" },
-            { title: "Geometric Series", channel: "Khan Academy", vid: "b-7kCymoUpg" },
-            { title: "The Harmonic Series", channel: "Mathologer", vid: "XFDM1ip5HdU" }
-        ] }],
-      storageKey: 'day15_stats'
-    });
-  </script>
 </body>
 </html>
