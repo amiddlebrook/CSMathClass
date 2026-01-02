@@ -572,7 +572,8 @@ li strong {
 }
 
 /* Two Column Grid */
-.two-col {
+.two-col,
+.grid-2col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -580,9 +581,70 @@ li strong {
 }
 
 @media (max-width: 600px) {
-  .two-col {
+
+  .two-col,
+  .grid-2col {
     grid-template-columns: 1fr;
   }
+}
+
+/* Cards */
+.card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--surface-alt);
+  font-weight: 600;
+  color: var(--text);
+}
+
+td {
+  color: var(--text-secondary);
+}
+
+tr:last-child td {
+  border-bottom: none;
 }
 
 /* Video Section */
