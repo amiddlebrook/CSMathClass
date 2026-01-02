@@ -935,93 +935,58 @@ const questionsData = {
       "answer": ["hessian", "hessian matrix"],
       "display": "Hessian Matrix"
     },
-    {
-      "id": 26, "topic": "ML", "prompt": "Stochastic Gradient Descent (SGD) uses a _____ of data to estimate the gradient.", "answer": ["subset", "minibatch", "batch"], "display": "Subset (Minibatch)"
-    },
-    { "id": 27, "topic": "Concept", "prompt": "A scalar field f(x, y, z) maps vectors to ____.", "answer": ["scalars", "numbers"], "display": "Scalars" },
-    { "id": 28, "topic": "Concept", "prompt": "A vector field F(x, y, z) maps vectors to ____.", "answer": ["vectors"], "display": "Vectors" },
-    { "id": 29, "topic": "Notation", "prompt": "nabla^2 f (Laplacian) is the ____ of the gradient.", "answer": ["divergence"], "display": "Divergence" },
-    { "id": 30, "topic": "Jacobian", "prompt": "The Jacobian matrix is usually denoted by capitalized letter ___.", "answer": ["j"], "display": "J" },
-    { "id": 31, "topic": "Partial Deriv", "prompt": "f(x,y)=e^{xy}. Find fx.", "answer": ["ye^{xy}", "ye^xy"], "display": "ye^{xy}" },
-    { "id": 32, "topic": "Partial Deriv", "prompt": "f(x,y)=sin(x+y). Find fx.", "answer": ["cos(x+y)"], "display": "cos(x+y)" },
-    { "id": 33, "topic": "Gradient", "prompt": "Magnitude of nabla f at origin for f=x^2+y^2 is ___.", "answer": ["0"], "display": "0" },
-    { "id": 34, "topic": "Gradient", "prompt": "Magnitude of nabla f at (1,0) for f=x^2+y^2 is ___.", "answer": ["2"], "display": "2" },
-    { "id": 35, "topic": "Jacobian", "prompt": "For f(x,y) = (x+y, xy), the Jacobian at (1,2) is [[1,1], [?,?]]. What are the bottom row values?", "answer": ["2,1", "2 1"], "display": "2, 1" },
-    { "id": 36, "topic": "Hessian", "prompt": "Hessian of x^2+y^2 is the constant matrix [[?,?],[?,?]]. Values are?", "answer": ["2,0,0,2"], "display": "[[2,0],[0,2]]" },
-    { "id": 37, "topic": "Stability", "prompt": "In high dimensions, most critical points are ____ points, not minima.", "answer": ["saddle"], "display": "Saddle" },
-    { "id": 38, "topic": "Directional Deriv", "prompt": "If u is perpendicular to nabla f, the directional derivative is ___.", "answer": ["0"], "display": "0" },
-    { "id": 39, "topic": "Technique", "prompt": "The 'Automatic Differentiation' in TensorFlow uses the ___ rule of Jacobians.", "answer": ["chain"], "display": "Chain" },
-    { "id": 40, "topic": "Conclusion", "prompt": "Multivariable calculus is the bridge between 1D math and real-world ___.", "answer": ["ai", "robotics", "data science"], "display": "AI/Data Science" }
+    { "id": 26, "topic": "ML", "prompt": "Stochastic Gradient Descent (SGD) uses a _____ of data to estimate the gradient.", "answer": ["subset", "minibatch", "batch"], "display": "Subset (Minibatch)", "generate": function () { return { prompt: "Mini-batch gradient descent is a compromise between batch GD and ___ GD.", answer: ["stochastic", "sgd"], display: "Stochastic" }; } },
+    { "id": 27, "topic": "Concept", "prompt": "A scalar field f(x, y, z) maps vectors to ____.", "answer": ["scalars", "numbers"], "display": "Scalars", "generate": function () { return { prompt: "Temperature over a room is an example of a ___ field.", answer: ["scalar"], display: "Scalar" }; } },
+    { "id": 28, "topic": "Concept", "prompt": "A vector field F(x, y, z) maps vectors to ____.", "answer": ["vectors"], "display": "Vectors", "generate": function () { return { prompt: "Wind velocity is an example of a ___ field.", answer: ["vector"], display: "Vector" }; } },
+    { "id": 29, "topic": "Notation", "prompt": "nabla^2 f (Laplacian) is the ____ of the gradient.", "answer": ["divergence"], "display": "Divergence", "generate": function () { return { prompt: "The Laplacian $\\nabla^2$ is the sum of second ___.", answer: ["derivatives", "partials"], display: "Derivatives" }; } },
+    { "id": 30, "topic": "Jacobian", "prompt": "The Jacobian matrix is usually denoted by capitalized letter ___.", "answer": ["j"], "display": "J", "generate": function () { return { prompt: "The ___ matrix contains all first partial derivatives.", answer: ["jacobian"], display: "Jacobian" }; } },
+    { "id": 31, "topic": "Partial Deriv", "prompt": "f(x,y)=e^{xy}. Find fx.", "answer": ["ye^{xy}", "ye^xy"], "display": "ye^{xy}", "generate": function () { return { prompt: "f(x,y)=xy. Find $\\partial f/\\partial x$.", answer: ["y"], display: "y" }; } },
+    { "id": 32, "topic": "Partial Deriv", "prompt": "f(x,y)=sin(x+y). Find fx.", "answer": ["cos(x+y)"], "display": "cos(x+y)", "generate": function () { return { prompt: "f(x,y)=cos(x+y). Find fx.", answer: ["-sin(x+y)"], display: "-sin(x+y)" }; } },
+    { "id": 33, "topic": "Gradient", "prompt": "Magnitude of nabla f at origin for f=x^2+y^2 is ___.", "answer": ["0"], "display": "0", "generate": function () { return { prompt: "At (0,0), the gradient of $x^2+y^2$ is the ___ vector.", answer: ["zero"], display: "Zero" }; } },
+    { "id": 34, "topic": "Gradient", "prompt": "Magnitude of nabla f at (1,0) for f=x^2+y^2 is ___.", "answer": ["2"], "display": "2", "generate": function () { const x = GenUtils.randomInt(1, 3); return { prompt: `|nabla f| at (${x},0) for f=x^2+y^2 is ___.`, answer: [(2 * x).toString()], display: (2 * x).toString() }; } },
+    { "id": 35, "topic": "Jacobian", "prompt": "For f(x,y) = (x+y, xy), the Jacobian at (1,2) is [[1,1], [?,?]]. What are the bottom row values?", "answer": ["2,1", "2 1"], "display": "2, 1", "generate": function () { return { prompt: "The Jacobian rows correspond to output components, columns to ___ components.", answer: ["input"], display: "Input" }; } },
+    { "id": 36, "topic": "Hessian", "prompt": "Hessian of x^2+y^2 is the constant matrix [[?,?],[?,?]]. Values are?", "answer": ["2,0,0,2"], "display": "[[2,0],[0,2]]", "generate": function () { return { prompt: "A diagonal Hessian means the mixed partial derivatives are ___.", answer: ["zero", "0"], display: "Zero" }; } },
+    { "id": 37, "topic": "Stability", "prompt": "In high dimensions, most critical points are ____ points, not minima.", "answer": ["saddle"], "display": "Saddle", "generate": function () { return { prompt: "High-dimensional optimization is hard because of many ___ points.", answer: ["saddle"], display: "Saddle" }; } },
+    { "id": 38, "topic": "Directional Deriv", "prompt": "If u is perpendicular to nabla f, the directional derivative is ___.", "answer": ["0"], "display": "0", "generate": function () { return { prompt: "Along level curves, the directional derivative equals ___.", answer: ["0", "zero"], display: "0" }; } },
+    { "id": 39, "topic": "Technique", "prompt": "The 'Automatic Differentiation' in TensorFlow uses the ___ rule of Jacobians.", "answer": ["chain"], "display": "Chain", "generate": function () { return { prompt: "JAX uses ___ -mode automatic differentiation for efficiency.", answer: ["reverse"], display: "Reverse" }; } },
+    { "id": 40, "topic": "Conclusion", "prompt": "Multivariable calculus is the bridge between 1D math and real-world ___.", "answer": ["ai", "robotics", "data science"], "display": "AI/Data Science", "generate": function () { return { prompt: "Gradients are fundamental to training ___ networks.", answer: ["neural"], display: "Neural" }; } }
   ],
+
   "day18": [
 
   ],
   "day19": [
-    {
-      "id": 1,
-      "topic": "Multiply",
-      "prompt": "(2×3) × (3×4) matrix product has shape ___×___",
-      "answer": "2x4,2×4",
-      "display": "2×4"
-    },
-    {
-      "id": 2,
-      "topic": "Multiply",
-      "prompt": "Is matrix multiplication commutative? (yes/no)",
-      "answer": "no",
-      "display": "No"
-    },
-    {
-      "id": 3,
-      "topic": "Systems",
-      "prompt": "Ax = b has a unique solution when A is ___",
-      "answer": "invertible,nonsingular",
-      "display": "invertible"
-    },
-    {
-      "id": 4,
-      "topic": "Gauss",
-      "prompt": "Gaussian elimination produces ___ triangular form",
-      "answer": "upper",
-      "display": "upper"
-    },
-    {
-      "id": 5,
-      "topic": "NumPy",
-      "prompt": "np.linalg._____(A, b) solves Ax = b",
-      "answer": "solve",
-      "display": "solve"
-    },
-    {
-      "id": 6,
-      "topic": "Identity",
-      "prompt": "AI = A. I is the ___ matrix",
-      "answer": "identity",
-      "display": "identity"
-    }
+    { "id": 1, "topic": "Multiply", "prompt": "(2×3) × (3×4) matrix product has shape ___×___", "answer": ["2x4", "2×4"], "display": "2×4", "generate": function () { const m = GenUtils.randomInt(2, 5); const n = GenUtils.randomInt(2, 5); const p = GenUtils.randomInt(2, 5); return { prompt: `(${m}×${n}) × (${n}×${p}) matrix product has shape ___×___`, answer: [`${m}x${p}`, `${m}×${p}`], display: `${m}×${p}` }; } },
+    { "id": 2, "topic": "Multiply", "prompt": "Is matrix multiplication commutative? (yes/no)", "answer": ["no"], "display": "No", "generate": function () { return { prompt: "Is matrix multiplication associative? (yes/no)", answer: ["yes"], display: "Yes" }; } },
+    { "id": 3, "topic": "Systems", "prompt": "Ax = b has a unique solution when A is ___", "answer": ["invertible", "nonsingular"], "display": "invertible", "generate": function () { return { prompt: "Ax = b has no solution or infinitely many when A is ___.", answer: ["singular"], display: "Singular" }; } },
+    { "id": 4, "topic": "Gauss", "prompt": "Gaussian elimination produces ___ triangular form", "answer": ["upper"], "display": "upper", "generate": function () { return { prompt: "___ substitution solves upper triangular systems.", answer: ["back"], display: "Back" }; } },
+    { "id": 5, "topic": "NumPy", "prompt": "np.linalg._____(A, b) solves Ax = b", "answer": ["solve"], "display": "solve", "generate": function () { return { prompt: "np.linalg._____(A) computes determinant.", answer: ["det"], display: "det" }; } },
+    { "id": 6, "topic": "Identity", "prompt": "AI = A. I is the ___ matrix", "answer": ["identity"], "display": "identity", "generate": function () { return { prompt: "The identity matrix has 1s on the ___ and 0s elsewhere.", answer: ["diagonal"], display: "Diagonal" }; } }
   ],
+
   "day20": [
-    { "id": 1, "topic": "Dot", "prompt": "If u · v = 0, the vectors are ___", "answer": "orthogonal,perpendicular", "display": "Orthogonal" },
-    { "id": 2, "topic": "Norm", "prompt": "The norm ||v|| equals the square root of v · ___", "answer": "v", "display": "v" },
-    { "id": 3, "topic": "Angle", "prompt": "cos(θ) = (u · v) / (||u|| × ___)", "answer": "||v||,v norm", "display": "||v||" },
-    { "id": 4, "topic": "Orthonormal", "prompt": "A basis with unit vectors that are mutually orthogonal is called ___", "answer": "orthonormal", "display": "Orthonormal" },
-    { "id": 5, "topic": "Projection", "prompt": "proj_a(b) = ((a·b)/(a·a)) × ___", "answer": "a", "display": "a" },
-    { "id": 6, "topic": "Error", "prompt": "The error vector e = b - p is ___ to the subspace", "answer": "orthogonal,perpendicular", "display": "Orthogonal" },
-    { "id": 7, "topic": "Gram-Schmidt", "prompt": "___ process converts any basis to orthonormal", "answer": "gram-schmidt,gram schmidt", "display": "Gram-Schmidt" },
-    { "id": 8, "topic": "Least Squares", "prompt": "Least Squares minimizes ||Ax - ___||²", "answer": "b", "display": "b" },
-    { "id": 9, "topic": "Normal Eq", "prompt": "Normal Equation: A^T A x̂ = A^T ___", "answer": "b", "display": "b" },
-    { "id": 10, "topic": "Application", "prompt": "Linear ___ uses Least Squares to fit a line", "answer": "regression", "display": "Regression" },
-    { "id": 11, "topic": "NumPy", "prompt": "np.linalg._____(A, b) solves least squares", "answer": "lstsq", "display": "lstsq" },
-    { "id": 12, "topic": "Dot", "prompt": "u · v can be written as u^T × ___", "answer": "v", "display": "v" },
-    { "id": 13, "topic": "Parallel", "prompt": "If u · v = ||u|| ||v||, the vectors are ___", "answer": "parallel", "display": "Parallel" },
-    { "id": 14, "topic": "Orthogonal", "prompt": "Q is orthogonal matrix if Q^T Q = ___", "answer": "i,identity", "display": "I (Identity)" },
-    { "id": 15, "topic": "Property", "prompt": "Orthogonal matrices preserve ___ (length)", "answer": "norm,length,magnitude", "display": "Norm/Length" },
-    { "id": 16, "topic": "CS", "prompt": "PCA finds principal components using ___", "answer": "orthogonality,eigenvectors", "display": "Orthogonality" },
-    { "id": 17, "topic": "Geometry", "prompt": "Projection onto a plane gives the ___ point", "answer": "closest,nearest", "display": "Closest" },
-    { "id": 18, "topic": "Formula", "prompt": "||u||² = u · ___", "answer": "u", "display": "u" },
-    { "id": 19, "topic": "Residual", "prompt": "In regression, the error is called the ___", "answer": "residual,residuals", "display": "Residual" },
-    { "id": 20, "topic": "Overdetermined", "prompt": "Ax=b with more equations than unknowns is ___", "answer": "overdetermined", "display": "Overdetermined" }
+    { "id": 1, "topic": "Dot", "prompt": "If u · v = 0, the vectors are ___", "answer": ["orthogonal", "perpendicular"], "display": "Orthogonal", "generate": function () { return { prompt: "Two vectors with a 90° angle between them are ___.", answer: ["orthogonal", "perpendicular"], display: "Orthogonal" }; } },
+    { "id": 2, "topic": "Norm", "prompt": "The norm ||v|| equals the square root of v · ___", "answer": ["v"], "display": "v", "generate": function () { return { prompt: "||v||² = v · ___.", answer: ["v"], display: "v" }; } },
+    { "id": 3, "topic": "Angle", "prompt": "cos(θ) = (u · v) / (||u|| × ___)", "answer": ["||v||", "v norm"], "display": "||v||", "generate": function () { return { prompt: "The angle between vectors uses the ___ product.", answer: ["dot", "inner"], display: "Dot" }; } },
+    { "id": 4, "topic": "Orthonormal", "prompt": "A basis with unit vectors that are mutually orthogonal is called ___", "answer": ["orthonormal"], "display": "Orthonormal", "generate": function () { return { prompt: "Orthogonal + normalized = ___.", answer: ["orthonormal"], display: "Orthonormal" }; } },
+    { "id": 5, "topic": "Projection", "prompt": "proj_a(b) = ((a·b)/(a·a)) × ___", "answer": ["a"], "display": "a", "generate": function () { return { prompt: "Vector projection of b onto a is a ___ multiple of a.", answer: ["scalar"], display: "Scalar" }; } },
+    { "id": 6, "topic": "Error", "prompt": "The error vector e = b - p is ___ to the subspace", "answer": ["orthogonal", "perpendicular"], "display": "Orthogonal", "generate": function () { return { prompt: "In least squares, the residual is ___ to the column space.", answer: ["orthogonal", "perpendicular"], display: "Orthogonal" }; } },
+    { "id": 7, "topic": "Gram-Schmidt", "prompt": "___ process converts any basis to orthonormal", "answer": ["gram-schmidt", "gram schmidt"], "display": "Gram-Schmidt", "generate": function () { return { prompt: "QR decomposition uses the ___ process internally.", answer: ["gram-schmidt", "gram schmidt"], display: "Gram-Schmidt" }; } },
+    { "id": 8, "topic": "Least Squares", "prompt": "Least Squares minimizes ||Ax - ___||²", "answer": ["b"], "display": "b", "generate": function () { return { prompt: "Least squares finds x that minimizes the ___ of the residual.", answer: ["norm", "magnitude"], display: "Norm" }; } },
+    { "id": 9, "topic": "Normal Eq", "prompt": "Normal Equation: A^T A x̂ = A^T ___", "answer": ["b"], "display": "b", "generate": function () { return { prompt: "The normal equations multiply both sides by A^___.", answer: ["T", "transpose"], display: "T (transpose)" }; } },
+    { "id": 10, "topic": "Application", "prompt": "Linear ___ uses Least Squares to fit a line", "answer": ["regression"], "display": "Regression", "generate": function () { return { prompt: "___ regression fits a line y = mx + b.", answer: ["linear"], display: "Linear" }; } },
+    { "id": 11, "topic": "NumPy", "prompt": "np.linalg._____(A, b) solves least squares", "answer": ["lstsq"], "display": "lstsq", "generate": function () { return { prompt: "np.dot(a, b) computes ___ product for 1D arrays.", answer: ["dot"], display: "Dot" }; } },
+    { "id": 12, "topic": "Dot", "prompt": "u · v can be written as u^T × ___", "answer": ["v"], "display": "v", "generate": function () { return { prompt: "The dot product equals the sum of ___ products.", answer: ["component", "elementwise"], display: "Component" }; } },
+    { "id": 13, "topic": "Parallel", "prompt": "If u · v = ||u|| ||v||, the vectors are ___", "answer": ["parallel"], "display": "Parallel", "generate": function () { return { prompt: "Parallel vectors have angle ___ or 180 degrees.", answer: ["0", "zero"], display: "0" }; } },
+    { "id": 14, "topic": "Orthogonal", "prompt": "Q is orthogonal matrix if Q^T Q = ___", "answer": ["i", "identity"], "display": "I (Identity)", "generate": function () { return { prompt: "For orthogonal Q: Q^(-1) = Q^___.", answer: ["T", "transpose"], display: "T" }; } },
+    { "id": 15, "topic": "Property", "prompt": "Orthogonal matrices preserve ___ (length)", "answer": ["norm", "length", "magnitude"], "display": "Norm/Length", "generate": function () { return { prompt: "Orthogonal transformations preserve ___ and norms.", answer: ["angles"], display: "Angles" }; } },
+    { "id": 16, "topic": "CS", "prompt": "PCA finds principal components using ___", "answer": ["orthogonality", "eigenvectors"], "display": "Orthogonality", "generate": function () { return { prompt: "Each PCA principal component is ___ to the others.", answer: ["orthogonal"], display: "Orthogonal" }; } },
+    { "id": 17, "topic": "Geometry", "prompt": "Projection onto a plane gives the ___ point", "answer": ["closest", "nearest"], "display": "Closest", "generate": function () { return { prompt: "Orthogonal projection minimizes ___.", answer: ["distance", "error"], display: "Distance" }; } },
+    { "id": 18, "topic": "Formula", "prompt": "||u||² = u · ___", "answer": ["u"], "display": "u", "generate": function () { return { prompt: "The Pythagorean theorem in n-D: ||u||² = sum of ___².", answer: ["components", "coordinates"], display: "Components" }; } },
+    { "id": 19, "topic": "Residual", "prompt": "In regression, the error is called the ___", "answer": ["residual", "residuals"], "display": "Residual", "generate": function () { return { prompt: "Sum of squared ___ is minimized in linear regression.", answer: ["residuals", "errors"], display: "Residuals" }; } },
+    { "id": 20, "topic": "Overdetermined", "prompt": "Ax=b with more equations than unknowns is ___", "answer": ["overdetermined"], "display": "Overdetermined", "generate": function () { return { prompt: "Ax=b with more unknowns than equations is ___.", answer: ["underdetermined"], display: "Underdetermined" }; } }
   ],
+
   "day21": [
 
   ],
