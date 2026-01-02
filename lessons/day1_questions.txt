@@ -1,0 +1,226 @@
+  "day1": [
+    {
+      "id": 1,
+      "topic": "Fractions",
+      "prompt": "Evaluate: $3/4 + 5/6$. (Give answer as simplified fraction)",
+      "answer": ["19/12"],
+      "display": "$19/12$",
+      "generate": function() {
+        const d1 = GenUtils.randomInt(2, 6);
+        const d2 = GenUtils.randomInt(2, 6);
+        const n1 = GenUtils.randomInt(1, 5);
+        const n2 = GenUtils.randomInt(1, 5);
+        const commonDenom = (d1 * d2) / GenUtils.gcd(d1, d2);
+        const finNum = n1 * (commonDenom/d1) + n2 * (commonDenom/d2);
+        const g = GenUtils.gcd(finNum, commonDenom);
+        return {
+          prompt: `Evaluate: $${n1}/${d1} + ${n2}/${d2}$.`,
+          answer: [`${finNum/g}/${commonDenom/g}`],
+          display: `${finNum/g}/${commonDenom/g}`
+        };
+      }
+    },
+    {
+      "id": 2,
+      "topic": "Fractions",
+      "prompt": "Multiply: $(2/3) \\times (9/4)$.",
+      "answer": ["3/2", "1.5"],
+      "display": "$3/2$"
+    },
+    {
+      "id": 3,
+      "topic": "Negatives",
+      "prompt": "Subtract: $5 - (-3)$.",
+      "answer": ["8"],
+      "display": "8"
+    },
+    {
+      "id": 4,
+      "topic": "Negatives",
+      "prompt": "Evaluate: $-7 + (-5)$.",
+      "answer": ["-12"],
+      "display": "-12"
+    },
+    {
+      "id": 5,
+      "topic": "Exponents",
+      "prompt": "Simplify: $x^2 \\cdot x^3$.",
+      "answer": ["x^5"],
+      "display": "$x^5$"
+    },
+    {
+      "id": 6,
+      "topic": "Exponents",
+      "prompt": "What is $16^{3/4}$?",
+      "answer": ["8"],
+      "display": "8"
+    },
+    {
+      "id": 7,
+      "topic": "Scientific Notation",
+      "prompt": "Write 0.00045 in scientific notation (e.g., 4.5e-4).",
+      "answer": ["4.5e-4", "4.5*10^-4"],
+      "display": "$4.5 \\times 10^{-4}$"
+    },
+    {
+      "id": 8,
+      "topic": "Scientific Notation",
+      "prompt": "Multiply: $(2 \\times 10^3) \\times (3 \\times 10^5)$.",
+      "answer": ["6e8", "6*10^8", "600000000"],
+      "display": "$6 \\times 10^8$"
+    },
+    {
+      "id": 9,
+      "topic": "Ratios",
+      "prompt": "Simplify the ratio $12:18$.",
+      "answer": ["2:3", "2/3"],
+      "display": "$2:3$"
+    },
+    {
+      "id": 10,
+      "topic": "Rates",
+      "prompt": "If a car travels 150 miles in 2.5 hours, what is its rate in mph?",
+      "answer": ["60"],
+      "display": "60 mph"
+    },
+    {
+      "id": 11,
+      "topic": "Percentages",
+      "prompt": "What is 15% of 200?",
+      "answer": ["30"],
+      "display": "30"
+    },
+    {
+      "id": 12,
+      "topic": "Unit Conversion",
+      "prompt": "Convert 2.5 GB to MB (assuming 1 GB = 1000 MB).",
+      "answer": ["2500"],
+      "display": "2500 MB"
+    },
+    {
+      "id": 13,
+      "topic": "Absolute Value",
+      "prompt": "Evaluate $|-5 - 3|$.",
+      "answer": ["8"],
+      "display": "8"
+    },
+    {
+      "id": 14,
+      "topic": "Order of Ops",
+      "prompt": "Evaluate: $2 + 3 \\times 4$.",
+      "answer": ["14"],
+      "display": "14"
+    },
+    {
+      "id": 15,
+      "topic": "Exponents",
+      "prompt": "Any non-zero number to the power of 0 equals ___.",
+      "answer": ["1"],
+      "display": "1"
+    },
+    {
+      "id": 16,
+      "topic": "Negatives",
+      "prompt": "Evaluate: $(-2)^3$.",
+      "answer": ["-8"],
+      "display": "-8"
+    },
+    {
+      "id": 17,
+      "topic": "Fractions",
+      "prompt": "Reciprocal of $2/7$ is ___.",
+      "answer": ["7/2", "3.5"],
+      "display": "$7/2$"
+    },
+    {
+      "id": 18,
+      "topic": "Fractions",
+      "prompt": "Divide: $(1/2) \\div (1/4)$.",
+      "answer": ["2"],
+      "display": "2"
+    },
+    {
+      "id": 19,
+      "topic": "Scientific Notation",
+      "prompt": "Light travels at $3 \\times 10^8$ m/s. How far in 10 seconds? (Scientific notation)",
+      "answer": ["3e9", "3*10^9"],
+      "display": "$3 \\times 10^9$ meters"
+    },
+    {
+      "id": 20,
+      "topic": "Rates",
+      "prompt": "A server processes 500 requests per minute. How many in 1 hour?",
+      "answer": ["30000"],
+      "display": "30,000"
+    },
+    {
+      "id": 21,
+      "topic": "Percentages",
+      "prompt": "If a \$200 item is 20% off, what is the new price?",
+      "answer": ["160"],
+      "display": "\$160"
+    },
+    {
+      "id": 22,
+      "topic": "Negatives",
+      "prompt": "Evaluate: $-(-(-5))$.",
+      "answer": ["-5"],
+      "display": "-5"
+    },
+    {
+      "id": 23,
+      "topic": "Exponents",
+      "prompt": "Simplify: $(x^3)^2$.",
+      "answer": ["x^6"],
+      "display": "$x^6$"
+    },
+    {
+      "id": 24,
+      "topic": "Ratios",
+      "prompt": "In a 16:9 aspect ratio, if height is 1080, what is width?",
+      "answer": ["1920"],
+      "display": "1920"
+    },
+    {
+      "id": 25,
+      "topic": "Unit Conversion",
+      "prompt": "16 bits = ___ bytes.",
+      "answer": ["2"],
+      "display": "2"
+    },
+    {
+      "id": 26,
+      "topic": "Order of Ops",
+      "prompt": "Evaluate: $(10 + 2) / 3$.",
+      "answer": ["4"],
+      "display": "4"
+    },
+    {
+      "id": 27,
+      "topic": "Fractions",
+      "prompt": "Convert $2 \\text{ } 3/4$ to an improper fraction.",
+      "answer": ["11/4"],
+      "display": "$11/4$"
+    },
+    {
+      "id": 28,
+      "topic": "Exponents",
+      "prompt": "Evaluate: $3^{-2}$.",
+      "answer": ["1/9", "0.111"],
+      "display": "$1/9$"
+    },
+    {
+      "id": 29,
+      "topic": "Percentages",
+      "prompt": "60 is what percent of 80?",
+      "answer": ["75", "75%"],
+      "display": "75%"
+    },
+    {
+      "id": 30,
+      "topic": "Conclusion",
+      "prompt": "Fluency in arithmetic is the foundation of ____ computing.",
+      "answer": ["all", "scientific", "modern"],
+      "display": "All"
+    }
+  ],

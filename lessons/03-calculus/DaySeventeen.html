@@ -87,12 +87,17 @@
                     <li><a href="#partial" class="toc-link">1. Partial Derivatives</a></li>
                     <li><a href="#gradient" class="toc-link">2. The Gradient ($\nabla$)</a></li>
                     <li><a href="#directional" class="toc-link">3. Directional Derivatives</a></li>
-                    <li><a href="#jacobian" class="toc-link">4. The Jacobian</a></li>
-                    <li><a href="#hessian" class="toc-link">5. The Hessian</a></li>
-                    <li><a href="#python" class="toc-link">6. Python Code</a></li>
-                    <li><a href="#summary" class="toc-link">7. Summary</a></li>
-                    <li><a href="#videos" class="toc-link">8. Video Lessons</a></li>
-                    <li><a href="#practice" class="toc-link">9. Practice Problems</a></li>
+                    <li><a href="#jacobian" class="toc-link">4. The Jacobian Matrix</a></li>
+                    <li><a href="#landscape" class="toc-link">5. The Loss Landscape</a></li>
+                    <li><a href="#hessian" class="toc-link">6. The Hessian Matrix</a></li>
+                    <li><a href="#latent" class="toc-link">7. Geometry of Latent Space</a></li>
+                    <li><a href="#python" class="toc-link">8. Python Code</a></li>
+                    <li><a href="#lagrange" class="toc-link">9. Lagrange Multipliers</a></li>
+                    <li><a href="#pde" class="toc-link">10. Intro to PDEs</a></li>
+                    <li><a href="#autodiff" class="toc-link">11. How Computers Actually Do This: Autodiff</a></li>
+                    <li><a href="#summary" class="toc-link">12. Summary</a></li>
+                    <li><a href="#videos" class="toc-link">13. Video Lessons</a></li>
+                    <li><a href="#practice" class="toc-link">14. Practice Problems</a></li>
                 </ul>
             </nav>
             <div class="stats-card">
@@ -260,13 +265,62 @@
                             <p>Backpropagation = chain rule with Jacobians!</p>
                         </div>
                     </div>
+
+                    <div class="info">
+                        <span class="info-icon">🔗</span>
+                        <strong>Deep Dive: Backpropagation & Chain Rule</strong>
+                        <br>In a deep network, you have layers $f_3(f_2(f_1(x)))$.
+                        <br>The derivative of the final output with respect to the input is the <strong>Product of
+                            Jacobians</strong>:
+                        <br>$$\frac{\partial y}{\partial x} = J_3 \cdot J_2 \cdot J_1$$
+                        <br>This is why we call it "Backpropagation"—we propagate errors backward through these matrix
+                        products.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loss Landscape -->
+            <section class="section" id="landscape">
+                <div class="section-header">
+                    <div class="section-number">Section 5</div>
+                    <h2 class="section-title">The Loss Landscape</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Training an AI is just navigating a multivariable function.
+                        We want to find the $W$ that minimizes $L(W)$.
+                    </p>
+
+                    <div class="grid-2col">
+                        <div class="card">
+                            <h3>1. Flat vs. Sharp Minima</h3>
+                            <p>A "Sharp" minimum (high Hessian curvature) is brittle. A "Flat" minimum generalizes
+                                better to new data.</p>
+                        </div>
+                        <div class="card">
+                            <h3>2. The Saddle Point Problem</h3>
+                            <p>In high dimensions, Local Minima are rare! Most critical points are Saddle Points (one
+                                direction goes down, one goes up). Gradient descent can get "stuck" here.</p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">⛷️</span>
+                        <strong>Analogy: The Foggy Mountain</strong>
+                        <br>Imagine you are on a mountain (the Loss) in thick fog. You can only see the ground beneath
+                        your feet.
+                        <br>Checking the slope with your foot is calculating the <strong>Gradient</strong>.
+                        <br>Stepping downhill is <strong>Gradient Descent</strong>.
+                        <br>The "Fog" is the high dimensionality—you don't know if this path leads to the valley or a
+                        cliff until you take it.
+                    </div>
                 </div>
             </section>
 
             <!-- Hessian -->
             <section class="section" id="hessian">
                 <div class="section-header">
-                    <div class="section-number">Section 5</div>
+                    <div class="section-number">Section 6</div>
                     <h2 class="section-title">The Hessian Matrix</h2>
                 </div>
                 <div class="section-body">
@@ -296,55 +350,190 @@
                 </div>
             </section>
 
+            <!-- Latent Space -->
+            <section class="section" id="latent">
+                <div class="section-header">
+                    <div class="section-number">Section 7</div>
+                    <h2 class="section-title">The Geometry of Latent Space</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        In LLMs (like GPT), words aren't characters; they are <strong>Vectors</strong> in a
+                        12,288-dimensional space.
+                        Calculating the "direction" between concepts is pure multivariable calculus.
+                    </p>
+
+                    <div class="grid-2col">
+                        <div class="card">
+                            <h3>Concept Arithmetic</h3>
+                            <p>$\text{Vector}(\text{"King"}) - \text{Vector}(\text{"Man"}) +
+                                \text{Vector}(\text{"Woman"}) \approx \text{Vector}(\text{"Queen"})$</p>
+                        </div>
+                        <div class="card">
+                            <h3>Gradient Attraction</h3>
+                            <p>During training, the gradient "pulls" related concepts together in this high-dimensional
+                                manifold.</p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">🌌</span>
+                        <strong>CS Analogy: The Global Namespace</strong>
+                        <br>Imagine a software project with millions of variables.
+                        Usually, you can't just "add" two variables to get a third (e.g., `User` + `Admin` doesn't make
+                        sense).
+                        <br>In a <strong>Latent Space</strong>, every point is a valid state. You can "interpolate"
+                        between two points to find a hybrid state.
+                        Calculus allows us to move through this namespace smoothly.
+                    </div>
+                </div>
+            </section>
+
             <!-- Python -->
             <section class="section" id="python">
                 <div class="section-header">
-                    <div class="section-number">Section 6</div>
-                    <h2 class="section-title">Python: Gradients & Visualization</h2>
+                    <div class="section-number">Section 8</div>
+                    <h2 class="section-title">Python: Gradients & Optimization</h2>
                 </div>
                 <div class="section-body">
                     <div class="grid-2col">
                         <div class="code-block">
                             <div class="code-header">
                                 <span class="code-lang">Python</span>
-                                <span class="code-label">3D Surface Plot</span>
+                                <span class="code-label">Hessian & Eigenvalues with NumPy</span>
                             </div>
                             <div class="code-content">
                                 <pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
 
-def f(x, y): return x**2 + y**2
+# f(x, y) = x^2 - y^2 (Saddle Point)
+# Grad = [2x, -2y]
+# Hessian = [[2, 0], [0, -2]]
 
-x = np.linspace(-5, 5, 50)
-y = np.linspace(-5, 5, 50)
-X, Y = np.meshgrid(x, y)
-Z = f(X, Y)
+H = np.array([[2, 0], [0, -2]])
+eigenvals = np.linalg.eigvals(H)
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-ax.plot_surface(X, Y, Z, cmap='viridis')
-plt.title('Loss Landscape')
-plt.show()</code></pre>
+print(f"Eigenvalues: {eigenvals}")
+# One positive, one negative -> Confirmed Saddle Point!</code></pre>
                             </div>
                         </div>
                         <div class="code-block">
                             <div class="code-header">
                                 <span class="code-lang">Python</span>
-                                <span class="code-label">Computing Gradient</span>
+                                <span class="code-label">Autograd in PyTorch</span>
                             </div>
                             <div class="code-content">
                                 <pre><code class="language-python">import torch
 
-x = torch.tensor([2.0, 3.0], requires_grad=True)
+# Create a 'Latent Vector'
+v = torch.randn(128, requires_grad=True)
 
-# f(x,y) = x^2 + y^2
-f = x[0]**2 + x[1]**2
-f.backward()
+# Define a Dummy Loss
+target = torch.ones(128)
+loss = torch.nn.functional.mse_loss(v, target)
 
-print(f"Gradient: {x.grad}")
-# Output: tensor([4., 6.])
-# = [2x, 2y] = [4, 6] ✓</code></pre>
+# BACKPROPAGATION
+loss.backward()
+
+print(f"First 5 Gradients: {v.grad[:5]}")
+# Tells the optimizer which way to nudge 'v' 
+# to make it more like 'target'</code></pre>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lagrange -->
+            <section class="section" id="lagrange">
+                <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Constrained Optimization: Lagrange Multipliers</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        In the real world, we don't just minimize loss. We minimize loss <strong>subject to
+                            constraints</strong> (e.g., hardware power limits, budget, or fairness).
+                    </p>
+
+                    <div class="rule">
+                        <strong>The Method:</strong>
+                        <br>To find max/min of $f(x, y)$ subject to $g(x, y) = c$:
+                        <br>Solve $\nabla f = \lambda \nabla g$
+                        <br>This means the gradients must be parallel at the optimal point!
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">⚖️</span>
+                        <strong>CS Connection: Regularization</strong>
+                        <br>In Machine Learning, <strong>L2 Regularization (Weight Decay)</strong> is effectively a
+                        Lagrange Multiplier problem.
+                        <br>We want to minimize the error, but we "punish" the model if the weights get too large.
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDE -->
+            <section class="section" id="pde">
+                <div class="section-header">
+                    <div class="section-number">Section 10</div>
+                    <h2 class="section-title">Intro to PDEs (Physics Engines)</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        A <strong>Partial Differential Equation (PDE)</strong> is an equation where the unknown is a
+                        multivariable function, and it's constrained by its own partial derivatives.
+                    </p>
+
+                    <div class="grid-2col">
+                        <div class="card">
+                            <h3>🎮 Game Physics</h3>
+                            <p>Water, smoke, and cloth are simulated by solving the <strong>Navier-Stokes PDEs</strong>.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h3>🔊 Audio/Image</h3>
+                            <p>The <strong>Wave Equation</strong> and <strong>Heat Equation</strong> are used for signal
+                                denoising and sound propagation.</p>
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <span class="warning-icon">⚠️</span>
+                        <strong>Complexity Warning:</strong>
+                        <br>Most PDEs cannot be solved with pen and paper. We use <strong>Finite Element Methods
+                            (FEM)</strong> or <strong>Neural PDE Solvers</strong> to approximate them.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Autodiff -->
+            <section class="section" id="autodiff">
+                <div class="section-header">
+                    <div class="section-number">Section 11</div>
+                    <h2 class="section-title">How Computers Actually Do This: Autodiff</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        Does PyTorch do partial derivatives using "Formulas"? <strong>No.</strong>
+                        Does it use "Numerical limits" ($f(x+h) - f(x)/h$)? <strong>No.</strong>
+                    </p>
+
+                    <div class="info">
+                        <strong>Automatic Differentiation</strong> is a way to compute exact derivatives using the
+                        "Computational Graph."
+                        Every operation (addition, sin, exp) is a node that knows its local Jacobian. The computer just
+                        multiplies them using the Chain Rule.
+                    </div>
+
+                    <div class="grid-2col">
+                        <div class="card">
+                            <h3>1. Forward Mode</h3>
+                            <p>Great when you have few inputs and many outputs (Robotics).</p>
+                        </div>
+                        <div class="card">
+                            <h3>2. Reverse Mode</h3>
+                            <p>The core of Deep Learning. Great when you have millions of inputs (weights) and one
+                                output (loss).</p>
                         </div>
                     </div>
                 </div>
@@ -353,8 +542,8 @@ print(f"Gradient: {x.grad}")
             <!-- Summary -->
             <section class="section" id="summary">
                 <div class="section-header">
-                    <div class="section-number">Section 7</div>
-                    <h2 class="section-title">Summary: The Calculus of Many Variables</h2>
+                    <div class="section-number">Section 12</div>
+                    <h2 class="section-title">Summary</h2>
                 </div>
                 <div class="section-body">
                     <div class="grid-2col">
@@ -385,7 +574,7 @@ print(f"Gradient: {x.grad}")
             <!-- Videos -->
             <section class="section" id="videos">
                 <div class="section-header">
-                    <div class="section-number">Section 8</div>
+                    <div class="section-number">Section 13</div>
                     <h2 class="section-title">Video Lessons</h2>
                 </div>
                 <div class="section-body">
@@ -405,7 +594,7 @@ print(f"Gradient: {x.grad}")
             <!-- Practice -->
             <section class="section" id="practice">
                 <div class="section-header">
-                    <div class="section-number">Section 9</div>
+                    <div class="section-number">Section 14</div>
                     <h2 class="section-title">Practice Problems</h2>
                 </div>
                 <div class="section-body">

@@ -601,7 +601,94 @@ print(f"MCMC Mean: {metropolis(lambda x: np.exp(-x**2), 10000):.4f}")</code></pr
             <!-- Summary -->
             <section class="section" id="summary">
                 <div class="section-header">
+                    <div class="section-number">Section 9</div>
+                    <h2 class="section-title">Deep Dive: Numerical Stability & Precision</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        In computer science, we don't have "Real Numbers." We have <strong>Floating Point
+                            Numbers</strong> (IEEE 754). This introduces unique challenges to integration.
+                    </p>
+
+                    <div class="grid-2col">
+                        <div class="card">
+                            <h3>1. Underflow & Log-Sum-Exp</h3>
+                            <p>In Bayesian ML, you often integrate the product of thousands of small probabilities
+                                (e.g., $10^{-300} \cdot 10^{-300}$). The result is so small the computer rounds it to 0
+                                (Underflow).</p>
+                            <p><strong>Solution:</strong> Integrate in "Log Space" using the Log-Sum-Exp trick. This
+                                turns multiplication into addition and prevents precision loss.</p>
+                        </div>
+                        <div class="card">
+                            <h3>2. Catastrophic Cancellation</h3>
+                            <p>When summing millions of Monte Carlo samples, the <strong>order</strong> of addition
+                                matters. If you add a very small $f(X_i)$ to a very large running sum, the small value
+                                might be completely ignored due to precision limits.</p>
+                            <p><strong>Solution:</strong> Use Kahan Summation or sum in smaller batches.</p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">⚖️</span>
+                        <strong>SWE Analogy: The Global Counter</strong>
+                        <br>Imagine a high-traffic web server that increments a "Total Views" counter. If you have 1
+                        billion views and add 1, a 32-bit float might literally not change the number ($10^9 + 1 = 10^9$
+                        in float math).
+                        <br>Integration is effectively a "Global Counter" for the area under a curve. If your step size
+                        is too small relative to your total area, your integration will "stall."
+                    </div>
+                </div>
+            </section>
+
+            <!-- Graphics Deep Dive -->
+            <section class="section">
+                <div class="section-header">
                     <div class="section-number">Section 10</div>
+                    <h2 class="section-title">The Math of Photons: Path Tracing</h2>
+                </div>
+                <div class="section-body">
+                    <p>
+                        How does Pixar render a movie? They solve the <strong>Rendering Equation</strong> using Monte
+                        Carlo integration.
+                        For every pixel, we integrate the light arriving from the entire hemisphere above that point.
+                    </p>
+
+                    <div class="mermaid">
+                        graph TD
+                        P[Pixel on Screen] -->|Ray Cast| S[Surface Point]
+                        S -->|Sample 1| L1[Light Source]
+                        S -->|Sample 2| W[Wall B]
+                        W -->|Bounce| L2[Light Source]
+                        S -->|Sample 3| O[Object C]
+                        O -->|Bounce| F[Floor]
+
+                        subgraph "Monte Carlo Integration"
+                        S
+                        L1
+                        W
+                        O
+                        end
+
+                        style P fill:#f9f,stroke:#333,stroke-width:4px
+                    </div>
+
+                    <div class="info">
+                        <span class="info-icon">🎞️</span>
+                        <strong>Analogy: The Interviewer</strong>
+                        <br>The computer is an interviewer trying to find out the "Average Opinion" of a room (the
+                        light).
+                        <br>Instead of asking everyone (impossible), it picks 64 random people (Rays) and asks them.
+                        <br>If a person says "I'm looking at a bright TV," the pixel gets brighter. If they say "I'm
+                        looking at a black hole," it stays dark.
+                        <br><strong>More rays = cleaner "Image" (Less Noise).</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Table -->
+            <section class="section" id="toolkit">
+                <div class="section-header">
+                    <div class="section-number">Section 11</div>
                     <h2 class="section-title">Summary: The Integration Toolkit</h2>
                 </div>
                 <div class="section-body">

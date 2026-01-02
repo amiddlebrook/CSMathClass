@@ -1,0 +1,352 @@
+  "day16": [
+    {
+      "id": 1,
+      "topic": "Substitution",
+      "prompt": "Evaluate $\\int 2x e^{x^2} dx$.",
+      "answer": ["e^{x^2}", "e^x^2", "e^(x^2)"],
+      "display": "$e^{x^2} + C$",
+      "generate": function() {
+        const a = GenUtils.randomInt(2, 5);
+        return {
+          prompt: `Evaluate $\\int ${a}x^{${a-1}} e^{x^{${a}}} dx$.`,
+          answer: [`e^{x^{${a}}}`],
+          display: `$e^{x^{${a}}} + C$`
+        };
+      }
+    },
+    {
+      "id": 2,
+      "topic": "By Parts",
+      "prompt": "Evaluate $\\int x e^x dx$.",
+      "answer": ["(x-1)e^x", "xe^x - e^x"],
+      "display": "$(x-1)e^x + C$",
+      "generate": function() {
+        const a = GenUtils.randomInt(2, 8);
+        return {
+          prompt: `Evaluate $\\int x e^{${a}x} dx$.`,
+          answer: [`(x/${a} - 1/${a*a})e^{${a}x}`, `((x*${a}-1)/${a*a})e^{${a}x}`],
+          display: `$\\frac{1}{${a}}(x - \\frac{1}{${a}})e^{${a}x} + C$`
+        };
+      }
+    },
+    {
+      "id": 3,
+      "topic": "Monte Carlo",
+      "prompt": "If 785 out of 1000 random points in a unit square fall inside a quarter circle, what is the estimated value of $\\pi$?",
+      "answer": ["3.14"],
+      "display": "3.14",
+      "generate": function() {
+        const total = 1000;
+        const hits = GenUtils.randomInt(770, 800);
+        const piVal = (4 * hits / total).toFixed(2);
+        return {
+          prompt: `If ${hits} out of ${total} random points in a unit square fall inside a quarter circle, what is the estimated value of $\\pi$? (Round to 2 decimal places)`,
+          answer: [piVal],
+          display: piVal
+        };
+      }
+    },
+    {
+      "id": 4,
+      "topic": "Trapezoid Rule",
+      "prompt": "Using Trapezoid Rule with $n=1$, estimate $\\int_0^2 x^2 dx$.",
+      "answer": ["4"],
+      "display": "4",
+      "generate": function() {
+        const b = GenUtils.randomInt(2, 6);
+        const val = (b * b * b) / 2; // (0 + b^2)/2 * b = b^3/2
+        return {
+          prompt: `Using Trapezoid Rule with $n=1$, estimate $\\int_0^{${b}} x^2 dx$.`,
+          answer: [val.toString()],
+          display: val.toString()
+        };
+      }
+    },
+    {
+      "id": 5,
+      "topic": "Simpson's Rule",
+      "prompt": "Simpson's Rule uses ____ to approximate the shape of the function.",
+      "answer": ["parabolas", "quadratic", "quadratics"],
+      "display": "Parabolas (Quadratic segments)"
+    },
+    {
+      "id": 6,
+      "topic": "Numerical",
+      "prompt": "Which method is generally more accurate for smooth functions: Trapezoid or Simpson's?",
+      "answer": ["simpson", "simpsons"],
+      "display": "Simpson's Rule"
+    },
+    {
+      "id": 7,
+      "topic": "Monte Carlo",
+      "prompt": "Monte Carlo error decreases at a rate of 1/sqrt(N). To halve the error, you need ___ times more samples.",
+      "answer": ["4"],
+      "display": "4"
+    },
+    {
+      "id": 8,
+      "topic": "Importance Sampling",
+      "prompt": "Importance Sampling reduces _____ by sampling from a distribution that matches the function shape.",
+      "answer": ["variance"],
+      "display": "Variance (Noise)"
+    },
+    {
+      "id": 9,
+      "topic": "Graphics",
+      "prompt": "The 'Rendering Equation' is an integral over all incoming ___.",
+      "answer": ["light", "radiance"],
+      "display": "Light (Radiance)"
+    },
+    {
+      "id": 10,
+      "topic": "MCMC",
+      "prompt": "MCMC stands for Markov Chain ____ ____.",
+      "answer": ["monte carlo"],
+      "display": "Monte Carlo"
+    },
+    {
+      "id": 11,
+      "topic": "Substitution",
+      "prompt": "In $\\int \\frac{1}{x \\ln x} dx$, what is the best $u$ substitution?",
+      "answer": ["ln x", "ln(x)"],
+      "display": "$u = \\ln x$"
+    },
+    {
+      "id": 12,
+      "topic": "Numerical",
+      "prompt": "The total area under a probability density function must integrate to ___.",
+      "answer": ["1"],
+      "display": "1"
+    },
+    {
+      "id": 13,
+      "topic": "Quadrature",
+      "prompt": "Gaussian Quadrature chooses optimal ____ and weights to maximize accuracy.",
+      "answer": ["nodes", "points", "locations"],
+      "display": "Nodes (or Points)"
+    },
+    {
+      "id": 14,
+      "topic": "Curse of Dimensionality",
+      "prompt": "Why is Monte Carlo used for 100-dimensional integrals? To avoid the Curse of ___.",
+      "answer": ["dimensionality"],
+      "display": "Dimensionality"
+    },
+    {
+      "id": 15,
+      "topic": "Finance",
+      "prompt": "The Black-Scholes formula is an _____ solution, while Monte Carlo is a numerical one.",
+      "answer": ["analytic", "exact", "closed-form"],
+      "display": "Analytic"
+    },
+    {
+      "id": 16,
+      "topic": "Substitution",
+      "prompt": "Evaluate $\\int \\sin(x) \\cos(x) dx$.",
+      "answer": ["1/2 sin^2(x)", "0.5 sin^2(x)", "-1/2 cos^2(x)"],
+      "display": "$\\frac{1}{2}\\sin^2(x) + C$"
+    },
+    {
+      "id": 17,
+      "topic": "By Parts",
+      "prompt": "Evaluate $\\int \\ln(x) dx$.",
+      "answer": ["x ln x - x", "x(ln x - 1)"],
+      "display": "$x \\ln x - x + C$"
+    },
+    {
+      "id": 18,
+      "topic": "Technique",
+      "prompt": "If the degree of the numerator is $\\ge$ the degree of the denominator, first use long ___.",
+      "answer": ["division"],
+      "display": "Division"
+    },
+    {
+      "id": 19,
+      "topic": "Monte Carlo",
+      "prompt": "True or False: Monte Carlo integration can be used for discontinuous functions.",
+      "answer": ["true", "t"],
+      "display": "True"
+    },
+    {
+      "id": 20,
+      "topic": "Simulation",
+      "prompt": "A 'Random Walk' that favors high-probability regions is the basis of ____.",
+      "answer": ["mcmc", "metropolis", "metropolis-hastings"],
+      "display": "MCMC"
+    },
+    {
+      "id": 21,
+      "topic": "Numerical",
+      "prompt": "Simpson's Rule requires the number of intervals $n$ to be ___.",
+      "answer": ["even"],
+      "display": "Even"
+    },
+    {
+      "id": 22,
+      "topic": "Stability",
+      "prompt": "Summing many small values can lead to rounding errors. The _____ summation algorithm helps.",
+      "answer": ["kahan"],
+      "display": "Kahan"
+    },
+    {
+      "id": 23,
+      "topic": "Partial Fractions",
+      "prompt": "Decompose $\\frac{1}{x(x+1)}$ into $\\frac{A}{x} + \\frac{B}{x+1}$. What is A?",
+      "answer": ["1"],
+      "display": "1"
+    },
+    {
+      "id": 24,
+      "topic": "Partial Fractions",
+      "prompt": "Decompose $\\frac{1}{x(x+1)}$ into $\\frac{A}{x} + \\frac{B}{x+1}$. What is B?",
+      "answer": ["-1"],
+      "display": "-1"
+    },
+    {
+      "id": 25,
+      "topic": "Technique",
+      "prompt": "The LIATE rule (Logs, Inverse trig, Algebraic...) helps choose $u$ in ____.",
+      "answer": ["integration by parts", "by parts"],
+      "display": "Integration by Parts"
+    },
+    {
+      "id": 26,
+      "topic": "Substitution",
+      "prompt": "In $\\int \\frac{2x}{1+x^2} dx$, the result is $\\ln| ___ |$.",
+      "answer": ["1+x^2", "x^2+1"],
+      "display": "$1+x^2$"
+    },
+    {
+      "id": 27,
+      "topic": "Monte Carlo",
+      "prompt": "Is Monte Carlo integration deterministic or stochastic?",
+      "answer": ["stochastic", "random"],
+      "display": "Stochastic"
+    },
+    {
+      "id": 28,
+      "topic": "Accuracy",
+      "prompt": "Standard Monte Carlo sampling is also known as ____ sampling.",
+      "answer": ["uniform", "simple"],
+      "display": "Uniform"
+    },
+    {
+      "id": 29,
+      "topic": "Concept",
+      "prompt": "Integration is the process of finding the _____ under a curve.",
+      "answer": ["area"],
+      "display": "Area"
+    },
+    {
+      "id": 30,
+      "topic": "Concept",
+      "prompt": "The Fundamental Theorem of Calculus relates integration to _____.",
+      "answer": ["differentiation"],
+      "display": "Differentiation"
+    },
+    {
+      "id": 31,
+      "topic": "By Parts",
+      "prompt": "Evaluate $\\int x \\cos(x) dx$.",
+      "answer": ["x sin x + cos x", "x*sin(x) + cos(x)"],
+      "display": "$x \\sin x + \\cos x + C$"
+    },
+    {
+      "id": 32,
+      "topic": "By Parts",
+      "prompt": "Evaluate $\\int x \\sin(x) dx$.",
+      "answer": ["-x cos x + sin x", "sin x - x cos x"],
+      "display": "$-x \\cos x + \\sin x + C$"
+    },
+    {
+      "id": 33,
+      "topic": "Technique",
+      "prompt": "What trig substitution is used for $\\sqrt{a^2 - x^2}$?",
+      "answer": ["x = a sin theta", "sin", "a sin"],
+      "display": "$x = a \\sin(\\theta)$"
+    },
+    {
+      "id": 34,
+      "topic": "Technique",
+      "prompt": "What trig substitution is used for $\\sqrt{a^2 + x^2}$?",
+      "answer": ["x = a tan theta", "tan", "a tan"],
+      "display": "$x = a \\tan(\\theta)$"
+    },
+    {
+      "id": 35,
+      "topic": "Technique",
+      "prompt": "The 'Box-Muller transform' is used to generate ____ distributed random numbers.",
+      "answer": ["normal", "gaussian"],
+      "display": "Normal (Gaussian)"
+    },
+    {
+      "id": 36,
+      "topic": "Monte Carlo",
+      "prompt": "To integrate over a 3D sphere of radius 1, our unit volume in Monte Carlo should be ___.",
+      "answer": ["8"],
+      "display": "8 (Cube from -1 to 1 in all axes)"
+    },
+    {
+      "id": 37,
+      "topic": "Convergence",
+      "prompt": "Which converges faster in 1D: Simpson's Rule or Monte Carlo?",
+      "answer": ["simpson", "simpsons"],
+      "display": "Simpson's Rule"
+    },
+    {
+      "id": 38,
+      "topic": "Convergence",
+      "prompt": "Which converges faster in 100D: Simpson's Rule or Monte Carlo?",
+      "answer": ["monte carlo"],
+      "display": "Monte Carlo"
+    },
+    {
+      "id": 39,
+      "topic": "Substitution",
+      "prompt": "Evaluate $\\int (2x+1)^5 dx$ using $u=2x+1$. (Coefficient only)",
+      "answer": ["1/12"],
+      "display": "$\\frac{1}{12}(2x+1)^6$"
+    },
+    {
+      "id": 40,
+      "topic": "Optimization",
+      "prompt": "Quasi-Monte Carlo uses ____-random sequences like Sobol or Halton.",
+      "answer": ["quasi", "low-discrepancy"],
+      "display": "Quasi (or Low-discrepancy)"
+    },
+    {
+      "id": 41,
+      "topic": "Graphics",
+      "prompt": "In ray tracing, 'Next Event Estimation' is a form of ____ sampling for lights.",
+      "answer": ["importance"],
+      "display": "Importance"
+    },
+    {
+      "id": 42,
+      "topic": "CS Foundations",
+      "prompt": "Rounding $\\pi$ to 3.14 involves a ____ error.",
+      "answer": ["truncation", "precision", "rounding"],
+      "display": "Truncation/Rounding"
+    },
+    {
+      "id": 43,
+      "topic": "Numerical",
+      "prompt": "Midpoint Rule is usually (more/less) accurate than Trapezoid Rule.",
+      "answer": ["more"],
+      "display": "More"
+    },
+    {
+      "id": 44,
+      "topic": "MCMC",
+      "prompt": "Metropolis-Hastings accepts a proposal with probability $\\min(1, P(x_{new})/P(x_{old}))$. This preserves the ___ distribution.",
+      "answer": ["stationary", "target", "posterior"],
+      "display": "Stationary (Target)"
+    },
+    {
+      "id": 45,
+      "topic": "Conclusion",
+      "prompt": "Numerical integration is the bedrock of 'Solving the ____'.",
+      "answer": ["unsolvable"],
+      "display": "Unsolvable"
+    }
+  ],
