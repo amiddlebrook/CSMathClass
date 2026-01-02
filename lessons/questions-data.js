@@ -2839,6 +2839,11 @@ const questionsData = {
   ]
 };
 
+// Expose to window for browser usage
+if (typeof window !== "undefined") {
+  window.QUESTIONS_DATA = questionsData;
+}
+
 if (typeof module !== "undefined") {
   module.exports = questionsData;
 }
