@@ -254,23 +254,33 @@ print(1234 * 5678)           # 7006652
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Divide & Conquer",
+                title: "Divide & Conquer Fundamentals",
                 items: [
                     { title: "Divide and Conquer Explained", channel: "HackerRank", vid: "2Rr2tW9zvRg" },
-                    { title: "Master Method", channel: "Abdul Bari", vid: "C4h8s3P7bM8" }
+                    { title: "Master Theorem Explained", channel: "Abdul Bari", vid: "OynWkEj0S-s" },
+                    { title: "Recurrence Relations", channel: "Abdul Bari", vid: "4V30R3I1vLI" },
+                    { title: "Divide and Conquer Introduction", channel: "mycodeschool", vid: "SLauY6PpjuI" }
                 ]
             },
             {
-                title: "Applications",
+                title: "Classic Algorithms",
                 items: [
-                    { title: "Karatsuba Multiplication", channel: "Stanford", vid: "JCbZay79pgu" }, // Note: checking generic if Stanford unavailable
-                    { title: "Algorithms - Karatsuba", channel: "Udacity", vid: "e7h7s7s7s7s" } // Placeholder ID, likely needs verify
+                    { title: "Merge Sort Algorithm", channel: "Abdul Bari", vid: "mB5HXBb_HY8" },
+                    { title: "Quick Sort Algorithm", channel: "Abdul Bari", vid: "7h1s2SojIRw" },
+                    { title: "Binary Search", channel: "CS Dojo", vid: "P3YID7liBug" },
+                    { title: "Karatsuba Multiplication", channel: "Reducible", vid: "cCKOl5li6YM" }
+                ]
+            },
+            {
+                title: "Advanced Applications",
+                items: [
+                    { title: "Strassen Matrix Multiplication", channel: "Abdul Bari", vid: "0oJyNmEbS4w" },
+                    { title: "Closest Pair of Points", channel: "Tushar Roy", vid: "ldHA8UcQI9Q" },
+                    { title: "Maximum Subarray Problem", channel: "Back To Back SWE", vid: "2MmGzdiKR9Y" },
+                    { title: "FFT Introduction", channel: "Reducible", vid: "h7apO7q16V0" }
                 ]
             }
         ];
-        // Updating Video IDs to safer ones if uncertain
-        VIDEO_GROUPS[1].items[0].vid = "JCbZay79pgu"; // Stanford Algo
-        VIDEO_GROUPS[1].items[1].vid = "yTM8WAdpKwA"; // Karatsuba explained
 
         initLesson({
             videos: VIDEO_GROUPS,

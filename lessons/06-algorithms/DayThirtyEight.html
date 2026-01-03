@@ -268,22 +268,36 @@ print(f"Quadratic: {time.time() - start:.5f}s")
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Big O Basics",
+                title: "Big O Fundamentals",
                 items: [
                     { title: "Big O Notation", channel: "HackerRank", vid: "v4cd1O4zkGw" },
-                    { title: "Asymptotic Notation", channel: "Abdul Bari", vid: "0oDAlMwTrLo" }
+                    { title: "Asymptotic Notation", channel: "Khan Academy", vid: "iOq5kSkZZ1s" },
+                    { title: "Time Complexity Analysis", channel: "mycodeschool", vid: "V42FBiohc6c" },
+                    { title: "Big O in 100 Seconds", channel: "Fireship", vid: "g2o22C3CRfU" }
                 ]
             },
             {
-                title: "Complexity Analysis",
+                title: "Complexity Classes",
                 items: [
-                    { title: "Time Complexity Analysis", channel: "mycodeschool", vid: "V42FBiohc6c" },
-                    { title: "P vs NP Explained", channel: "Hackerdashery", vid: "YX40hbAHx3s" }
+                    { title: "Logarithms Explained", channel: "Khan Academy", vid: "Z5myJ8dg_rM" },
+                    { title: "P vs NP Problem", channel: "Up and Atom", vid: "EHp4FPyajKQ" },
+                    { title: "Amortized Analysis", channel: "Back To Back SWE", vid: "T7W5E-5mljc" },
+                    { title: "Space Complexity", channel: "CS Dojo", vid: "yOb0BL-84h8" }
+                ]
+            },
+            {
+                title: "Deep Dives",
+                items: [
+                    { title: "Master Theorem", channel: "Abdul Bari", vid: "OynWkEj0S-s" },
+                    { title: "Recurrence Relations", channel: "MIT OpenCourseWare", vid: "HT7uT5V6vDs" },
+                    { title: "Analyzing Loops", channel: "mycodeschool", vid: "QtrP5LBWWJ4" },
+                    { title: "Big O Cheat Sheet", channel: "NeetCode", vid: "BgLTDT03QtU" }
                 ]
             }
         ];
 
         initLesson({
+
             videos: VIDEO_GROUPS,
             questions: window.QUESTIONS_DATA['day38'] || [],
             storageKey: 'day38_v2'

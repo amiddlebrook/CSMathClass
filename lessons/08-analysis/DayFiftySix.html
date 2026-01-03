@@ -110,10 +110,13 @@
                         <br>• Each space X and Y is a "color" of LEGO.
                         <br>• The product X × Y is all possible pairs (red brick, blue brick).
                         <br>• The topology tells you which combinations are "close together."
-                    
-                    <div class="info">
-                        <strong>🧩 Simple:</strong> Mathematical concepts are like building blocks. Each new idea builds on previous ones, so mastering the fundamentals makes everything else easier to understand.
-                    </div></div>
+
+                        <div class="info">
+                            <strong>🧩 Simple:</strong> Mathematical concepts are like building blocks. Each new idea
+                            builds on previous ones, so mastering the fundamentals makes everything else easier to
+                            understand.
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -216,7 +219,7 @@ print([next(gen) for _ in range(10)])
 # This is "pointwise convergence".</code></pre>
                         </div>
                     </div>
-                
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
@@ -230,7 +233,8 @@ print([next(gen) for _ in range(10)])
 <span class="code-function">print</span>(math.log(<span class="code-number">100</span>, <span class="code-number">10</span>))  <span class="code-comment"># 2.0</span>
 <span class="code-function">print</span>(math.factorial(<span class="code-number">5</span>))  <span class="code-comment"># 120</span></pre>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
             </section>
 
             <!-- Videos -->
@@ -279,16 +283,31 @@ print([next(gen) for _ in range(10)])
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Core Concepts",
+                title: "Product Topology",
                 items: [
-                    { title: "Mathematical Thinking", channel: "Numberphile", vid: "OmJ-4B-mS-Y" },
-                    { title: "Problem Solving Strategies", channel: "MIT OCW", vid: "WvQPgCz1ID8" },
-                    { title: "How to Learn Math", channel: "3Blue1Brown", vid: "9L_U80EshvY" },
-                    { title: "Mathematical Foundations", channel: "Professor Leonard", vid: "LwCRRUa8yTU" },
-                    { title: "Applied Mathematics", channel: "Steve Brunton", vid: "KZs_3WkSN2E" }
+                    { title: "Product & Box Topology", channel: "Michael Penn", vid: "Tf35A6d75p8" },
+                    { title: "Box vs Product", channel: "Problemathic", vid: "k_9YwP-98jY" },
+                    { title: "Metric Spaces Visualized", channel: "The Bright Side of Mathematics", vid: "_y-m6v_S41w" },
+                    { title: "Constructing Product Spaces", channel: "Physics for Students", vid: "sI916m3F56E" }
                 ]
-            }
-        ]
+            },
+            {
+                title: "Infinite & Tychonoff",
+                items: [
+                    { title: "Tychonoff's Theorem", channel: "The Bright Side of Mathematics", vid: "jWpM0QeR7Lw" },
+                    { title: "Proof of Tychonoff", channel: "The Bright Side of Mathematics", vid: "eHjVb-4qR4A" },
+                    { title: "Infinite Dimensions", channel: "3Blue1Brown", vid: "zwAD6dRSVyI" },
+                    { title: "Higher Dimensions", channel: "Numberphile", vid: "dr2sIoD7eeU" }
+                ]
+            },
+            {
+                title: "Applications",
+                items: [
+                    { title: "High Dimensional Data", channel: "Steve Brunton", vid: "A2F_n2v1tGg" },
+                    { title: "Curse of Dimensionality", channel: "Computerphile", vid: "f2s4J4E5a3k" },
+                    { title: "Detailed Curse Explanation", channel: "Machine Learning", vid: "g_n56QJrt7k" },
+                    { title: "Dimensionality Reduction", channel: "Steve Brunton", vid: "9lZmnk99vjo" }
+                ]
             }
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day56'], storageKey: 'day56_product_v2' });

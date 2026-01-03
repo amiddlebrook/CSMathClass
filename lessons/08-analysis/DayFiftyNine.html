@@ -103,10 +103,13 @@
                     <p>Suppose you have a sequence of functions `f_n(x)` converging to `f(x)`. Is it true that:</p>
                     <div class="math-block">
                         \lim_{n \to \infty} \int f_n \, d\mu = \int \lim_{n \to \infty} f_n \, d\mu
-                    
-                    <div class="info">
-                        <strong>🧩 Simple:</strong> Mathematical concepts are like building blocks. Each new idea builds on previous ones, so mastering the fundamentals makes everything else easier to understand.
-                    </div></div>
+
+                        <div class="info">
+                            <strong>🧩 Simple:</strong> Mathematical concepts are like building blocks. Each new idea
+                            builds on previous ones, so mastering the fundamentals makes everything else easier to
+                            understand.
+                        </div>
+                    </div>
                     <p><strong>Not always!</strong> Example: "Moving Bump". Let `f_n` be a bump of height 1 and width 1
                         shifting to infinity. `\lim f_n(x) = 0` pointwise. But `\int f_n = 1` for all `n`. So `\lim \int
                         = 1 \ne 0`.</p>
@@ -258,7 +261,7 @@ plt.show()
 # Then limits would match.</code></pre>
                         </div>
                     </div>
-                
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">Python</span>
@@ -272,7 +275,8 @@ plt.show()
 <span class="code-function">print</span>(math.log(<span class="code-number">100</span>, <span class="code-number">10</span>))  <span class="code-comment"># 2.0</span>
 <span class="code-function">print</span>(math.factorial(<span class="code-number">5</span>))  <span class="code-comment"># 120</span></pre>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
             </section>
 
             <!-- Videos -->
@@ -321,16 +325,21 @@ plt.show()
     <script>
         const VIDEO_GROUPS = [
             {
-                title: "Core Concepts",
+                title: "Convergence Theorems",
                 items: [
-                    { title: "Mathematical Thinking", channel: "Numberphile", vid: "OmJ-4B-mS-Y" },
-                    { title: "Problem Solving Strategies", channel: "MIT OCW", vid: "WvQPgCz1ID8" },
-                    { title: "How to Learn Math", channel: "3Blue1Brown", vid: "9L_U80EshvY" },
-                    { title: "Mathematical Foundations", channel: "Professor Leonard", vid: "LwCRRUa8yTU" },
-                    { title: "Applied Mathematics", channel: "Steve Brunton", vid: "KZs_3WkSN2E" }
+                    { title: "Monotone Convergence Theorem", channel: "The Bright Side of Mathematics", vid: "r9G4-W_tC4A" },
+                    { title: "Fatou's Lemma", channel: "The Bright Side of Mathematics", vid: "rC_J-i173iU" },
+                    { title: "Dominated Convergence", channel: "The Bright Side of Mathematics", vid: "Xg6o03G521M" },
+                    { title: "Integration Models", channel: "Kate Penner", vid: "3q-v_qW2n5E" }
                 ]
-            }
-        ]
+            },
+            {
+                title: "Advanced Mastery",
+                items: [
+                    { title: "Convergence Modes", channel: "The Bright Side of Mathematics", vid: "A_R3m880U_I" },
+                    { title: "Measure Theory Recap", channel: "The Bright Side of Mathematics", vid: "q9pX8v8h1oM" },
+                    { title: "Integration Examples", channel: "Michael Penn", vid: "ab_PVSO4flE" }
+                ]
             }
         ];
         initLesson({ videos: VIDEO_GROUPS, questions: window.QUESTIONS_DATA['day59'], storageKey: 'day59_convergence_v2' });
